@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Passport - STEM Learn Odisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f0f7ff;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            background: white;
+            color: #2a69ac;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: #38b2ac;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Game Header */
+        .game-header {
+            background: linear-gradient(rgba(14, 42, 71, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1542744095-291d1f67b221?crop=entropy&cs=tinysrgb&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .game-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Game Stats */
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .timer i {
+            color: #e53e3e;
+        }
+
+        .score {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .score i {
+            color: #38a169;
+        }
+
+        .hints {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .hints i {
+            color: #d69e2e;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #3182ce;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Game Area */
+        .game-area {
+            padding: 20px 0 60px;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            position: relative;
+            min-height: 420px; /* Same height for both boxes */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Left object preview - SAME DIMENSIONS AS PASSPORT */
+        .object-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .object-emoji {
+            font-size: 5.2rem;
+            background: linear-gradient(145deg, #ffffff, #f1f8ff);
+            width: 140px;
+            height: 140px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .object-name {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #1a365d;
+            text-align: center;
+        }
+
+        .object-desc {
+            color: #4a5568;
+            font-size: .95rem;
+            text-align: center;
+            padding: 6px 10px;
+        }
+
+        /* Passport card (right) */
+        .passport-card {
+            background: linear-gradient(145deg, #ffffff, #f7fbff);
+            padding: 18px;
+            border-radius: 18px;
+            border: 3px solid rgba(66, 153, 225, 0.06);
+        }
+
+        .passport-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #1a365d;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .passport-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+        }
+
+        label {
+            font-size: .85rem;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            font-weight: 600;
+            width: 100%;
+            min-width: 0; /* Prevent flexbox overflow */
+        }
+
+        /* Ensure all select boxes have the same width */
+        .passport-form .form-row:nth-child(odd) select,
+        .passport-form .form-row:nth-child(even) select {
+            width: 100%;
+        }
+
+        .verify-btn {
+            margin-top: 14px;
+            padding: 12px 16px;
+            background: linear-gradient(45deg, #38b2ac, #2c9a94);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            grid-column: 1 / -1; /* Span both columns */
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3);
+        }
+
+        .retry-btn {
+            margin-top: 14px;
+            padding: 12px 16px;
+            background: linear-gradient(45deg, #e53e3e, #c53030);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: none;
+            grid-column: 1 / -1; /* Span both columns */
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.3);
+        }
+
+        /* Stamp overlay (big) */
+        .passport-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 2200;
+        }
+
+        .passport-card-large {
+            width: 82%;
+            max-width: 760px;
+            background: #fff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all .45s;
+        }
+
+        .passport-card-large.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .passport-large-left {
+            flex: 0 0 120px;
+            text-align: center;
+        }
+
+        .passport-large-center {
+            flex: 1;
+        }
+
+        .passport-stamp {
+            width: 220px;
+            height: 220px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 2.6rem;
+            color: #fff;
+            transform: rotate(-18deg) scale(.8);
+            opacity: 0;
+            transition: all .45s;
+        }
+
+        .passport-stamp.approved {
+            background: #16a34a;
+            box-shadow: 0 12px 40px rgba(22, 163, 74, 0.28);
+        }
+
+        .passport-stamp.rejected {
+            background: #ef4444;
+            box-shadow: 0 12px 40px rgba(239, 68, 68, 0.28);
+        }
+
+        .passport-stamp.show {
+            opacity: 1;
+            transform: rotate(-18deg) scale(1.05);
+        }
+
+        /* Level complete card */
+        .level-complete {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #fff, #f7fafc);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+            max-width: 720px;
+            margin: 18px auto;
+        }
+
+        .next-level-btn {
+            padding: 10px 18px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(45deg, #38b2ac, #2c9a94);
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .next-level-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3);
+        }
+
+        /* Small helpers */
+        .small-muted {
+            font-size: .9rem;
+            color: #64748b;
+        }
+
+        /* Instructions Modal */
+        .instructions-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instructions-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 700px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            text-align: center;
+        }
+
+        .instructions-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 700;
+        }
+
+        .instructions-text {
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+
+        .instructions-list {
+            margin-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        .instructions-list li {
+            margin-bottom: 10px;
+        }
+
+        .start-game-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #38b2ac 0%, #2c9a94 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .start-game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3);
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .badge {
+            font-size: 3rem;
+            color: #d69e2e;
+            margin-bottom: 15px;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            color: #1a365d;
+            margin-bottom: 15px;
+        }
+
+        .success-text {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+       
+        .did-you-know {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .did-you-know strong {
+            color: #38b2ac;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .did-you-know p {
+            font-size: 0.95rem;
+            color: #4a6572;
+        }
+
+        .next-btn {
+            padding: 12px 30px;
+            background: #38b2ac;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .next-btn:hover {
+            background: #2c9a94;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about {
+            padding-right: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-icon {
+            font-size: 1.8rem;
+            background: #38b2ac;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .footer-about p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            color: #38b2ac;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2d3748;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: #38b2ac;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 980px) {
+            .game-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+           
+            .passport-form {
+                grid-template-columns: 1fr;
+            }
+           
+            .object-emoji {
+                width: 120px;
+                height: 120px;
+                font-size: 4.2rem;
+            }
+           
+            .passport-card-large {
+                width: 92%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+           
+            .game-header h1 {
+                font-size: 2.2rem;
+            }
+           
+            .game-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles -->
+    <div class="particles" id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:0"></div>
+
+    <!-- Streak counter -->
+    <div class="streak-counter" id="streak-counter" style="position:fixed;right:18px;top:50%;transform:translateY(-50%);display:none;background:linear-gradient(45deg,#ff6b6b,#ee5a24);color:white;padding:14px 18px;border-radius:40px;font-weight:800;z-index:1500">🔥 <span id="streak-count">0</span> Streak!</div>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
+        <button class="lang-btn" data-lang="hi">हिन्दी</button>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <div class="logo-text">STEM <span>Learn</span> Odisha</div>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="student-dashboard.html" data-translate="nav-dashboard">Dashboard</a></li>
+                        <li><a href="about.html" data-translate="nav-about">About</a></li>
+                        <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Instructions Modal -->
+    <div class="instructions-modal" id="instructions-modal">
+        <div class="instructions-content">
+            <!-- Language selector for instructions -->
+            <div class="language-switcher" style="position: relative; top: 0; right: 0; margin: 0 auto 20px auto; width: fit-content; background: rgba(26, 54, 93, 0.1);">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
+                <button class="lang-btn" data-lang="hi">हिन्दी</button>
+            </div>
+            
+            <h2 class="instructions-title" id="instructions-title">How to Play Object Passport</h2>
+            <div class="instructions-text" id="instructions-text">
+                <p id="instructions-intro">Welcome to Object Passport! Help objects travel by creating their passports with the correct properties:</p>
+                <ul class="instructions-list" id="instructions-list">
+                    <li id="instruction-1">An object will appear on the screen with its image.</li>
+                    <li id="instruction-2">Select the correct properties for the object from the options provided.</li>
+                    <li id="instruction-3">Properties include shape, size, color, material, texture, and more.</li>
+                    <li id="instruction-4">Click the "Verify Passport" button to check your answers.</li>
+                    <li id="instruction-5">If all answers are correct, the passport gets APPROVED with a green stamp!</li>
+                    <li id="instruction-6">If any answer is wrong, the passport gets REJECTED with a red stamp and you can try again.</li>
+                </ul>
+                <p id="instructions-outro">Help all the objects get their passports approved so they can travel!</p>
+            </div>
+            <button class="start-game-btn" id="start-game-btn">Start Game</button>
+        </div>
+    </div>
+
+    <!-- Game Header -->
+    <section class="game-header" id="game-header" style="display:none">
+        <div class="container">
+            <h1 data-translate="game-title">Object Passport Builder</h1>
+            <p data-translate="game-desc">Identify object properties and approve passports to send objects on their journey!</p>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="container" id="game-stats-container" style="display:none">
+        <div class="game-stats">
+            <div class="timer">
+                <i class="fas fa-clock"></i>
+                <span id="time">05:00</span>
+            </div>
+           
+            <div class="score">
+                <i class="fas fa-star"></i>
+                <span id="score" data-translate="score">Score: 0</span>
+            </div>
+           
+            <div class="hints">
+                <i class="fas fa-fire"></i>
+                <span id="streak" data-translate="streak">Streak: 0</span>
+            </div>
+           
+            <div class="progress-container">
+                <div class="progress-bar" id="progress" style="width:0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Area -->
+    <section class="game-area" id="game-area" style="display:none">
+        <div class="container">
+            <div class="game-container">
+
+                <!-- LEFT: object preview -->
+                <div class="card object-preview" id="object-preview">
+                    <div class="object-emoji" id="object-emoji">🎾</div>
+                    <div class="object-name" id="object-name">Ball</div>
+                    <div class="object-desc small-muted" id="object-desc">Select properties below and click VERIFY to approve passport.</div>
+
+                    <div style="margin-top:14px;text-align:center">
+                        <div class="small-muted">Progress: <span id="placed-count">0</span>/<span id="total-count">0</span></div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: passport form -->
+                <div class="card passport-card">
+                    <div class="passport-title">OBJECT PASSPORT</div>
+
+                    <div class="passport-form">
+                        <div class="form-row">
+                            <label data-translate="shape-label">Shape</label>
+                            <select id="shape">
+                                <option value="">Select shape</option>
+                                <option>Round</option>
+                                <option>Long</option>
+                                <option>Square</option>
+                                <option>Rectangular</option>
+                                <option>Irregular</option>
+                                <option>Cylindrical</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label data-translate="size-label">Size</label>
+                            <select id="size">
+                                <option value="">Select size</option>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Big</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label data-translate="colour-label">Colour</label>
+                            <select id="colour">
+                                <option value="">Select colour</option>
+                                <option>Red</option>
+                                <option>Blue</option>
+                                <option>Grey</option>
+                                <option>Silver</option>
+                                <option>Brown</option>
+                                <option>Black</option>
+                                <option>Transparent</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label data-translate="material-label">Material</label>
+                            <select id="material">
+                                <option value="">Select material</option>
+                                <option>Metal</option>
+                                <option>Wood</option>
+                                <option>Plastic</option>
+                                <option>Rubber</option>
+                                <option>Glass</option>
+                                <option>Rock</option>
+                                <option>Cloth</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label data-translate="texture-label">Texture</label>
+                            <select id="texture">
+                                <option value="">Select texture</option>
+                                <option>Smooth</option>
+                                <option>Rough</option>
+                                <option>Soft</option>
+                                <option>Hard</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label data-translate="use-label">Use</label>
+                            <select id="use">
+                                <option value="">Select use</option>
+                                <option>Eating</option>
+                                <option>Storing water</option>
+                                <option>Opening locks</option>
+                                <option>Grooming</option>
+                                <option>Writing</option>
+                                <option>Playing</option>
+                                <option>Measuring</option>
+                                <option>Reading</option>
+                                <option>None</option>
+                            </select>
+                        </div>
+
+                        <button class="verify-btn" id="verify-btn" data-translate="verify-btn">Verify Passport</button>
+                        <button class="retry-btn" id="retry-btn" data-translate="retry-btn">Try Again</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level complete -->
+            <div class="level-complete" id="level-complete">
+                <div style="font-size:1.2rem;font-weight:800;margin-bottom:8px" data-translate="level-complete">Level Complete!</div>
+                <p class="small-muted" data-translate="level-desc">Fantastic! You approved all passports.</p>
+                <div style="margin-top:12px">
+                    <button class="next-level-btn" id="play-again-btn" data-translate="play-again-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overlay for big passport + stamp -->
+    <div class="passport-overlay" id="passport-overlay" aria-hidden="true" style="display:none">
+        <div class="passport-card-large" id="passport-large">
+            <div class="passport-large-left">
+                <div id="overlay-emoji" style="font-size:4.6rem">🎾</div>
+                <div style="margin-top:8px;font-weight:800" id="overlay-name">Ball</div>
+            </div>
+            <div class="passport-large-center">
+                <div style="font-weight:700;font-size:1.1rem;color:#1a365d;margin-bottom:8px">Passport Verification</div>
+                <div id="overlay-text" style="color:#475569">All properties matched. Passport Approved!</div>
+            </div>
+            <div style="flex:0 0 240px;display:flex;align-items:center;justify-content:center">
+                <div class="passport-stamp" id="overlay-stamp">APPROVED</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="success-modal">
+        <div class="success-content">
+            <div class="badge">
+                <i class="fas fa-medal"></i>
+            </div>
+            <h2 class="success-title" data-translate="success-title">Level Complete!</h2>
+            <p class="success-text" data-translate="success-text">You've earned the <strong>Object Expert</strong> badge!</p>
+            <div class="did-you-know">
+                <strong data-translate="did-you-know">Did you know?</strong>
+                <p id="object-funfact">Objects have different properties that help us identify and classify them.</p>
+            </div>
+            <button class="next-btn" id="success-next-btn" data-translate="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        <div class="footer-logo-text">STEM <span>Learn</span> Odisha</div>
+                    </div>
+                    <p>Making learning fun and interactive for children through engaging educational games.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+               
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-gamepad"></i> Games</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Resources</a></li>
+                        <li><a href="#"><i class="fas fa-award"></i> Achievements</a></li>
+                    </ul>
+                </div>
+               
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="copyright">
+                &copy; 2023 STEM Learn Odisha. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Game elements
+        const instructionsModal = document.getElementById('instructions-modal');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const gameHeader = document.getElementById('game-header');
+        const gameArea = document.getElementById('game-area');
+        const statsContainer = document.getElementById('game-stats-container');
+        const objectEmoji = document.getElementById('object-emoji');
+        const objectName = document.getElementById('object-name');
+        const objectDesc = document.getElementById('object-desc');
+        const placedCount = document.getElementById('placed-count');
+        const totalCount = document.getElementById('total-count');
+
+        const shapeEl = document.getElementById('shape');
+        const sizeEl = document.getElementById('size');
+        const colourEl = document.getElementById('colour');
+        const materialEl = document.getElementById('material');
+        const textureEl = document.getElementById('texture');
+        const useEl = document.getElementById('use');
+        const verifyBtn = document.getElementById('verify-btn');
+        const retryBtn = document.getElementById('retry-btn');
+
+        const overlay = document.getElementById('passport-overlay');
+        const overlayLarge = document.getElementById('passport-large');
+        const overlayEmoji = document.getElementById('overlay-emoji');
+        const overlayName = document.getElementById('overlay-name');
+        const overlayText = document.getElementById('overlay-text');
+        const overlayStamp = document.getElementById('overlay-stamp');
+
+        const scoreEl = document.getElementById('score');
+        const streakEl = document.getElementById('streak');
+        const streakCounter = document.getElementById('streak-counter');
+        const streakCountDisplay = document.getElementById('streak-count');
+        const progressBar = document.getElementById('progress');
+
+        const timeEl = document.getElementById('time');
+        const levelComplete = document.getElementById('level-complete');
+        const playAgainBtn = document.getElementById('play-again-btn');
+        const successModal = document.getElementById('success-modal');
+        const successNextBtn = document.getElementById('success-next-btn');
+
+        const langBtns = document.querySelectorAll('.lang-btn');
+
+        // Game state
+        let currentLang = 'en';
+        let currentIndex = 0;
+        let score = 0, streak = 0, correctCount = 0;
+        let timeLeft = 300; // 5 minutes
+        let timerInterval = null;
+        let usedIds = [];
+        let lastRejected = false;
+        let isInInstructions = true;
+        let currentObjects = [];
+
+        // Enhanced object database with clear visual properties
+        const objects = [
+            { 
+                id: 1, 
+                icon: '🔴', 
+                name: { en: 'Red Rubber Ball', or: 'ରେଡ୍ ରବର ବଲ୍', hi: 'लाल रबर की गेंद' }, 
+                shape: 'Round', 
+                size: 'Medium', 
+                colour: 'Red', 
+                material: 'Rubber', 
+                texture: 'Smooth', 
+                use: 'Playing',
+                funfact: 'Rubber balls bounce because of their elastic material that stores and releases energy.'
+            },
+            { 
+                id: 2, 
+                icon: '🥄', 
+                name: { en: 'Metal Spoon', or: 'ମେଟାଲ୍ ଚମଚ', hi: 'धातु का चम्मच' }, 
+                shape: 'Long', 
+                size: 'Small', 
+                colour: 'Silver', 
+                material: 'Metal', 
+                texture: 'Smooth', 
+                use: 'Eating',
+                funfact: 'Spoons are one of the oldest eating utensils, dating back to prehistoric times.'
+            },
+            { 
+                id: 3, 
+                icon: '🟫', 
+                name: { en: 'Wooden Block', or: 'କାଠ ବ୍ଲକ୍', hi: 'लकड़ी का ब्लॉक' }, 
+                shape: 'Square', 
+                size: 'Medium', 
+                colour: 'Brown', 
+                material: 'Wood', 
+                texture: 'Rough', 
+                use: 'None',
+                funfact: 'Wooden blocks help develop spatial reasoning and problem-solving skills in children.'
+            },
+            { 
+                id: 4, 
+                icon: '🧴', 
+                name: { en: 'Blue Plastic Bottle', or: 'ବ୍ଲୁ ପ୍ଲାଷ୍ଟିକ୍ ବୋତଲ୍', hi: 'नीली प्लास्टिक की बोतल' }, 
+                shape: 'Cylindrical', 
+                size: 'Medium', 
+                colour: 'Blue', 
+                material: 'Plastic', 
+                texture: 'Smooth', 
+                use: 'Storing water',
+                funfact: 'Plastic bottles can take up to 450 years to decompose in the environment.'
+            },
+            { 
+                id: 5, 
+                icon: '🔑', 
+                name: { en: 'Silver Key', or: 'ସିଲ୍ଭର ଚାବି', hi: 'चांदी की चाबी' }, 
+                shape: 'Long', 
+                size: 'Small', 
+                colour: 'Silver', 
+                material: 'Metal', 
+                texture: 'Smooth', 
+                use: 'Opening locks',
+                funfact: 'The earliest keys were made of wood and were used in ancient Egypt over 4,000 years ago.'
+            },
+            { 
+                id: 6, 
+                icon: '🫙', 
+                name: { en: 'Glass Cup', or: 'ଗ୍ଲାସ୍ କପ୍', hi: 'कांच का प्याला' }, 
+                shape: 'Cylindrical', 
+                size: 'Small', 
+                colour: 'Transparent', 
+                material: 'Glass', 
+                texture: 'Smooth', 
+                use: 'None',
+                funfact: 'Glass is made from sand, soda ash, and limestone heated to extremely high temperatures.'
+            },
+            { 
+                id: 7, 
+                icon: '🪨', 
+                name: { en: 'Grey Stone', or: 'ଗ୍ରେ ପଥର', hi: 'ग्रे पत्थर' }, 
+                shape: 'Irregular', 
+                size: 'Medium', 
+                colour: 'Grey', 
+                material: 'Rock', 
+                texture: 'Rough', 
+                use: 'None',
+                funfact: 'Rocks are made of minerals and are classified into three types: igneous, sedimentary, and metamorphic.'
+            },
+            { 
+                id: 8, 
+                icon: '📏', 
+                name: { en: 'Yellow Ruler', or: 'ହଳଦିଆ ରୁଲର୍', hi: 'पीला पैमाना' }, 
+                shape: 'Long', 
+                size: 'Small', 
+                colour: 'Yellow', 
+                material: 'Plastic', 
+                texture: 'Smooth', 
+                use: 'Measuring',
+                funfact: 'The first rulers were made of ivory and used by the Indus Valley Civilization around 1500 BCE.'
+            },
+            { 
+                id: 9, 
+                icon: '📘', 
+                name: { en: 'Blue Book', or: 'ନୀଳ ବହି', hi: 'नीली किताब' }, 
+                shape: 'Rectangular', 
+                size: 'Medium', 
+                colour: 'Blue', 
+                material: 'Paper', 
+                texture: 'Smooth', 
+                use: 'Reading',
+                funfact: 'The oldest known printed book is the Diamond Sutra, a Buddhist text from 868 AD.'
+            },
+            { 
+                id: 10, 
+                icon: '✏️', 
+                name: { en: 'Pencil', or: 'ପେନ୍ସିଲ୍', hi: 'पेंसिल' }, 
+                shape: 'Long', 
+                size: 'Small', 
+                colour: 'Yellow', 
+                material: 'Wood', 
+                texture: 'Smooth', 
+                use: 'Writing',
+                funfact: 'The average pencil can draw a line 35 miles long or write about 45,000 words.'
+            }
+        ];
+
+        // Translations
+        const translations = {
+            en: {
+                'nav-dashboard': 'Dashboard',
+                'nav-about': 'About',
+                'nav-contact': 'Contact',
+                'game-title': 'Object Passport Builder',
+                'game-desc': 'Identify object properties and approve passports to send objects on their journey!',
+                'instructions-title': 'How to Play Object Passport',
+                'instructions-intro': 'Welcome to Object Passport! Help objects travel by creating their passports with the correct properties:',
+                'instruction-1': 'An object will appear on the screen with its image.',
+                'instruction-2': 'Select the correct properties for the object from the options provided.',
+                'instruction-3': 'Properties include shape, size, color, material, texture, and more.',
+                'instruction-4': 'Click the "Verify Passport" button to check your answers.',
+                'instruction-5': 'If all answers are correct, the passport gets APPROVED with a green stamp!',
+                'instruction-6': 'If any answer is wrong, the passport gets REJECTED with a red stamp and you can try again.',
+                'instructions-outro': 'Help all the objects get their passports approved so they can travel!',
+                'start-game-btn': 'Start Game',
+                'verify-btn': 'Verify Passport',
+                'retry-btn': 'Try Again',
+                'success-title': 'Level Complete!',
+                'success-text': 'You\'ve earned the <strong>Object Expert</strong> badge!',
+                'did-you-know': 'Did you know?',
+                'play-again-btn': 'Play Again',
+                'level-complete': 'Level Complete!',
+                'level-desc': 'Fantastic! You approved all passports.',
+                'score': 'Score: ',
+                'streak': 'Streak: ',
+                'shape-label': 'Shape',
+                'size-label': 'Size',
+                'colour-label': 'Colour',
+                'material-label': 'Material',
+                'texture-label': 'Texture',
+                'use-label': 'Use'
+            },
+            or: {
+                'nav-dashboard': 'ଡ୍ୟାସବୋର୍ଡ',
+                'nav-about': 'ବିଷୟରେ',
+                'nav-contact': 'ଯୋଗାଯୋଗ',
+                'game-title': 'ବସ୍ତୁ ପାସପୋର୍ଟ ବିଲ୍ଡର୍',
+                'game-desc': 'ବସ୍ତୁ ଗୁଣଗୁଡିକ ଚିହ୍ନଟ କରନ୍ତୁ ଏବଂ ବସ୍ତୁମାନଙ୍କୁ ସେମାନଙ୍କ ଯାତ୍ରାରେ ପଠାଇବା ପାଇଁ ପାସପୋର୍ଟ ଅନୁମୋଦନ କରନ୍ତୁ!',
+                'instructions-title': 'ବସ୍ତୁ ପାସପୋର୍ଟ କିପରି ଖେଳିବେ',
+                'instructions-intro': 'ବସ୍ତୁ ପାସପୋର୍ଟକୁ ସ୍ୱାଗତ! ସଠିକ୍ ଗୁଣଗୁଡିକ ସହିତ ବସ୍ତୁମାନଙ୍କର ପାସପୋର୍ଟ ସୃଷ୍ଟି କରି ସେମାନଙ୍କୁ ଭ୍ରମଣରେ ସାହାଯ୍ୟ କରନ୍ତୁ:',
+                'instruction-1': 'ଏକ ବସ୍ତୁ ତାହାର ଛବି ସହିତ ପରଦାରେ ଦେଖାଯିବ।',
+                'instruction-2': 'ପ୍ରଦାନ କରାଯାଇଥିବା ବିକଳ୍ପଗୁଡିକରୁ ବସ୍ତୁ ପାଇଁ ସଠିକ୍ ଗୁଣଗୁଡିକ ବାଛନ୍ତୁ।',
+                'instruction-3': 'ଗୁଣଗୁଡିକରେ ଆକୃତି, ଆକାର, ରଙ୍ଗ, ପଦାର୍ଥ, ଗଠନ, ଏବଂ ଅନ୍ୟାନ୍ୟ ଅନ୍ତର୍ଭୁକ୍ତ ଅଛନ୍ତି।',
+                'instruction-4': 'ଆପଣଙ୍କର ଉତ୍ତର ଯାଞ୍ଚ କରିବାକୁ "ପାସପୋର୍ଟ ଯାଞ୍ଚ କରନ୍ତୁ" ବଟନ୍ କ୍ଲିକ୍ କରନ୍ତୁ।',
+                'instruction-5': 'ଯଦି ସମସ୍ତ ଉତ୍ତର ସଠିକ୍ ଅଛି, ପାସପୋର୍ଟ ଏକ ସବୁଜ ସ୍ଟାମ୍ପ ସହିତ ଅନୁମୋଦିତ ହୁଏ!',
+                'instruction-6': 'ଯଦି କୌଣସି ଉତ୍ତର ଭୁଲ୍ ଅଛି, ପାସପୋର୍ଟ ଏକ ଲାଲ୍ ସ୍ଟାମ୍ପ ସହିତ ପ୍ରତ୍ୟାଖ୍ୟାନ କରାଯାଏ ଏବଂ ଆପଣ ପୁନର୍ବାର ଚେଷ୍ଟା କରିପାରିବେ।',
+                'instructions-outro': 'ସମସ୍ତ ବସ୍ତୁମାନଙ୍କର ପାସପୋର୍ଟ ଅନୁମୋଦିତ ହେବା ପାଇଁ ସାହାଯ୍ୟ କରନ୍ତୁ ଯାହା ଦ୍ୱାରା ସେମାନେ ଭ୍ରମଣ କରିପାରିବେ!',
+                'start-game-btn': 'ଖେଳ ଆରମ୍ଭ କରନ୍ତୁ',
+                'verify-btn': 'ପାସପୋର୍ଟ ଯାଞ୍ଚ କରନ୍ତୁ',
+                'retry-btn': 'ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ',
+                'success-title': 'ସ୍ତର ସମ୍ପୂର୍ଣ୍ଣ!',
+                'success-text': 'ଆପଣ <strong>ବସ୍ତୁ ବିଶେଷଜ୍ଞ</strong> ବ୍ୟାଜ୍ ଅର୍ଜନ କରିଛନ୍ତି!',
+                'did-you-know': 'ଆପଣ ଜାଣିଛନ୍ତି କି?',
+                'play-again-btn': 'ପୁନର୍ବାର ଖେଳନ୍ତୁ',
+                'level-complete': 'ସ୍ତର ସମ୍ପୂର୍ଣ୍ଣ!',
+                'level-desc': 'ଅଦ୍ଭୁତ! ଆପଣ ସମସ୍ତ ପାସପୋର୍ଟ ଅନୁମୋଦନ କରିଛନ୍ତି।',
+                'score': 'ସ୍କୋର: ',
+                'streak': 'ଷ୍ଟ୍ରିକ୍: ',
+                'shape-label': 'ଆକୃତି',
+                'size-label': 'ଆକାର',
+                'colour-label': 'ରଙ୍ଗ',
+                'material-label': 'ପଦାର୍ଥ',
+                'texture-label': 'ଗଠନ',
+                'use-label': 'ବ୍ୟବହାର'
+            },
+            hi: {
+                'nav-dashboard': 'डैशबोर्ड',
+                'nav-about': 'हमारे बारे में',
+                'nav-contact': 'संपर्क करें',
+                'game-title': 'वस्तु पासपोर्ट बिल्डर',
+                'game-desc': 'वस्तु गुणों की पहचान करें और वस्तुओं को उनकी यात्रा पर भेजने के लिए पासपोर्ट स्वीकृत करें!',
+                'instructions-title': 'वस्तु पासपोर्ट कैसे खेलें',
+                'instructions-intro': 'वस्तु पासपोर्ट में आपका स्वागत है! सही गुणों के साथ वस्तुओं के पासपोर्ट बनाकर उन्हें यात्रा करने में मदद करें:',
+                'instruction-1': 'एक वस्तु उसकी छवि के साथ स्क्रीन पर दिखाई देगी।',
+                'instruction-2': 'प्रदान किए गए विकल्पों में से वस्तु के लिए सही गुणों का चयन करें।',
+                'instruction-3': 'गुणों में आकार, आकार, रंग, सामग्री, बनावट और अधिक शामिल हैं।',
+                'instruction-4': 'अपने उत्तरों की जांच करने के लिए "पासपोर्ट सत्यापित करें" बटन पर क्लिक करें।',
+                'instruction-5': 'यदि सभी उत्तर सही हैं, तो पासपोर्ट हरे रंग के स्टांप के साथ स्वीकृत हो जाता है!',
+                'instruction-6': 'यदि कोई उत्तर गलत है, तो पासपोर्ट लाल स्टांप के साथ अस्वीकृत हो जाता है और आप फिर से प्रयास कर सकते हैं।',
+                'instructions-outro': 'सभी वस्तुओं के पासपोर्ट स्वीकृत होने में मदद करें ताकि वे यात्रा कर सकें!',
+                'start-game-btn': 'खेल शुरू करें',
+                'verify-btn': 'पासपोर्ट सत्यापित करें',
+                'retry-btn': 'फिर से प्रयास करें',
+                'success-title': 'स्तर पूरा!',
+                'success-text': 'आपने <strong>वस्तु विशेषज्ञ</strong> बैज अर्जित किया है!',
+                'did-you-know': 'क्या आप जानते हैं?',
+                'play-again-btn': 'फिर से खेलें',
+                'level-complete': 'स्तर पूरा!',
+                'level-desc': 'बहुत बढ़िया! आपने सभी पासपोर्ट स्वीकृत कर दिए।',
+                'score': 'स्कोर: ',
+                'streak': 'स्ट्रीक: ',
+                'shape-label': 'आकार',
+                'size-label': 'आकार',
+                'colour-label': 'रंग',
+                'material-label': 'सामग्री',
+                'texture-label': 'बनावट',
+                'use-label': 'उपयोग'
+            }
+        };
+
+        // Initialize the game
+        function init() {
+            createParticles();
+            totalCount.textContent = objects.length;
+
+            // Language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+
+            startGameBtn.addEventListener('click', startGame);
+            verifyBtn.addEventListener('click', verifyPassport);
+            retryBtn.addEventListener('click', retryPassport);
+            playAgainBtn.addEventListener('click', () => {
+                resetGame();
+                startGame();
+            });
+            successNextBtn.addEventListener('click', () => {
+                successModal.style.display = 'none';
+                resetGame();
+                startGame();
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    overlayHide();
+                }
+            });
+
+            switchLanguage('en');
+        }
+
+        // Create particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            container.innerHTML = '';
+            for (let i = 0; i < 18; i++) {
+                const p = document.createElement('div');
+                p.style.position = 'absolute';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.width = (3 + Math.random() * 6) + 'px';
+                p.style.height = p.style.width;
+                p.style.background = 'rgba(255,255,255,0.35)';
+                p.style.borderRadius = '50%';
+                p.style.filter = 'blur(0.2px)';
+                p.style.opacity = 0.7;
+                container.appendChild(p);
+            }
+        }
+
+        // Switch language
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+            
+            if (isInInstructions) {
+                // Only update instructions when in instructions modal
+                updateInstructionTranslations();
+            } else {
+                // Update all translations when in game
+                updateTranslations();
+                // Also update the current object name
+                if (currentObjects.length > 0 && currentIndex < currentObjects.length) {
+                    const obj = currentObjects[currentIndex];
+                    objectName.textContent = obj.name[currentLang] || obj.name.en;
+                }
+            }
+        }
+
+        // Update translations
+        function updateTranslations() {
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    if (key === 'success-text') {
+                        const translatedText = translations[currentLang][key];
+                        el.innerHTML = translatedText;
+                    } else {
+                        el.textContent = translations[currentLang][key];
+                    }
+                }
+            });
+
+            // Update score and streak with current values
+            updateScore();
+            updateStreak();
+
+            // Update instruction elements
+            updateInstructionTranslations();
+        }
+
+        // Update instruction elements
+        function updateInstructionTranslations() {
+            const instructionsTitle = document.getElementById('instructions-title');
+            const instructionsIntro = document.getElementById('instructions-intro');
+            const instruction1 = document.getElementById('instruction-1');
+            const instruction2 = document.getElementById('instruction-2');
+            const instruction3 = document.getElementById('instruction-3');
+            const instruction4 = document.getElementById('instruction-4');
+            const instruction5 = document.getElementById('instruction-5');
+            const instruction6 = document.getElementById('instruction-6');
+            const instructionsOutro = document.getElementById('instructions-outro');
+            const startGameBtn = document.getElementById('start-game-btn');
+
+            if (translations[currentLang]) {
+                if (instructionsTitle) instructionsTitle.textContent = translations[currentLang]['instructions-title'];
+                if (instructionsIntro) instructionsIntro.textContent = translations[currentLang]['instructions-intro'];
+                if (instruction1) instruction1.textContent = translations[currentLang]['instruction-1'];
+                if (instruction2) instruction2.textContent = translations[currentLang]['instruction-2'];
+                if (instruction3) instruction3.textContent = translations[currentLang]['instruction-3'];
+                if (instruction4) instruction4.textContent = translations[currentLang]['instruction-4'];
+                if (instruction5) instruction5.textContent = translations[currentLang]['instruction-5'];
+                if (instruction6) instruction6.textContent = translations[currentLang]['instruction-6'];
+                if (instructionsOutro) instructionsOutro.textContent = translations[currentLang]['instructions-outro'];
+                if (startGameBtn) startGameBtn.textContent = translations[currentLang]['start-game-btn'];
+            }
+        }
+
+        // Start the game
+        function startGame() {
+            isInInstructions = false;
+            instructionsModal.style.display = 'none';
+            gameHeader.style.display = 'block';
+            statsContainer.style.display = 'block';
+            gameArea.style.display = 'block';
+            levelComplete.style.display = 'none';
+            successModal.style.display = 'none';
+            retryBtn.style.display = 'none';
+            verifyBtn.style.display = 'block';
+
+            // Update all translations when starting the game
+            updateTranslations();
+
+            // Reset game state
+            score = 0;
+            streak = 0;
+            correctCount = 0;
+            usedIds = [];
+            lastRejected = false;
+            updateScore();
+            updateStreak();
+
+            // Shuffle objects - NEW RANDOMIZATION EVERY TIME
+            currentObjects = [...objects].sort(() => Math.random() - 0.5);
+            usedIds = currentObjects.map(it => it.id);
+            currentIndex = 0;
+            placedCount.textContent = correctCount;
+            totalCount.textContent = objects.length;
+
+            loadCurrent();
+            startTimer();
+        }
+
+        // Load current object
+        function loadCurrent() {
+            const obj = currentObjects[currentIndex];
+            if (!obj) return;
+            objectEmoji.textContent = obj.icon;
+            objectName.textContent = obj.name[currentLang] || obj.name.en;
+            objectDesc.textContent = 'Select the correct properties and click VERIFY PASSPORT.';
+            // Clear selects
+            [shapeEl, sizeEl, colourEl, materialEl, textureEl, useEl].forEach(s => s.value = '');
+        }
+
+        // Verify passport
+        function verifyPassport() {
+            const obj = currentObjects[currentIndex];
+            // Compare values
+            const ok =
+                (shapeEl.value === obj.shape) &&
+                (sizeEl.value === obj.size) &&
+                (colourEl.value === obj.colour) &&
+                (materialEl.value === obj.material) &&
+                (textureEl.value === obj.texture) &&
+                (useEl.value === obj.use);
+
+            if (ok) {
+                correctCount++;
+                score += 10 + Math.min(streak * 2, 20);
+                streak++;
+                showOverlay(true, obj);
+                setTimeout(() => {
+                    nextObject();
+                }, 1600);
+            } else {
+                streak = 0;
+                score = Math.max(0, score - 5);
+                updateScore();
+                updateStreak();
+                showOverlay(false, obj);
+                lastRejected = true;
+                // Show retry button
+                setTimeout(() => {
+                    retryBtn.style.display = 'block';
+                    verifyBtn.style.display = 'none';
+                }, 1500);
+            }
+        }
+
+        // Retry passport
+        function retryPassport() {
+            retryBtn.style.display = 'none';
+            verifyBtn.style.display = 'block';
+            overlayHide();
+        }
+
+        // Next object
+        function nextObject() {
+            currentIndex++;
+            updateScore();
+            updateStreak();
+            placedCount.textContent = correctCount;
+            const pct = Math.round((correctCount / objects.length) * 100);
+            progressBar.style.width = pct + '%';
+
+            if (currentIndex >= currentObjects.length) {
+                finishLevel();
+                return;
+            }
+            // Show next
+            setTimeout(() => {
+                overlayHide();
+                loadCurrent();
+            }, 700);
+        }
+
+        // Finish level
+        function finishLevel() {
+            clearInterval(timerInterval);
+            levelComplete.style.display = 'block';
+            successModal.style.display = 'flex';
+        }
+
+        // Reset game
+        function resetGame() {
+            currentIndex = 0;
+            score = 0;
+            streak = 0;
+            correctCount = 0;
+            lastRejected = false;
+            updateScore();
+            updateStreak();
+            progressBar.style.width = '0%';
+            placedCount.textContent = '0';
+            overlayHide();
+            retryBtn.style.display = 'none';
+            verifyBtn.style.display = 'block';
+        }
+
+        // Show overlay
+        function showOverlay(isApproved, obj) {
+            overlay.style.display = 'flex';
+            setTimeout(() => overlayLarge.classList.add('show'), 10);
+
+            overlayEmoji.textContent = obj.icon;
+            overlayName.textContent = obj.name[currentLang] || obj.name.en;
+
+            if (isApproved) {
+                overlayText.textContent = (currentLang === 'en') ? 'All properties matched. Passport Approved!' : 'Passport Approved!';
+                overlayStamp.textContent = 'APPROVED';
+                overlayStamp.classList.remove('rejected');
+                overlayStamp.classList.add('approved', 'show');
+                overlayStamp.style.background = '#16a34a';
+                // Update score/streak after small delay
+                setTimeout(() => {
+                    updateScore();
+                    updateStreak();
+                }, 250);
+            } else {
+                overlayText.textContent = (currentLang === 'en') ? 'Some properties are incorrect. Passport Rejected.' : 'Passport Rejected.';
+                overlayStamp.textContent = 'REJECTED';
+                overlayStamp.classList.remove('approved');
+                overlayStamp.classList.add('rejected', 'show');
+                overlayStamp.style.background = '#ef4444';
+            }
+        }
+
+        // Hide overlay
+        function overlayHide() {
+            overlayLarge.classList.remove('show');
+            overlayStamp.classList.remove('show', 'approved', 'rejected');
+            setTimeout(() => overlay.style.display = 'none', 350);
+        }
+
+        // Update score
+        function updateScore() {
+            const scoreText = translations[currentLang] ? translations[currentLang]['score'] : 'Score: ';
+            scoreEl.textContent = `${scoreText}${score}`;
+        }
+
+        // Update streak
+        function updateStreak() {
+            const streakText = translations[currentLang] ? translations[currentLang]['streak'] : 'Streak: ';
+            streakEl.textContent = `${streakText}${streak}`;
+            streakCountDisplay.textContent = streak;
+            if (streak >= 3) streakCounter.style.display = 'block';
+            else streakCounter.style.display = 'none';
+        }
+
+        // Timer
+        function startTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 300;
+            updateTimer();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    finishLevel();
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            timeEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        // Initialize the game when the page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

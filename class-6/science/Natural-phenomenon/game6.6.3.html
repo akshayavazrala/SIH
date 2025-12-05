@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Disaster Mystery Game - STEM Learn Odisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f7ff;
+            color: #1e293b;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            border-radius: 25px;
+            padding: 6px;
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Indic font helper */
+        .indic-text {
+            font-family: 'Nirmala UI', 'Kalinga', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            background: white;
+            color: #2a69ac;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: #38b2ac;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 0.98rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(
+                    rgba(14, 42, 71, 0.85),
+                    rgba(26, 54, 93, 0.9)
+                ),
+                url('https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 12px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+        }
+
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #3182ce;
+        }
+
+        .breadcrumb span {
+            color: #64748b;
+        }
+
+        /* Instructions Modal */
+        .instructions-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1500;
+        }
+
+        .instructions-content {
+            background: white;
+            border-radius: 18px;
+            padding: 24px 22px 26px;
+            max-width: 650px;
+            width: 92%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .instructions-title {
+            font-size: 1.6rem;
+            color: #1a365d;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .instructions-subtitle {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 14px;
+        }
+
+        .instructions-list {
+            margin-left: 18px;
+            margin-bottom: 14px;
+            font-size: 0.93rem;
+            color: #4b5563;
+        }
+
+        .instructions-list li {
+            margin-bottom: 6px;
+        }
+
+        .instructions-highlight {
+            background: #eff6ff;
+            border-radius: 10px;
+            padding: 10px 10px;
+            font-size: 0.9rem;
+            color: #1d4ed8;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .instructions-highlight i {
+            margin-top: 2px;
+        }
+
+        .start-btn {
+            margin-top: 6px;
+            padding: 10px 22px;
+            border-radius: 999px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            font-size: 0.98rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .start-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* Main Game Section */
+        .main-game-section {
+            padding: 32px 0 60px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 24px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 1rem;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .score-board div {
+            background: rgba(255,255,255,0.18);
+            padding: 6px 12px;
+            border-radius: 999px;
+        }
+
+        .content {
+            padding: 24px 30px 30px;
+        }
+
+        .guess-phase {
+            text-align: center;
+        }
+
+        .media-container {
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .media-container img, .media-container video {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .situation-text {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe0b2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 1.05em;
+            line-height: 1.7;
+            border-left: 5px solid #ff9800;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .guess-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0 10px;
+        }
+
+        .guess-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 16px 18px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .guess-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .guess-card.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .guess-card.correct {
+            background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+            color: white;
+            animation: pulse 0.5s;
+        }
+
+        .guess-card.wrong {
+            background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+            color: white;
+            animation: shake 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .game-phase {
+            display: none;
+        }
+
+        .game-phase.active {
+            display: block;
+        }
+
+        .phase-selector {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .phase-btn {
+            padding: 10px 22px;
+            font-size: 0.95em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+        }
+
+        .phase-btn.before {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .phase-btn.during {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .phase-btn.after {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+        }
+
+        .phase-btn.active {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        .phase-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .phase-btn:disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .action-card {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 15px;
+            cursor: grab;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 0.98em;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .action-card.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .drop-zone {
+            min-height: 200px;
+            border: 3px dashed #ccc;
+            border-radius: 15px;
+            padding: 16px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .drop-zone.do {
+            background: linear-gradient(135deg, #e0f7e0 0%, #c8e6c9 100%);
+        }
+
+        .drop-zone.dont {
+            background: linear-gradient(135deg, #ffe0e0 0%, #ffcdd2 100%);
+        }
+
+        .drop-zone h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .drop-zone.do h3 {
+            color: #2e7d32;
+        }
+
+        .drop-zone.dont h3 {
+            color: #c62828;
+        }
+
+        .drop-zone.drag-over {
+            border-color: #667eea;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .dropped-item {
+            background: white;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 0.96em;
+            cursor: pointer; /* click to remove back to grid */
+        }
+
+        .dropped-item.correct {
+            border-left-color: #4caf50;
+            background: #e0f7e0;
+        }
+
+        .dropped-item.wrong {
+            border-left-color: #f44336;
+            background: #ffe0e0;
+            animation: shake 0.5s;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 26px;
+            font-size: 0.98em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 0.98em;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            color: #721c24;
+            display: block;
+        }
+
+        .revealed-name {
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 10px 0 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-3deg) scale(1.03); }
+            75% { transform: rotate(3deg) scale(1.03); }
+        }
+
+        .celebrating {
+            animation: celebrate 0.5s ease infinite;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 32px 0 16px;
+            margin-top: 20px;
+        }
+        /* ---- Top stats bar & game header like Shadow Lab ---- */
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    background: transparent;   /* 👈 BLACK BOX GONE */
+    color: #1e293b;             /* Dark text like Shadow Lab */
+    padding: 0;                 /* Removes pill-like background */
+}
+
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.timer-box {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.score-box {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #ecfeff;
+    color: #155e75;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.game-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.game-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.game-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a365d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.game-subtitle {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.badge-level {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 18px;
+        }
+
+        .footer-about {
+            padding-right: 10px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo-icon {
+            font-size: 1.6rem;
+            background: #38b2ac;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-about p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 12px;
+            color: #38b2ac;
+            font-size: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid #2d3748;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .drop-zones {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                background: #0f172a;
+                position: absolute;
+                top: 55px;
+                right: 10px;
+                padding: 10px 12px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+                min-width: 150px;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
+        <button class="lang-btn" data-lang="hi">हिन्दी</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <div class="logo-text">STEM <span>Learn</span> Odisha</div>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="student-dashboard.html" data-i18n="nav-dashboard">Dashboard</a></li>
+                        <li><a href="about.html" data-i18n="nav-about">About</a></li>
+                        <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 data-i18n="page-title">Natural Disaster Mystery Game</h1>
+            <p data-i18n="page-desc">
+                Spot the disaster from the scene, then sort DOs and DON’Ts for each phase: BEFORE, DURING and AFTER. Can you complete all 5 challenges in 25 minutes and score high out of 150?
+            </p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <a href="student-dashboard.html" data-i18n="breadcrumb-dashboard">Dashboard</a>
+                <span>/</span>
+                <span data-i18n="breadcrumb-section">Disaster Preparedness</span>
+                <span>/</span>
+                <span data-i18n="breadcrumb-game">Natural Disaster Mystery Game</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Modal -->
+    <div class="instructions-modal" id="instructions-modal">
+        <div class="instructions-content">
+            <h2 class="instructions-title" data-i18n="instr-title">How to Play – Natural Disaster Mystery</h2>
+            <p class="instructions-subtitle" data-i18n="instr-subtitle">
+                This is a hard-level preparedness game with 5 different disasters. Read these steps before you begin.
+            </p>
+            <ul class="instructions-list">
+                <li data-i18n="instr-1">You will play through 5 mystery challenges. Each one shows a real-life disaster scene.</li>
+                <li data-i18n="instr-2">First, read the situation and guess which disaster is happening.</li>
+                <li data-i18n="instr-3">Next, sort actions into DO and DON'T for the phases: BEFORE, DURING and AFTER.</li>
+                <li data-i18n="instr-4">Drag each action card into the correct bucket. Place all cards before checking.</li>
+                <li data-i18n="instr-5">Total game time is 25 minutes and you can score up to 150 points.</li>
+            </ul>
+            <div class="instructions-highlight">
+                <i class="fas fa-lightbulb"></i>
+                <span data-i18n="instr-tip">
+                    Tip: Think like a safety officer. Even if something looks brave or exciting, it might still be a big DON'T in a real disaster!
+                </span>
+            </div>
+            <button class="start-btn" id="start-btn">
+                <i class="fas fa-play-circle"></i>
+                <span data-i18n="instr-start-btn">Start Game</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Game Section -->
+    <section class="main-game-section">
+        <div class="container">
+            <div class="game-container">
+                <div class="game-container">
+    <!-- New top stats bar (like Shadow Lab) -->
+    <div class="content" style="padding: 18px 24px 6px;">
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="timer-box">
+                    <i class="fas fa-clock"></i>
+                    <span>Time left:</span>
+                    <span id="gameTime">25:00</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="score-box">
+                    <i class="fas fa-star"></i>
+                    <span>Score:</span>
+                    <span id="score">0</span>/150
+                </div>
+            </div>
+            <div class="stat-item">
+                <span>Challenges solved:</span>
+                <span id="level">1</span> / <span>5</span>
+            </div>
+            <div class="stat-item">
+                <div class="badge-level">
+                    <i class="fas fa-bolt"></i>
+                    <span>Hard</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game title row (like Shadow Lab) -->
+        <div class="game-header-row">
+            <div class="game-title-block">
+                <div class="game-title">
+                    <i class="fas fa-mountain"></i>
+                    <span>Natural Disaster Mystery Game</span>
+                </div>
+                <div class="game-subtitle">
+                    Spot the disaster, then sort DO and DON’T actions for BEFORE, DURING and AFTER each event.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keep your original content wrapper, but remove its extra padding to avoid double spacing -->
+    <div class="content">
+        <!-- Guess Phase -->
+        ...
+
+                </div>
+
+                <div class="content">
+                    <!-- Guess Phase -->
+                    <div id="guessPhase" class="guess-phase active">
+                        <h2 style="text-align: center; color: #667eea; margin-bottom: 20px;" data-i18n="guess-title">
+                            🤔 What disaster is happening?
+                        </h2>
+                       
+                        <div class="media-container" id="mediaContainer"></div>
+                       
+                        <div class="situation-text" id="situationText"></div>
+                       
+                        <div class="guess-options" id="guessOptions"></div>
+                       
+                        <div class="buttons">
+                            <button class="btn btn-primary" id="submitGuess" disabled>
+                                <span data-i18n="submit-guess">Submit Guess</span>
+                            </button>
+                        </div>
+                       
+                        <div class="feedback" id="guessFeedback"></div>
+                    </div>
+
+                    <!-- Action Phase -->
+                    <div id="gamePhase" class="game-phase">
+                        <div class="revealed-name" id="revealedName"></div>
+
+                        <div class="phase-selector">
+                            <button class="phase-btn before" data-phase="before" disabled data-i18n="phase-before">📋 BEFORE</button>
+                            <button class="phase-btn during" data-phase="during" disabled data-i18n="phase-during">⚡ DURING</button>
+                            <button class="phase-btn after" data-phase="after" disabled data-i18n="phase-after">🔧 AFTER</button>
+                        </div>
+
+                        <div class="action-grid" id="actionGrid"></div>
+
+                        <div class="drop-zones">
+                            <div class="drop-zone do" data-zone="do">
+                                <h3 data-i18n="do-title">✅ DO</h3>
+                                <div id="doZone"></div>
+                            </div>
+                            <div class="drop-zone dont" data-zone="dont">
+                                <h3 data-i18n="dont-title">🚫 DON'T</h3>
+                                <div id="dontZone"></div>
+                            </div>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="btn btn-check" id="checkBtn">Check Answers</button>
+                            <button class="btn btn-next" id="nextBtn" style="display:none;">Next Phase</button>
+                        </div>
+
+                        <div class="feedback" id="feedback"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="footer-logo-text">STEM Learn Odisha</div>
+                    </div>
+                    <p data-i18n="footer-desc">
+                        Making Science and Mathematics education engaging and relevant for students in Odisha
+                        through localized content and interactive learning experiences.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h3 data-i18n="quick-links">Quick Links</h3>
+                    <ul>
+                        <li>
+                            <a href="student-dashboard.html">
+                                <i class="fas fa-home"></i>
+                                <span data-i18n="nav-dashboard">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html">
+                                <i class="fas fa-info-circle"></i>
+                                <span data-i18n="nav-about">About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html">
+                                <i class="fas fa-envelope"></i>
+                                <span data-i18n="nav-contact">Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright" data-i18n="copyright">
+                © 2023 STEM Learn Odisha. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ====== LANGUAGE & TRANSLATIONS ====== */
+        let currentLanguage = 'en';
+
+        const translations = {
+            en: {
+                'nav-dashboard': 'Dashboard',
+                'nav-about': 'About',
+                'nav-contact': 'Contact',
+                'page-title': 'Natural Disaster Mystery Game',
+                'page-desc': 'Spot the disaster from the scene, then sort DOs and DON’Ts for each phase: BEFORE, DURING and AFTER. Can you complete all 5 challenges in 25 minutes and score high out of 150?',
+                'breadcrumb-dashboard': 'Dashboard',
+                'breadcrumb-section': 'Disaster Preparedness',
+                'breadcrumb-game': 'Natural Disaster Mystery Game',
+
+                'instr-title': 'How to Play – Natural Disaster Mystery',
+                'instr-subtitle': 'This is a hard-level preparedness game with 5 different disasters. Read these steps before you begin.',
+                'instr-1': 'You will play through 5 mystery challenges. Each one shows a real-life disaster scene.',
+                'instr-2': 'First, read the situation and guess which disaster is happening.',
+                'instr-3': 'Next, sort actions into DO and DON\'T for the phases: BEFORE, DURING and AFTER.',
+                'instr-4': 'Drag each action card into the correct bucket. Place all cards before checking.',
+                'instr-5': 'Total game time is 25 minutes and you can score up to 150 points.',
+                'instr-tip': 'Tip: Think like a safety officer. Even if something looks brave or exciting, it might still be a big DON\'T in a real disaster!',
+                'instr-start-btn': 'Start Game',
+
+                'game-header-title': '🔍 Natural Disaster Mystery 🎮',
+                'score-label': 'Score',
+                'challenge-label': 'Challenge',
+                'time-label': 'Time Left',
+                'level-label': 'Level',
+                'level-hard': 'Hard',
+
+                'guess-title': '🤔 What disaster is happening?',
+                'submit-guess': 'Submit Guess',
+
+                'phase-before': '📋 BEFORE',
+                'phase-during': '⚡ DURING',
+                'phase-after': '🔧 AFTER',
+
+                'do-title': '✅ DO',
+                'dont-title': '🚫 DON\'T',
+
+                'footer-desc': 'Making Science and Mathematics education engaging and relevant for students in Odisha through localized content and interactive learning experiences.',
+                'quick-links': 'Quick Links',
+                'copyright': '© 2023 STEM Learn Odisha. All rights reserved.'
+            },
+            or: {
+                'nav-dashboard': 'ଡ୍ୟାଶବୋର୍ଡ',
+                'nav-about': 'ଆମ ବିଷୟରେ',
+                'nav-contact': 'ଯୋଗାଯୋଗ',
+                'page-title': 'ପ୍ରାକୃତିକ ବିପଦ ରହସ୍ୟ ଖେଳ',
+                'page-desc': 'ଦୃଶ୍ୟକୁ ଦେଖି ପ୍ରାକୃତିକ ବିପଦଟି ଚିହ୍ନଟ କରନ୍ତୁ, ପରେ BEFORE, DURING ଏବଂ AFTER ପାଇଁ DO ଏବଂ DON\'T କାର୍ଯ୍ୟଗୁଡ଼ିକୁ ସଠିକ୍ ଭାବରେ ଚୟନ କରନ୍ତୁ। 25 ମିନିଟ୍‌ ଭିତରେ 5ଟି ଚ୍ୟାଲେଞ୍ଜ ସମାପ୍ତ କରି 150 ମଧ୍ୟରୁ ଉଚ୍ଚ ସ୍କୋର ପାଇପାରିବେ କି?',
+                'breadcrumb-dashboard': 'ଡ୍ୟାଶବୋର୍ଡ',
+                'breadcrumb-section': 'ବିପଦ ପ୍ରସ୍ତୁତି',
+                'breadcrumb-game': 'ପ୍ରାକୃତିକ ବିପଦ ରହସ୍ୟ ଖେଳ',
+
+                'instr-title': 'କିପରି ଖେଳିବେ – ପ୍ରାକୃତିକ ବିପଦ ରହସ୍ୟ',
+                'instr-subtitle': 'ଏହା 5ଟି ଭିନ୍ନ ବିପଦ ଉପରେ ଆଧାରିତ ଏକ Hard Level ଖେଳ। ଆରମ୍ଭ ପୂର୍ବରୁ ଏହି ପଦକ୍ରମ ପଢ଼ନ୍ତୁ।',
+                'instr-1': 'ଆପଣ 5ଟି ରହସ୍ୟମୟ ଚ୍ୟାଲେଞ୍ଜ ଖେଳିବେ। ପ୍ରତ୍ୟେକରେ ଏକ ପ୍ରାକୃତିକ ବିପଦ ଦୃଶ୍ୟ ଦେଖାଯିବ।',
+                'instr-2': 'ପ୍ରଥମେ ପରିସ୍ଥିତି ବର୍ଣ୍ଣନାକୁ ପଢ଼ି କେଉଁ ବିପଦ ଘଟୁଛି ତାହା ଅନୁମାନ କରନ୍ତୁ।',
+                'instr-3': 'ତାପରେ ସେଇ ବିପଦ ପାଇଁ BEFORE, DURING ଏବଂ AFTER ଫେଜର DO ଓ DON\'T କାର୍ଯ୍ୟଗୁଡ଼ିକୁ ବଛନ୍ତୁ।',
+                'instr-4': 'ପ୍ରତ୍ୟେକ କାର୍ଯ୍ୟ କାର୍ଡକୁ ଠିକ୍ DO କିମ୍ବା DON\'T ବାକେଟ୍‌ରେ ଡ୍ରାଗ୍ କରନ୍ତୁ। ସମସ୍ତ କାର୍ଡ ରଖିବା ପରେ ମାତ୍ର ଯାଞ୍ଚ କରନ୍ତୁ।',
+                'instr-5': 'ମୋଟ ଖେଳ ସମୟ 25 ମିନିଟ୍ ଏବଂ ଆପଣ ସର୍ବାଧିକ 150 ପଏଣ୍ଟ୍ ପାଇପାରିବେ।',
+                'instr-tip': 'Tip: ଏକ ସେଫ୍ଟି ଅଫିସର ଭଳି ଭାବନ୍ତୁ। କୌଣସି କାମ ଦେଖିବାକୁ ସାହସୀ ଲାଗିଲେ ମଧ୍ୟ ବାସ୍ତବ ବିପଦ ସମୟରେ ସେଟା ଠାରୁଣିଆ DON\'T ହୋଇପାରେ!',
+                'instr-start-btn': 'ଖେଳ ଆରମ୍ଭ କରନ୍ତୁ',
+
+                'game-header-title': '🔍 ପ୍ରାକୃତିକ ବିପଦ ରହସ୍ୟ 🎮',
+                'score-label': 'ସ୍କୋର',
+                'challenge-label': 'ଚ୍ୟାଲେଞ୍ଜ',
+                'time-label': 'ଅବଶିଷ୍ଟ ସମୟ',
+                'level-label': 'ସ୍ତର',
+                'level-hard': 'Hard',
+
+                'guess-title': '🤔 କେଉଁ ବିପଦ ଘଟୁଛି?',
+                'submit-guess': 'ଅନୁମାନ ପଠାନ୍ତୁ',
+
+                'phase-before': '📋 BEFORE',
+                'phase-during': '⚡ DURING',
+                'phase-after': '🔧 AFTER',
+
+                'do-title': '✅ DO',
+                'dont-title': '🚫 DON\'T',
+
+                'footer-desc': 'ସ୍ଥାନୀୟ ବିଷୟବସ୍ତୁ ଏବଂ ଇଣ୍ଟରାକ୍ଟିଭ୍ କାର୍ଯ୍ୟକଳାପ ମାଧ୍ୟମରେ ଓଡ଼ିଶାର ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କ ପାଇଁ ବିଜ୍ଞାନ ଓ ଗଣିତ ଶିକ୍ଷାକୁ ଆକର୍ଷଣୀୟ ଏବଂ ପ୍ରାସଙ୍ଗିକ କରିବା।',
+                'quick-links': 'ଶୀଘ୍ର ଲିଙ୍କ',
+                'copyright': '© 2023 STEM Learn Odisha. ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।'
+            },
+            hi: {
+                'nav-dashboard': 'डैशबोर्ड',
+                'nav-about': 'हमारे बारे में',
+                'nav-contact': 'संपर्क',
+                'page-title': 'प्राकृतिक आपदा रहस्य खेल',
+                'page-desc': 'दृश्य को देखकर आपदा पहचानिए, फिर BEFORE, DURING और AFTER चरणों के लिए DO और DON\'T कार्रवाइयों को सही ढंग से चुनिए। क्या आप 25 मिनट में सभी 5 चुनौतियाँ पूरी कर के 150 में से ऊँचा स्कोर बना सकते हैं?',
+                'breadcrumb-dashboard': 'डैशबोर्ड',
+                'breadcrumb-section': 'आपदा तैयारी',
+                'breadcrumb-game': 'प्राकृतिक आपदा रहस्य खेल',
+
+                'instr-title': 'कैसे खेलें – प्राकृतिक आपदा रहस्य',
+                'instr-subtitle': 'यह 5 अलग–अलग आपदाओं पर आधारित एक Hard Level तैयारी गेम है। शुरू करने से पहले ये चरण पढ़िए।',
+                'instr-1': 'आप 5 रहस्यमयी चुनौतियाँ खेलेंगे। हर एक में किसी वास्तविक आपदा का दृश्य दिखेगा।',
+                'instr-2': 'सबसे पहले स्थिति पढ़कर अनुमान लगाइए कि कौन सी आपदा हो रही है।',
+                'instr-3': 'फिर उसी आपदा के लिए BEFORE, DURING और AFTER चरणों में DO और DON\'T क्रियाओं को बाँटिए।',
+                'instr-4': 'हर एक एक्शन कार्ड को सही DO या DON\'T वाले बॉक्स में ड्रैग कीजिए। सभी कार्ड लगाने के बाद ही जाँच कीजिए।',
+                'instr-5': 'कुल खेल का समय 25 मिनट है और आप अधिकतम 150 अंक कमा सकते हैं।',
+                'instr-tip': 'Tip: एक सेफ्टी ऑफिसर की तरह सोचिए। कोई काम देखने में बहादुर या रोमांचक लगे, फिर भी असली आपदा में वह बड़ा DON\'T हो सकता है!',
+                'instr-start-btn': 'गेम शुरू करें',
+
+                'game-header-title': '🔍 Natural Disaster Mystery 🎮',
+                'score-label': 'स्कोर',
+                'challenge-label': 'चैलेंज',
+                'time-label': 'शेष समय',
+                'level-label': 'स्तर',
+                'level-hard': 'Hard',
+
+                'guess-title': '🤔 यहाँ कौन सी आपदा हो रही है?',
+                'submit-guess': 'अनुमान भेजें',
+
+                'phase-before': '📋 BEFORE',
+                'phase-during': '⚡ DURING',
+                'phase-after': '🔧 AFTER',
+
+                'do-title': '✅ DO',
+                'dont-title': '🚫 DON\'T',
+
+                'footer-desc': 'स्थानीय सामग्री और इंटरैक्टिव गतिविधियों के ज़रिए ओडिशा के छात्रों के लिए विज्ञान और गणित की पढ़ाई को रोचक और उपयोगी बनाना।',
+                'quick-links': 'त्वरित लिंक',
+                'copyright': '© 2023 STEM Learn Odisha. सर्वाधिकार सुरक्षित।'
+            }
+        };
+
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const i18nElements = document.querySelectorAll('[data-i18n]');
+
+        function t(key) {
+            const pack = translations[currentLanguage] || translations.en;
+            return pack[key] || translations.en[key] || '';
+        }
+
+        function applyTranslations() {
+            i18nElements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (!key) return;
+                const text = t(key);
+                if (text) {
+                    el.innerHTML = text;
+                }
+            });
+        }
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                if (lang === currentLanguage) return;
+                currentLanguage = lang;
+
+                langButtons.forEach(b => b.classList.toggle('active', b === btn));
+
+                if (lang === 'or' || lang === 'hi') {
+                    document.body.classList.add('indic-text');
+                } else {
+                    document.body.classList.remove('indic-text');
+                }
+
+                applyTranslations();
+            });
+        });
+
+        /* ====== MASTER POOL: 7 DISASTERS ====== */
+        const allGameData = [
+            {
+                name: "TSUNAMI",
+                emoji: "🌊",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1200&q=80",
+                situation: "You're at a beach resort when suddenly the water recedes far from shore, exposing the ocean floor. Fish are flopping on the sand. The sea has pulled back about 100 meters. People around you are curious and some are walking toward the exposed seabed to collect fish.",
+                fact: "Most tsunamis are caused by powerful undersea earthquakes that suddenly move huge amounts of water.",
+                phases: {
+                    before: { do: ["🗺️ Learn evacuation routes to high ground", "🎒 Prepare emergency kit with supplies", "🚨 Know natural warning signs"], dont: ["🚫 Ignore evacuation warnings", "🏖️ Stay near coastal areas", "⏳ Wait to see the wave coming"] },
+                    during: { do: ["🏃 Move to higher ground immediately", "⛰️ Get at least 30 meters above sea level", "📻 Listen to emergency broadcasts"], dont: ["📸 Go to beach to watch waves", "🏠 Stay in low-lying coastal areas", "🚪 Use elevators in buildings"] },
+                    after: { do: ["🛑 Stay on high ground for hours", "🩹 Help injured people safely", "🚧 Avoid damaged coastal areas"], dont: ["🏡 Return home too early", "💧 Drink possibly contaminated water", "🔌 Touch damaged electrical equipment"] }
+                }
+            },
+            {
+                name: "TORNADO",
+                emoji: "🌪️",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1527482797697-8795b05a13fe?auto=format&fit=crop&w=1200&q=80",
+                situation: "Dark greenish clouds fill the sky. You hear a loud roar that sounds like a freight train approaching. The weather radio issues a warning for your area. Hail suddenly starts falling, and the wind picks up dramatically. You notice debris swirling in the distance.",
+                fact: "The strongest tornadoes can have wind speeds over 300 km/h, powerful enough to destroy well-built houses.",
+                phases: {
+                    before: { do: ["🏠 Identify safe interior room on lowest floor", "📦 Stock emergency supplies and radio", "📱 Monitor weather alerts regularly"], dont: ["🤢 Ignore dark greenish sky warnings", "🖼️ Keep windows open during storms", "🌉 Plan to shelter under highway overpasses"] },
+                    during: { do: ["⬇️ Go to basement or interior room", "🛡️ Cover yourself with mattress or blankets", "❌ Stay away from all windows"], dont: ["🚗 Try to outrun it in a vehicle", "🏚️ Stay in mobile home or trailer", "🚪 Open windows to equalize pressure"] },
+                    after: { do: ["🤕 Check for injuries carefully", "⚡ Avoid damaged power lines completely", "📸 Document all property damage"], dont: ["⚠️ Enter severely damaged buildings", "⚡ Touch any downed power wires", "🔥 Use candles near gas leak smell"] }
+                }
+            },
+            {
+                name: "WILDFIRE",
+                emoji: "🔥",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1584462396651-2b2c4e93fcd7?auto=format&fit=crop&w=1200&q=80",
+                situation: "You smell smoke and see an orange glow on the horizon near your neighborhood. Ash is falling from the sky like snow. The air quality alert on your phone says 'hazardous.' You hear sirens in the distance. Your neighbors are starting to pack their cars.",
+                fact: "Wildfires can move as fast as a running person or faster, especially when pushed by strong winds.",
+                phases: {
+                    before: { do: ["🌳 Create defensible space around home", "🗺️ Have evacuation plan with routes", "📑 Prepare emergency kit and documents"], dont: ["🪵 Store firewood next to house", "🛑 Ignore fire danger warnings", "🗑️ Leave flammable materials outside"] },
+                    during: { do: ["🏃 Evacuate immediately when ordered", "🚪 Close all windows and vents", "😷 Wear N95 mask for smoke protection"], dont: ["🛡️ Stay behind to protect property", "🚗 Drive through heavy smoke", "🐾 Leave pets behind locked up"] },
+                    after: { do: ["🔥 Check property for hot spots", "🧤 Wear protective gear and mask", "📸 Document all losses with photos"], dont: ["⛔ Return before official clearance", "🤚 Touch ash with bare hands", "🍎 Eat food exposed to heavy smoke"] }
+                }
+            },
+            {
+                name: "EARTHQUAKE",
+                emoji: "⚡",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1587036859083-f7265e2f535e?auto=format&fit=crop&w=1200&q=80",
+                situation: "The ground suddenly starts shaking violently. Books fall off shelves, picture frames crash to the floor. You hear glass breaking. Car alarms are going off outside. The shaking lasts about 30 seconds, then stops, but you know aftershocks may follow.",
+                fact: "Most earthquakes happen at the edges of tectonic plates, where Earth's crust is slowly moving and grinding.",
+                phases: {
+                    before: { do: ["⚙️ Secure heavy furniture to walls", "👨‍👩‍👧‍👦 Create family emergency plan", "💧 Store water and emergency supplies"], dont: ["📚 Place heavy items on high shelves", "📜 Ignore building safety codes", "💰 Neglect earthquake insurance"] },
+                    during: { do: ["⬇️ Drop, cover and hold on immediately", "❌ Stay away from windows and glass", "🌳 If outside move to clear open area"], dont: ["🏃 Run outside during the shaking", "🚪 Stand in doorway or near walls", "🚪 Use elevators during shaking"] },
+                    after: { do: ["🤕 Check yourself and others for injuries", "🏠 Inspect home for structural damage", "📦 Be prepared for strong aftershocks"], dont: ["🔥 Light matches if you smell gas", "🚧 Enter buildings with visible damage", "📢 Spread unverified rumors or panic"] }
+                }
+            },
+            {
+                name: "HURRICANE",
+                emoji: "🌀",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1507502707541-f369a3b18502?auto=format&fit=crop&w=1200&q=80",
+                situation: "Weather forecasts show a Category 4 hurricane heading directly toward your coastal city in 48 hours. Sustained winds could reach 140 mph. Storm surge of 15 feet predicted. Mandatory evacuation orders are being issued for coastal zones. Stores are running out of supplies.",
+                fact: "In the Northern Hemisphere, hurricanes spin counterclockwise because of Earth's rotation (the Coriolis effect).",
+                phases: {
+                    before: { do: ["🔨 Board up all windows securely", "📦 Stock 7 days of supplies", "🗺️ Plan evacuation route with alternatives"], dont: ["⏳ Wait until last minute to prepare", "🛑 Ignore mandatory evacuation orders", "📑 Forget important documents and photos"] },
+                    during: { do: ["🏡 Stay indoors away from windows", "📻 Listen to weather updates constantly", "🚪 Remain in interior safe room"], dont: ["💨 Go outside during the eye", "🕯️ Use open flame candles near gas", "🚗 Drive through any flooded areas"] },
+                    after: { do: ["🌊 Avoid all standing floodwater", "🏠 Check home for structural damage", "🤝 Help elderly neighbors safely"], dont: ["🚶 Walk in standing water", "💧 Use tap water without boiling first", "⚠️ Enter buildings surrounded by water"] }
+                }
+            },
+            {
+                name: "FLOOD",
+                emoji: "🌧️",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1506917728033-b3f13a8d56c0?auto=format&fit=crop&w=1200&q=80",
+                situation: "It has been raining heavily for two days. The nearby river is rising quickly and local news warns of possible flash flooding. Water is already covering some roads, and drains on your street are overflowing.",
+                fact: "Just 15 cm of fast-moving floodwater can knock an adult over, and 30 cm can move a small car.",
+                phases: {
+                    before: { do: ["📻 Check local flood warnings", "🗺️ Know higher ground routes", "📦 Move valuables to upper floors"], dont: ["🚗 Park car in low areas", "⏳ Wait to see water at your door", "🛏️ Sleep in basement rooms"] },
+                    during: { do: ["🏃 Move to higher ground immediately", "🚫 Avoid walking through moving water", "🚗 Turn around, don’t drive through floods"], dont: ["🚗 Drive through flooded roads", "🤿 Play or swim in floodwater", "⚡ Touch electrical equipment in water"] },
+                    after: { do: ["🧤 Wear boots and gloves when cleaning", "💧 Use only safe drinking water", "📸 Record damage for insurance"], dont: ["🚶 Enter buildings with standing water", "🍞 Eat food that touched floodwater", "🔥 Turn on power without inspection"] }
+                }
+            },
+            {
+                name: "VOLCANO",
+                emoji: "🌋",
+                mediaType: "image",
+                mediaUrl: "https://images.unsplash.com/photo-1518300670681-9a7dbcdcfb31?auto=format&fit=crop&w=1200&q=80",
+                situation: "You live near a volcano that has been quiet for years. Suddenly you feel tremors, see ash clouds rising from the crater, and smell sulfur. Authorities issue an alert that an eruption is possible.",
+                fact: "Volcanic ash is made of tiny pieces of rock and glass that can damage lungs, eyes and engines.",
+                phases: {
+                    before: { do: ["🗺️ Know evacuation routes away from volcano", "😷 Keep masks and goggles ready", "📦 Prepare a grab-and-go emergency kit"], dont: ["⛰️ Hike near the crater", "📸 Go closer to take photos", "🛑 Ignore official volcano alerts"] },
+                    during: { do: ["🏃 Evacuate along recommended routes", "😷 Cover nose and mouth with mask", "🏠 Stay indoors if ash is falling"], dont: ["⛰️ Stay in valleys or river beds", "🚗 Drive fast in heavy ashfall", "👀 Rub eyes if ash gets in"] },
+                    after: { do: ["🧹 Clean ash from roofs carefully", "😷 Wear protection when outside", "📻 Listen for updates on activity"], dont: ["🚿 Wash ash into drains", "🏡 Return to exclusion zones", "🐾 Let pets roam in heavy ash"] }
+                }
+            }
+        ];
+
+        const TOTAL_LEVELS_PER_GAME = 5;
+        const TOTAL_GAME_TIME = 25 * 60; // 25 minutes
+
+        let gameData = [];                // the 5 picked disasters for this game
+        let currentLevel = 0;
+        let currentPhase = 'before';
+        let score = 0;
+        let selectedGuess = null;
+        let draggedElement = null;
+        let userAnswers = { do: [], dont: [] };
+        let phaseCompleted = { before: false, during: false, after: false };
+
+        let gameTimeLeft = TOTAL_GAME_TIME;
+        let gameTimerInterval = null;
+
+        // Utility to shuffle an array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function updateGameTimerDisplay() {
+            const m = Math.floor(gameTimeLeft / 60);
+            const s = gameTimeLeft % 60;
+            document.getElementById('gameTime').textContent =
+                `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        }
+
+        function endGameDueToTime() {
+            // Disable all interactions
+            document.querySelectorAll('button').forEach(b => b.disabled = true);
+            document.querySelectorAll('.action-card').forEach(c => c.draggable = false);
+            document.querySelectorAll('.drop-zone').forEach(z => z.style.pointerEvents = 'none');
+            document.querySelectorAll('.guess-card').forEach(c => c.style.pointerEvents = 'none');
+
+            // Switch to gamePhase and show message
+            document.getElementById('guessPhase').classList.remove('active');
+            document.getElementById('gamePhase').classList.add('active');
+
+            const feedback = document.getElementById('feedback');
+            feedback.className = 'feedback incorrect';
+            feedback.textContent = `⏱️ Time is up! Your final score is ${score}/150.`;
+            feedback.style.display = 'block';
+        }
+
+        function startGameTimer() {
+            if (gameTimerInterval) clearInterval(gameTimerInterval);
+            gameTimeLeft = TOTAL_GAME_TIME;
+            updateGameTimerDisplay();
+            gameTimerInterval = setInterval(() => {
+                gameTimeLeft--;
+                updateGameTimerDisplay();
+                if (gameTimeLeft <= 0) {
+                    clearInterval(gameTimerInterval);
+                    gameTimerInterval = null;
+                    endGameDueToTime();
+                }
+            }, 1000);
+        }
+
+        // Initialize game: pick 5 random challenges and random order
+        function initializeGame() {
+            const shuffledDisasters = shuffleArray(allGameData);
+            gameData = shuffledDisasters.slice(0, TOTAL_LEVELS_PER_GAME); // 5 out of 7, random
+            currentLevel = 0;
+            score = 0;
+            updateScore(0, true); // reset display
+            document.getElementById('level').textContent = 1;
+            phaseCompleted = { before: false, during: false, after: false };
+            selectedGuess = null;
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('guessFeedback').style.display = 'none';
+            document.getElementById('guessPhase').classList.add('active');
+            document.getElementById('gamePhase').classList.remove('active');
+            document.querySelector('.phase-selector').style.display = 'flex';
+            document.getElementById('actionGrid').style.display = 'grid';
+            document.querySelector('.drop-zones').style.display = 'grid';
+            startGameTimer();
+            loadGuessPhase();
+        }
+
+        function updateScore(points, reset = false) {
+            if (reset) {
+                score = 0;
+            } else {
+                score += points;
+            }
+            document.getElementById('score').textContent = score;
+        }
+
+        function updatePhaseButtons() {
+            const phases = ['before', 'during', 'after'];
+            document.querySelectorAll('.phase-btn').forEach(btn => {
+                const phase = btn.dataset.phase;
+                btn.classList.remove('active');
+               
+                if (phase === currentPhase) {
+                    btn.classList.add('active');
+                    btn.disabled = false;
+                } else if (phaseCompleted[phase]) {
+                    btn.disabled = false; // completed phases can be revisited
+                } else {
+                    btn.disabled = true;  // lock future phases
+                }
+            });
+
+            // Unlock next phase if current has been completed
+            const nextIndex = phases.indexOf(currentPhase) + 1;
+            if (phaseCompleted[currentPhase] && nextIndex < phases.length) {
+                const nextPhase = phases[nextIndex];
+                document.querySelector(`.phase-btn[data-phase="${nextPhase}"]`).disabled = false;
+            }
+        }
+
+        function loadGuessPhase() {
+            // Game finished (all 5 levels)
+            if (currentLevel >= TOTAL_LEVELS_PER_GAME) {
+                if (gameTimerInterval) {
+                    clearInterval(gameTimerInterval);
+                    gameTimerInterval = null;
+                }
+                document.getElementById('guessPhase').classList.remove('active');
+                document.getElementById('gamePhase').classList.add('active');
+                document.querySelector('.phase-selector').style.display = 'none';
+                document.getElementById('actionGrid').style.display = 'none';
+                document.querySelector('.drop-zones').style.display = 'none';
+                const feedback = document.getElementById('feedback');
+                feedback.className = 'feedback correct';
+                feedback.textContent = `🏆 GAME COMPLETE! Final Score: ${score}/150 points! ${score >= 120 ? 'AMAZING!' : score >= 90 ? 'Great job!' : 'Good effort!'}`;
+                feedback.style.display = 'block';
+                document.getElementById('checkBtn').style.display = 'none';
+                document.getElementById('nextBtn').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('guessPhase').classList.add('active');
+            document.getElementById('gamePhase').classList.remove('active');
+
+            const level = gameData[currentLevel];
+            document.getElementById('level').textContent = currentLevel + 1;
+
+            // Reset phase completion for new level
+            phaseCompleted = { before: false, during: false, after: false };
+
+            const mediaContainer = document.getElementById('mediaContainer');
+            if (level.mediaType === 'image') {
+                mediaContainer.innerHTML = `<img src="${level.mediaUrl}" alt="Mystery scenario" style="max-height: 400px;">`;
+            } else {
+                mediaContainer.innerHTML = `<video src="${level.mediaUrl}" autoplay loop muted style="max-height: 400px;"></video>`;
+            }
+
+            document.getElementById('situationText').textContent = level.situation;
+
+            // Guess options only from the 5 disasters selected in this game
+            const optionsForThisGame = shuffleArray(gameData.map(d => d.name));
+            const guessOptions = document.getElementById('guessOptions');
+            guessOptions.innerHTML = '';
+
+            optionsForThisGame.forEach(option => {
+                const card = document.createElement('div');
+                card.className = 'guess-card';
+                card.textContent = option;
+                card.dataset.disaster = option;
+               
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.guess-card').forEach(c => c.classList.remove('selected', 'correct', 'wrong'));
+                    card.classList.add('selected');
+                    selectedGuess = option;
+                    document.getElementById('submitGuess').disabled = false;
+                });
+               
+                guessOptions.appendChild(card);
+            });
+
+            document.getElementById('submitGuess').disabled = true;
+            document.getElementById('guessFeedback').style.display = 'none';
+            selectedGuess = null;
+        }
+
+        document.getElementById('submitGuess').addEventListener('click', () => {
+            const level = gameData[currentLevel];
+            const feedback = document.getElementById('guessFeedback');
+            const correctCard = document.querySelector(`[data-disaster="${level.name}"]`);
+            const selectedCard = selectedGuess ? document.querySelector(`[data-disaster="${selectedGuess}"]`) : null;
+           
+            document.querySelectorAll('.guess-card').forEach(c => c.style.pointerEvents = 'none');
+
+            if (selectedGuess === level.name) {
+                updateScore(30);
+                feedback.className = 'feedback correct';
+                feedback.textContent = `🎉 Correct! It's a ${level.name}! You earned 30 points!`;
+                if (selectedCard) selectedCard.classList.add('correct');
+               
+                setTimeout(() => {
+                    document.getElementById('guessPhase').classList.remove('active');
+                    document.getElementById('gamePhase').classList.add('active');
+                    document.getElementById('revealedName').textContent = `${level.emoji} ${level.name}`;
+                    currentPhase = 'before';
+                    loadPhase();
+                }, 2000);
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `❌ Not quite! It's actually a ${level.name}. Let's learn about it anyway!`;
+                if (selectedCard) selectedCard.classList.add('wrong');
+                if (correctCard) correctCard.classList.add('correct');
+               
+                setTimeout(() => {
+                    document.getElementById('guessPhase').classList.remove('active');
+                    document.getElementById('gamePhase').classList.add('active');
+                    document.getElementById('revealedName').textContent = `${level.emoji} ${level.name}`;
+                    currentPhase = 'before';
+                    loadPhase();
+                }, 3000);
+            }
+           
+            document.getElementById('submitGuess').disabled = true;
+        });
+
+        function updateCheckButtonState() {
+            const level = gameData[currentLevel];
+            const phaseData = level.phases[currentPhase];
+            const totalActions = phaseData.do.length + phaseData.dont.length;
+            const placedActions = userAnswers.do.length + userAnswers.dont.length;
+            document.getElementById('checkBtn').disabled = (placedActions !== totalActions);
+        }
+
+        function loadPhase() {
+            const level = gameData[currentLevel];
+            const phaseData = level.phases[currentPhase];
+            const allActions = [...phaseData.do, ...phaseData.dont].sort(() => Math.random() - 0.5);
+
+            const actionGrid = document.getElementById('actionGrid');
+            actionGrid.innerHTML = '';
+
+            // Only load actions if phase not completed
+            if (!phaseCompleted[currentPhase]) {
+                allActions.forEach(action => {
+                    const card = document.createElement('div');
+                    card.className = 'action-card';
+                    card.draggable = true;
+                    card.textContent = action;
+                    card.dataset.action = action;
+
+                    card.addEventListener('dragstart', handleDragStart);
+                    card.addEventListener('dragend', handleDragEnd);
+                   
+                    actionGrid.appendChild(card);
+                });
+            }
+
+            document.getElementById('doZone').innerHTML = '';
+            document.getElementById('dontZone').innerHTML = '';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('checkBtn').style.display = 'inline-block';
+            document.getElementById('checkBtn').disabled = true;
+            document.getElementById('nextBtn').style.display = 'none';
+
+            if (phaseCompleted[currentPhase]) {
+                document.getElementById('checkBtn').style.display = 'none';
+                document.getElementById('nextBtn').style.display = 'inline-block';
+            }
+
+            userAnswers = { do: [], dont: [] };
+            updatePhaseButtons();
+        }
+
+        function handleDragStart(e) {
+            draggedElement = e.target;
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.dataset.action);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+               
+                const actionText = e.dataTransfer.getData('text/plain');
+                const draggedCard = document.querySelector(`.action-card[data-action="${actionText}"]`);
+
+                if (draggedCard) {
+                    const zoneType = zone.dataset.zone;
+                    const action = draggedCard.dataset.action;
+
+                    // Remove from previous answer arrays
+                    userAnswers.do = userAnswers.do.filter(a => a !== action);
+                    userAnswers.dont = userAnswers.dont.filter(a => a !== action);
+
+                    userAnswers[zoneType].push(action);
+                   
+                    const droppedItem = document.createElement('div');
+                    droppedItem.className = 'dropped-item';
+                    droppedItem.textContent = action;
+                    droppedItem.dataset.action = action;
+
+                    // Click to remove back to grid
+                    droppedItem.addEventListener('click', () => {
+                        // Remove from userAnswers
+                        userAnswers.do = userAnswers.do.filter(a => a !== action);
+                        userAnswers.dont = userAnswers.dont.filter(a => a !== action);
+
+                        const newCard = document.createElement('div');
+                        newCard.className = 'action-card';
+                        newCard.draggable = true;
+                        newCard.textContent = action;
+                        newCard.dataset.action = action;
+                        newCard.addEventListener('dragstart', handleDragStart);
+                        newCard.addEventListener('dragend', handleDragEnd);
+                        document.getElementById('actionGrid').appendChild(newCard);
+
+                        droppedItem.remove();
+                        updateCheckButtonState();
+                    });
+
+                    // Append to correct inner container (first div inside zone after h3)
+                    const innerContainer = zone.querySelector('div[id$="Zone"]');
+                    innerContainer.appendChild(droppedItem);
+                    draggedCard.remove();
+
+                    updateCheckButtonState();
+                }
+            });
+        });
+
+        document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+
+        function checkAnswers() {
+            const level = gameData[currentLevel];
+            const phaseData = level.phases[currentPhase];
+            let correctCount = 0;
+            const totalActions = phaseData.do.length + phaseData.dont.length;
+
+            const droppedItems = document.querySelectorAll('.dropped-item');
+            droppedItems.forEach(item => {
+                item.classList.remove('correct', 'wrong');
+                const action = item.dataset.action;
+                const parentZone = item.closest('.drop-zone').dataset.zone;
+
+                let isCorrect = false;
+                if (parentZone === 'do' && phaseData.do.includes(action)) isCorrect = true;
+                if (parentZone === 'dont' && phaseData.dont.includes(action)) isCorrect = true;
+
+                if (isCorrect) {
+                    item.classList.add('correct');
+                    correctCount++;
+                } else {
+                    item.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('feedback');
+            document.getElementById('checkBtn').style.display = 'none';
+
+            if (correctCount === totalActions) {
+                updateScore(20); // 20 points per phase
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `✅ Phase Complete! All ${totalActions} actions correctly classified! You earned 20 points.<br><br>💡 Fact: ${level.fact}`;
+                feedback.style.display = 'block';
+                phaseCompleted[currentPhase] = true;
+
+                const phases = ['before', 'during', 'after'];
+                const currentIndex = phases.indexOf(currentPhase);
+                const nextIndex = currentIndex + 1;
+
+                if (nextIndex < phases.length) {
+                    currentPhase = phases[nextIndex];
+                    document.getElementById('nextBtn').textContent = `Go to ${currentPhase.toUpperCase()} Phase`;
+                    document.getElementById('nextBtn').style.display = 'inline-block';
+                    document.getElementById('nextBtn').onclick = nextPhaseHandler;
+                } else {
+                    document.getElementById('nextBtn').textContent = 'Next Challenge';
+                    document.getElementById('nextBtn').style.display = 'inline-block';
+                    document.getElementById('nextBtn').onclick = nextChallengeHandler;
+                }
+
+                document.querySelector('.game-container').classList.add('celebrating');
+                setTimeout(() => {
+                    document.querySelector('.game-container').classList.remove('celebrating');
+                }, 1500);
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `❌ Not quite! You correctly classified ${correctCount} of ${totalActions} actions. Try again!`;
+                feedback.style.display = 'block';
+
+                // Reset phase so they drag & drop again
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                    document.getElementById('checkBtn').style.display = 'inline-block';
+                    document.getElementById('checkBtn').disabled = true;
+                    loadPhase(); // reload cards
+                }, 2000);
+            }
+        }
+
+        function nextPhaseHandler() {
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('feedback').style.display = 'none';
+            loadPhase();
+        }
+
+        function nextChallengeHandler() {
+            currentLevel++;
+            currentPhase = 'before';
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('feedback').style.display = 'none';
+            loadGuessPhase();
+        }
+
+        // Allow revisiting completed phases
+        document.querySelectorAll('.phase-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!btn.disabled) {
+                    currentPhase = btn.dataset.phase;
+                    loadPhase();
+                }
+            });
+        });
+
+        // Header mobile menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navList = document.querySelector('header nav ul');
+        if (mobileMenuBtn && navList) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navList.classList.toggle('show');
+            });
+        }
+
+        // Instructions start button
+        const instructionsModal = document.getElementById('instructions-modal');
+        const startBtn = document.getElementById('start-btn');
+        startBtn.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+            initializeGame();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateGameTimerDisplay();
+            applyTranslations();
+        });
+    </script>
+</body>
+</html>

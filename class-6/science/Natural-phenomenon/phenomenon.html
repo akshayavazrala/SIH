@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Phenomenon - STEM Learn Odisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #2a69ac;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text h1 span {
+            color: #38b2ac;
+            font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 180px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f7fa;
+        }
+
+        .dropdown-item i {
+            color: #3182ce;
+            width: 20px;
+        }
+
+        /* Language Options */
+        .language-options {
+            position: absolute;
+            top: 60px;
+            right: 120px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 120px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .language-options.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: #f5f7fa;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(14, 42, 71, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .breadcrumb a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #3182ce;
+        }
+
+        .breadcrumb span {
+            color: #64748b;
+        }
+
+        /* Interactive Content */
+        .interactive-content {
+            padding: 50px 0;
+        }
+
+        .learning-path {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .learning-title {
+            font-size: 1.5rem;
+            color: #1a365d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .path-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .path-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .path-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: #3182ce;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: #3182ce;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .card-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        /* Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 30px;
+        }
+
+        .modal-section h3 {
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .modal-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .modal-section ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal-section li {
+            margin-bottom: 8px;
+        }
+
+        /* Progress Tracking */
+        .progress-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .progress-title {
+            font-size: 1.5rem;
+            color: #1a365d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .progress-item {
+            margin-bottom: 15px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #3182ce;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        /* Games Section */
+        .games-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #1a365d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .game-level {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .game-body {
+            padding: 20px;
+        }
+
+        .game-features {
+            margin-bottom: 20px;
+        }
+
+        .game-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .game-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #38b2ac;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .game-btn:hover {
+            background: #2c9a94;
+            transform: translateY(-2px);
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            color: #3182ce;
+            margin-bottom: 15px;
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+
+        .resource-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #38b2ac;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            background: #2c9a94;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about {
+            padding-right: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-icon {
+            font-size: 1.8rem;
+            background: #38b2ac;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .footer-about p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 20px;
+            color: #38b2ac;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2d3748;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: #38b2ac;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .games-grid, .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .path-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+           
+            nav ul {
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Odia font support */
+        .odia-text {
+            font-family: 'Kalinga', 'Nirmala UI', 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+            </div>
+            <div class="logo-text">
+                <h1>STEM Learn Odisha</h1>
+                <p>Gamified Learning Platform</p>
+            </div>
+        </div>
+       
+        <nav>
+            <ul>
+                <li><a href="student-dashboard.html" id="navDashboard">Dashboard</a></li>
+                <li><a href="science.html" id="navScience">Science</a></li>
+                <li><a href="scienceidx.html" id="navCurriculum">Curriculum</a></li>
+                <li><a href="natural-phenomenon.html" class="active" id="navNaturalPhenomenon">Natural Phenomenon</a></li>
+            </ul>
+        </nav>
+       
+        <div class="header-controls">
+            <button class="control-btn" id="languageToggle">
+                <i class="fas fa-globe"></i>
+            </button>
+           
+            <div class="profile-container">
+                <button class="profile-btn" id="profileToggle">
+                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <span id="headerUserName">Student</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+               
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" class="dropdown-item" id="dropdownProfile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownSettings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownLogout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Language Options -->
+    <div class="language-options" id="languageOptions">
+        <div class="language-option" data-lang="en">English</div>
+        <div class="language-option" data-lang="or">ଓଡ଼ିଆ</div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 id="phenomenon-title">Natural Phenomenon: Weather and Light</h1>
+            <p id="phenomenon-desc">Explore amazing natural events and understand the science behind light through interactive activities</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <a href="student-dashboard.html" id="breadcrumb-home">Dashboard</a>
+                <span>/</span>
+                <a href="science.html" id="breadcrumb-science">Science</a>
+                <span>/</span>
+                <a href="scienceidx.html" id="breadcrumb-curriculum">Curriculum</a>
+                <span>/</span>
+                <span id="breadcrumb-topic">Natural Phenomenon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Content -->
+    <section class="interactive-content">
+        <div class="container">
+            <!-- Learning Path -->
+            <div class="learning-path">
+                <h2 class="learning-title">
+                    <i class="fas fa-road"></i>
+                    <span id="learning-path-title">Your Learning Path</span>
+                </h2>
+                <div class="path-cards">
+                    <div class="path-card" data-card="weather">
+                        <div class="card-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <div class="card-title" id="card1-title">Weather Phenomena</div>
+                        <div class="card-desc" id="card1-desc">Learn about rain, wind, storms, and other weather events</div>
+                    </div>
+                    <div class="path-card" data-card="seasons">
+                        <div class="card-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="card-title" id="card2-title">Seasons and Climate</div>
+                        <div class="card-desc" id="card2-desc">Understand seasonal changes and climate patterns</div>
+                    </div>
+                    <div class="path-card" data-card="light">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="card-title" id="card3-title">Light and Vision</div>
+                        <div class="card-desc" id="card3-desc">Discover properties of light, shadows, and how we see</div>
+                    </div>
+                    <div class="path-card" data-card="review">
+                        <div class="card-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="card-title" id="card4-title">Review and Quizzes</div>
+                        <div class="card-desc" id="card4-desc">Test your knowledge with interactive quizzes and reviews</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracking -->
+            <div class="progress-section">
+                <h2 class="progress-title">
+                    <i class="fas fa-chart-line"></i>
+                    <span id="progress-title">Your Progress</span>
+                </h2>
+                <div class="progress-bars">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span id="progress-weather">Weather Phenomena</span>
+                            <span id="weather-progress-value">45%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="weather-progress" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span id="progress-seasons">Seasons & Climate</span>
+                            <span id="seasons-progress-value">35%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="seasons-progress" style="width: 35%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span id="progress-light">Light & Vision</span>
+                            <span id="light-progress-value">20%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="light-progress" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span id="progress-overall">Overall Mastery</span>
+                            <span id="overall-progress-value">33%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="overall-progress" style="width: 33%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Games Section -->
+            <div class="games-section">
+                <h2 class="section-title">
+                    <i class="fas fa-gamepad"></i>
+                    <span id="games-title">Interactive Learning Games</span>
+                </h2>
+
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-level" id="level-basic">Basic</div>
+                            <h3 class="game-title" id="game1-title">Weather Detective</h3>
+                            <p class="game-desc" id="game1-desc">Identify different weather conditions and phenomena</p>
+                        </div>
+                        <div class="game-body">
+                            <div class="game-features">
+                                <div class="game-feature">
+                                    <i class="fas fa-star"></i>
+                                    <span id="game1-feature1">Match weather conditions to their characteristics</span>
+                                </div>
+                                <div class="game-feature">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="game1-feature2">10-15 minutes gameplay</span>
+                                </div>
+                                <div class="game-feature">
+                                    <i class="fas fa-trophy"></i>
+                                    <span id="game1-feature3">Earn up to 50 points</span>
+                                </div>
+                            </div>
+                            <a href="game6.6.1.html" class="game-btn" id="play-game1">Play Game</a>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-level" id="level-hard">Hard</div>
+                            <h3 class="game-title" id="game3-title">Light & Shadow Lab</h3>
+                            <p class="game-desc" id="game3-desc">Experiment with light properties and shadow formation</p>
+                        </div>
+                        <div class="game-body">
+                            <div class="game-features">
+                                <div class="game-feature">
+                                    <i class="fas fa-star"></i>
+                                    <span id="game3-feature1">Create shadows and understand light behavior</span>
+                                </div>
+                                <div class="game-feature">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="game3-feature2">20-25 minutes gameplay</span>
+                                </div>
+                                <div class="game-feature">
+                                    <i class="fas fa-trophy"></i>
+                                    <span id="game3-feature3">Earn up to 150 points</span>
+                                </div>
+                            </div>
+                            <a href="game6.6.2.html" class="game-btn" id="play-game3">Play Game</a>
+                        </div>
+                    </div>
+
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-level" id="level-intermediate">Intermediate</div>
+                            <h3 class="game-title" id="game2-title">Season Explorer</h3>
+                            <p class="game-desc" id="game2-desc">Learn about seasonal changes and their effects</p>
+                        </div>
+                        <div class="game-body">
+                            <div class="game-features">
+                                <div class="game-feature">
+                                    <i class="fas fa-star"></i>
+                                    <span id="game2-feature1">Identify characteristics of different seasons</span>
+                                </div>
+                                <div class="game-feature">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="game2-feature2">15-20 minutes gameplay</span>
+                                </div>
+                                <div class="game-feature">
+                                    <i class="fas fa-trophy"></i>
+                                    <span id="game2-feature3">Earn up to 100 points</span>
+                                </div>
+                            </div>
+                            <a href="game6.6.3.html" class="game-btn" id="play-game2">Play Game</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Section -->
+            <div class="resources-section">
+                <h2 class="section-title">
+                    <i class="fas fa-download"></i>
+                    <span id="resources-title">Learning Resources</span>
+                </h2>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3 class="resource-title" id="resource1-title">Study Notes</h3>
+                        <p class="resource-desc" id="resource1-desc">Complete chapter notes for revision</p>
+                        <a href="#" class="download-btn">
+                            <i class="fas fa-download"></i>
+                            <span id="download-english">Download (English)</span>
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="resource-title" id="resource2-title">Study Notes (Odia)</h3>
+                        <p class="resource-desc" id="resource2-desc">Complete chapter notes for revision</p>
+                        <a href="#" class="download-btn">
+                            <i class="fas fa-download"></i>
+                            <span id="download-odia">Download (Odia)</span>
+                        </a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3 class="resource-title" id="resource3-title">Flashcards</h3>
+                        <p class="resource-desc" id="resource3-desc">Visual learning cards for key concepts</p>
+                        <a href="#" class="download-btn">
+                            <i class="fas fa-download"></i>
+                            <span id="download-flashcards">Download Flashcards</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="footer-logo-text">STEM Learn Odisha</div>
+                    </div>
+                    <p id="footer-desc">Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h3 id="quick-links">Quick Links</h3>
+                    <ul>
+                        <li><a href="student-dashboard.html"><i class="fas fa-tachometer-alt"></i> <span id="footer-dashboard">Dashboard</span></a></li>
+                        <li><a href="science.html"><i class="fas fa-flask"></i> <span id="footer-science">Science</span></a></li>
+                        <li><a href="natural-phenomenon.html"><i class="fas fa-mountain"></i> <span id="footer-phenomenon">Natural Phenomenon</span></a></li>
+                        <li><a href="scienceidx.html"><i class="fas fa-book"></i> <span id="footer-curriculum">Curriculum</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3 id="contact-us">Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> <span id="footer-address">Department of Education, Bhubaneswar</span></a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +91 674 123 4567</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@stemlearnodisha.com</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p id="copyright">© 2023 STEM Learn Odisha. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="content-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Weather Phenomena</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+           
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'student-login.html';
+                return;
+            }
+           
+            // Load user data
+            loadUserData(user);
+            
+            // Initialize the page
+            init();
+        });
+
+        // Load user data into the page
+        function loadUserData(user) {
+            document.getElementById('headerUserName').textContent = user.fullName;
+            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+        }
+
+        // Content for modal popups
+        const contentData = {
+            'weather': {
+                'title': 'Weather Phenomena',
+                'content': `
+                    <div class="modal-section">
+                        <h3>What is Weather?</h3>
+                        <p>Weather refers to the day-to-day conditions of the atmosphere at a particular place and time. It includes temperature, humidity, rainfall, wind speed, and cloud cover.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Common Weather Phenomena</h3>
+                        <p>Some amazing weather events we observe:</p>
+                        <ul>
+                            <li><strong>Rain:</strong> Water droplets falling from clouds</li>
+                            <li><strong>Thunderstorms:</strong> Storms with thunder and lightning</li>
+                            <li><strong>Clouds:</strong> Visible masses of water droplets or ice crystals
+                                <ul>
+                                    <li>Cumulus (fluffy, fair weather)</li>
+                                    <li>Stratus (layered, overcast)</li>
+                                    <li>Cirrus (wispy, high altitude)</li>
+                                    <li>Nimbus (rain clouds)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Wind:</strong> Moving air from high pressure to low pressure areas</li>
+                            <li><strong>Fog:</strong> Cloud at ground level</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Extreme Weather Events</h3>
+                        <p>Some weather can be dangerous:</p>
+                        <ul>
+                            <li><strong>Cyclones/Hurricanes:</strong> Large rotating storms with strong winds</li>
+                            <li><strong>Tornadoes:</strong> Violently rotating columns of air touching the ground</li>
+                            <li><strong>Floods:</strong> Overflow of water onto normally dry land</li>
+                            <li><strong>Droughts:</strong> Long periods without rainfall</li>
+                            <li><strong>Heatwaves:</strong> Prolonged periods of excessively hot weather</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Weather in Odisha</h3>
+                        <p>Odisha experiences diverse weather patterns:</p>
+                        <ul>
+                            <li><strong>Summer (March-June):</strong> Hot and humid with temperatures up to 45°C</li>
+                            <li><strong>Monsoon (June-September):</strong> Heavy rainfall from southwest monsoon</li>
+                            <li><strong>Post-Monsoon (October-November):</strong> Retreating monsoon with occasional rains</li>
+                            <li><strong>Winter (December-February):</strong> Mild and pleasant with temperatures 10-25°C</li>
+                        </ul>
+                        <p>Odisha is prone to cyclones, especially along the coastal areas. The 1999 Super Cyclone was one of the most devastating.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Measuring Weather</h3>
+                        <p>Meteorologists use various instruments:</p>
+                        <ul>
+                            <li><strong>Thermometer:</strong> Measures temperature</li>
+                            <li><strong>Barometer:</strong> Measures atmospheric pressure</li>
+                            <li><strong>Anemometer:</strong> Measures wind speed</li>
+                            <li><strong>Rain Gauge:</strong> Measures rainfall</li>
+                            <li><strong>Hygrometer:</strong> Measures humidity</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Weather Safety</h3>
+                        <p>Important safety tips for different weather:</p>
+                        <ul>
+                            <li><strong>During Thunderstorms:</strong> Stay indoors, away from windows, and avoid using electrical appliances</li>
+                            <li><strong>During Cyclones:</strong> Move to safe shelters, store drinking water, and follow official warnings</li>
+                            <li><strong>During Heatwaves:</strong> Drink plenty of water, stay in shade, and avoid outdoor activities</li>
+                            <li><strong>During Floods:</strong> Move to higher ground and avoid walking through floodwater</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'seasons': {
+                'title': 'Seasons and Climate',
+                'content': `
+                    <div class="modal-section">
+                        <h3>What Causes Seasons?</h3>
+                        <p>Seasons are caused by two main factors:</p>
+                        <ol>
+                            <li><strong>Earth's Tilt:</strong> Earth is tilted at 23.5 degrees on its axis</li>
+                            <li><strong>Earth's Revolution:</strong> Earth orbits around the Sun once a year</li>
+                        </ol>
+                        <p>As Earth revolves, different parts receive direct sunlight at different times of the year, creating seasons.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Major Seasons in India</h3>
+                        <p>India experiences four main seasons:</p>
+                        <ul>
+                            <li><strong>Winter (December-February):</strong>
+                                <ul>
+                                    <li>Cool and dry weather</li>
+                                    <li>Short days and long nights</li>
+                                    <li>Some regions experience frost</li>
+                                </ul>
+                            </li>
+                            <li><strong>Summer (March-May):</strong>
+                                <ul>
+                                    <li>Hot and dry weather</li>
+                                    <li>Long days and short nights</li>
+                                    <li>Local winds like "loo" in North India</li>
+                                </ul>
+                            </li>
+                            <li><strong>Monsoon (June-September):</strong>
+                                <ul>
+                                    <li>Rainy season</li>
+                                    <li>Brought by southwest monsoon winds</li>
+                                    <li>Crucial for agriculture</li>
+                                </ul>
+                            </li>
+                            <li><strong>Autumn (October-November):</strong>
+                                <ul>
+                                    <li>Transition season</li>
+                                    <li>Retreating monsoon</li>
+                                    <li>Pleasant weather</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Seasons in Odisha</h3>
+                        <p>Odisha has distinct seasonal patterns:</p>
+                        <ul>
+                            <li><strong>Grishma (Summer):</strong> March to June - Hot and humid with temperatures reaching 40-45°C</li>
+                            <li><strong>Barsha (Monsoon):</strong> June to September - Heavy rainfall from Bay of Bengal</li>
+                            <li><strong>Sharad (Autumn):</strong> October to November - Pleasant weather, harvest season</li>
+                            <li><strong>Hemanta (Late Autumn):</strong> November to December - Cool and comfortable</li>
+                            <li><strong>Shishira (Winter):</strong> December to February - Mild winter with temperatures 10-25°C</li>
+                        </ul>
+                        <p>Odisha celebrates many festivals according to seasons: Raja Parba (monsoon onset), Nuakhai (harvest), and more.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Climate vs Weather</h3>
+                        <p>Important distinction:</p>
+                        <ul>
+                            <li><strong>Weather:</strong> Short-term atmospheric conditions (hours to days)</li>
+                            <li><strong>Climate:</strong> Long-term weather patterns of a region (years to centuries)</li>
+                        </ul>
+                        <p>Example: "Today it's raining" is weather. "Odisha has a tropical climate with distinct wet and dry seasons" is climate.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Effects of Seasons</h3>
+                        <p>Seasons affect many aspects of life:</p>
+                        <ul>
+                            <li><strong>Agriculture:</strong> Different crops grown in different seasons</li>
+                            <li><strong>Clothing:</strong> Light clothes in summer, warm clothes in winter</li>
+                            <li><strong>Food:</strong> Seasonal fruits and vegetables available</li>
+                            <li><strong>Festivals:</strong> Many festivals are seasonal</li>
+                            <li><strong>Animal Behavior:</strong> Migration, hibernation, breeding patterns</li>
+                            <li><strong>Human Health:</strong> Different diseases prevalent in different seasons</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Climate Change</h3>
+                        <p>Important environmental issue:</p>
+                        <ul>
+                            <li><strong>Definition:</strong> Long-term changes in temperature and weather patterns</li>
+                            <li><strong>Causes:</strong> Human activities (burning fossil fuels, deforestation) and natural factors</li>
+                            <li><strong>Effects in Odisha:</strong>
+                                <ul>
+                                    <li>More frequent and intense cyclones</li>
+                                    <li>Changing rainfall patterns</li>
+                                    <li>Rising sea levels affecting coastal areas</li>
+                                    <li>Impact on agriculture and livelihoods</li>
+                                </ul>
+                            </li>
+                            <li><strong>What we can do:</strong> Plant trees, save energy, reduce waste, use public transport</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'light': {
+                'title': 'Light and Vision',
+                'content': `
+                    <div class="modal-section">
+                        <h3>What is Light?</h3>
+                        <p>Light is a form of energy that enables us to see objects. It travels in straight lines and very fast - about 300,000 kilometers per second!</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Sources of Light</h3>
+                        <p>Light comes from various sources:</p>
+                        <ul>
+                            <li><strong>Natural Sources:</strong>
+                                <ul>
+                                    <li>Sun (primary natural source)</li>
+                                    <li>Stars</li>
+                                    <li>Lightning</li>
+                                    <li>Fireflies (bioluminescence)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Artificial Sources:</strong>
+                                <ul>
+                                    <li>Electric bulbs</li>
+                                    <li>Tube lights</li>
+                                    <li>Candles</li>
+                                    <li>Torches</li>
+                                    <li>LED lights</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Properties of Light</h3>
+                        <p>Light has interesting properties:</p>
+                        <ul>
+                            <li><strong>Travels in Straight Lines:</strong> This is why we see shadows</li>
+                            <li><strong>Reflection:</strong> Light bounces off surfaces
+                                <ul>
+                                    <li>Regular reflection: From smooth surfaces (mirrors)</li>
+                                    <li>Diffuse reflection: From rough surfaces (walls)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Refraction:</strong> Light bends when passing from one medium to another (air to water)</li>
+                            <li><strong>Can be Split:</strong> White light can be split into colors (rainbow)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Shadows</h3>
+                        <p>Shadows are formed when light is blocked by an object:</p>
+                        <ul>
+                            <li><strong>Umbra:</strong> Darkest part of the shadow where light is completely blocked</li>
+                            <li><strong>Penumbra:</strong> Lighter part where light is partially blocked</li>
+                            <li>Size and shape of shadows depend on:
+                                <ul>
+                                    <li>Distance between light source and object</li>
+                                    <li>Distance between object and screen</li>
+                                    <li>Size of light source</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Examples: Sundials use shadows to tell time. Shadow puppetry is an ancient art form.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>How We See</h3>
+                        <p>The process of vision:</p>
+                        <ol>
+                            <li>Light from a source falls on an object</li>
+                            <li>The object reflects this light</li>
+                            <li>Reflected light enters our eyes</li>
+                            <li>The lens in our eye focuses the light on the retina</li>
+                            <li>Retina sends signals to the brain through the optic nerve</li>
+                            <li>The brain interprets these signals as images</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Transparent, Translucent and Opaque Objects</h3>
+                        <p>Objects behave differently with light:</p>
+                        <ul>
+                            <li><strong>Transparent:</strong> Allow all light to pass through (clear glass, water)</li>
+                            <li><strong>Translucent:</strong> Allow some light to pass through (frosted glass, tracing paper)</li>
+                            <li><strong>Opaque:</strong> Do not allow any light to pass through (wood, metal, stone)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Colors of Light</h3>
+                        <p>White light contains all colors:</p>
+                        <ul>
+                            <li><strong>VIBGYOR:</strong> Violet, Indigo, Blue, Green, Yellow, Orange, Red</li>
+                            <li><strong>Primary Colors:</strong> Red, Green, Blue - can be mixed to create other colors</li>
+                            <li>Objects appear colored because they reflect some colors and absorb others</li>
+                            <li>A red apple appears red because it reflects red light and absorbs other colors</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Important Applications</h3>
+                        <p>Understanding light helps us in many ways:</p>
+                        <ul>
+                            <li><strong>Mirrors:</strong> For reflection (bathroom mirrors, vehicle rearview mirrors)</li>
+                            <li><strong>Lenses:</strong> For refraction (spectacles, microscopes, telescopes)</li>
+                            <li><strong>Periscopes:</strong> Use mirrors to see around corners (submarines)</li>
+                            <li><strong>Rainbows:</strong> Natural demonstration of light refraction and dispersion</li>
+                            <li><strong>Solar Energy:</strong> Using sunlight to generate electricity</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'review': {
+                'title': 'Review and Quizzes',
+                'content': `
+                    <div class="modal-section">
+                        <h3>Test Your Knowledge</h3>
+                        <p>Let's review what you've learned about natural phenomena and light.</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Quick Quiz</h3>
+                        <p><strong>Question 1:</strong> What instrument measures rainfall?</p>
+                        <ul>
+                            <li>A) Thermometer</li>
+                            <li>B) Barometer</li>
+                            <li>C) Rain Gauge</li>
+                            <li>D) Anemometer</li>
+                        </ul>
+                        <p><strong>Answer:</strong> C) Rain Gauge</p>
+                        
+                        <p><strong>Question 2:</strong> What causes seasons on Earth?</p>
+                        <ul>
+                            <li>A) Earth's rotation</li>
+                            <li>B) Earth's revolution and tilt</li>
+                            <li>C) Distance from the Sun</li>
+                            <li>D) Moon's gravity</li>
+                        </ul>
+                        <p><strong>Answer:</strong> B) Earth's revolution and tilt</p>
+                        
+                        <p><strong>Question 3:</strong> Which type of object allows all light to pass through?</p>
+                        <ul>
+                            <li>A) Opaque</li>
+                            <li>B) Translucent</li>
+                            <li>C) Transparent</li>
+                            <li>D) Reflective</li>
+                        </ul>
+                        <p><strong>Answer:</strong> C) Transparent</p>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Key Points to Remember</h3>
+                        <ul>
+                            <li>Weather is short-term, climate is long-term</li>
+                            <li>Seasons are caused by Earth's tilt and revolution around the Sun</li>
+                            <li>Light travels in straight lines and very fast</li>
+                            <li>Shadows are formed when light is blocked by opaque objects</li>
+                            <li>We see objects when light reflected from them enters our eyes</li>
+                            <li>Transparent objects allow all light through, translucent allow some, opaque allow none</li>
+                            <li>White light contains all colors (VIBGYOR)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3>Interactive Activities</h3>
+                        <p>Try these activities to reinforce your learning:</p>
+                        <ul>
+                            <li>Observe and record weather for a week</li>
+                            <li>Create a shadow clock (sundial) using a stick and markers</li>
+                            <li>Experiment with transparent, translucent and opaque materials</li>
+                            <li>Make a simple periscope using cardboard and mirrors</li>
+                            <li>Create a weather chart showing different seasons in Odisha</li>
+                            <li>Investigate how shadows change throughout the day</li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        // Translations
+        const translations = {
+            en: {
+                'navDashboard': 'Dashboard',
+                'navScience': 'Science',
+                'navCurriculum': 'Curriculum',
+                'navNaturalPhenomenon': 'Natural Phenomenon',
+                'phenomenon-title': 'Natural Phenomenon: Weather and Light',
+                'phenomenon-desc': 'Explore amazing natural events and understand the science behind light through interactive activities',
+                'breadcrumb-home': 'Dashboard',
+                'breadcrumb-science': 'Science',
+                'breadcrumb-curriculum': 'Curriculum',
+                'breadcrumb-topic': 'Natural Phenomenon',
+                'learning-path-title': 'Your Learning Path',
+                'card1-title': 'Weather Phenomena',
+                'card1-desc': 'Learn about rain, wind, storms, and other weather events',
+                'card2-title': 'Seasons and Climate',
+                'card2-desc': 'Understand seasonal changes and climate patterns',
+                'card3-title': 'Light and Vision',
+                'card3-desc': 'Discover properties of light, shadows, and how we see',
+                'card4-title': 'Review and Quizzes',
+                'card4-desc': 'Test your knowledge with interactive quizzes and reviews',
+                'progress-title': 'Your Progress',
+                'progress-weather': 'Weather Phenomena',
+                'progress-seasons': 'Seasons & Climate',
+                'progress-light': 'Light & Vision',
+                'progress-overall': 'Overall Mastery',
+                'games-title': 'Interactive Learning Games',
+                'level-basic': 'Basic',
+                'game1-title': 'Weather Detective',
+                'game1-desc': 'Identify different weather conditions and phenomena',
+                'game1-feature1': 'Match weather conditions to their characteristics',
+                'game1-feature2': '10-15 minutes gameplay',
+                'game1-feature3': 'Earn up to 50 points',
+                'level-intermediate': 'Intermediate',
+                'game2-title': 'Season Explorer',
+                'game2-desc': 'Learn about seasonal changes and their effects',
+                'game2-feature1': 'Identify characteristics of different seasons',
+                'game2-feature2': '15-20 minutes gameplay',
+                'game2-feature3': 'Earn up to 100 points',
+                'level-hard': 'Hard',
+                'game3-title': 'Light & Shadow Lab',
+                'game3-desc': 'Experiment with light properties and shadow formation',
+                'game3-feature1': 'Create shadows and understand light behavior',
+                'game3-feature2': '20-25 minutes gameplay',
+                'game3-feature3': 'Earn up to 150 points',
+                'play-game1': 'Play Game',
+                'play-game2': 'Play Game',
+                'play-game3': 'Play Game',
+                'resources-title': 'Learning Resources',
+                'resource1-title': 'Study Notes',
+                'resource1-desc': 'Complete chapter notes for revision',
+                'download-english': 'Download (English)',
+                'resource2-title': 'Study Notes (Odia)',
+                'resource2-desc': 'Complete chapter notes for revision',
+                'download-odia': 'Download (Odia)',
+                'resource3-title': 'Flashcards',
+                'resource3-desc': 'Visual learning cards for key concepts',
+                'download-flashcards': 'Download Flashcards',
+                'footer-desc': 'Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.',
+                'quick-links': 'Quick Links',
+                'contact-us': 'Contact Us',
+                'footer-dashboard': 'Dashboard',
+                'footer-science': 'Science',
+                'footer-phenomenon': 'Natural Phenomenon',
+                'footer-curriculum': 'Curriculum',
+                'footer-address': 'Department of Education, Bhubaneswar',
+                'copyright': '© 2023 STEM Learn Odisha. All rights reserved.'
+            },
+            or: {
+                'navDashboard': 'ଡ୍ୟାସବୋର୍ଡ',
+                'navScience': 'ବିଜ୍ଞାନ',
+                'navCurriculum': 'ପାଠ୍ୟକ୍ରମ',
+                'navNaturalPhenomenon': 'ପ୍ରାକୃତିକ ଘଟଣା',
+                'phenomenon-title': 'ପ୍ରାକୃତିକ ଘଟଣା: ମୌସୁମୀ ଏବଂ ଆଲୋକ',
+                'phenomenon-desc': 'ଆଶ୍ଚର୍ଯ୍ୟଜନକ ପ୍ରାକୃତିକ ଘଟଣାଗୁଡ଼ିକୁ ଅନୁସନ୍ଧାନ କରନ୍ତୁ ଏବଂ ଇଣ୍ଟରାକ୍ଟିଭ୍ କାର୍ଯ୍ୟକଳାପ ମାଧ୍ୟମରେ ଆଲୋକର ବିଜ୍ଞାନକୁ ବୁଝନ୍ତୁ',
+                'breadcrumb-home': 'ଡ୍ୟାସବୋର୍ଡ',
+                'breadcrumb-science': 'ବିଜ୍ଞାନ',
+                'breadcrumb-curriculum': 'ପାଠ୍ୟକ୍ରମ',
+                'breadcrumb-topic': 'ପ୍ରାକୃତିକ ଘଟଣା',
+                'learning-path-title': 'ଆପଣଙ୍କର ଶିକ୍ଷଣ ପଥ',
+                'card1-title': 'ମୌସୁମୀ ଘଟଣା',
+                'card1-desc': 'ବର୍ଷା, ପବନ, ଝଡ଼, ଏବଂ ଅନ୍ୟାନ୍ୟ ମୌସୁମୀ ଘଟଣା ବିଷୟରେ ଶିଖନ୍ତୁ',
+                'card2-title': 'ଋତୁ ଏବଂ ଜଳବାୟୁ',
+                'card2-desc': 'ଋତୁଗତ ପରିବର୍ତ୍ତନ ଏବଂ ଜଳବାୟୁ ପ୍ରଣାଳୀ ବୁଝନ୍ତୁ',
+                'card3-title': 'ଆଲୋକ ଏବଂ ଦୃଷ୍ଟି',
+                'card3-desc': 'ଆଲୋକର ଗୁଣଗୁଡ଼ିକ, ଛାୟା, ଏବଂ ଆମେ କିପରି ଦେଖୁ ତାହା ଆବିଷ୍କାର କରନ୍ତୁ',
+                'card4-title': 'ସମୀକ୍ଷା ଏବଂ କ୍ୱିଜ୍',
+                'card4-desc': 'ଇଣ୍ଟରାକ୍ଟିଭ୍ କ୍ୱିଜ୍ ଏବଂ ସମୀକ୍ଷା ସହିତ ଆପଣଙ୍କର ଜ୍ଞାନ ପରୀକ୍ଷା କରନ୍ତୁ',
+                'progress-title': 'ଆପଣଙ୍କର ପ୍ରଗତି',
+                'progress-weather': 'ମୌସୁମୀ ଘଟଣା',
+                'progress-seasons': 'ଋତୁ ଏବଂ ଜଳବାୟୁ',
+                'progress-light': 'ଆଲୋକ ଏବଂ ଦୃଷ୍ଟି',
+                'progress-overall': 'ସର୍ବମୋଟ ଦକ୍ଷତା',
+                'games-title': 'ଇଣ୍ଟରାକ୍ଟିଭ୍ ଶିକ୍ଷଣ ଖେଳଗୁଡିକ',
+                'level-basic': 'ମୌଳିକ',
+                'game1-title': 'ମୌସୁମୀ ଡିଟେକ୍ଟିଭ୍',
+                'game1-desc': 'ବିଭିନ୍ନ ମୌସୁମୀ ଅବସ୍ଥା ଏବଂ ଘଟଣା ଚିହ୍ନିବା',
+                'game1-feature1': 'ମୌସୁମୀ ଅବସ୍ଥାଗୁଡ଼ିକୁ ସେମାନଙ୍କର ବିଶେଷତା ସହିତ ମିଳାନ୍ତୁ',
+                'game1-feature2': '10-15 ମିନିଟ୍ ଖେଳପଣ',
+                'game1-feature3': '50 ପଏଣ୍ଟ୍ ପର୍ଯ୍ୟନ୍ତ ଅର୍ଜନ କରନ୍ତୁ',
+                'level-intermediate': 'ମଧ୍ୟମ ସ୍ତର',
+                'game2-title': 'ଋତୁ ଅନୁସନ୍ଧାନକାରୀ',
+                'game2-desc': 'ଋତୁଗତ ପରିବର୍ତ୍ତନ ଏବଂ ସେମାନଙ୍କର ପ୍ରଭାବ ବିଷୟରେ ଶିଖନ୍ତୁ',
+                'game2-feature1': 'ବିଭିନ୍ନ ଋତୁର ବିଶେଷତା ଚିହ୍ନିବା',
+                'game2-feature2': '15-20 ମିନିଟ୍ ଖେଳପଣ',
+                'game2-feature3': '100 ପଏଣ୍ଟ୍ ପର୍ଯ୍ୟନ୍ତ ଅର୍ଜନ କରନ୍ତୁ',
+                'level-hard': 'କଠିନ',
+                'game3-title': 'ଆଲୋକ ଏବଂ ଛାୟା ଲ୍ୟାବ୍',
+                'game3-desc': 'ଆଲୋକର ଗୁଣଗୁଡ଼ିକ ଏବଂ ଛାୟା ଗଠନ ସହିତ ପ୍ରୟୋଗ କରନ୍ତୁ',
+                'game3-feature1': 'ଛାୟା ସୃଷ୍ଟି କରନ୍ତୁ ଏବଂ ଆଲୋକ ଆଚରଣ ବୁଝନ୍ତୁ',
+                'game3-feature2': '20-25 ମିନିଟ୍ ଖେଳପଣ',
+                'game3-feature3': '150 ପଏଣ୍ଟ୍ ପର୍ଯ୍ୟନ୍ତ ଅର୍ଜନ କରନ୍ତୁ',
+                'play-game1': 'ଖେଳନ୍ତୁ',
+                'play-game2': 'ଖେଳନ୍ତୁ',
+                'play-game3': 'ଖେଳନ୍ତୁ',
+                'resources-title': 'ଶିକ୍ଷଣ ସମ୍ବଳ',
+                'resource1-title': 'ଅଧ୍ୟୟନ ଟିପ୍ପଣୀ',
+                'resource1-desc': 'ସଂଶୋଧନ ପାଇଁ ସମ୍ପୂର୍ଣ୍ଣ ଅଧ୍ୟାୟ ଟିପ୍ପଣୀ',
+                'download-english': 'ଡାଉନଲୋଡ୍ (ଇଂରାଜୀ)',
+                'resource2-title': 'ଅଧ୍ୟୟନ ଟିପ୍ପଣୀ (ଓଡ଼ିଆ)',
+                'resource2-desc': 'ସଂଶୋଧନ ପାଇଁ ସମ୍ପୂର୍ଣ୍ଣ ଅଧ୍ୟାୟ ଟିପ୍ପଣୀ',
+                'download-odia': 'ଡାଉନଲୋଡ୍ (ଓଡ଼ିଆ)',
+                'resource3-title': 'ଫ୍ଲାସ୍‌କାର୍ଡଗୁଡିକ',
+                'resource3-desc': 'ମୁଖ୍ୟ ଧାରଣାଗୁଡିକ ପାଇଁ ଭିଜୁଆଲ୍ ଶିକ୍ଷଣ କାର୍ଡଗୁଡିକ',
+                'download-flashcards': 'ଫ୍ଲାସ୍‌କାର୍ଡଗୁଡିକ ଡାଉନଲୋଡ୍ କରନ୍ତୁ',
+                'footer-desc': 'ଓଡ଼ିଶାର ଷଷ୍ଠ ଶ୍ରେଣୀର ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କ ପାଇଁ ସ୍ଥାନୀୟ ବିଷୟବସ୍ତୁ ଏବଂ ଇଣ୍ଟରାକ୍ଟିଭ୍ ଶିକ୍ଷଣ ମାଧ୍ୟମରେ ବିଜ୍ଞାନ ଏବଂ ଗଣିତ ଶିକ୍ଷାକୁ ଆକର୍ଷଣୀୟ ଏବଂ ପ୍ରାସଙ୍ଗିକ କରିବା',
+                'quick-links': 'ଶୀଘ୍ର ଲିଙ୍କ୍',
+                'contact-us': 'ଆମ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ',
+                'footer-dashboard': 'ଡ୍ୟାସବୋର୍ଡ',
+                'footer-science': 'ବିଜ୍ଞାନ',
+                'footer-phenomenon': 'ପ୍ରାକୃତିକ ଘଟଣା',
+                'footer-curriculum': 'ପାଠ୍ୟକ୍ରମ',
+                'footer-address': 'ଶିକ୍ଷା ବିଭାଗ, ଭୁବନେଶ୍ୱର',
+                'copyright': '© 2023 STEM ଲର୍ନ ଓଡ଼ିଶା। ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        // Initialize the page
+        function init() {
+            // Set up language options
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                    document.getElementById('languageOptions').classList.remove('show');
+                });
+            });
+
+            // Set up path cards
+            const pathCards = document.querySelectorAll('.path-card');
+            pathCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const cardType = this.getAttribute('data-card');
+                    openModal(cardType);
+                });
+            });
+
+            // Set up modal close button
+            document.getElementById('close-modal').addEventListener('click', closeModalFunc);
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === document.getElementById('content-modal')) {
+                    closeModalFunc();
+                }
+            });
+
+            // Dashboard integration event listeners
+            const profileToggle = document.getElementById('profileToggle');
+            const profileDropdown = document.getElementById('profileDropdown');
+            const languageToggle = document.getElementById('languageToggle');
+            const languageOptions = document.getElementById('languageOptions');
+            const dropdownProfile = document.getElementById('dropdownProfile');
+            const dropdownSettings = document.getElementById('dropdownSettings');
+            const dropdownLogout = document.getElementById('dropdownLogout');
+            const navDashboard = document.getElementById('navDashboard');
+            const navScience = document.getElementById('navScience');
+            const navCurriculum = document.getElementById('navCurriculum');
+            const navNaturalPhenomenon = document.getElementById('navNaturalPhenomenon');
+
+            // Profile dropdown toggle
+            profileToggle.addEventListener('click', function() {
+                profileDropdown.classList.toggle('show');
+            });
+
+            // Language toggle
+            languageToggle.addEventListener('click', function() {
+                languageOptions.classList.toggle('show');
+            });
+
+            // Navigation between pages
+            dropdownProfile.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#profile';
+            });
+
+            dropdownSettings.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#settings';
+            });
+
+            dropdownLogout.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.href = 'student-login.html';
+            });
+
+            // Navigation menu items
+            navDashboard.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html';
+            });
+
+            navScience.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'science.html';
+            });
+
+            navCurriculum.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'scienceidx.html';
+            });
+
+            navNaturalPhenomenon.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'natural-phenomenon.html';
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
+                    languageOptions.classList.remove('show');
+                }
+               
+                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+
+            // Initialize with default language
+            switchLanguage('en');
+        }
+
+        // Switch language function
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            const map = translations[lang] || translations.en;
+            
+            // Update all text content
+            Object.keys(map).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = map[key];
+                }
+            });
+            
+            // Add Odia font class for Odia text
+            if (lang === 'or') {
+                document.body.classList.add('odia-text');
+            } else {
+                document.body.classList.remove('odia-text');
+            }
+        }
+
+        // Open modal with content
+        function openModal(cardType) {
+            const content = contentData[cardType];
+            if (content) {
+                document.getElementById('modal-title').textContent = content.title;
+                document.getElementById('modal-body').innerHTML = content.content;
+                document.getElementById('content-modal').style.display = 'flex';
+            }
+        }
+
+        // Close modal function
+        function closeModalFunc() {
+            document.getElementById('content-modal').style.display = 'none';
+        }
+
+        // Progress tracking
+        function updateProgress(category, points) {
+            const progressBars = {
+                'weather': document.getElementById('weather-progress'),
+                'seasons': document.getElementById('seasons-progress'),
+                'light': document.getElementById('light-progress'),
+                'overall': document.getElementById('overall-progress')
+            };
+            
+            const progressValues = {
+                'weather': document.getElementById('weather-progress-value'),
+                'seasons': document.getElementById('seasons-progress-value'),
+                'light': document.getElementById('light-progress-value'),
+                'overall': document.getElementById('overall-progress-value')
+            };
+            
+            // Update specific category
+            let currentWidth = parseInt(progressBars[category].style.width);
+            if (currentWidth + points <= 100) {
+                progressBars[category].style.width = (currentWidth + points) + '%';
+                progressValues[category].textContent = (currentWidth + points) + '%';
+            } else {
+                progressBars[category].style.width = '100%';
+                progressValues[category].textContent = '100%';
+            }
+            
+            // Update overall progress
+            let overallWidth = (
+                parseInt(progressBars['weather'].style.width) +
+                parseInt(progressBars['seasons'].style.width) +
+                parseInt(progressBars['light'].style.width)
+            ) / 3;
+            
+            progressBars['overall'].style.width = overallWidth + '%';
+            progressValues['overall'].textContent = Math.round(overallWidth) + '%';
+        }
+    </script>
+</body>
+</html>
