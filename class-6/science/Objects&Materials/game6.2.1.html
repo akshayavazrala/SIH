@@ -29,7 +29,206 @@
             padding: 0 20px;
         }
 
-        /* Language Switcher */
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #2a69ac;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text h1 span {
+            color: #38b2ac;
+            font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 180px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f7fa;
+        }
+
+        .dropdown-item i {
+            color: #3182ce;
+            width: 20px;
+        }
+
+        /* Language Options */
+        .language-options {
+            position: absolute;
+            top: 60px;
+            right: 120px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 120px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .language-options.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: #f5f7fa;
+        }
+
+        /* Language Switcher for Game */
         .language-switcher {
             position: absolute;
             top: 20px;
@@ -64,83 +263,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
-            color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            font-size: 2.2rem;
-            background: white;
-            color: #2a69ac;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo-text span {
-            color: #38b2ac;
-            font-weight: 800;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 28px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 1.05rem;
-        }
-
-        nav a:hover, nav a.active {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.6rem;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-
         /* Game Header */
         .game-header {
             background: linear-gradient(rgba(14, 42, 71, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1593118247619-e2d6f056869e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
@@ -150,6 +272,7 @@
             padding: 60px 0;
             text-align: center;
             position: relative;
+            display: none;
         }
 
         .game-header h1 {
@@ -178,6 +301,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             margin: 20px auto;
             max-width: 1000px;
+            display: none;
         }
 
         .timer {
@@ -237,6 +361,7 @@
         /* Game Area */
         .game-area {
             padding: 20px 0;
+            display: none;
         }
 
         .location-container {
@@ -389,7 +514,7 @@
             margin-top: 20px;
         }
 
-        .control-btn {
+        .control-btn-game {
             padding: 12px 25px;
             background: #3182ce;
             color: white;
@@ -403,34 +528,34 @@
             gap: 8px;
         }
 
-        .control-btn:hover {
+        .control-btn-game:hover {
             background: #2b6cb0;
             transform: translateY(-2px);
         }
 
-        .control-btn.hint {
+        .control-btn-game.hint {
             background: #d69e2e;
         }
 
-        .control-btn.hint:hover {
+        .control-btn-game.hint:hover {
             background: #b3821e;
         }
 
-        .control-btn.reset {
+        .control-btn-game.reset {
             background: #e53e3e;
         }
 
-        .control-btn.reset:hover {
+        .control-btn-game.reset:hover {
             background: #c53030;
         }
 
-        .control-btn:disabled {
+        .control-btn-game:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
 
-        .control-btn:disabled:hover {
+        .control-btn-game:disabled:hover {
             background: #3182ce;
             transform: none;
         }
@@ -732,7 +857,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             font-size: 1.5rem;
             border: 2px solid transparent;
-            z-index: 10; /* Added to ensure items are above the image */
+            z-index: 10;
         }
 
         .map-item:hover {
@@ -873,12 +998,16 @@
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
             }
-
-            .mobile-menu-btn {
-                display: block;
+           
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
            
             .game-header h1 {
@@ -895,7 +1024,7 @@
                 gap: 10px;
             }
            
-            .control-btn {
+            .control-btn-game {
                 width: 100%;
                 justify-content: center;
             }
@@ -975,43 +1104,88 @@
         .simple-dialog button:hover {
             background: #2b6cb0;
         }
+        
+        /* Odia font support */
+        .odia-text {
+            font-family: 'Kalinga', 'Nirmala UI', 'Segoe UI', sans-serif;
+        }
+        
+        /* Hindi font support */
+        .hindi-text {
+            font-family: 'Mangal', 'Nirmala UI', 'Segoe UI', sans-serif;
+        }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="logo-text">
+                <h1>STEM Learn Odisha</h1>
+                <p>Gamified Learning Platform</p>
+            </div>
+        </div>
+       
+        <nav>
+            <ul>
+                <li><a href="student-dashboard.html" id="navDashboard">Dashboard</a></li>
+                <li><a href="science.html" id="navScience">Science</a></li>
+                <li><a href="food.html" id="navFood">Food</a></li>
+                <li><a href="scienceidx.html" id="navCurriculum">Curriculum</a></li>
+            </ul>
+        </nav>
+       
+        <div class="header-controls">
+            <button class="control-btn" id="languageToggle">
+                <i class="fas fa-globe"></i>
+            </button>
+           
+            <div class="profile-container">
+                <button class="profile-btn" id="profileToggle">
+                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <span id="headerUserName">Student</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+               
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="student-dashboard.html" class="dropdown-item" id="dropdownProfile">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="dropdown-profile">Profile</span>
+                    </a>
+                    <a href="student-dashboard.html" class="dropdown-item" id="dropdownSettings">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="dropdown-settings">Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownLogout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="dropdown-logout">Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Language Options -->
+    <div class="language-options" id="languageOptions">
+        <div class="language-option" data-lang="en">English</div>
+        <div class="language-option" data-lang="or">ଓଡ଼ିଆ</div>
+        <div class="language-option" data-lang="hi">हिन्दी</div>
+    </div>
+
+    <!-- Language Switcher for Game -->
     <div class="language-switcher" id="game-language-switcher">
         <button class="lang-btn active" data-lang="en">English</button>
         <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
         <button class="lang-btn" data-lang="hi">हिन्दी</button>
     </div>
 
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="logo-text">STEM <span>Learn</span> Odisha</div>
-                </div>
-
-                <nav>
-                    <ul>
-                        <li><a href="student-dashboard.html" data-translate="nav-dashboard">Dashboard</a></li>
-                        <li><a href="about.html" data-translate="nav-about">About</a></li>
-                        <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
-                    </ul>
-                </nav>
-
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
+    <!-- Instructions Modal -->
     <div class="instructions-modal" id="instructions-modal">
         <div class="instructions-content">
-            <!-- Separate language switcher for instructions -->
+            <!-- Separate language switcher for instructions only -->
             <div class="language-switcher" id="instructions-language-switcher" style="position: relative; top: 0; right: 0; margin: 0 auto 20px auto; width: fit-content; background: rgba(26, 54, 93, 0.1);">
                 <button class="lang-btn active" data-lang="en">English</button>
                 <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
@@ -1035,15 +1209,17 @@
         </div>
     </div>
 
-    <section class="game-header" style="display: none;" id="game-header">
+    <!-- Game Header -->
+    <section class="game-header" id="game-header">
         <div class="container">
             <h1 data-translate="game-title">Treasure Hunt Adventure</h1>
             <p data-translate="game-desc">Explore the virtual house and find hidden treasures while learning fun facts!</p>
         </div>
     </section>
 
-    <div class="container" style="display: none;" id="game-stats-container">
-        <div class="game-stats">
+    <!-- Game Stats -->
+    <div class="container" id="game-stats-container">
+        <div class="game-stats" id="game-stats">
             <div class="timer">
                 <i class="fas fa-clock"></i>
                 <span id="time">20:00</span>
@@ -1065,7 +1241,8 @@
         </div>
     </div>
 
-    <section class="game-area" style="display: none;" id="game-area">
+    <!-- Game Area -->
+    <section class="game-area" id="game-area">
         <div class="container">
             <div class="location-container">
                 <div class="interactive-map" id="interactive-map">
@@ -1090,15 +1267,15 @@
             </div>
            
             <div class="controls">
-                <button class="control-btn hint" id="hint-btn">
+                <button class="control-btn-game hint" id="hint-btn">
                     <i class="fas fa-lightbulb"></i>
                     <span data-translate="hint-btn">Get Hint</span>
                 </button>
-                <button class="control-btn" id="next-location-btn" disabled>
+                <button class="control-btn-game" id="next-location-btn" disabled>
                     <i class="fas fa-arrow-right"></i>
                     <span data-translate="next-location-btn">Next Room</span>
                 </button>
-                <button class="control-btn reset" id="reset-btn">
+                <button class="control-btn-game reset" id="reset-btn">
                     <i class="fas fa-redo"></i>
                     <span data-translate="reset-btn">Start Over</span>
                 </button>
@@ -1106,6 +1283,7 @@
         </div>
     </section>
 
+    <!-- Item Detail Modal -->
     <div class="item-modal" id="item-modal">
         <div class="item-content">
             <div class="item-icon-large" id="item-icon-large"></div>
@@ -1120,6 +1298,7 @@
         </div>
     </div>
 
+    <!-- Success Modal -->
     <div class="success-modal" id="success-modal">
         <div class="success-content">
             <div class="badge">
@@ -1136,6 +1315,29 @@
     </div>
 
     <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+           
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'student-login.html';
+                return;
+            }
+           
+            // Load user data
+            loadUserData(user);
+            
+            // Initialize the game page
+            initGamePage();
+        });
+
+        // Load user data into the page
+        function loadUserData(user) {
+            document.getElementById('headerUserName').textContent = user.fullName;
+            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+        }
+
         // Game elements
         const instructionsModal = document.getElementById('instructions-modal');
         const startGameBtn = document.getElementById('start-game-btn');
@@ -1184,9 +1386,13 @@
         // Complete translations for all languages
         const translations = {
             en: {
-                'nav-dashboard': 'Dashboard',
-                'nav-about': 'About',
-                'nav-contact': 'Contact',
+                'navDashboard': 'Dashboard',
+                'navScience': 'Science',
+                'navFood': 'Food',
+                'navCurriculum': 'Curriculum',
+                'dropdown-profile': 'Profile',
+                'dropdown-settings': 'Settings',
+                'dropdown-logout': 'Logout',
                 'game-title': 'Treasure Hunt Adventure',
                 'game-desc': 'Explore the virtual house and find hidden treasures while learning fun facts!',
                 'instructions-title': 'Welcome to Treasure Hunt!',
@@ -1213,9 +1419,13 @@
                 'you-found': 'You found:'
             },
             or: {
-                'nav-dashboard': 'ଡ୍ୟାସବୋର୍ଡ',
-                'nav-about': 'ବିଷୟରେ',
-                'nav-contact': 'ଯୋଗାଯୋଗ',
+                'navDashboard': 'ଡ୍ୟାସବୋର୍ଡ',
+                'navScience': 'ବିଜ୍ଞାନ',
+                'navFood': 'ଖାଦ୍ୟ',
+                'navCurriculum': 'ପାଠ୍ୟକ୍ରମ',
+                'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍',
+                'dropdown-settings': 'ସେଟିଂସ୍',
+                'dropdown-logout': 'ଲଗଆଉଟ୍',
                 'game-title': 'ଖଜାଣା ଖୋଜିବା ରୋମାଞ୍ଚ',
                 'game-desc': 'ଭର୍ଚୁଆଲ୍ ଘରେ ଭ୍ରମଣ କର ଏବଂ ମଜାଦାର ତଥ୍ୟ ଶିଖିବା ସମୟରେ ଲୁକ୍କାୟିତ ଖଜାଣା ଖୋଜ!',
                 'instructions-title': 'ଖଜାଣା ଖୋଜିବାକୁ ସ୍ୱାଗତ!',
@@ -1242,9 +1452,13 @@
                 'you-found': 'ଆପଣ ପାଇଲେ:'
             },
             hi: {
-                'nav-dashboard': 'डैशबोर्ड',
-                'nav-about': 'हमारे बारे में',
-                'nav-contact': 'संपर्क करें',
+                'navDashboard': 'डैशबोर्ड',
+                'navScience': 'विज्ञान',
+                'navFood': 'भोजन',
+                'navCurriculum': 'पाठ्यक्रम',
+                'dropdown-profile': 'प्रोफाइल',
+                'dropdown-settings': 'सेटिंग्स',
+                'dropdown-logout': 'लॉगआउट',
                 'game-title': 'खजाना खोज साहसिक',
                 'game-desc': 'आभासी घर का पता लगाएं और मजेदार तथ्य सीखते हुए छिपे हुए खजाने ढूंढें!',
                 'instructions-title': 'खजाना खोज में आपका स्वागत है!',
@@ -1270,6 +1484,292 @@
                 'found-status': 'मिल गया! 🎉',
                 'you-found': 'आपको मिला:'
             }
+        };
+
+        // Initialize the game page
+        function initGamePage() {
+            // Set up header language options
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                    document.getElementById('languageOptions').classList.remove('show');
+                });
+            });
+
+            // Language switching for game
+            document.querySelectorAll('#game-language-switcher .lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchGameLanguage(lang);
+                });
+            });
+
+            // Language switching for instructions only
+            document.querySelectorAll('#instructions-language-switcher .lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    switchInstructionsLanguage(lang);
+                });
+            });
+
+            // Dashboard integration event listeners
+            const profileToggle = document.getElementById('profileToggle');
+            const profileDropdown = document.getElementById('profileDropdown');
+            const languageToggle = document.getElementById('languageToggle');
+            const languageOptions = document.getElementById('languageOptions');
+            const dropdownProfile = document.getElementById('dropdownProfile');
+            const dropdownSettings = document.getElementById('dropdownSettings');
+            const dropdownLogout = document.getElementById('dropdownLogout');
+            const navDashboard = document.getElementById('navDashboard');
+            const navScience = document.getElementById('navScience');
+            const navCurriculum = document.getElementById('navCurriculum');
+            const navFood = document.getElementById('navFood');
+
+            // Profile dropdown toggle
+            profileToggle.addEventListener('click', function() {
+                profileDropdown.classList.toggle('show');
+            });
+
+            // Language toggle
+            languageToggle.addEventListener('click', function() {
+                languageOptions.classList.toggle('show');
+            });
+
+            // Navigation between pages
+            dropdownProfile.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#profile';
+            });
+
+            dropdownSettings.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#settings';
+            });
+
+            dropdownLogout.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.href = 'student-login.html';
+            });
+
+            // Navigation menu items
+            navDashboard.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html';
+            });
+
+            navScience.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'science.html';
+            });
+
+            navCurriculum.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'scienceidx.html';
+            });
+
+            navFood.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'food.html';
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
+                    languageOptions.classList.remove('show');
+                }
+               
+                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+
+            // Initialize with default language
+            switchLanguage('en');
+            switchGameLanguage('en');
+            switchInstructionsLanguage('en');
+            
+            // Start with instructions modal open
+            instructionsModal.style.display = 'flex';
+        }
+
+        // Language switching functions
+        function switchLanguage(lang) {
+            // Update header language elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (key === 'success-text') {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+        }
+
+        function switchGameLanguage(lang) {
+            gameLanguage = lang;
+           
+            // Update language buttons in game switcher
+            document.querySelectorAll('#game-language-switcher .lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update all translated elements in the game
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang] && translations[lang][key]) {
+                    if (key === 'success-text') {
+                        // Handle HTML content separately
+                        const translatedText = translations[lang][key];
+                        element.innerHTML = translatedText;
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Add language-specific font classes
+            document.body.classList.remove('odia-text', 'hindi-text');
+            if (lang === 'or') {
+                document.body.classList.add('odia-text');
+            } else if (lang === 'hi') {
+                document.body.classList.add('hindi-text');
+            }
+
+            // Update score display
+            updateScoreDisplay();
+            updateHintsDisplay();
+            
+            // Update game if active
+            if (isGameStarted) {
+                // Reload current location with new language
+                generateRandomItems();
+                loadLocation(currentLocationIndex);
+            }
+        }
+
+        function switchInstructionsLanguage(lang) {
+            instructionsLanguage = lang;
+           
+            // Update language buttons in instructions switcher
+            document.querySelectorAll('#instructions-language-switcher .lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update instruction elements
+            updateInstructionTranslations(lang);
+        }
+
+        // Function to update instruction elements
+        function updateInstructionTranslations(lang) {
+            const instructionsTitle = document.getElementById('instructions-title');
+            const instructionsIntro = document.getElementById('instructions-intro');
+            const instruction1 = document.getElementById('instruction-1');
+            const instruction2 = document.getElementById('instruction-2');
+            const instruction3 = document.getElementById('instruction-3');
+            const instruction4 = document.getElementById('instruction-4');
+            const instruction5 = document.getElementById('instruction-5');
+            const instruction6 = document.getElementById('instruction-6');
+            const instructionsOutro = document.getElementById('instructions-outro');
+            const startGameBtn = document.getElementById('start-game-btn');
+
+            if (translations[lang]) {
+                if (instructionsTitle) instructionsTitle.textContent = translations[lang]['instructions-title'];
+                if (instructionsIntro) instructionsIntro.textContent = translations[lang]['instructions-intro'];
+                if (instruction1) instruction1.textContent = translations[lang]['instruction-1'];
+                if (instruction2) instruction2.textContent = translations[lang]['instruction-2'];
+                if (instruction3) instruction3.textContent = translations[lang]['instruction-3'];
+                if (instruction4) instruction4.textContent = translations[lang]['instruction-4'];
+                if (instruction5) instruction5.textContent = translations[lang]['instruction-5'];
+                if (instruction6) instruction6.textContent = translations[lang]['instruction-6'];
+                if (instructionsOutro) instructionsOutro.textContent = translations[lang]['instructions-outro'];
+                if (startGameBtn) startGameBtn.textContent = translations[lang]['start-game-btn'];
+            }
+        }
+
+        // Multi-language locations with all 4 rooms
+        const locations = {
+            en: [
+                {
+                    id: 'kitchen',
+                    name: 'Kitchen',
+                    description: 'Welcome to the kitchen! Look around and click on items you find. Each item has a question for you to answer!',
+                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                },
+                {
+                    id: 'bathroom',
+                    name: 'Bathroom',
+                    description: 'This is the bathroom where we keep clean. Look for items that help with personal hygiene!',
+                    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
+                },
+                {
+                    id: 'bedroom',
+                    name: 'Bedroom',
+                    description: 'This is the bedroom where we sleep and relax. Can you find items related to rest and comfort?',
+                    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                },
+                {
+                    id: 'livingroom',
+                    name: 'Living Room',
+                    description: 'This is the living room where we spend time with family. Look for items related to entertainment and comfort!',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                }
+            ],
+            or: [
+                {
+                    id: 'kitchen',
+                    name: 'ରୋଷେଇଘର',
+                    description: 'ରୋଷେଇଘରକୁ ସ୍ୱାଗତ! ଚାରିପାଖରେ ଦେଖନ୍ତୁ ଏବଂ ଆପଣ ପାଇଥିବା ଜିନିଷଗୁଡିକୁ କ୍ଲିକ୍ କରନ୍ତୁ। ପ୍ରତ୍ୟେକ ଜିନିଷରେ ଆପଣଙ୍କ ପାଇଁ ଏକ ପ୍ରଶ୍ନ ଅଛି!',
+                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                },
+                {
+                    id: 'bathroom',
+                    name: 'ଗାଧୁଆଘର',
+                    description: 'ଏହା ହେଉଛି ଗାଧୁଆଘର ଯେଉଁଠାରେ ଆମେ ପରିଷ୍କାର ରହୁ। ବ୍ୟକ୍ତିଗତ ସ୍ୱଚ୍ଛତାରେ ସାହାଯ୍ୟ କରୁଥିବା ଜିନିଷଗୁଡିକୁ ଖୋଜନ୍ତୁ!',
+                    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
+                },
+                {
+                    id: 'bedroom',
+                    name: 'ଶୋଇବାର ଘର',
+                    description: 'ଏହା ହେଉଛି ଶୋଇବାର ଘର ଯେଉଁଠାରେ ଆମେ ଶୋଇ ଏବଂ ଆରାମ କରୁ। ଆରାମ ଏବଂ ସୁଖସୁବିଧା ସହିତ ଜଡିତ ଜିନିଷଗୁଡିକୁ ଆପଣ ଖୋଜିପାରିବେ କି?',
+                    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                },
+                {
+                    id: 'livingroom',
+                    name: 'ବସିବାର ଘର',
+                    description: 'ଏହା ହେଉଛି ବସିବାର ଘର ଯେଉଁଠାରେ ଆମେ ପରିବାର ସହିତ ସମୟ ବିତାଉ। ମନୋରଞ୍ଜନ ଏବଂ ସୁଖସୁବିଧା ସହିତ ଜଡିତ ଜିନିଷଗୁଡିକୁ ଖୋଜନ୍ତୁ!',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                }
+            ],
+            hi: [
+                {
+                    id: 'kitchen',
+                    name: 'रसोई',
+                    description: 'रसोई में आपका स्वागत है! चारों ओर देखें और जो वस्तुएं मिलें उन पर क्लिक करें। प्रत्येक वस्तु में आपके लिए एक प्रश्न है!',
+                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                },
+                {
+                    id: 'bathroom',
+                    name: 'बाथरूम',
+                    description: 'यह बाथरूम है जहां हम साफ-सफाई रखते हैं। व्यक्तिगत स्वच्छता में मदद करने वाली वस्तुओं को ढूंढें!',
+                    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
+                },
+                {
+                    id: 'bedroom',
+                    name: 'बेडरूम',
+                    description: 'यह बेडरूम है जहां हम सोते और आराम करते हैं। क्या आप आराम और सुविधा से संबंधित वस्तुएं ढूंढ सकते हैं?',
+                    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                },
+                {
+                    id: 'livingroom',
+                    name: 'लिविंग रूम',
+                    description: 'यह लिविंग रूम है जहां हम परिवार के साथ समय बिताते हैं। मनोरंजन और आराम से संबंधित वस्तुएं ढूंढें!',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+                }
+            ]
         };
 
         // Multi-language item database with all possible items
@@ -1361,7 +1861,7 @@
                     dependencies: []
                 },
                 
-                // Bathroom items - FIXED: Removed towel dependency on soap
+                // Bathroom items
                 {
                     id: 'toothbrush',
                     name: 'Toothbrush',
@@ -1402,7 +1902,7 @@
                     },
                     location: 'bathroom',
                     position: { x: 25, y: 40 },
-                    dependencies: [] // FIXED: Removed dependency on soap
+                    dependencies: []
                 },
                 {
                     id: 'mirror',
@@ -1706,7 +2206,7 @@
                     dependencies: []
                 },
                 
-                // Bathroom items in Odia - FIXED: Removed towel dependency on soap
+                // Bathroom items in Odia
                 {
                     id: 'toothbrush',
                     name: 'ଦାନ୍ତ ବ୍ରସ୍',
@@ -1747,7 +2247,7 @@
                     },
                     location: 'bathroom',
                     position: { x: 25, y: 40 },
-                    dependencies: [] // FIXED: Removed dependency on soap
+                    dependencies: []
                 },
                 {
                     id: 'mirror',
@@ -2051,7 +2551,7 @@
                     dependencies: []
                 },
                 
-                // Bathroom items in Hindi - FIXED: Removed towel dependency on soap
+                // Bathroom items in Hindi
                 {
                     id: 'toothbrush',
                     name: 'टूथब्रश',
@@ -2092,7 +2592,7 @@
                     },
                     location: 'bathroom',
                     position: { x: 25, y: 40 },
-                    dependencies: [] // FIXED: Removed dependency on soap
+                    dependencies: []
                 },
                 {
                     id: 'mirror',
@@ -2311,163 +2811,6 @@
             ]
         };
 
-        // Multi-language locations with all 4 rooms
-        const locations = {
-            en: [
-                {
-                    id: 'kitchen',
-                    name: 'Kitchen',
-                    description: 'Welcome to the kitchen! Look around and click on items you find. Each item has a question for you to answer!',
-                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                },
-                {
-                    id: 'bathroom',
-                    name: 'Bathroom',
-                    description: 'This is the bathroom where we keep clean. Look for items that help with personal hygiene!',
-                    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
-                },
-                {
-                    id: 'bedroom',
-                    name: 'Bedroom',
-                    description: 'This is the bedroom where we sleep and relax. Can you find items related to rest and comfort?',
-                    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                },
-                {
-                    id: 'livingroom',
-                    name: 'Living Room',
-                    description: 'This is the living room where we spend time with family. Look for items related to entertainment and comfort!',
-                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                }
-            ],
-            or: [
-                {
-                    id: 'kitchen',
-                    name: 'ରୋଷେଇଘର',
-                    description: 'ରୋଷେଇଘରକୁ ସ୍ୱାଗତ! ଚାରିପାଖରେ ଦେଖନ୍ତୁ ଏବଂ ଆପଣ ପାଇଥିବା ଜିନିଷଗୁଡିକୁ କ୍ଲିକ୍ କରନ୍ତୁ। ପ୍ରତ୍ୟେକ ଜିନିଷରେ ଆପଣଙ୍କ ପାଇଁ ଏକ ପ୍ରଶ୍ନ ଅଛି!',
-                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                },
-                {
-                    id: 'bathroom',
-                    name: 'ଗାଧୁଆଘର',
-                    description: 'ଏହା ହେଉଛି ଗାଧୁଆଘର ଯେଉଁଠାରେ ଆମେ ପରିଷ୍କାର ରହୁ। ବ୍ୟକ୍ତିଗତ ସ୍ୱଚ୍ଛତାରେ ସାହାଯ୍ୟ କରୁଥିବା ଜିନିଷଗୁଡିକୁ ଖୋଜନ୍ତୁ!',
-                    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
-                },
-                {
-                    id: 'bedroom',
-                    name: 'ଶୋଇବାର ଘର',
-                    description: 'ଏହା ହେଉଛି ଶୋଇବାର ଘର ଯେଉଁଠାରେ ଆମେ ଶୋଇ ଏବଂ ଆରାମ କରୁ। ଆରାମ ଏବଂ ସୁଖସୁବିଧା ସହିତ ଜଡିତ ଜିନିଷଗୁଡିକୁ ଆପଣ ଖୋଜିପାରିବେ କି?',
-                    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                },
-                {
-                    id: 'livingroom',
-                    name: 'ବସିବାର ଘର',
-                    description: 'ଏହା ହେଉଛି ବସିବାର ଘର ଯେଉଁଠାରେ ଆମେ ପରିବାର ସହିତ ସମୟ ବିତାଉ। ମନୋରଞ୍ଜନ ଏବଂ ସୁଖସୁବିଧା ସହିତ ଜଡିତ ଜିନିଷଗୁଡିକୁ ଖୋଜନ୍ତୁ!',
-                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                }
-            ],
-            hi: [
-                {
-                    id: 'kitchen',
-                    name: 'रसोई',
-                    description: 'रसोई में आपका स्वागत है! चारों ओर देखें और जो वस्तुएं मिलें उन पर क्लिक करें। प्रत्येक वस्तु में आपके लिए एक प्रश्न है!',
-                    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                },
-                {
-                    id: 'bathroom',
-                    name: 'बाथरूम',
-                    description: 'यह बाथरूम है जहां हम साफ-सफाई रखते हैं। व्यक्तिगत स्वच्छता में मदद करने वाली वस्तुओं को ढूंढें!',
-                    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80'
-                },
-                {
-                    id: 'bedroom',
-                    name: 'बेडरूम',
-                    description: 'यह बेडरूम है जहां हम सोते और आराम करते हैं। क्या आप आराम और सुविधा से संबंधित वस्तुएं ढूंढ सकते हैं?',
-                    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                },
-                {
-                    id: 'livingroom',
-                    name: 'लिविंग रूम',
-                    description: 'यह लिविंग रूम है जहां हम परिवार के साथ समय बिताते हैं। मनोरंजन और आराम से संबंधित वस्तुएं ढूंढें!',
-                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-                }
-            ]
-        };
-
-        // Handle language switching for instructions
-        const instructionsLanguageSwitcher = document.getElementById('instructions-language-switcher');
-        instructionsLanguageSwitcher.addEventListener('click', (e) => {
-            if (e.target.classList.contains('lang-btn')) {
-                const newLang = e.target.dataset.lang;
-                if (newLang !== instructionsLanguage) {
-                    instructionsLanguage = newLang;
-                    instructionsLanguageSwitcher.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    updateInstructionsTranslations();
-                }
-            }
-        });
-
-        // Handle language switching for game
-        const gameLanguageSwitcher = document.getElementById('game-language-switcher');
-        gameLanguageSwitcher.addEventListener('click', (e) => {
-            if (e.target.classList.contains('lang-btn')) {
-                const newLang = e.target.dataset.lang;
-                if (newLang !== gameLanguage) {
-                    gameLanguage = newLang;
-                    gameLanguageSwitcher.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    updateGameTranslations();
-                    
-                    // Reload current location with new language
-                    if (isGameStarted) {
-                        loadLocation(currentLocationIndex);
-                    }
-                }
-            }
-        });
-
-        function updateInstructionsTranslations() {
-            const instructionsTitle = document.getElementById('instructions-title');
-            const instructionsIntro = document.getElementById('instructions-intro');
-            const instruction1 = document.getElementById('instruction-1');
-            const instruction2 = document.getElementById('instruction-2');
-            const instruction3 = document.getElementById('instruction-3');
-            const instruction4 = document.getElementById('instruction-4');
-            const instruction5 = document.getElementById('instruction-5');
-            const instruction6 = document.getElementById('instruction-6');
-            const instructionsOutro = document.getElementById('instructions-outro');
-            const startGameBtn = document.getElementById('start-game-btn');
-
-            if (translations[instructionsLanguage]) {
-                if (instructionsTitle) instructionsTitle.textContent = translations[instructionsLanguage]['instructions-title'];
-                if (instructionsIntro) instructionsIntro.textContent = translations[instructionsLanguage]['instructions-intro'];
-                if (instruction1) instruction1.textContent = translations[instructionsLanguage]['instruction-1'];
-                if (instruction2) instruction2.textContent = translations[instructionsLanguage]['instruction-2'];
-                if (instruction3) instruction3.textContent = translations[instructionsLanguage]['instruction-3'];
-                if (instruction4) instruction4.textContent = translations[instructionsLanguage]['instruction-4'];
-                if (instruction5) instruction5.textContent = translations[instructionsLanguage]['instruction-5'];
-                if (instruction6) instruction6.textContent = translations[instructionsLanguage]['instruction-6'];
-                if (instructionsOutro) instructionsOutro.textContent = translations[instructionsLanguage]['instructions-outro'];
-                if (startGameBtn) startGameBtn.textContent = translations[instructionsLanguage]['start-game-btn'];
-            }
-        }
-
-        function updateGameTranslations() {
-            // Update all elements with data-translate attribute
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.dataset.translate;
-                if (translations[gameLanguage] && translations[gameLanguage][key]) {
-                    if (key === 'success-text') {
-                        // Handle HTML content separately
-                        const translatedText = translations[gameLanguage][key];
-                        el.innerHTML = translatedText;
-                    } else {
-                        el.textContent = translations[gameLanguage][key];
-                    }
-                }
-            });
-        }
-
         // Function to start the game
         startGameBtn.addEventListener('click', () => {
             instructionsModal.style.display = 'none';
@@ -2569,14 +2912,13 @@
                 mapItem.dataset.itemId = item.id;
                 
                 // Check if item is found
-               // Check if item is found
-if (foundItems.includes(item.id)) {
-    mapItem.classList.add('found');
-}
+                if (foundItems.includes(item.id)) {
+                    mapItem.classList.add('found');
+                }
 
-if (!foundItems.includes(item.id)) {
-    mapItem.addEventListener('click', () => showItemModal(item));
-}
+                if (!foundItems.includes(item.id)) {
+                    mapItem.addEventListener('click', () => showItemModal(item));
+                }
                 
                 interactiveMap.appendChild(mapItem);
             });
@@ -2599,10 +2941,10 @@ if (!foundItems.includes(item.id)) {
             updateProgress();
         }
 
-       function isItemAvailable(item) {
-    // All items are available immediately - no dependencies
-    return true;
-}
+        function isItemAvailable(item) {
+            // All items are available immediately - no dependencies
+            return true;
+        }
 
         function showItemModal(item) {
             currentItem = item;
@@ -2706,7 +3048,7 @@ if (!foundItems.includes(item.id)) {
         function useHint() {
             if (hintsLeft > 0) {
                 hintsLeft--;
-                hintsLeftEl.textContent = `Hints: ${hintsLeft}`;
+                updateHintsDisplay();
                 
                 // Find an available but not found item in current location
                 const locationItems = currentGameItems.filter(item => 
@@ -2750,7 +3092,19 @@ if (!foundItems.includes(item.id)) {
         function updateScore(points) {
             score += points;
             if (score < 0) score = 0;
-            scoreEl.textContent = `Score: ${score}`;
+            updateScoreDisplay();
+        }
+
+        function updateScoreDisplay() {
+            const scoreText = gameLanguage === 'or' ? 'ସ୍କୋର: ' : 
+                             gameLanguage === 'hi' ? 'स्कोर: ' : 'Score: ';
+            scoreEl.textContent = scoreText + score;
+        }
+
+        function updateHintsDisplay() {
+            const hintsText = gameLanguage === 'or' ? 'ସୂଚନା: ' : 
+                             gameLanguage === 'hi' ? 'संकेत: ' : 'Hints: ';
+            hintsLeftEl.textContent = hintsText + hintsLeft;
         }
 
         function updateProgress() {
@@ -2778,8 +3132,8 @@ if (!foundItems.includes(item.id)) {
             unlockedRooms = [0]; // Reset to only first room unlocked
             currentGameItems = []; // Clear current game items
            
-            scoreEl.textContent = 'Score: 0';
-            hintsLeftEl.textContent = 'Hints: 5';
+            updateScoreDisplay();
+            updateHintsDisplay();
             progressEl.style.width = '0%';
             timeEl.textContent = '20:00';
 
@@ -2824,8 +3178,7 @@ if (!foundItems.includes(item.id)) {
         }
 
         // Initialize the game
-        updateInstructionsTranslations();
-        updateGameTranslations();
+        updateInstructionTranslations(instructionsLanguage);
     </script>
 </body>
 </html>

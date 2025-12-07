@@ -1626,39 +1626,151 @@ app.get('/api/games/subject/:subject', (req, res) => {
   });
 });
 
-// ==================== BASIC HTML ROUTES ====================
+// ==================== HTML ROUTES WITH CLEAN URLS ====================
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'student-login.html'));
+// REDIRECTS FROM OLD .html URLs TO CLEAN URLs
+app.get('/home.html', (req, res) => res.redirect('/home'));
+app.get('/about.html', (req, res) => res.redirect('/about'));
+app.get('/contact.html', (req, res) => res.redirect('/contact'));
+app.get('/student-login.html', (req, res) => res.redirect('/student-login'));
+app.get('/teacher-login.html', (req, res) => res.redirect('/teacher-login'));
+app.get('/student-register.html', (req, res) => res.redirect('/register'));
+app.get('/teacher-register.html', (req, res) => res.redirect('/teacher-register'));
+app.get('/student-dashboard.html', (req, res) => res.redirect('/student-dashboard'));
+app.get('/teacher-dashboard.html', (req, res) => res.redirect('/teacher-dashboard'));
+app.get('/assignments.html', (req, res) => res.redirect('/assignments'));
+app.get('/quizzes.html', (req, res) => res.redirect('/quizzes'));
+app.get('/leaderboard.html', (req, res) => res.redirect('/leaderboard'));
+app.get('/profile.html', (req, res) => res.redirect('/profile'));
+
+// MAIN CLEAN URL ROUTES
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
+app.get('/home', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
+app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
+app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
+app.get('/student-login', (req, res) => res.sendFile(path.join(__dirname, 'student-login.html')));
+app.get('/teacher-login', (req, res) => res.sendFile(path.join(__dirname, 'teacher-login.html')));
+app.get('/register', (req, res) => res.sendFile(path.join(__dirname, 'student-register.html')));
+app.get('/teacher-register', (req, res) => res.sendFile(path.join(__dirname, 'teacher-register.html')));
+app.get('/student-dashboard', (req, res) => res.sendFile(path.join(__dirname, 'student-dashboard.html')));
+app.get('/teacher-dashboard', (req, res) => res.sendFile(path.join(__dirname, 'teacher-dashboard.html')));
+app.get('/assignments', (req, res) => res.sendFile(path.join(__dirname, 'assignments.html')));
+app.get('/quizzes', (req, res) => res.sendFile(path.join(__dirname, 'quizzes.html')));
+app.get('/leaderboard', (req, res) => res.sendFile(path.join(__dirname, 'leaderboard.html')));
+app.get('/profile', (req, res) => res.sendFile(path.join(__dirname, 'profile.html')));
+
+// SUBJECT PAGES
+app.get('/english', (req, res) => res.sendFile(path.join(__dirname, 'class-6/english/english.html')));
+app.get('/maths', (req, res) => res.sendFile(path.join(__dirname, 'class-6/maths/math.html')));
+app.get('/science', (req, res) => res.sendFile(path.join(__dirname, 'class-6/science/science.html')));
+app.get('/technology', (req, res) => res.sendFile(path.join(__dirname, 'class-6/technology/technology.html')));
+
+// GAME PAGES
+app.get('/english-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/english/enggames.html')));
+app.get('/math-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/maths/mathidx.html')));
+app.get('/science-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/science/scienceidx.html')));
+app.get('/tech-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/technology/techgames.html')));
+
+// INDIVIDUAL GAMES
+app.get('/game-living', (req, res) => res.sendFile(path.join(__dirname, 'game-living.html')));
+app.get('/game-habitat', (req, res) => res.sendFile(path.join(__dirname, 'game-habitat.html')));
+app.get('/game-bodyparts', (req, res) => res.sendFile(path.join(__dirname, 'game-bodyparts.html')));
+app.get('/game-math-basic', (req, res) => res.sendFile(path.join(__dirname, 'game-math-basic.html')));
+app.get('/game-fractions', (req, res) => res.sendFile(path.join(__dirname, 'game-fractions.html')));
+app.get('/game6.1.1', (req, res) => res.sendFile(path.join(__dirname, 'game6.1.1.html')));
+app.get('/game6.3.2', (req, res) => res.sendFile(path.join(__dirname, 'game6.3.2.html')));
+
+// FALLBACK FOR ANY .html FILE ACCESS
+app.get('*.html', (req, res) => {
+  const requestedFile = req.path;
+  // Redirect to clean URL (remove .html)
+  const cleanUrl = requestedFile.replace('.html', '');
+  res.redirect(cleanUrl);
 });
 
-app.get('/student-dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'student-dashboard.html'));
+// CATCH-ALL FOR CLASS-6 FOLDER
+app.get('/class-6/:folder/:file', (req, res) => {
+  const folder = req.params.folder;
+  const file = req.params.file;
+  const filePath = path.join(__dirname, `class-6/${folder}/${file}.html`);
+  
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      res.status(404).send('<h1>Page not found</h1><p>Go to <a href="/home">Home</a></p>');
+    } else {
+      res.sendFile(filePath);
+    }
+  });
 });
 
-app.get('/student-login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'student-login.html'));
-});
-
-app.get('/teacher-login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'teacher-login.html'));
-});
-
-app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'student-register.html'));
+// FINAL CATCH-ALL - Try to serve any HTML file without extension
+app.get('/:page', (req, res) => {
+  const page = req.params.page;
+  
+  // Skip API routes
+  if (page.startsWith('api')) {
+    return res.status(404).json({ message: 'API endpoint not found' });
+  }
+  
+  const filePath = path.join(__dirname, `${page}.html`);
+  
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      // Check if it's in class-6 folder
+      const class6Path = path.join(__dirname, `class-6/${page}/${page}.html`);
+      fs.access(class6Path, fs.constants.F_OK, (err2) => {
+        if (err2) {
+          // Send 404 page
+          res.status(404).send(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <title>404 - Page Not Found</title>
+              <style>
+                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+                h1 { color: #ff4444; }
+                a { color: #0066cc; text-decoration: none; }
+                a:hover { text-decoration: underline; }
+              </style>
+            </head>
+            <body>
+              <h1>404 - Page Not Found</h1>
+              <p>The page "${page}" does not exist.</p>
+              <p><a href="/home">Go to Home Page</a></p>
+              <p><a href="/student-login">Student Login</a> | <a href="/teacher-login">Teacher Login</a></p>
+            </body>
+            </html>
+          `);
+        } else {
+          res.sendFile(class6Path);
+        }
+      });
+    } else {
+      res.sendFile(filePath);
+    }
+  });
 });
 
 // ==================== START SERVER ====================
 
 app.listen(PORT, () => {
-  console.log('='.repeat(60));
-  console.log('🚀 STEM Learn Odisha Server Started Successfully!');
-  console.log('='.repeat(60));
-  console.log(`📍 Server running on: http://localhost:${PORT}`);
-  console.log(`👨‍🎓 Student Portal: http://localhost:${PORT}/student-login`);
-  console.log(`👨‍🏫 Teacher Portal: http://localhost:${PORT}/teacher-login`);
-  console.log(`📊 Dashboard: http://localhost:${PORT}/student-dashboard`);
-  console.log('='.repeat(60));
+  console.log('='.repeat(70));
+  console.log('🚀 STEM Learn Odisha - NATIONAL LEVEL HACKATHON SUBMISSION 🚀');
+  console.log('='.repeat(70));
+  console.log(`✅ Server running on: http://localhost:${PORT}`);
+  console.log('📌 CLEAN URLS:');
+  console.log(`   🏠 Home: http://localhost:${PORT}/home`);
+  console.log(`   👨‍🎓 Student Login: http://localhost:${PORT}/student-login`);
+  console.log(`   👨‍🏫 Teacher Login: http://localhost:${PORT}/teacher-login`);
+  console.log(`   📊 Dashboard: http://localhost:${PORT}/student-dashboard`);
+  console.log(`   📋 Teacher Dashboard: http://localhost:${PORT}/teacher-dashboard`);
+  console.log(`   🔬 Science: http://localhost:${PORT}/science`);
+  console.log(`   ➕ Maths: http://localhost:${PORT}/maths`);
+  console.log(`   📚 English: http://localhost:${PORT}/english`);
+  console.log(`   💻 Technology: http://localhost:${PORT}/technology`);
+  console.log('='.repeat(70));
+  console.log('📢 FOR DEMO: Open browser and type: http://localhost:5000/home');
+  console.log('='.repeat(70));
 });
 
 // Error handling middleware

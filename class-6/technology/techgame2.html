@@ -239,15 +239,41 @@
         .assembly-container { display:grid; grid-template-columns:1fr 1fr; gap:30px; max-width:1100px; margin:0 auto 40px auto; }
         
         /* Computer Case */
-        .computer-case { background: linear-gradient(145deg, #2d3748, #4a5568); border-radius: 25px; padding: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); min-height: 500px; position: relative; border: 3px solid #1a202c; }
+        .computer-case { 
+            background: linear-gradient(145deg, #2d3748, #4a5568); 
+            border-radius: 25px; 
+            padding: 25px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+            min-height: 500px; 
+            position: relative; 
+            border: 3px solid #1a202c; 
+            overflow: hidden;
+        }
         .case-title { color: white; text-align: center; margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; }
-        .case-inner { background: rgba(0, 0, 0, 0.3); border-radius: 15px; height: 100%; padding: 15px; position: relative; }
+        .case-inner { 
+            background: rgba(0, 0, 0, 0.3); 
+            border-radius: 15px; 
+            height: 100%; 
+            padding: 15px; 
+            position: relative;
+            min-height: 450px;
+        }
         
         /* Component Slots */
-        .component-slot { position: absolute; background: rgba(255, 255, 255, 0.1); border: 2px dashed rgba(255, 255, 255, 0.3); border-radius: 10px; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .component-slot { 
+            position: absolute; 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 2px dashed rgba(255, 255, 255, 0.3); 
+            border-radius: 8px; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            z-index: 10;
+        }
         .component-slot.locked { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
         .component-slot.highlight { background: rgba(66, 153, 225, 0.2); border-color: #4299e1; transform: scale(1.05); }
-        .component-slot.filled { background: rgba(72, 187, 120, 0.2); border-color: #48bb78; }
+        .component-slot.filled { background: rgba(72, 187, 120, 0.2); border-color: #48bb78; border-style: solid; }
         .slot-label { color: white; font-size: 0.8rem; position: absolute; bottom: -25px; text-align: center; width: 100%; }
         .slot-number { position: absolute; top: 5px; left: 5px; background: rgba(0,0,0,0.5); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; }
         
@@ -272,15 +298,68 @@
         .quiz-next { background: linear-gradient(45deg, #38b2ac, #2c9a94); color: white; }
         .quiz-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3); }
         
-        /* Component Items */
-        .component-item { width: 120px; height: 120px; background: linear-gradient(145deg,#ffffff,#f0f4f8); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: grab; box-shadow:0 8px 20px rgba(0,0,0,0.06); transition:all 0.25s ease; user-select:none; border: 2px solid #e2e8f0; position: relative; }
+        /* Component Items - Realistic Computer Parts */
+        .component-item { 
+            width: 120px; 
+            height: 120px; 
+            background: #f8fafc;
+            border-radius: 8px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: grab; 
+            box-shadow:0 8px 20px rgba(0,0,0,0.08); 
+            transition:all 0.25s ease; 
+            user-select:none; 
+            border: 2px solid #e2e8f0; 
+            position: relative;
+            padding: 5px;
+        }
         .component-item:hover { transform:translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
-        .component-item.dragging { opacity:0.85; transform:scale(1.08) rotate(8deg); z-index:1200; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .component-item.dragging { 
+            opacity:0.85; 
+            transform: scale(1.08); 
+            z-index:1200; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            cursor: grabbing;
+        }
         .component-item.locked { opacity: 0.5; cursor: not-allowed; filter: grayscale(0.7); }
         .component-item.unlocked { border-color: #48bb78; }
-        .component-icon { font-size:2.8rem; margin-bottom:8px; }
-        .component-name { font-size:0.95rem; font-weight:700; color:#2d3748; text-align:center; }
-        .component-status { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+        
+        /* Component-specific styles */
+        .component-item.cpu { 
+            background: linear-gradient(145deg, #2d3748, #4a5568); 
+            border-color: #4a5568;
+        }
+        .component-item.ram { 
+            background: linear-gradient(145deg, #2b6cb0, #4299e1);
+            border-color: #2b6cb0;
+            width: 140px;
+            height: 40px;
+        }
+        .component-item.hdd { 
+            background: linear-gradient(145deg, #4a5568, #718096);
+            border-color: #4a5568;
+            width: 110px;
+            height: 70px;
+        }
+        .component-item.motherboard { 
+            background: linear-gradient(145deg, #1a202c, #2d3748);
+            border-color: #1a202c;
+            width: 150px;
+            height: 130px;
+        }
+        .component-item.gpu { 
+            background: linear-gradient(145deg, #553c9a, #6b46c1);
+            border-color: #553c9a;
+            width: 110px;
+            height: 70px;
+        }
+        
+        .component-icon { font-size:2.5rem; margin-bottom:8px; color: white; }
+        .component-name { font-size:0.95rem; font-weight:700; color:white; text-align:center; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .component-status { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; background: rgba(255,255,255,0.9); }
         .component-status.locked { background: #a0aec0; color: white; }
         .component-status.unlocked { background: #48bb78; color: white; }
         .component-status.placed { background: #38b2ac; color: white; }
@@ -294,6 +373,19 @@
         .guide-step.completed { border-color: #48bb78; background: #f0fff4; }
         .step-number { width: 30px; height: 30px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px; font-weight: bold; }
         .step-name { font-size: 0.8rem; }
+        
+        /* Component Inventory */
+        .component-inventory { margin-top: 30px; }
+        .inventory-title { color: #1a365d; margin-bottom: 15px; font-size: 1.3rem; }
+        .inventory-items { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+            gap: 15px; 
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+        }
         
         /* modal */
         .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75); z-index:2000; align-items:center; justify-content:center; }
@@ -330,12 +422,40 @@
         .odia-text { font-family: 'Kalinga', 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600; }
         .hindi-text { font-family: 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600; }
 
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1500;
+        }
+
+        /* Component details inside case */
+        .component-in-case {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .component-in-case .icon {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
         @media (max-width:968px) {
             .assembly-container { grid-template-columns:1fr; gap:20px; }
             .component-item { width:100px; height:100px; }
             .game-stats { flex-direction:column; gap:10px; align-items:flex-start; }
             .quiz-actions { flex-direction: column; gap: 10px; }
             .quiz-btn { width: 100%; }
+            .inventory-items { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
         }
         
         @media (max-width: 768px) {
@@ -834,7 +954,7 @@
             or: {
                 'nav-dashboard':'ଡ୍ୟାସବୋର୍ଡ','nav-cs': 'କମ୍ପ୍ୟୁଟର ବିଜ୍ଞାନ','nav-about':'ବିଷୟରେ','nav-contact':'ଯୋଗାଯୋଗ',
                 'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍','dropdown-settings': 'ସେଟିଂସ୍','dropdown-logout': 'ଲଗଆଉଟ୍',
-                'game-title':'କମ୍ପ୍ୟୁଟର ଇଞ୍ଜିନିୟର୍','game-desc':'ତୁମର ହାର୍ଡୱେର୍ ଜ୍ଞାନ ପରୀକ୍ଷା କର ଏବଂ ଏକ କମ୍ପ୍ୟୁଟର ତିଆରି କର! ଉପାଦାନ ଅନଲକ୍ କରିବା ପାଇଁ ପ୍ରଶ୍ନୋତ୍ତର ଦିଅ, ତା’ପରେ ତୁମର ସିଷ୍ଟମ୍ ତିଆରି କରିବା ପାଇଁ ସେଗୁଡିକୁ ଟାଣ!',
+                'game-title':'କମ୍ପ୍ୟୁଟର ଇଞ୍ଜିନିୟର୍','game-desc':'ତୁମର ହାର୍ଡୱେର୍ ଜ୍ଞାନ ପରୀକ୍ଷା କର ଏବଂ ଏକ କମ୍ପ୍ୟୁଟର ତିଆରି କର! ଉପାଦାନ ଅନଲକ୍ କରିବା ପାଇଁ ପ୍ରଶ୍ନୋତ୍ତର ଦିଅ, ତାପରେ ତୁମର ସିଷ୍ଟମ୍ ତିଆରି କରିବା ପାଇଁ ସେଗୁଡିକୁ ଟାଣ!',
                 'case-title':'କମ୍ପ୍ୟୁଟର ଏସେମ୍ବ୍ଲି','inventory-title':'ଉପାଦାନ ଇନଭେଣ୍ଟରୀ',
                 'correct-title':'ଚମତ୍କାର!','incorrect-title':'ପୁଣି ଚେଷ୍ଟା କର!',
                 'continue-btn':'ବିଲ୍ଡିଂ ଜାରି ରଖନ୍ତୁ','level-title':'କମ୍ପ୍ୟୁଟର ସମ୍ପୂର୍ଣ୍ଣ!',
@@ -1022,7 +1142,7 @@
             inventoryItems.innerHTML = '';
             computerComponents.forEach((component, index) => {
                 const el = document.createElement('div');
-                el.className = 'component-item';
+                el.className = `component-item ${component.type}`;
                 el.dataset.id = component.id;
                 el.dataset.slot = component.slot;
                 el.dataset.type = component.type;
@@ -1090,7 +1210,14 @@
             draggedItem = this;
             e.dataTransfer.setData('text/plain', this.dataset.id);
             this.classList.add('dragging');
-            setTimeout(()=> this.style.opacity = '0.5', 10);
+            
+            // Create a ghost image for better dragging experience
+            const ghost = this.cloneNode(true);
+            ghost.style.position = 'fixed';
+            ghost.style.left = '-1000px';
+            document.body.appendChild(ghost);
+            e.dataTransfer.setDragImage(ghost, 0, 0);
+            setTimeout(() => document.body.removeChild(ghost), 0);
         }
         
         function dragEnd() { 
@@ -1098,26 +1225,44 @@
                 this.classList.remove('dragging'); 
                 this.style.opacity='1'; 
             }
+            draggedItem = null;
         }
 
-        function dragOver(e) { e.preventDefault(); }
+        function dragOver(e) { 
+            e.preventDefault(); 
+            e.dataTransfer.dropEffect = 'move';
+        }
+        
         function dragEnter(e) { 
             e.preventDefault(); 
             if (!this.classList.contains('filled')) {
                 this.classList.add('highlight'); 
             }
         }
-        function dragLeave() { this.classList.remove('highlight'); }
+        
+        function dragLeave() { 
+            this.classList.remove('highlight'); 
+        }
 
         function drop(e) {
             e.preventDefault();
             this.classList.remove('highlight');
-            const id = e.dataTransfer.getData('text/plain');
+            
+            if (!draggedItem) return;
+            
+            const id = draggedItem.dataset.id;
             const component = computerComponents.find(f => f.id == id);
             const targetSlotId = this.id;
             
-            if (!component || !draggedItem) return;
+            if (!component) return;
             
+            // Check if component is already placed
+            if (placedComponents.includes(component.id)) {
+                showIncorrectPlacement();
+                return;
+            }
+            
+            // Check if this is the correct slot
             if (component.slot === targetSlotId) {
                 handleCorrectPlacement(component, this, draggedItem);
             } else {
@@ -1266,18 +1411,17 @@
             statusIcon.innerHTML = '<i class="fas fa-check"></i>';
             
             // Add visual feedback to slot
-            const slotContent = document.createElement('div');
-            slotContent.style.cssText = `
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2rem;
-            `;
-            slotContent.textContent = component.icon;
             slot.innerHTML = '';
-            slot.appendChild(slotContent);
+            slot.style.background = 'rgba(72, 187, 120, 0.3)';
+            slot.style.border = '2px solid #48bb78';
+            
+            const componentInCase = document.createElement('div');
+            componentInCase.className = 'component-in-case';
+            componentInCase.innerHTML = `
+                <div class="icon">${component.icon}</div>
+                <div>${component.name[currentLanguage]}</div>
+            `;
+            slot.appendChild(componentInCase);
             
             // Add the label and number back
             const label = document.createElement('div');
@@ -1295,17 +1439,41 @@
             setTimeout(() => slot.classList.remove('success-pulse'), 1500);
             
             createConfetti();
+            
+            // Check if all components are placed
+            if (placedComponents.length === computerComponents.length) {
+                setTimeout(completeAssembly, 1000);
+            }
         }
 
         function handleIncorrectPlacement(component, slot, draggedElement) {
             slot.classList.remove('highlight');
-            slot.classList.add('incorrect');
+            slot.style.borderColor = '#f56565';
+            slot.style.background = 'rgba(245, 101, 101, 0.2)';
             
             // Shake animation for wrong placement
             draggedElement.style.animation = 'shake 0.6s';
             setTimeout(()=> draggedElement.style.animation = '', 600);
             
-            setTimeout(()=> slot.classList.remove('incorrect'), 900);
+            setTimeout(()=> {
+                slot.style.borderColor = '';
+                slot.style.background = '';
+            }, 900);
+            
+            // Return dragged element to original position with animation
+            draggedElement.style.transition = 'all 0.3s ease';
+            draggedElement.style.transform = 'translate(0, 0)';
+            setTimeout(() => {
+                draggedElement.style.transition = '';
+            }, 300);
+        }
+
+        function showIncorrectPlacement() {
+            // Shake animation for already placed component
+            if (draggedItem) {
+                draggedItem.style.animation = 'shake 0.6s';
+                setTimeout(()=> draggedItem.style.animation = '', 600);
+            }
         }
 
         /* ---- MODAL & FEEDBACK ---- */

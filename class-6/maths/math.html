@@ -27,92 +27,60 @@
             padding: 0 20px;
         }
 
-        /* Language Switcher */
-        .language-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            gap: 5px;
-        }
-
-        .lang-btn {
-            padding: 8px 16px;
-            border: none;
-            background: transparent;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: white;
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-        }
-
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
         /* Header Styles */
         header {
             background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
             color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            font-size: 2.2rem;
+            width: 50px;
+            height: 50px;
             background: white;
-            color: #2a69ac;
-            width: 55px;
-            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logo-text {
+        .logo i {
             font-size: 1.8rem;
+            color: #2a69ac;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
-        .logo-text span {
+        .logo-text h1 span {
             color: #38b2ac;
             font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 28px;
+            gap: 30px;
         }
 
         nav a {
@@ -121,8 +89,7 @@
             font-weight: 500;
             transition: all 0.3s ease;
             padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 1.05rem;
+            border-radius: 6px;
         }
 
         nav a:hover, nav a.active {
@@ -130,13 +97,133 @@
             transform: translateY(-2px);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.6rem;
-            background: none;
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
             border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 15px;
             color: white;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 180px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f7fa;
+        }
+
+        .dropdown-item i {
+            color: #3182ce;
+            width: 20px;
+        }
+
+        /* Language Options */
+        .language-options {
+            position: absolute;
+            top: 60px;
+            right: 120px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 120px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .language-options.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: #f5f7fa;
         }
 
         /* Page Header */
@@ -682,24 +769,17 @@
             .topic-cards, .learn-grid, .games-grid, .resources-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .language-switcher {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 15px;
-                justify-content: center;
-                background: transparent;
-            }
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
             }
-            
-            .mobile-menu-btn {
-                display: block;
+           
+            nav ul {
+                gap: 15px;
             }
             
             .page-header h1 {
@@ -714,40 +794,63 @@
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="en">English</button>
-        <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
-    </div>
-
     <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <div class="logo-text">STEM <span>Learn</span> Odisha</div>
-                </div>
-
-                <nav>
-                    <ul>
-                        <li><a href="home.html" data-translate="nav-home">Home</a></li>
-                        <li><a href="science.html" data-translate="nav-science">Science</a></li>
-                        <li><a href="math.html" class="active" data-translate="nav-math">Math</a></li>
-                        <li><a href="teachers.html" data-translate="nav-teachers">Teachers</a></li>
-                        <li><a href="about.html" data-translate="nav-about">About</a></li>
-                        <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
-                    </ul>
-                </nav>
-
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+            </div>
+            <div class="logo-text">
+                <h1>STEM Learn Odisha</h1>
+                <p>Gamified Learning Platform</p>
+            </div>
+        </div>
+       
+        <nav>
+            <ul>
+                <li><a href="student-dashboard.html" id="navHome" data-translate="nav-home">Dashboard</a></li>
+                <li><a href="science.html" data-translate="nav-science">Science</a></li>
+                <li><a href="math.html" class="active" data-translate="nav-math">Math</a></li>
+                <li><a href="about.html" id="navAbout" data-translate="nav-about">About</a></li>
+                <li><a href="contact.html" id="navContact" data-translate="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+       
+        <div class="header-controls">
+            <button class="control-btn" id="languageToggle">
+                <i class="fas fa-globe"></i>
+            </button>
+           
+            <div class="profile-container">
+                <button class="profile-btn" id="profileToggle">
+                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <span id="headerUserName">Student</span>
+                    <i class="fas fa-chevron-down"></i>
                 </button>
+               
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" class="dropdown-item" id="dropdownProfile">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="dropdown-profile">Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownSettings">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="dropdown-settings">Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownLogout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="dropdown-logout">Logout</span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Language Options -->
+    <div class="language-options" id="languageOptions">
+        <div class="language-option" data-lang="en">English</div>
+        <div class="language-option" data-lang="or">ଓଡ଼ିଆ</div>
+    </div>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -761,11 +864,9 @@
     <section class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-content">
-                <a href="home.html" data-translate="breadcrumb-home">Home</a>
-                <span>/</span>
-                <a href="math.html" data-translate="breadcrumb-math">Math</a>
-                <span>/</span>
-                <span data-translate="breadcrumb-curriculum">Class 6 Mathematics Curriculum</span>
+                <a href="student-dashboard.html" data-translate="breadcrumb-home">Dashboard</a>
+                <span>></span>
+                <a href="#" class="active" data-translate="breadcrumb-math">Mathematics</a>
             </div>
         </div>
     </section>
@@ -922,52 +1023,122 @@
                         </div>
                         <div class="footer-logo-text">STEM Learn Odisha</div>
                     </div>
-                    <p data-translate="footer-desc">Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.</p>
+                    <p data-lang="en">Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.</p>
+                    <p data-lang="odia">ଓଡିଶାର କକ୍ଷା ୬ ର ଛାତ୍ରଛାତ୍ରୀଙ୍କ ପାଇଁ ବିଜ୍ଞାନ ଏବଂ ଗଣିତ ଶିକ୍ଷାକୁ ଆକର୍ଷଣୀୟ ଏବଂ ପ୍ରାସଙ୍ଗିକ କରିବା ସ୍ଥାନୀୟକୃତ ବିଷୟବସ୍ତୁ ଏବଂ ଇଣ୍ଟରାକ୍ଟିଭ୍ ଶିକ୍ଷା ମାଧ୍ୟମରେ।</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
 
                 <div class="footer-links">
-                    <h3 data-translate="quick-links">Quick Links</h3>
+                    <h3 data-lang="en">Quick Links</h3>
+                    <h3 data-lang="odia">ଦ୍ରୁତ ଲିଙ୍କ୍</h3>
                     <ul>
-                        <li><a href="home.html"><i class="fas fa-home"></i> <span data-translate="nav-home">Home</span></a></li>
-                        <li><a href="science.html"><i class="fas fa-flask"></i> <span data-translate="nav-science">Science</span></a></li>
-                        <li><a href="math.html"><i class="fas fa-calculator"></i> <span data-translate="nav-math">Math</span></a></li>
-                        <li><a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> <span data-translate="nav-teachers">Teachers</span></a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h3 data-translate="contact-us">Contact Us</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> <span data-translate="footer-address">Department of Education, Bhubaneswar</span></a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> +91 674 123 4567</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> info@stemlearnodisha.com</a></li>
+                        <li><a href="student-dashboard.html"><i class="fas fa-home"></i> <span data-lang="en">Home</span><span data-lang="odia">ମୁଖ୍ୟ ପୃଷ୍ଠା</span></a></li>
+                        <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> <span data-lang="en">Our Teachers</span><span data-lang="odia">ଆମର ଶିକ୍ଷକ</span></a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> <span data-lang="en">About Us</span><span data-lang="odia">ଆମ ବିଷୟରେ</span></a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="copyright">
-                <p data-translate="copyright">© 2023 STEM Learn Odisha. All rights reserved.</p>
+                <p data-lang="en">&copy; 2023 STEM Learn Odisha. All rights reserved.</p>
+                <p data-lang="odia">&copy; ୨୦୨୩ ଷ୍ଟେମ୍ ଲର୍ନ ଓଡିଶା। ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Language switching functionality
-        let currentLanguage = 'en';
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+           
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'student-login.html';
+                return;
+            }
+           
+            // Load user data
+            loadUserData(user);
+        });
 
+        // Load user data into the page
+        function loadUserData(user) {
+            document.getElementById('headerUserName').textContent = user.fullName;
+            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+        }
+
+        // Profile dropdown toggle
+        document.getElementById('profileToggle').addEventListener('click', function() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        });
+
+        // Navigation between pages
+        document.getElementById('dropdownProfile').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'student-dashboard.html#profile';
+        });
+
+        document.getElementById('dropdownSettings').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'student-dashboard.html#settings';
+        });
+
+        document.getElementById('dropdownLogout').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('user');
+            window.location.href = 'student-login.html';
+        });
+
+        // Navigation menu items
+        document.getElementById('navHome').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'student-dashboard.html';
+        });
+
+        document.getElementById('navAbout').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('About page would open here');
+        });
+
+        document.getElementById('navContact').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Contact page would open here');
+        });
+
+        // Language toggle
+        document.getElementById('languageToggle').addEventListener('click', function() {
+            document.getElementById('languageOptions').classList.toggle('show');
+        });
+
+        // Language selection
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                switchLanguage(lang);
+                document.getElementById('languageOptions').classList.remove('show');
+            });
+        });
+
+        // Language translations
         const translations = {
             en: {
-                'nav-home': 'Home',
+                'nav-home': 'Dashboard',
                 'nav-science': 'Science',
                 'nav-math': 'Math',
-                'nav-teachers': 'Teachers',
                 'nav-about': 'About',
                 'nav-contact': 'Contact',
+                'dropdown-profile': 'Profile',
+                'dropdown-settings': 'Settings',
+                'dropdown-logout': 'Logout',
                 'math-title': 'Mathematics',
                 'math-desc': 'Explore the world of numbers, shapes, and patterns through interactive lessons and activities designed for Class 6 students',
-                'breadcrumb-home': 'Home',
-                'breadcrumb-math': 'Math',
-                'breadcrumb-curriculum': 'Class 6 Mathematics Curriculum',
+                'breadcrumb-home': 'Dashboard',
+                'breadcrumb-math': 'Mathematics',
                 'importance-title': 'Why Mathematics is Important for Class 6 Students',
                 'importance-text1': 'Mathematics education at the Class 6 level builds a strong foundation for logical thinking and problem-solving skills. It helps students develop analytical abilities that are essential for everyday life and future academic success.',
                 'importance-text2': 'Through engaging activities and practical applications, students learn to recognize patterns, understand relationships between numbers, and apply mathematical concepts to real-world situations.',
@@ -1013,65 +1184,21 @@
                 'learn6-4': 'Conversion between fractions and decimals',
                 'curriculum-title': 'Mathematics Curriculum for Class 6',
                 'curriculum-desc': 'Our comprehensive curriculum covers all essential topics as prescribed by the Odisha Board of Secondary Education, with engaging content tailored for young learners.',
-                'view-curriculum': 'View Full Curriculum',
-                'topic1-title': 'Knowing Our Numbers',
-                'topic1-desc': 'Learn about large numbers and their applications',
-                'topic2-title': 'Basic Geometrical Ideas',
-                'topic2-desc': 'Understand points, lines, and basic shapes',
-                'topic3-title': 'Understanding Elementary Shapes',
-                'topic3-desc': 'Explore different types of shapes and their properties',
-                'progress-label': 'Progress',
-                'games-title': 'Interactive Learning Games',
-                'level-basic': 'Basic',
-                'game1-title': 'Math Quiz Challenge',
-                'game1-desc': 'Test your math skills with fun questions and puzzles',
-                'game1-feature1': 'Multiple difficulty levels',
-                'game1-feature2': '10-15 minutes gameplay',
-                'game1-feature3': 'Earn up to 50 points',
-                'level-intermediate': 'Intermediate',
-                'game2-title': 'Shape Builder Adventure',
-                'game2-desc': 'Create and explore geometric shapes in a virtual world',
-                'game2-feature1': 'Interactive shape manipulation',
-                'game2-feature2': '15-20 minutes gameplay',
-                'game2-feature3': 'Earn up to 100 points',
-                'level-hard': 'Hard',
-                'game3-title': 'Math Puzzle Adventure',
-                'game3-desc': 'Solve challenging math puzzles to advance through levels',
-                'game3-feature1': 'Logical thinking challenges',
-                'game3-feature2': '20-25 minutes gameplay',
-                'game3-feature3': 'Earn up to 150 points',
-                'play-game': 'Play Game',
-                'resources-title': 'Learning Resources',
-                'resource1-title': 'Study Notes',
-                'resource1-desc': 'Complete chapter notes for revision',
-                'download-english': 'Download (English)',
-                'resource2-title': 'ଅଧ୍ୟୟନ ଟିପ୍ପଣୀ',
-                'resource2-desc': 'ସମ୍ପୂର୍ଣ୍ଣ ଅଧ୍ୟାୟ ଟିପ୍ପଣୀ ସଂଶୋଧନ ପାଇଁ',
-                'download-odia': 'Download (ଓଡ଼ିଆ)',
-                'resource3-title': 'Practice Worksheets',
-                'resource3-desc': 'Exercises for each chapter with solutions',
-                'download-worksheets': 'Download Worksheets',
-                'resource4-title': 'Video Lessons',
-                'resource4-desc': 'Animated explanations of concepts',
-                'watch-videos': 'Watch Videos',
-                'footer-desc': 'Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.',
-                'quick-links': 'Quick Links',
-                'contact-us': 'Contact Us',
-                'footer-address': 'Department of Education, Bhubaneswar',
-                'copyright': '© 2023 STEM Learn Odisha. All rights reserved.'
+                'view-curriculum': 'View Full Curriculum'
             },
             or: {
-                'nav-home': 'ମୁଖ୍ୟ ପୃଷ୍ଠା',
+                'nav-home': 'ଡ୍ୟାସବୋର୍ଡ',
                 'nav-science': 'ବିଜ୍ଞାନ',
                 'nav-math': 'ଗଣିତ',
-                'nav-teachers': 'ଶିକ୍ଷକମାନେ',
                 'nav-about': 'ଆମ ବିଷୟରେ',
                 'nav-contact': 'ଯୋଗାଯୋଗ',
+                'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍',
+                'dropdown-settings': 'ସେଟିଂସ୍',
+                'dropdown-logout': 'ଲଗଆଉଟ୍',
                 'math-title': 'ଗଣିତ',
                 'math-desc': 'ଷଷ୍ଠ ଶ୍ରେଣୀର ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କ ପାଇଁ ଡିଜାଇନ୍ କରାଯାଇଥିବା ଇଣ୍ଟରାକ୍ଟିଭ୍ ପାଠ ଏବଂ କାର୍ଯ୍ୟକଳାପ ମାଧ୍ୟମରେ ସଂଖ୍ୟା, ଆକୃତି, ଏବଂ ନମୁନାର ଦୁନିଆକୁ ଏକ୍ସପ୍ଲୋର୍ କରନ୍ତୁ',
-                'breadcrumb-home': 'ମୁଖ୍ୟ ପୃଷ୍ଠା',
+                'breadcrumb-home': 'ଡ୍ୟାସବୋର୍ଡ',
                 'breadcrumb-math': 'ଗଣିତ',
-                'breadcrumb-curriculum': 'ଷଷ୍ଠ ଶ୍ରେଣୀ ଗଣିତ ପାଠ୍ୟକ୍ରମ',
                 'importance-title': 'ଷଷ୍ଠ ଶ୍ରେଣୀର ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କ ପାଇଁ ଗଣିତ କାହିଁକି ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ',
                 'importance-text1': 'ଷଷ୍ଠ ଶ୍ରେଣୀ ସ୍ତରରେ ଗଣିତ ଶିକ୍ଷା ଯାନ୍ତ୍ରିକ ଚିନ୍ତନ ଏବଂ ସମସ୍ୟା ସମାଧାନ କୌଶଳ ପାଇଁ ଏକ ଶକ୍ତିଶାଳୀ ଅଟଳ ଭିତ୍ତିଭୂମି ପ୍ରସ୍ତୁତ କରେ। ଏହା ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କୁ ବିଶ୍ଳେଷଣାତ୍ମକ ଦକ୍ଷତା ବିକଶିତ କରିବାରେ ସାହାଯ୍ୟ କରେ ଯାହା ଦ daily ନନ୍ଦିନ ଜୀବନ ଏବଂ ଭବିଷ୍ୟତର ଶାସ୍ତ୍ରୀୟ ସଫଳତା ପାଇଁ ଅତ୍ୟାବଶ୍ୟକ।',
                 'importance-text2': 'ଆକର୍ଷଣୀୟ କାର୍ଯ୍ୟକଳାପ ଏବଂ ବ୍ୟବହାରିକ ପ୍ରୟୋଗ ମାଧ୍ୟମରେ, ଛାତ୍ରଛାତ୍ରୀମାନେ ନମୁନା ଚିହ୍ନିବା, ସଂଖ୍ୟା ମଧ୍ୟରେ ସମ୍ପର୍କ ବୁଝିବା, ଏବଂ ବାସ୍ତବ ପରିସ୍ଥିତିକୁ ଗାଣିତିକ ଧାରଣା ପ୍ରୟୋଗ କରିବା ଶିଖନ୍ତି।',
@@ -1104,7 +1231,7 @@
                 'learn4-1': 'ଦ length ର୍ଘ୍ୟ, ଓଜନ, ଏବଂ ଧାରଣ ଶକ୍ତି ମାପ',
                 'learn4-2': 'ସରଳ ଆକୃତିର ପରିଧି ଏବଂ କ୍ଷେତ୍ରଫଳ',
                 'learn4-3': 'ସମୟ, ତାରିଖ, ଏବଂ କ୍ୟାଲେଣ୍ଡର ଗଣନା',
-                'learn4-4': 'ଟଙ୍କା ଏବଂ ମୁଦ୍ରା ଗଣନା',
+                'learn4-4': 'ଟଙ୍କା ଏବଂ ମୁଦ୍ରା �ଗଣନା',
                 'learn5-title': 'ତଥ୍ୟ ହ୍ୟାଣ୍ଡଲିଂ',
                 'learn5-1': 'ତଥ୍ୟର ସଂଗ୍ରହ ଏବଂ ସଂଗଠନ',
                 'learn5-2': 'ଚିତ୍ରଲିପି ଏବଂ ବାର୍ ଗ୍ରାଫ୍',
@@ -1117,94 +1244,18 @@
                 'learn6-4': 'ଭଗ୍ନାଂଶ ଏବଂ ଦଶମିକ ମଧ୍ୟରେ ରୂପାନ୍ତରଣ',
                 'curriculum-title': 'ଷଷ୍ଠ ଶ୍ରେଣୀ ପାଇଁ ଗଣିତ ପାଠ୍ୟକ୍ରମ',
                 'curriculum-desc': 'ଆମର ସମ୍ପୂର୍ଣ୍ଣ ପାଠ୍ୟକ୍ରମ ଓଡ଼ିଶା ମାଧ୍ୟମିକ ଶିକ୍ଷା ବୋର୍ଡ ଦ୍ୱାରା ପ୍ରଣୀତ ସମସ୍ତ ମୌଳିକ ବିଷୟବସ୍ତୁକୁ ଆବର୍ତ୍ତନ କରେ, ଯୁବ ଶିକ୍ଷାର୍ଥୀମାନଙ୍କ ପାଇଁ ଆକର୍ଷଣୀୟ ବିଷୟବସ୍ତୁ ସହିତ।',
-                'view-curriculum': 'ସମ୍ପୂର୍ଣ୍ଣ ପାଠ୍ୟକ୍ରମ ଦେଖନ୍ତୁ',
-                'topic1-title': 'ଆମର ସଂଖ୍ୟା ଜାଣିବା',
-                'topic1-desc': 'ବଡ଼ ସଂଖ୍ୟା ଏବଂ ସେମାନଙ୍କର ପ୍ରୟୋଗ ବିଷୟରେ ଜାଣନ୍ତୁ',
-                'topic2-title': 'ମୌଳିକ ଜ୍ୟାମିତିକ ଧାରଣା',
-                'topic2-desc': 'ବିନ୍ଦୁ, ରେଖା, ଏବଂ ମୌଳିକ ଆକୃତି ବୁଝନ୍ତୁ',
-                'topic3-title': 'ପ୍ରାଥମିକ ଆକୃତି ବୁଝିବା',
-                'topic3-desc': 'ବିଭିନ୍ନ ପ୍ରକାରର ଆକୃତି ଏବଂ ସେମାନଙ୍କର ଗୁଣଧର୍ମ ଏକ୍ସପ୍ଲୋର୍ କରନ୍ତୁ',
-                'progress-label': 'ପ୍ରଗତି',
-                'games-title': 'ଇଣ୍ଟରାକ୍ଟିଭ୍ ଶିକ୍ଷଣ ଖେଳଗୁଡିକ',
-                'level-basic': 'ମୌଳିକ',
-                'game1-title': 'ଗଣିତ କ୍ୱିଜ୍ ଚ୍ୟାଲେଞ୍ଜ',
-                'game1-desc': 'ମଜାଦାର ପ୍ରଶ୍ନ ଏବଂ ପଜଲ୍ ସହିତ ଆପଣଙ୍କର ଗଣିତ କୌଶଳ ପରୀକ୍ଷା କରନ୍ତୁ',
-                'game1-feature1': 'ବହୁ କଠିନତା ସ୍ତର',
-                'game1-feature2': '10-15 ମିନିଟ୍ ଖେଳପଣ',
-                'game1-feature3': '50 ପଏଣ୍ଟ୍ ପର୍ଯ୍ୟନ୍ତ ଅର୍ଜନ କରନ୍ତୁ',
-                'level-intermediate': 'ମଧ୍ୟମ ସ୍ତର',
-                'game2-title': 'ଆକୃତି ବିଲଡର୍ ଆଡଭେଞ୍ଚର',
-                'game2-desc': 'ଏକ ଭର୍ଚୁଆଲ୍ ଦୁନିଆରେ ଜ୍ୟାମିତିକ ଆକୃତି ସୃଷ୍ଟି ଏବଂ ଏକ୍ସପ୍ଲୋର୍ କରନ୍ତୁ',
-                'game2-feature1': 'ଇଣ୍ଟରାକ୍ଟିଭ୍ ଆକୃତି ମ୍ୟାନିପୁଲେସନ୍',
-                'game2-feature2': '15-20 ମିନିଟ୍ ଖେଳପଣ',
-                'game2-feature3': '100 ପଏଣ୍ଟ୍ ପର୍ଯ୍ୟନ୍ତ ଅର୍ଜନ କରନ୍ତୁ',
-                'level-hard': 'କଠିନ',
-                'game3-title': 'ଗଣିତ ପଜଲ୍ ଆଡଭେଞ୍ଚର',
-                'game3-desc': 'ସ୍ତର ମାଧ୍ୟମରେ ଆଗେଇବା ପାଇଁ ଚ୍ୟାଲେଞ୍ଜିଂ ଗଣିତ ପଜଲ୍ ସମାଧାନ କରନ୍ତୁ',
-                'game3-feature1': 'ଯାନ୍ତ୍ରିକ ଚିନ୍ତନ ଚ୍ୟାଲେଞ୍ଜ',
-                'game3-feature2': '20-25 ମିନିଟ୍ ଖେଳପଣ',
-                'game3-feature3': '150 ପଏଣ୍ଟ୍ ପର୍ଯ୍ୟନ୍ତ ଅର୍ଜନ କରନ୍ତୁ',
-                'play-game': 'ଖେଳନ୍ତୁ',
-                'resources-title': 'ଶିକ୍ଷଣ ସମ୍ବଳ',
-                'resource1-title': 'ଅଧ୍ୟୟନ ଟିପ୍ପଣୀ',
-                'resource1-desc': 'ସଂଶୋଧନ ପାଇଁ ସମ୍ପୂର୍ଣ୍ଣ ଅଧ୍ୟାୟ ଟିପ୍ପଣୀ',
-                'download-english': 'ଡାଉନଲୋଡ୍ (ଇଂରାଜୀ)',
-                'resource2-title': 'ଅଧ୍ୟୟନ ଟିପ୍ପଣୀ',
-                'resource2-desc': 'ସମ୍ପୂର୍ଣ୍ଣ ଅଧ୍ୟାୟ ଟିପ୍ପଣୀ ସଂଶୋଧନ ପାଇଁ',
-                'download-odia': 'ଡାଉନଲୋଡ୍ (ଓଡ଼ିଆ)',
-                'resource3-title': 'ଅଭ୍ୟାସ ୱର୍କସିଟ୍',
-                'resource3-desc': 'ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟ ପାଇଁ ସମାଧାନ ସହିତ ଅଭ୍ୟାସ',
-                'download-worksheets': 'ୱର୍କସିଟ୍ ଡାଉନଲୋଡ୍ କରନ୍ତୁ',
-                'resource4-title': 'ଭିଡିଓ ପାଠଗୁଡିକ',
-                'resource4-desc': 'ଧାରଣାଗୁଡିକର ଆନିମେଟେଡ୍ ବ୍ୟାଖ୍ୟା',
-                'watch-videos': 'ଭିଡିଓ ଦେଖନ୍ତୁ',
-                'footer-desc': 'ଓଡ଼ିଶାର ଷଷ୍ଠ ଶ୍ରେଣୀର ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କ ପାଇଁ ସ୍ଥାନୀୟ ବିଷୟବସ୍ତୁ ଏବଂ ଇଣ୍ଟରାକ୍ଟିଭ୍ ଶିକ୍ଷଣ ମାଧ୍ୟମରେ ବିଜ୍ଞାନ ଏବଂ ଗଣିତ ଶିକ୍ଷାକୁ ଆକର୍ଷଣୀୟ ଏବଂ ପ୍ରାସଙ୍ଗିକ କରିବା',
-                'quick-links': 'ଶୀଘ୍ର ଲିଙ୍କ୍',
-                'contact-us': 'ଆମ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ',
-                'footer-address': 'ଶିକ୍ଷା ବିଭାଗ, ଭୁବନେଶ୍ୱର',
-                'copyright': '© 2023 STEM ଲର୍ନ ଓଡ଼ିଶା। ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।'
+                'view-curriculum': 'ସମ୍ପୂର୍ଣ୍ଣ ପାଠ୍ୟକ୍ରମ ଦେଖନ୍ତୁ'
             }
         };
 
-        // DOM elements
-        const langButtons = document.querySelectorAll('.lang-btn');
-        
-        // Initialize the page
-        function init() {
-            // Set up language switcher
-            langButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    switchLanguage(lang);
-                });
-            });
-
-            // Initialize with default language
-            switchLanguage('en');
-        }
-
-        // Switch language function
         function switchLanguage(lang) {
-            currentLanguage = lang;
-            
-            // Update active button
-            langButtons.forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
                 }
             });
-            
-            // Update all text content
-            Object.keys(translations[lang]).forEach(key => {
-                const elements = document.querySelectorAll(`[data-translate="${key}"]`);
-                elements.forEach(element => {
-                    element.textContent = translations[lang][key];
-                });
-            });
-            
-            // Add Odia font class for Odia text
+           
             if (lang === 'or') {
                 document.body.classList.add('odia-text');
             } else {
@@ -1212,8 +1263,16 @@
             }
         }
 
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+        // Close language options when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
+                document.getElementById('languageOptions').classList.remove('show');
+            }
+           
+            if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                document.getElementById('profileDropdown').classList.remove('show');
+            }
+        });
     </script>
 </body>
 </html>

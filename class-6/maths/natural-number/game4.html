@@ -461,6 +461,16 @@
             box-shadow: 0 0 20px rgba(56, 178, 172, 0.7);
         }
 
+        .stone.available {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .stone.unavailable {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
         .stone-number {
             font-size: 1.5rem;
             font-weight: 700;
@@ -577,54 +587,6 @@
             font-weight: 700;
         }
 
-        /* Number Information */
-        .number-info {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: #1a365d;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-text {
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        .natural-numbers-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .natural-number {
-            padding: 5px 10px;
-            background: #c6f6d5;
-            border: 1px solid #9ae6b4;
-            border-radius: 5px;
-            font-weight: 600;
-            color: #22543d;
-        }
-
-        .non-natural-number {
-            padding: 5px 10px;
-            background: #fed7d7;
-            border: 1px solid #fc8181;
-            border-radius: 5px;
-            font-weight: 600;
-            color: #742a2a;
-        }
-
         /* Game Controls */
         .game-controls {
             display: flex;
@@ -657,7 +619,7 @@
             color: white;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             background: #2b6cb0;
             transform: translateY(-2px);
         }
@@ -667,7 +629,7 @@
             color: #4a5568;
         }
 
-        .btn-secondary:hover {
+        .btn-secondary:hover:not(:disabled) {
             background: #cbd5e0;
             transform: translateY(-2px);
         }
@@ -677,26 +639,31 @@
             color: white;
         }
 
-        .btn-success:hover {
+        .btn-success:hover:not(:disabled) {
             background: #2c9a94;
             transform: translateY(-2px);
         }
 
-        .btn-danger {
-            background: #e53e3e;
+        .btn-warning {
+            background: #ed8936;
             color: white;
         }
 
-        .btn-danger:hover {
-            background: #c53030;
+        .btn-warning:hover:not(:disabled) {
+            background: #dd6b20;
             transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         /* Timer Display */
         .timer-display {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #e53e3e;
+            color: #3182ce;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -768,75 +735,6 @@
             width: 0%;
         }
 
-        /* Resources Section */
-        .resources-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .resource-card {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .resource-icon {
-            font-size: 2.5rem;
-            color: #3182ce;
-            margin-bottom: 15px;
-        }
-
-        .resource-title {
-            font-size: 1.1rem;
-            color: #1a365d;
-            margin-bottom: 10px;
-        }
-
-        .resource-desc {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: #38b2ac;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .download-btn:hover {
-            background: #2c9a94;
-            transform: translateY(-2px);
-        }
-
         /* Footer */
         footer {
             background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
@@ -884,58 +782,6 @@
             color: #cbd5e1;
             line-height: 1.7;
             margin-bottom: 20px;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 20px;
-            color: #38b2ac;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #2d3748;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .social-links a:hover {
-            background: #38b2ac;
-            transform: translateY(-3px);
         }
 
         .copyright {
@@ -1042,7 +888,7 @@
            
             <div class="profile-container">
                 <button class="profile-btn" id="profileToggle">
-                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <img src="https://ui-avatars.com/api/?name=Student&background=3182ce&color=fff" alt="Profile" class="profile-pic" id="headerProfilePic">
                     <span id="headerUserName">Student</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
@@ -1076,19 +922,6 @@
         <div class="container">
             <h1 data-translate="page-title">Natural Number Trail</h1>
             <p data-translate="page-desc">Help the character cross the river by stepping only on natural number stones! Avoid zeros and negative numbers.</p>
-        </div>
-    </section>
-
-    <!-- Breadcrumb -->
-    <section class="breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-content">
-                <a href="student-dashboard.html" data-translate="breadcrumb-home">Home</a>
-                <span>/</span>
-                <a href="mathematics.html" data-translate="breadcrumb-math">Mathematics</a>
-                <span>/</span>
-                <span data-translate="breadcrumb-topic">Natural Number Trail</span>
-            </div>
         </div>
     </section>
 
@@ -1145,7 +978,7 @@
                         <ul class="instructions-list">
                             <li>
                                 <i class="fas fa-shoe-prints"></i>
-                                <span data-translate="instruction1">Click on stones to make your character step on them</span>
+                                <span data-translate="instruction1">Click on green stones to make your character step on them</span>
                             </li>
                             <li>
                                 <i class="fas fa-check-circle"></i>
@@ -1156,29 +989,14 @@
                                 <span data-translate="instruction3">Avoid zeros (0) and negative numbers (-1, -2, ...)</span>
                             </li>
                             <li>
-                                <i class="fas fa-trophy"></i>
-                                <span data-translate="instruction4">Reach the end of the trail to complete the level</span>
+                                <i class="fas fa-forward"></i>
+                                <span data-translate="instruction4">Use "Skip" button to skip a stone you can't step on</span>
                             </li>
                             <li>
-                                <i class="fas fa-clock"></i>
-                                <span data-translate="instruction5">Complete quickly for bonus points!</span>
+                                <i class="fas fa-trophy"></i>
+                                <span data-translate="instruction5">Reach the end of the trail to complete the level</span>
                             </li>
                         </ul>
-                    </div>
-                    
-                    <div class="number-info">
-                        <h3 class="info-title">
-                            <i class="fas fa-lightbulb"></i>
-                            <span data-translate="what-are-natural">What are Natural Numbers?</span>
-                        </h3>
-                        <p class="info-text" data-translate="natural-definition">
-                            Natural numbers are counting numbers starting from 1: 1, 2, 3, 4, 5, ...
-                            They do NOT include zero or negative numbers.
-                        </p>
-                        <div class="natural-numbers-list">
-                            <span class="natural-number" data-translate="example-natural">1, 2, 3, 4, 5</span>
-                            <span class="non-natural-number" data-translate="example-non-natural">0, -1, -2, -3</span>
-                        </div>
                     </div>
                 </div>
                 
@@ -1221,9 +1039,13 @@
                                 <i class="fas fa-play"></i>
                                 <span data-translate="start-btn">Start Game</span>
                             </button>
-                            <button class="btn btn-secondary" id="resetBtn">
+                            <button class="btn btn-secondary" id="resetBtn" disabled>
                                 <i class="fas fa-redo"></i>
                                 <span data-translate="reset-btn">Reset Level</span>
+                            </button>
+                            <button class="btn btn-warning" id="skipBtn" disabled>
+                                <i class="fas fa-forward"></i>
+                                <span data-translate="skip-btn">Skip Stone</span>
                             </button>
                             <button class="btn btn-success" id="nextBtn" disabled>
                                 <i class="fas fa-forward"></i>
@@ -1244,52 +1066,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Resources Section -->
-            <div class="resources-section">
-                <h2 class="learning-title">
-                    <i class="fas fa-download"></i>
-                    <span data-translate="resources-title">Learning Resources</span>
-                </h2>
-
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <h3 class="resource-title" data-translate="resource1-title">Natural Numbers Guide</h3>
-                        <p class="resource-desc" data-translate="resource1-desc">Complete guide to understanding natural numbers</p>
-                        <a href="#" class="download-btn">
-                            <i class="fas fa-download"></i>
-                            <span data-translate="download-english">Download (English)</span>
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <div class="resource-icon">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <h3 class="resource-title" data-translate="resource2-title">ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଗାଇଡ୍</h3>
-                        <p class="resource-desc" data-translate="resource2-desc">ପ୍ରାକୃତିକ ସଂଖ୍ୟା ବୁଝିବା ପାଇଁ ସମ୍ପୂର୍ଣ୍ଣ ଗାଇଡ୍</p>
-                        <a href="#" class="download-btn">
-                            <i class="fas fa-download"></i>
-                            <span data-translate="download-odia">Download (ଓଡ଼ିଆ)</span>
-                        </a>
-                    </div>
-
-                    <div class="resource-card">
-                        <div class="resource-icon">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
-                        <h3 class="resource-title" data-translate="resource3-title">Practice Worksheets</h3>
-                        <p class="resource-desc" data-translate="resource3-desc">Interactive worksheets for natural numbers practice</p>
-                        <a href="#" class="download-btn">
-                            <i class="fas fa-download"></i>
-                            <span data-translate="download-worksheets">Download Worksheets</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -1306,25 +1082,6 @@
                     </div>
                     <p data-translate="footer-desc">Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.</p>
                 </div>
-
-                <div class="footer-links">
-                    <h3 data-translate="quick-links">Quick Links</h3>
-                    <ul>
-                        <li><a href="student-dashboard.html"><i class="fas fa-tachometer-alt"></i> <span data-translate="nav-dashboard">Dashboard</span></a></li>
-                        <li><a href="mathematics.html"><i class="fas fa-calculator"></i> <span data-translate="nav-mathematics">Mathematics</span></a></li>
-                        <li><a href="fractions.html"><i class="fas fa-divide"></i> <span data-translate="nav-fractions">Fractions</span></a></li>
-                        <li><a href="scienceidx.html"><i class="fas fa-book"></i> <span data-translate="nav-curriculum">Curriculum</span></a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h3 data-translate="contact-us">Contact Us</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> <span data-translate="footer-address">Department of Education, Bhubaneswar</span></a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> +91 674 123 4567</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> info@stemlearnodisha.com</a></li>
-                    </ul>
-                </div>
             </div>
 
             <div class="copyright">
@@ -1334,72 +1091,43 @@
     </footer>
 
     <script>
-        // Check if user is logged in
-        document.addEventListener('DOMContentLoaded', function() {
-            const user = JSON.parse(localStorage.getItem('user'));
-           
-            if (!user) {
-                // Redirect to login if not authenticated
-                window.location.href = 'student-login.html';
-                return;
-            }
-           
-            // Load user data
-            loadUserData(user);
-            
-            // Initialize the game
-            initGame();
-        });
-
-        // Load user data into the page
-        function loadUserData(user) {
-            document.getElementById('headerUserName').textContent = user.fullName;
-            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
-        }
-
         // Game Variables
-        let score = 0;
-        let level = 1;
-        let correctSteps = 0;
-        let timer = 60;
-        let timerInterval;
-        let isGameActive = false;
-        let currentStoneIndex = 0;
-        let stones = [];
-        let totalStones = 8;
-        let characterPosition = 50;
-
-        // Game Configuration
-        const gameConfig = {
-            maxLevel: 5,
-            timePerLevel: 60,
-            scoreCorrectStep: 50,
-            scoreLevelComplete: 500,
-            scoreTimeBonus: 100,
-            timeBonusThreshold: 30
+        let gameState = {
+            score: 0,
+            level: 1,
+            correctSteps: 0,
+            timeLeft: 60,
+            currentStoneIndex: 0,
+            isActive: false,
+            timer: null,
+            stones: [],
+            totalStones: 6,
+            skippedStones: [] // Track skipped stones
         };
 
-        // Level configurations
-        const levelConfig = {
-            1: { naturalRatio: 0.8, maxNumber: 10, negativeChance: 0.1 },
-            2: { naturalRatio: 0.7, maxNumber: 20, negativeChance: 0.2 },
-            3: { naturalRatio: 0.6, maxNumber: 30, negativeChance: 0.3 },
-            4: { naturalRatio: 0.5, maxNumber: 50, negativeChance: 0.4 },
-            5: { naturalRatio: 0.4, maxNumber: 100, negativeChance: 0.5 }
+        // Game Configuration - NOW 6 LEVELS
+        const config = {
+            maxLevel: 6, // CHANGED FROM 5 TO 6
+            timePerLevel: 60,
+            scorePerStep: 50,
+            scorePerLevel: 500,
+            timeBonus: 100,
+            skipPenalty: 10, // Points deducted for skipping
+            levelConfig: {
+                1: { naturalRatio: 0.8, maxNumber: 10, stones: 6 },
+                2: { naturalRatio: 0.7, maxNumber: 15, stones: 7 },
+                3: { naturalRatio: 0.6, maxNumber: 20, stones: 8 },
+                4: { naturalRatio: 0.5, maxNumber: 25, stones: 9 },
+                5: { naturalRatio: 0.4, maxNumber: 30, stones: 10 },
+                6: { naturalRatio: 0.3, maxNumber: 40, stones: 12 } // ADDED LEVEL 6
+            }
         };
 
         // Translations
         const translations = {
             en: {
-                'nav-dashboard': 'Dashboard',
-                'nav-mathematics': 'Mathematics',
-                'nav-curriculum': 'Curriculum',
-                'nav-fractions': 'Fractions',
                 'page-title': 'Natural Number Trail',
                 'page-desc': 'Help the character cross the river by stepping only on natural number stones! Avoid zeros and negative numbers.',
-                'breadcrumb-home': 'Home',
-                'breadcrumb-math': 'Mathematics',
-                'breadcrumb-topic': 'Natural Number Trail',
                 'game-title': 'Natural Number Trail',
                 'game-description': 'Help your character cross the river safely! Step only on stones with natural numbers (1, 2, 3, ...). Avoid stones with zeros or negative numbers, or your character will fall into the water!',
                 'stat-score': 'Score',
@@ -1408,46 +1136,23 @@
                 'stat-time': 'Time (s)',
                 'progress-label': 'Trail Progress',
                 'instructions-title': 'How to Play:',
-                'instruction1': 'Click on stones to make your character step on them',
+                'instruction1': 'Click on green stones to make your character step on them',
                 'instruction2': 'Only step on natural numbers (1, 2, 3, 4, ...)',
                 'instruction3': 'Avoid zeros (0) and negative numbers (-1, -2, ...)',
-                'instruction4': 'Reach the end of the trail to complete the level',
-                'instruction5': 'Complete quickly for bonus points!',
-                'what-are-natural': 'What are Natural Numbers?',
-                'natural-definition': 'Natural numbers are counting numbers starting from 1: 1, 2, 3, 4, 5, ... They do NOT include zero or negative numbers.',
-                'example-natural': '1, 2, 3, 4, 5',
-                'example-non-natural': '0, -1, -2, -3',
+                'instruction4': 'Use "Skip" button to skip a stone you can\'t step on',
+                'instruction5': 'Reach the end of the trail to complete the level',
                 'level-label': 'Current Level',
                 'start-btn': 'Start Game',
                 'reset-btn': 'Reset Level',
+                'skip-btn': 'Skip Stone',
                 'next-btn': 'Next Level',
                 'score-label': 'Current Score:',
-                'resources-title': 'Learning Resources',
-                'resource1-title': 'Natural Numbers Guide',
-                'resource1-desc': 'Complete guide to understanding natural numbers',
-                'download-english': 'Download (English)',
-                'resource2-title': 'Natural Numbers Guide',
-                'resource2-desc': 'Complete guide to understanding natural numbers',
-                'download-odia': 'Download (Odia)',
-                'resource3-title': 'Practice Worksheets',
-                'resource3-desc': 'Interactive worksheets for natural numbers practice',
-                'download-worksheets': 'Download Worksheets',
                 'footer-desc': 'Making Science and Mathematics education engaging and relevant for Class 6 students in Odisha through localized content and interactive learning.',
-                'quick-links': 'Quick Links',
-                'contact-us': 'Contact Us',
-                'footer-address': 'Department of Education, Bhubaneswar',
                 'copyright': '© 2023 STEM Learn Odisha. All rights reserved.'
             },
             or: {
-                'nav-dashboard': 'ଡ୍ୟାସବୋର୍ଡ',
-                'nav-mathematics': 'ଗଣିତ',
-                'nav-curriculum': 'ପାଠ୍ୟକ୍ରମ',
-                'nav-fractions': 'ଭଗ୍ନାଂଶ',
                 'page-title': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଟ୍ରେଲ୍',
                 'page-desc': 'କେବଳ ପ୍ରାକୃତିକ ସଂଖ୍ୟା ପଥର ଉପରେ ପଦକ୍ଷେପ କରି ଚରିତ୍ରକୁ ନଦୀ ପାର କରାଇବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ! ଶୂନ୍ୟ ଏବଂ ନକାରାତ୍ମକ ସଂଖ୍ୟାଗୁଡିକୁ ଏଡାନ୍ତୁ।',
-                'breadcrumb-home': 'ମୁଖ୍ୟ ପୃଷ୍ଠା',
-                'breadcrumb-math': 'ଗଣିତ',
-                'breadcrumb-topic': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଟ୍ରେଲ୍',
                 'game-title': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଟ୍ରେଲ୍',
                 'game-description': 'ଆପଣଙ୍କର ଚରିତ୍ରକୁ ସୁରକ୍ଷିତ ଭାବରେ ନଦୀ ପାର କରାଇବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ! କେବଳ ପ୍ରାକୃତିକ ସଂଖ୍ୟା (1, 2, 3, ...) ଥିବା ପଥର ଉପରେ ପଦକ୍ଷେପ କରନ୍ତୁ। ଶୂନ୍ୟ (0) କିମ୍ବା ନକାରାତ୍ମକ ସଂଖ୍ୟା (-1, -2, ...) ଥିବା ପଥରକୁ ଏଡାନ୍ତୁ, ନଚେତ୍ ଆପଣଙ୍କର ଚରିତ୍ର ପାଣିରେ ପଡିବ!',
                 'stat-score': 'ସ୍କୋର',
@@ -1456,581 +1161,472 @@
                 'stat-time': 'ସମୟ (ସେ.)',
                 'progress-label': 'ଟ୍ରେଲ୍ ପ୍ରଗତି',
                 'instructions-title': 'କିପରି ଖେଳିବେ:',
-                'instruction1': 'ଆପଣଙ୍କର ଚରିତ୍ରକୁ ସେଗୁଡିକ ଉପରେ ପଦକ୍ଷେପ କରିବା ପାଇଁ ପଥର ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ',
+                'instruction1': 'ଆପଣଙ୍କର ଚରିତ୍ରକୁ ସେଗୁଡିକ ଉପରେ ପଦକ୍ଷେପ କରିବା ପାଇଁ ସବୁଜ ପଥର ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ',
                 'instruction2': 'କେବଳ ପ୍ରାକୃତିକ ସଂଖ୍ୟା (1, 2, 3, 4, ...) ଉପରେ ପଦକ୍ଷେପ କରନ୍ତୁ',
                 'instruction3': 'ଶୂନ୍ୟ (0) ଏବଂ ନକାରାତ୍ମକ ସଂଖ୍ୟା (-1, -2, ...) ଏଡାନ୍ତୁ',
-                'instruction4': 'ସ୍ତର ସମାପ୍ତ କରିବା ପାଇଁ ଟ୍ରେଲ୍ ଶେଷରେ ପହଞ୍ଚନ୍ତୁ',
-                'instruction5': 'ବୋନସ୍ ପଏଣ୍ଟ୍ ପାଇଁ ଶୀଘ୍ର ଶେଷ କରନ୍ତୁ!',
-                'what-are-natural': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା କଣ?',
-                'natural-definition': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟାଗୁଡିକ ହେଉଛି ଗଣନା ସଂଖ୍ୟା ଯାହା 1 ରୁ ଆରମ୍ଭ ହୋଇଥାଏ: 1, 2, 3, 4, 5, ... ସେଗୁଡ଼ିକରେ ଶୂନ୍ୟ କିମ୍ବା ନକାରାତ୍ମକ ସଂଖ୍ୟା ଅନ୍ତର୍ଭୁକ୍ତ ନୁହେଁ।',
-                'example-natural': '1, 2, 3, 4, 5',
-                'example-non-natural': '0, -1, -2, -3',
+                'instruction4': 'ଆପଣ ପଦକ୍ଷେପ କରିପାରିବେ ନାହିଁ କେଉଁଠି ପଥରକୁ ଛାଡିବା ପାଇଁ "ଛାଡିଦିଅନ୍ତୁ" ବଟନ୍ ବ୍ୟବହାର କରନ୍ତୁ',
+                'instruction5': 'ସ୍ତର ସମାପ୍ତ କରିବା ପାଇଁ ଟ୍ରେଲ୍ ଶେଷରେ ପହଞ୍ଚନ୍ତୁ',
                 'level-label': 'ବର୍ତ୍ତମାନର ସ୍ତର',
                 'start-btn': 'ଖେଳ ଆରମ୍ଭ କରନ୍ତୁ',
                 'reset-btn': 'ସ୍ତର ପୁନଃସ୍ଥାପନ କରନ୍ତୁ',
+                'skip-btn': 'ପଥର ଛାଡିଦିଅନ୍ତୁ',
                 'next-btn': 'ପରବର୍ତ୍ତୀ ସ୍ତର',
                 'score-label': 'ବର୍ତ୍ତମାନର ସ୍କୋର:',
-                'resources-title': 'ଶିକ୍ଷଣ ସମ୍ବଳ',
-                'resource1-title': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଗାଇଡ୍',
-                'resource1-desc': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ବୁଝିବା ପାଇଁ ସମ୍ପୂର୍ଣ୍ଣ ଗାଇଡ୍',
-                'download-english': 'ଡାଉନଲୋଡ୍ (ଇଂରାଜୀ)',
-                'resource2-title': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଗାଇଡ୍',
-                'resource2-desc': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ବୁଝିବା ପାଇଁ ସମ୍ପୂର୍ଣ୍ଣ ଗାଇଡ୍',
-                'download-odia': 'ଡାଉନଲୋଡ୍ (ଓଡ଼ିଆ)',
-                'resource3-title': 'ଅଭ୍ୟାସ କାର୍ଯ୍ୟପତ୍ର',
-                'resource3-desc': 'ପ୍ରାକୃତିକ ସଂଖ୍ୟା ଅଭ୍ୟାସ ପାଇଁ ଇଣ୍ଟରାକ୍ଟିଭ୍ କାର୍ଯ୍ୟପତ୍ର',
-                'download-worksheets': 'କାର୍ଯ୍ୟପତ୍ର ଡାଉନଲୋଡ୍ କରନ୍ତୁ',
                 'footer-desc': 'ଓଡ଼ିଶାର ଷଷ୍ଠ ଶ୍ରେଣୀର ଛାତ୍ରଛାତ୍ରୀମାନଙ୍କ ପାଇଁ ସ୍ଥାନୀୟ ବିଷୟବସ୍ତୁ ଏବଂ ଇଣ୍ଟରାକ୍ଟିଭ୍ ଶିକ୍ଷଣ ମାଧ୍ୟମରେ ବିଜ୍ଞାନ ଏବଂ ଗଣିତ ଶିକ୍ଷାକୁ ଆକର୍ଷଣୀୟ ଏବଂ ପ୍ରାସଙ୍ଗିକ କରିବା',
-                'quick-links': 'ଶୀଘ୍ର ଲିଙ୍କ୍',
-                'contact-us': 'ଆମ ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ',
-                'footer-address': 'ଶିକ୍ଷା ବିଭାଗ, ଭୁବନେଶ୍ୱର',
                 'copyright': '© 2023 STEM ଲର୍ନ ଓଡ଼ିଶା। ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।'
             }
         };
 
         let currentLanguage = 'en';
 
-        // Initialize the game
-        function initGame() {
-            // Reset game state
-            score = 0;
-            level = 1;
-            correctSteps = 0;
-            timer = gameConfig.timePerLevel;
-            isGameActive = false;
-            currentStoneIndex = 0;
-            stones = [];
-            characterPosition = 50;
-
-            // Generate trail
-            generateTrail();
-            
-            // Update UI
-            updateGameUI();
-            
-            // Initialize buttons
-            initButtons();
-            
-            // Initialize navigation
-            initNavigation();
-            
-            // Set up language options
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    switchLanguage(lang);
-                    document.getElementById('languageOptions').classList.remove('show');
-                });
-            });
-
-            // Initialize with default language
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            initGame();
             switchLanguage('en');
+            setupEventListeners();
+        });
+
+        // Initialize Game
+        function initGame() {
+            gameState = {
+                score: 0,
+                level: 1,
+                correctSteps: 0,
+                timeLeft: config.timePerLevel,
+                currentStoneIndex: 0,
+                isActive: false,
+                timer: null,
+                stones: [],
+                totalStones: config.levelConfig[1].stones,
+                skippedStones: []
+            };
+            
+            updateUI();
+            generateStones();
         }
 
-        // Generate trail stones
-        function generateTrail() {
-            const trailDisplay = document.getElementById('trailDisplay');
+        // Generate Stones
+        function generateStones() {
+            const container = document.getElementById('trailDisplay');
+            // Remove existing stones
+            const existingStones = container.querySelectorAll('.stone');
+            existingStones.forEach(stone => stone.remove());
             
-            // Clear existing stones
-            trailDisplay.querySelectorAll('.stone').forEach(stone => stone.remove());
-            stones = [];
+            gameState.stones = [];
+            gameState.skippedStones = [];
             
-            // Get level configuration
-            const config = levelConfig[level] || levelConfig[1];
+            const levelConfig = config.levelConfig[gameState.level];
+            gameState.totalStones = levelConfig.stones;
             
-            // Generate stones
-            for (let i = 0; i < totalStones; i++) {
-                // Determine if this should be a natural number
-                const isNatural = Math.random() < config.naturalRatio;
-                
+            const containerWidth = container.offsetWidth;
+            const stoneSpacing = (containerWidth - 100) / (gameState.totalStones - 1);
+            
+            for (let i = 0; i < gameState.totalStones; i++) {
+                const isNatural = Math.random() < levelConfig.naturalRatio;
                 let number;
+                
                 if (isNatural) {
-                    // Generate natural number (1 to maxNumber)
-                    number = Math.floor(Math.random() * config.maxNumber) + 1;
+                    number = Math.floor(Math.random() * levelConfig.maxNumber) + 1;
                 } else {
-                    // Generate non-natural number (0 or negative)
                     if (Math.random() < 0.5) {
-                        number = 0; // Zero
+                        number = 0;
                     } else {
-                        // Negative number
-                        number = -Math.floor(Math.random() * config.maxNumber) - 1;
+                        number = -Math.floor(Math.random() * levelConfig.maxNumber) - 1;
                     }
                 }
                 
-                // Calculate stone position
-                const xPosition = 100 + (i * 100); // Horizontal spacing
-                const yPosition = 150 + (Math.random() * 100 - 50); // Some vertical variation
+                const x = 50 + (i * stoneSpacing);
+                const y = 100 + (Math.random() * 60 - 30);
                 
-                // Create stone
-                const stone = createStone(number, isNatural, xPosition, yPosition, i);
-                trailDisplay.appendChild(stone);
+                const stone = document.createElement('div');
+                stone.className = `stone ${isNatural ? 'natural' : 'non-natural'} unavailable`;
+                stone.style.left = `${x}px`;
+                stone.style.bottom = `${y}px`;
+                stone.dataset.index = i;
+                stone.dataset.number = number;
+                stone.dataset.natural = isNatural;
                 
-                stones.push({
+                const numberSpan = document.createElement('div');
+                numberSpan.className = 'stone-number';
+                numberSpan.textContent = number;
+                
+                stone.appendChild(numberSpan);
+                container.appendChild(stone);
+                
+                gameState.stones.push({
                     element: stone,
                     number: number,
                     isNatural: isNatural,
                     index: i,
-                    x: xPosition,
-                    y: yPosition
+                    x: x,
+                    y: y,
+                    isSelected: false
+                });
+                
+                // Add click event
+                stone.addEventListener('click', function() {
+                    handleStoneClick(i);
                 });
             }
+            
+            updateStoneAvailability();
         }
 
-        // Create a stone element
-        function createStone(number, isNatural, x, y, index) {
-            const stone = document.createElement('div');
-            stone.className = `stone ${isNatural ? 'natural' : 'non-natural'}`;
-            stone.style.left = `${x}px`;
-            stone.style.bottom = `${y}px`;
-            stone.setAttribute('data-index', index);
-            
-            const numberSpan = document.createElement('div');
-            numberSpan.className = 'stone-number';
-            numberSpan.textContent = number;
-            
-            stone.appendChild(numberSpan);
-            
-            // Add click event
-            stone.addEventListener('click', function() {
-                handleStoneClick(index);
-            });
-            
-            return stone;
-        }
-
-        // Handle stone click
+        // Handle Stone Click
         function handleStoneClick(index) {
-            if (!isGameActive) return;
-            
-            const stone = stones[index];
-            const character = document.getElementById('character');
-            const feedbackMessage = document.getElementById('feedbackMessage');
-            
-            // Check if this is the next stone in sequence
-            if (index !== currentStoneIndex) {
-                feedbackMessage.className = 'feedback-message feedback-error';
-                feedbackMessage.innerHTML = `
-                    <i class="fas fa-exclamation-triangle"></i>
-                    ${currentLanguage === 'or' ? 
-                        'ପ୍ରଥମେ ପରବର୍ତ୍ତୀ ପଥର ଉପରେ ପଦକ୍ଷେପ କରନ୍ତୁ!' : 
-                        'Step on the next stone in sequence first!'}
-                `;
-                feedbackMessage.style.display = 'block';
+            if (!gameState.isActive) {
+                showFeedback(currentLanguage === 'or' ? 'ପ୍ରଥମେ ଖେଳ ଆରମ୍ଭ କରନ୍ତୁ!' : 'Please start the game first!', 'error');
                 return;
             }
             
-            // Move character to stone
-            character.style.left = `${stone.x + 10}px`;
-            character.classList.add('walking');
-            
-            // Check if stone is natural
-            if (stone.isNatural) {
-                // Correct step - natural number
-                correctSteps++;
-                score += gameConfig.scoreCorrectStep;
-                
-                // Visual feedback
-                stone.classList.add('selected');
-                
-                // Show success message
-                feedbackMessage.className = 'feedback-message feedback-success';
-                feedbackMessage.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    ${currentLanguage === 'or' ? 
-                        `ବହୁତ ଭଲ! ${stone.number} ହେଉଛି ଏକ ପ୍ରାକୃତିକ ସଂଖ୍ୟା। +${gameConfig.scoreCorrectStep} ପଏଣ୍ଟ୍` : 
-                        `Excellent! ${stone.number} is a natural number. +${gameConfig.scoreCorrectStep} points`}
-                `;
-                feedbackMessage.style.display = 'block';
-                
-                // Move to next stone
-                currentStoneIndex++;
-                
-                // Update progress
-                updateProgress();
-                
-                // Check if level is complete
-                if (currentStoneIndex === totalStones) {
-                    completeLevel();
-                }
-                
-            } else {
-                // Wrong step - non-natural number
-                stone.classList.add('selected');
-                
-                // Show splash effect
-                createSplash(stone.x + 40, stone.y + 25);
-                
-                // Character falls
-                character.classList.remove('walking');
-                character.classList.add('falling');
-                
-                // Show error message
-                feedbackMessage.className = 'feedback-message feedback-error';
-                feedbackMessage.innerHTML = `
-                    <i class="fas fa-exclamation-triangle"></i>
-                    ${currentLanguage === 'or' ? 
-                        `ଓହୋ! ${stone.number} ହେଉଛି ଏକ ପ୍ରାକୃତିକ ସଂଖ୍ୟା ନୁହେଁ। ଆପଣଙ୍କ ଚରିତ୍ର ପଡିଗଲା!` : 
-                        `Oops! ${stone.number} is not a natural number. Your character fell!`}
-                `;
-                feedbackMessage.style.display = 'block';
-                
-                // End game
-                endGame();
+            // Check if stone is already skipped
+            if (gameState.skippedStones.includes(index)) {
+                showFeedback(currentLanguage === 'or' ? 'ଏହି ପଥର ଛାଡିଦିଆଯାଇଛି!' : 'This stone was skipped!', 'error');
+                return;
             }
             
-            // Update game UI
-            updateGameUI();
+            // Check if this is the next available stone
+            if (index !== gameState.currentStoneIndex) {
+                const message = currentLanguage === 'or' 
+                    ? `ପ୍ରଥମେ ପଥର ${gameState.currentStoneIndex + 1} ଉପରେ ପଦକ୍ଷେପ କରନ୍ତୁ!` 
+                    : `Step on stone ${gameState.currentStoneIndex + 1} first!`;
+                showFeedback(message, 'error');
+                return;
+            }
+            
+            const stone = gameState.stones[index];
+            
+            if (stone.isNatural) {
+                // CORRECT: Natural number stone (green)
+                handleCorrectStep(stone);
+            } else {
+                // WRONG: Non-natural stone (red - zero or negative)
+                handleWrongStep(stone);
+            }
         }
 
-        // Create splash effect
-        function createSplash(x, y) {
+        // Handle correct step (natural number)
+        function handleCorrectStep(stone) {
+            gameState.correctSteps++;
+            gameState.score += config.scorePerStep;
+            
+            // Move character to stone
+            const character = document.getElementById('character');
+            character.style.left = `${stone.x - 10}px`;
+            
+            // Visual feedback for stone
+            stone.element.classList.add('selected');
+            stone.isSelected = true;
+            
+            // Success feedback
+            const message = currentLanguage === 'or' 
+                ? `ବହୁତ ଭଲ! ${stone.number} ହେଉଛି ଏକ ପ୍ରାକୃତିକ ସଂଖ୍ୟା` 
+                : `Correct! ${stone.number} is a natural number`;
+            showFeedback(message, 'success');
+            
+            // Move to next stone
+            gameState.currentStoneIndex++;
+            
+            // Skip any already skipped stones
+            while (gameState.currentStoneIndex < gameState.totalStones && 
+                   gameState.skippedStones.includes(gameState.currentStoneIndex)) {
+                gameState.currentStoneIndex++;
+            }
+            
+            updateStoneAvailability();
+            updateProgress();
+            updateUI();
+            
+            // Check if level completed
+            if (gameState.currentStoneIndex >= gameState.totalStones) {
+                completeLevel();
+            }
+        }
+
+        // Handle wrong step (non-natural number: 0 or negative)
+        function handleWrongStep(stone) {
+            // Move character to stone
+            const character = document.getElementById('character');
+            character.style.left = `${stone.x - 10}px`;
+            
+            // Visual feedback for stone
+            stone.element.classList.add('selected');
+            
+            // Create splash effect
             const splash = document.createElement('div');
             splash.className = 'splash';
-            splash.style.left = `${x}px`;
-            splash.style.bottom = `${y}px`;
-            
+            splash.style.left = `${stone.x + 20}px`;
+            splash.style.bottom = `${stone.y + 10}px`;
             document.getElementById('trailDisplay').appendChild(splash);
+            setTimeout(() => splash.remove(), 500);
             
-            // Remove splash after animation
-            setTimeout(() => {
-                splash.remove();
-            }, 500);
+            // Make character fall
+            character.classList.add('falling');
+            
+            const message = currentLanguage === 'or' 
+                ? `ଓହୋ! ${stone.number} ଏକ ପ୍ରାକୃତିକ ସଂଖ୍ୟା ନୁହେଁ!` 
+                : `Oops! ${stone.number} is not a natural number!`;
+            showFeedback(message, 'error');
+            
+            // End game
+            setTimeout(() => endGame(), 1000);
         }
 
-        // Update progress bar
+        // Skip current stone
+        function skipCurrentStone() {
+            if (!gameState.isActive || gameState.currentStoneIndex >= gameState.totalStones) {
+                return;
+            }
+            
+            const stone = gameState.stones[gameState.currentStoneIndex];
+            
+            // Mark stone as skipped
+            gameState.skippedStones.push(gameState.currentStoneIndex);
+            
+            // Apply penalty for skipping
+            gameState.score = Math.max(0, gameState.score - config.skipPenalty);
+            
+            // Visual feedback for skipped stone
+            stone.element.style.opacity = '0.5';
+            stone.element.style.border = '2px dashed #a0aec0';
+            
+            const message = currentLanguage === 'or' 
+                ? `ପଥର ${stone.number} ଛାଡିଦେଲେ! -${config.skipPenalty} ପଏଣ୍ଟ୍` 
+                : `Skipped stone ${stone.number}! -${config.skipPenalty} points`;
+            showFeedback(message, 'error');
+            
+            // Move to next stone
+            gameState.currentStoneIndex++;
+            
+            // Skip any already skipped stones
+            while (gameState.currentStoneIndex < gameState.totalStones && 
+                   gameState.skippedStones.includes(gameState.currentStoneIndex)) {
+                gameState.currentStoneIndex++;
+            }
+            
+            updateStoneAvailability();
+            updateProgress();
+            updateUI();
+            
+            // Check if level completed
+            if (gameState.currentStoneIndex >= gameState.totalStones) {
+                completeLevel();
+            }
+        }
+
+        // Update Stone Availability
+        function updateStoneAvailability() {
+            gameState.stones.forEach((stone, index) => {
+                if (index === gameState.currentStoneIndex && gameState.isActive && 
+                    !gameState.skippedStones.includes(index)) {
+                    stone.element.classList.remove('unavailable');
+                    stone.element.classList.add('available');
+                } else {
+                    stone.element.classList.remove('available');
+                    stone.element.classList.add('unavailable');
+                }
+            });
+            
+            // Update skip button state
+            const skipBtn = document.getElementById('skipBtn');
+            skipBtn.disabled = !gameState.isActive || gameState.currentStoneIndex >= gameState.totalStones;
+        }
+
+        // Update Progress
         function updateProgress() {
-            const progress = (currentStoneIndex / totalStones) * 100;
+            const totalProcessed = gameState.currentStoneIndex + gameState.skippedStones.length;
+            const progress = (totalProcessed / gameState.totalStones) * 100;
             document.getElementById('trailProgress').style.width = `${progress}%`;
             document.getElementById('progressValue').textContent = `${Math.round(progress)}%`;
         }
 
-        // Complete level
-        function completeLevel() {
-            isGameActive = false;
-            clearInterval(timerInterval);
-            
-            // Level completion bonus
-            let pointsEarned = gameConfig.scoreLevelComplete;
-            
-            // Time bonus
-            if (timer > gameConfig.timeBonusThreshold) {
-                pointsEarned += gameConfig.scoreTimeBonus;
-            }
-            
-            score += pointsEarned;
-            
-            const feedbackMessage = document.getElementById('feedbackMessage');
-            feedbackMessage.className = 'feedback-message feedback-success';
-            feedbackMessage.innerHTML = `
-                <i class="fas fa-trophy"></i>
-                ${currentLanguage === 'or' ? 
-                    `ଅଭିନନ୍ଦନ! ଆପଣ ସ୍ତର ${level} ସଫଳତାର ସହ ଶେଷ କରିଛନ୍ତି। +${pointsEarned} ପଏଣ୍ଟ୍` : 
-                    `Congratulations! You completed Level ${level} successfully. +${pointsEarned} points`}
-            `;
-            feedbackMessage.style.display = 'block';
-            
-            // Enable next level button
-            document.getElementById('nextBtn').disabled = false;
-            
-            // Update game UI
-            updateGameUI();
-            
-            // Save progress
-            saveProgress();
-        }
-
-        // End game (character fell)
-        function endGame() {
-            isGameActive = false;
-            clearInterval(timerInterval);
-            
-            // Disable buttons
-            document.getElementById('startBtn').disabled = true;
-            document.getElementById('nextBtn').disabled = true;
-            
-            // Save progress
-            saveProgress();
-        }
-
-        // Start game
+        // Start Game
         function startGame() {
-            if (isGameActive) return;
+            if (gameState.isActive) return;
             
-            isGameActive = true;
-            currentStoneIndex = 0;
-            correctSteps = 0;
-            timer = gameConfig.timePerLevel;
+            gameState.isActive = true;
+            gameState.currentStoneIndex = 0;
+            gameState.correctSteps = 0;
+            gameState.timeLeft = config.timePerLevel;
+            gameState.skippedStones = [];
             
             // Reset character
             const character = document.getElementById('character');
             character.classList.remove('falling');
-            character.classList.add('walking');
             character.style.left = '50px';
             
             // Reset stones
-            stones.forEach(stone => {
+            gameState.stones.forEach(stone => {
                 stone.element.classList.remove('selected');
+                stone.element.style.opacity = '';
+                stone.element.style.border = '';
+                stone.isSelected = false;
             });
             
-            // Reset feedback
-            document.getElementById('feedbackMessage').style.display = 'none';
-            
-            // Update progress
-            updateProgress();
-            
-            // Update UI
-            updateGameUI();
+            // Clear feedback
+            document.getElementById('feedbackMessage').className = 'feedback-message';
             
             // Start timer
-            startTimer();
+            clearInterval(gameState.timer);
+            gameState.timer = setInterval(updateTimer, 1000);
             
-            // Enable/disable buttons
-            document.getElementById('startBtn').disabled = true;
-            document.getElementById('resetBtn').disabled = false;
-            document.getElementById('nextBtn').disabled = true;
+            updateUI();
+            updateStoneAvailability();
+            updateProgress();
         }
 
-        // Reset level
-        function resetLevel() {
-            isGameActive = false;
-            clearInterval(timerInterval);
-            currentStoneIndex = 0;
-            correctSteps = 0;
-            timer = gameConfig.timePerLevel;
+        // Reset Game
+        function resetGame() {
+            clearInterval(gameState.timer);
+            gameState.isActive = false;
+            gameState.currentStoneIndex = 0;
+            gameState.correctSteps = 0;
+            gameState.timeLeft = config.timePerLevel;
+            gameState.skippedStones = [];
             
             // Reset character
             const character = document.getElementById('character');
-            character.classList.remove('falling', 'walking');
+            character.classList.remove('falling');
             character.style.left = '50px';
             
             // Reset stones
-            stones.forEach(stone => {
-                stone.element.classList.remove('selected');
+            gameState.stones.forEach(stone => {
+                stone.element.classList.remove('selected', 'available');
+                stone.element.classList.add('unavailable');
+                stone.element.style.opacity = '';
+                stone.element.style.border = '';
+                stone.isSelected = false;
             });
             
-            // Reset feedback
-            document.getElementById('feedbackMessage').style.display = 'none';
+            // Clear feedback
+            document.getElementById('feedbackMessage').className = 'feedback-message';
             
-            // Update progress
+            updateUI();
             updateProgress();
-            
-            // Update UI
-            updateGameUI();
-            
-            // Enable/disable buttons
-            document.getElementById('startBtn').disabled = false;
-            document.getElementById('resetBtn').disabled = false;
-            document.getElementById('nextBtn').disabled = true;
         }
 
-        // Go to next level
+        // Next Level
         function nextLevel() {
-            if (level < gameConfig.maxLevel) {
-                level++;
+            if (gameState.level < config.maxLevel) {
+                gameState.level++;
+                gameState.currentStoneIndex = 0;
+                gameState.correctSteps = 0;
+                gameState.timeLeft = config.timePerLevel;
+                gameState.isActive = false;
+                gameState.skippedStones = [];
                 
-                // Generate new trail
-                generateTrail();
+                clearInterval(gameState.timer);
                 
-                // Reset game state
-                resetLevel();
+                document.getElementById('feedbackMessage').className = 'feedback-message';
                 
-                // Update level display
-                document.getElementById('currentLevel').textContent = level;
-                document.getElementById('levelValue').textContent = level;
+                updateUI();
+                generateStones();
+                updateProgress();
                 
-                // Show level up message
-                const feedbackMessage = document.getElementById('feedbackMessage');
-                feedbackMessage.className = 'feedback-message feedback-success';
-                feedbackMessage.innerHTML = `
-                    <i class="fas fa-level-up-alt"></i>
-                    ${currentLanguage === 'or' ? 
-                        `ଅଭିନନ୍ଦନ! ଆପଣ ସ୍ତର ${level} କୁ ଉନ୍ନତି ପାଇଲେ!` : 
-                        `Congratulations! You advanced to Level ${level}!`}
-                `;
-                feedbackMessage.style.display = 'block';
+                // Reset character position
+                document.getElementById('character').style.left = '50px';
+                
+                const message = currentLanguage === 'or' 
+                    ? `ସ୍ତର ${gameState.level}! ଚାଲ ଆରମ୍ଭ କରିବା!` 
+                    : `Level ${gameState.level}! Let's go!`;
+                showFeedback(message, 'success');
             } else {
-                // Game completed
-                const feedbackMessage = document.getElementById('feedbackMessage');
-                feedbackMessage.className = 'feedback-message feedback-success';
-                feedbackMessage.innerHTML = `
-                    <i class="fas fa-crown"></i>
-                    ${currentLanguage === 'or' ? 
-                        'ବହୁତ ଭଲ! ଆପଣ ସମସ୍ତ ସ୍ତର ଶେଷ କରିଛନ୍ତି! ଆପଣ ପ୍ରାକୃତିକ ସଂଖ୍ୟାର ମାଷ୍ଟର ହୋଇଛନ୍ତି!' : 
-                        'Amazing! You completed all levels! You are now a master of natural numbers!'}
-                `;
-                feedbackMessage.style.display = 'block';
-                
-                document.getElementById('nextBtn').disabled = true;
+                const message = currentLanguage === 'or' 
+                    ? 'ଆପଣ ସମସ୍ତ ସ୍ତର ଶେଷ କରିଛନ୍ତି! ଆପଣ ପ୍ରାକୃତିକ ସଂଖ୍ୟାର ମାଷ୍ଟର ହୋଇଛନ୍ତି!' 
+                    : 'You completed all levels! You are a master of natural numbers!';
+                showFeedback(message, 'success');
             }
         }
 
-        // Timer functions
-        function startTimer() {
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                if (timer > 0 && isGameActive) {
-                    timer--;
-                    updateTimerDisplay();
-                } else if (timer === 0) {
-                    timeUp();
-                }
-            }, 1000);
+        // Complete Level
+        function completeLevel() {
+            clearInterval(gameState.timer);
+            gameState.isActive = false;
+            
+            // Add level completion bonus
+            let bonus = config.scorePerLevel;
+            if (gameState.timeLeft > 30) {
+                bonus += config.timeBonus;
+            }
+            
+            gameState.score += bonus;
+            
+            const message = currentLanguage === 'or' 
+                ? `ସ୍ତର ସମାପ୍ତ! +${bonus} ପଏଣ୍ଟ୍!` 
+                : `Level Complete! +${bonus} points!`;
+            showFeedback(message, 'success');
+            
+            updateUI();
+            
+            // Enable next level button
+            document.getElementById('nextBtn').disabled = false;
         }
 
-        function updateTimerDisplay() {
-            document.getElementById('timerDisplay').textContent = timer;
-            document.getElementById('timeValue').textContent = timer;
-            
-            // Change color when time is running low
-            if (timer <= 10) {
-                document.getElementById('timerDisplay').style.color = '#e53e3e';
-            } else if (timer <= 30) {
-                document.getElementById('timerDisplay').style.color = '#d69e2e';
+        // End Game
+        function endGame() {
+            clearInterval(gameState.timer);
+            gameState.isActive = false;
+            updateUI();
+            updateStoneAvailability();
+        }
+
+        // Update Timer
+        function updateTimer() {
+            if (gameState.timeLeft > 0) {
+                gameState.timeLeft--;
+                updateUI();
+                
+                // Update timer display color
+                const timerDisplay = document.getElementById('timerDisplay');
+                if (gameState.timeLeft <= 10) {
+                    timerDisplay.style.color = '#e53e3e';
+                } else if (gameState.timeLeft <= 30) {
+                    timerDisplay.style.color = '#d69e2e';
+                } else {
+                    timerDisplay.style.color = '#3182ce';
+                }
             } else {
-                document.getElementById('timerDisplay').style.color = '#3182ce';
+                clearInterval(gameState.timer);
+                const message = currentLanguage === 'or' 
+                    ? 'ସମୟ ଶେଷ! ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ!' 
+                    : 'Time\'s up! Try again!';
+                showFeedback(message, 'error');
+                endGame();
             }
         }
 
-        function timeUp() {
-            isGameActive = false;
-            clearInterval(timerInterval);
+        // Show Feedback
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedbackMessage');
+            feedback.textContent = message;
+            feedback.className = `feedback-message feedback-${type}`;
             
-            const feedbackMessage = document.getElementById('feedbackMessage');
-            feedbackMessage.className = 'feedback-message feedback-error';
-            feedbackMessage.innerHTML = `
-                <i class="fas fa-clock"></i>
-                ${currentLanguage === 'or' ? 
-                    'ସମୟ ଶେଷ! ପୁନର୍ବାର ଚେଷ୍ଟା କରିବା ପାଇଁ "ସ୍ତର ପୁନଃସ୍ଥାପନ କରନ୍ତୁ" କ୍ଲିକ୍ କରନ୍ତୁ।' : 
-                    'Time\'s up! Click "Reset Level" to try again.'}
-            `;
-            feedbackMessage.style.display = 'block';
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                if (feedback.className.includes('feedback-')) {
+                    feedback.className = 'feedback-message';
+                }
+            }, 3000);
         }
 
-        // Update game UI
-        function updateGameUI() {
-            document.getElementById('scoreValue').textContent = score;
-            document.getElementById('levelValue').textContent = level;
-            document.getElementById('correctValue').textContent = correctSteps;
-            document.getElementById('currentScore').textContent = score;
-            document.getElementById('timerDisplay').textContent = timer;
-            document.getElementById('timeValue').textContent = timer;
-        }
-
-        // Initialize buttons
-        function initButtons() {
-            // Start Button
-            document.getElementById('startBtn').addEventListener('click', startGame);
+        // Update UI
+        function updateUI() {
+            document.getElementById('scoreValue').textContent = gameState.score;
+            document.getElementById('levelValue').textContent = gameState.level;
+            document.getElementById('correctValue').textContent = gameState.correctSteps;
+            document.getElementById('timeValue').textContent = gameState.timeLeft;
+            document.getElementById('timerDisplay').textContent = gameState.timeLeft;
+            document.getElementById('currentLevel').textContent = gameState.level;
+            document.getElementById('currentScore').textContent = gameState.score;
             
-            // Reset Button
-            document.getElementById('resetBtn').addEventListener('click', resetLevel);
-            
-            // Next Button
-            document.getElementById('nextBtn').addEventListener('click', nextLevel);
+            // Update button states
+            document.getElementById('startBtn').disabled = gameState.isActive;
+            document.getElementById('resetBtn').disabled = !gameState.isActive && gameState.currentStoneIndex === 0;
+            document.getElementById('nextBtn').disabled = gameState.level >= config.maxLevel || 
+                gameState.isActive || gameState.currentStoneIndex < gameState.totalStones;
         }
 
-        // Save progress to localStorage
-        function saveProgress() {
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user) {
-                // Initialize game progress if not exists
-                if (!user.gameProgress) {
-                    user.gameProgress = {};
-                }
-                
-                // Update natural numbers game progress
-                if (!user.gameProgress.naturalNumbers) {
-                    user.gameProgress.naturalNumbers = {
-                        highScore: 0,
-                        maxLevel: 0,
-                        totalCorrect: 0
-                    };
-                }
-                
-                // Update values
-                user.gameProgress.naturalNumbers.highScore = Math.max(user.gameProgress.naturalNumbers.highScore || 0, score);
-                user.gameProgress.naturalNumbers.maxLevel = Math.max(user.gameProgress.naturalNumbers.maxLevel || 0, level);
-                user.gameProgress.naturalNumbers.totalCorrect = (user.gameProgress.naturalNumbers.totalCorrect || 0) + correctSteps;
-                
-                // Save back to localStorage
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-        }
-
-        // Initialize navigation
-        function initNavigation() {
-            const profileToggle = document.getElementById('profileToggle');
-            const profileDropdown = document.getElementById('profileDropdown');
-            const languageToggle = document.getElementById('languageToggle');
-            const languageOptions = document.getElementById('languageOptions');
-            const dropdownProfile = document.getElementById('dropdownProfile');
-            const dropdownSettings = document.getElementById('dropdownSettings');
-            const dropdownLogout = document.getElementById('dropdownLogout');
-            const navDashboard = document.getElementById('navDashboard');
-            const navMathematics = document.getElementById('navMathematics');
-            const navCurriculum = document.getElementById('navCurriculum');
-            const navFractions = document.getElementById('navFractions');
-
-            // Profile dropdown toggle
-            profileToggle.addEventListener('click', function() {
-                profileDropdown.classList.toggle('show');
-            });
-
-            // Language toggle
-            languageToggle.addEventListener('click', function() {
-                languageOptions.classList.toggle('show');
-            });
-
-            // Navigation between pages
-            dropdownProfile.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'student-dashboard.html#profile';
-            });
-
-            dropdownSettings.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'student-dashboard.html#settings';
-            });
-
-            dropdownLogout.addEventListener('click', function(e) {
-                e.preventDefault();
-                localStorage.removeItem('user');
-                window.location.href = 'student-login.html';
-            });
-
-            // Navigation menu items
-            navDashboard.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'student-dashboard.html';
-            });
-
-            navMathematics.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'mathematics.html';
-            });
-
-            navCurriculum.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'scienceidx.html';
-            });
-
-            navFractions.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = 'fractions.html';
-            });
-
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
-                    languageOptions.classList.remove('show');
-                }
-               
-                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
-                    profileDropdown.classList.remove('show');
-                }
-            });
-        }
-
-        // Switch language function
+        // Switch Language
         function switchLanguage(lang) {
             currentLanguage = lang;
             
@@ -2050,6 +1646,51 @@
             } else {
                 document.body.classList.remove('odia-text');
             }
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Game buttons
+            document.getElementById('startBtn').addEventListener('click', startGame);
+            document.getElementById('resetBtn').addEventListener('click', resetGame);
+            document.getElementById('skipBtn').addEventListener('click', skipCurrentStone);
+            document.getElementById('nextBtn').addEventListener('click', nextLevel);
+            
+            // Language toggle
+            document.getElementById('languageToggle').addEventListener('click', function() {
+                document.getElementById('languageOptions').classList.toggle('show');
+            });
+            
+            // Language selection
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                    document.getElementById('languageOptions').classList.remove('show');
+                });
+            });
+            
+            // Profile toggle
+            document.getElementById('profileToggle').addEventListener('click', function() {
+                document.getElementById('profileDropdown').classList.toggle('show');
+            });
+            
+            // Navigation
+            document.getElementById('dropdownLogout').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Logged out successfully!');
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
+                    document.getElementById('languageOptions').classList.remove('show');
+                }
+               
+                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                    document.getElementById('profileDropdown').classList.remove('show');
+                }
+            });
         }
     </script>
 </body>
