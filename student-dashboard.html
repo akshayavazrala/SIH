@@ -1,0 +1,4980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - STEM Learn Odisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background-color: #f8fafc;
+        color: #1e293b;
+        line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+        background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo i {
+        font-size: 1.8rem;
+        color: #2a69ac;
+    }
+
+    .logo-text h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .logo-text h1 span {
+        color: #38b2ac;
+        font-weight: 800;
+    }
+
+    .logo-text p {
+        font-size: 0.8rem;
+        opacity: 0.9;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+
+    nav a:hover, nav a.active {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .control-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 1rem;
+    }
+
+    .control-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .profile-container {
+        position: relative;
+    }
+
+    .profile-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 30px;
+        padding: 8px 15px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .profile-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .profile-pic {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid white;
+    }
+
+    .profile-dropdown {
+        position: absolute;
+        top: 55px;
+        right: 0;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        width: 180px;
+        display: none;
+        z-index: 1001;
+        overflow: hidden;
+    }
+
+    .profile-dropdown.show {
+        display: block;
+    }
+
+    .dropdown-item {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+        background: #f5f7fa;
+    }
+
+    .dropdown-item i {
+        color: #3182ce;
+        width: 20px;
+    }
+
+    /* Language Options */
+    .language-options {
+        position: absolute;
+        top: 60px;
+        right: 120px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        width: 120px;
+        display: none;
+        z-index: 1001;
+        overflow: hidden;
+    }
+
+    .language-options.show {
+        display: block;
+    }
+
+    .language-option {
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .language-option:last-child {
+        border-bottom: none;
+    }
+
+    .language-option:hover {
+        background: #f5f7fa;
+    }
+
+    /* Main Content */
+    .container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+
+    .welcome-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .welcome-section h2 {
+        color: #1a365d;
+        margin-bottom: 10px;
+    }
+
+    .welcome-section p {
+        color: #64748b;
+    }
+
+    .dashboard-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+
+    .stat-badge {
+        background: #e6f7ff;
+        color: #1890ff;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .stat-badge.warning {
+        background: #fff7e6;
+        color: #fa8c16;
+    }
+
+    .stat-badge.danger {
+        background: #fff1f0;
+        color: #ff4d4f;
+    }
+
+    /* Assignments and Quizzes Sections */
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .section-header h3 {
+        color: #1a365d;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        position: relative;
+    }
+
+    .section-header h3:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #38b2ac;
+        margin: 15px 0 0;
+        border-radius: 2px;
+    }
+
+    .btn-refresh {
+        background: #e2e8f0;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #64748b;
+    }
+
+    .btn-refresh:hover {
+        background: #cbd5e0;
+        transform: rotate(180deg);
+    }
+
+    .assignments-section, .quizzes-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .assignments-grid, .quizzes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .assignment-card, .quiz-card {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .assignment-card:hover, .quiz-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        border-color: #cbd5e0;
+    }
+
+    .assignment-header, .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .assignment-title, .quiz-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1a365d;
+        margin: 0;
+        flex: 1;
+    }
+
+    .assignment-subject, .quiz-subject {
+        display: inline-block;
+        padding: 4px 12px;
+        background: #e6f7ff;
+        color: #1890ff;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .assignment-teacher, .quiz-teacher {
+        color: #64748b;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+
+    .assignment-due, .quiz-duration {
+        color: #666;
+        font-size: 0.85rem;
+        margin: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .assignment-description, .quiz-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 10px 0;
+        line-height: 1.5;
+    }
+
+    .assignment-status, .quiz-status {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .status-pending {
+        background: #fff7e6;
+        color: #fa8c16;
+    }
+
+    .status-submitted {
+        background: #f6ffed;
+        color: #52c41a;
+    }
+
+    .status-overdue {
+        background: #fff1f0;
+        color: #ff4d4f;
+    }
+
+    .status-completed {
+        background: #f6ffed;
+        color: #52c41a;
+    }
+
+    .status-in-progress {
+        background: #e6f7ff;
+        color: #1890ff;
+    }
+
+    .assignment-actions, .quiz-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .btn-view, .btn-start, .btn-submit, .btn-upload {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btn-view {
+        background: #f0f2f5;
+        color: #666;
+    }
+
+    .btn-start {
+        background: #1890ff;
+        color: white;
+    }
+
+    .btn-submit {
+        background: #52c41a;
+        color: white;
+    }
+
+    .btn-upload {
+        background: #722ed1;
+        color: white;
+    }
+
+    .btn-view:hover, .btn-start:hover, .btn-submit:hover, .btn-upload:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-view:hover {
+        background: #e4e6e9;
+    }
+
+    .btn-start:hover {
+        background: #096dd9;
+    }
+
+    .btn-submit:hover {
+        background: #389e0d;
+    }
+
+    .btn-upload:hover {
+        background: #531dab;
+    }
+
+    .quiz-questions-count {
+        color: #999;
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+
+    /* Empty state */
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #999;
+        grid-column: 1 / -1;
+    }
+
+    .empty-icon {
+        font-size: 3rem;
+        color: #d9d9d9;
+        margin-bottom: 15px;
+    }
+
+    .empty-message {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #666;
+    }
+
+    /* Dashboard notifications */
+    .dashboard-notifications {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e2e8f0;
+        display: none;
+    }
+
+    .notification-icon {
+        width: 40px;
+        height: 40px;
+        background: #1890ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .notification-content {
+        flex: 1;
+    }
+
+    .notification-text {
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .notification-time {
+        color: #999;
+        font-size: 0.85rem;
+    }
+
+    .notification-close {
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .notification-close:hover {
+        background: #f5f5f5;
+    }
+
+    /* Modal styles */
+    .assignment-modal, .quiz-modal, .quiz-results-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        border: 1px solid #e2e8f0;
+    }
+
+    .modal-header {
+        padding: 20px;
+        border-bottom: 1px solid #e8e8e8;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background: white;
+        border-radius: 12px 12px 0 0;
+        z-index: 1;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1a365d;
+        margin: 0;
+    }
+
+    .close-modal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #666;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .close-modal:hover {
+        background: #f5f5f5;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #1890ff;
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+
+    textarea.form-control {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .file-input {
+        padding: 8px;
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        width: 100%;
+    }
+
+    .modal-footer {
+        padding: 20px;
+        border-top: 1px solid #e8e8e8;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        position: sticky;
+        bottom: 0;
+        background: white;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .btn-cancel, .btn-confirm {
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        min-width: 100px;
+    }
+
+    .btn-cancel {
+        background: #f5f5f5;
+        color: #666;
+    }
+
+    .btn-confirm {
+        background: #1890ff;
+        color: white;
+    }
+
+    .btn-cancel:hover {
+        background: #e8e8e8;
+    }
+
+    .btn-confirm:hover {
+        background: #096dd9;
+    }
+
+    /* Quiz specific styles */
+    .quiz-timer {
+        background: #fff7e6;
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        color: #fa8c16;
+    }
+
+    .timer-warning {
+        background: #fff1f0;
+        color: #ff4d4f;
+    }
+
+    .quiz-instructions {
+        background: #f6ffed;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        border-left: 4px solid #52c41a;
+    }
+
+    .quiz-question {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+    .question-text {
+        font-weight: 500;
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .option-label:hover {
+        background: #f5f5f5;
+    }
+
+    .option-label.selected {
+        background: #e6f7ff;
+        border-color: #1890ff;
+    }
+
+    .option-input {
+        display: none;
+    }
+
+    .option-text {
+        flex: 1;
+    }
+
+    /* Quiz results */
+    .quiz-results-content {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .score-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #1890ff 0%, #722ed1 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .result-breakdown {
+        background: #f8fafc;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: left;
+    }
+
+    .result-message {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+    .success-message {
+        background: #f6ffed;
+        color: #52c41a;
+        border: 1px solid #b7eb8f;
+    }
+
+    .good-message {
+        background: #fff7e6;
+        color: #fa8c16;
+        border: 1px solid #ffd591;
+    }
+
+    .improve-message {
+        background: #fff1f0;
+        color: #ff4d4f;
+        border: 1px solid #ffa39e;
+    }
+
+    /* Toast notifications */
+    .notification-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 3000;
+        animation: slideIn 0.3s ease;
+    }
+
+    .notification-toast .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .notification-toast .notification-close {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    /* Grade Section */
+    .grade-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .grade-section h3 {
+        color: #1a365d;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        position: relative;
+    }
+
+    .grade-section h3:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #38b2ac;
+        margin: 15px 0 0;
+        border-radius: 2px;
+    }
+
+    .subject-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .subject-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+    }
+
+    .subject-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    }
+
+    .maths-card .subject-header {
+        background: linear-gradient(135deg, #1a365d 0%, #1a365d 100%);
+    }
+
+    .science-card .subject-header {
+        background: linear-gradient(135deg, #1a365d 0%, #1a365d 100%);
+    }
+
+    .technology-card .subject-header {
+        background: linear-gradient(135deg, #1a365d 0%, #1a365d 100%);
+    }
+
+    .english-card .subject-header {
+        background: linear-gradient(135deg, #1a365d 0%, #1a365d 100%);
+    }
+
+    .subject-header {
+        padding: 20px;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .subject-header i {
+        font-size: 2rem;
+    }
+
+    .subject-header h3 {
+        color: white;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .subject-content {
+        padding: 20px;
+    }
+
+    .subject-content h4 {
+        color: #1a365d;
+        margin-bottom: 10px;
+    }
+
+    .subject-content p {
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    .maths-card .btn {
+        background: #1a365d;
+    }
+
+    .science-card .btn {
+        background: #1a365d;
+    }
+
+    .technology-card .btn {
+        background: #1a365d;
+    }
+
+    .english-card .btn {
+        background: #1a365d;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .maths-card .btn:hover {
+        background: #1a365d;
+    }
+
+    .science-card .btn:hover {
+        background: #1a365d;
+    }
+
+    .technology-card .btn:hover {
+        background: #1a365d;
+    }
+
+    .english-card .btn:hover {
+        background: #1a365d;
+    }
+
+    /* Profile Page Styles */
+    .profile-page {
+        display: none;
+    }
+
+    .profile-container-main {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .profile-sidebar {
+        flex: 1;
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .profile-info {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .profile-pic-large {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 15px;
+        border: 5px solid #e2e8f0;
+    }
+
+    .profile-info h3 {
+        color: #1a365d;
+        margin-bottom: 5px;
+    }
+
+    .profile-info p {
+        color: #64748b;
+        margin-bottom: 5px;
+    }
+
+    .profile-details {
+        text-align: left;
+    }
+
+    .detail-item {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .detail-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #1a365d;
+        margin-bottom: 5px;
+    }
+
+    .detail-value {
+        color: #64748b;
+    }
+
+    .profile-main {
+        flex: 2;
+    }
+
+    .summary-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .summary-section h3 {
+        color: #1a365d;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        position: relative;
+    }
+
+    .summary-section h3:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #38b2ac;
+        margin: 15px 0 0;
+        border-radius: 2px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .stat-card {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #3182ce;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+
+    .charts-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .chart-container {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .chart-container h3 {
+        color: #1a365d;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        position: relative;
+    }
+
+    .chart-container h3:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #38b2ac;
+        margin: 15px 0 0;
+        border-radius: 2px;
+    }
+
+    .chart-placeholder {
+        height: 250px;
+        background: #f8fafc;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-weight: 500;
+        border: 1px solid #e2e8f0;
+    }
+
+    .activity-section {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .activity-section h3 {
+        color: #1a365d;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        position: relative;
+    }
+
+    .activity-section h3:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #38b2ac;
+        margin: 15px 0 0;
+        border-radius: 2px;
+    }
+
+    .activity-calendar-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .activity-month {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 5px;
+    }
+
+    .month-label {
+        font-size: 0.8rem;
+        color: #64748b;
+        width: 60px;
+        text-align: right;
+    }
+
+    .activity-week {
+        display: flex;
+        gap: 3px;
+        margin-left: 70px;
+    }
+
+    .activity-day {
+        width: 12px;
+        height: 12px;
+        background: #e2e8f0;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    .activity-day:hover {
+        transform: scale(1.2);
+    }
+
+    .activity-day.low {
+        background: #c6f6d5;
+    }
+
+    .activity-day.medium {
+        background: #68d391;
+    }
+
+    .activity-day.high {
+        background: #38a169;
+    }
+
+    .activity-day.very-high {
+        background: #276749;
+    }
+
+    .activity-legend {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 15px;
+        font-size: 0.8rem;
+        color: #64748b;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+    }
+
+    /* Settings Page Styles */
+    .settings-page {
+        display: none;
+    }
+
+    .settings-container {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e2e8f0;
+    }
+
+    .settings-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .settings-section:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .settings-section h3 {
+        color: #1a365d;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .settings-section h3:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #38b2ac;
+        margin: 15px 0 0;
+        border-radius: 2px;
+    }
+
+    .btn-save {
+        background: #3182ce;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-save:hover {
+        background: #2b6cb0;
+        transform: translateY(-2px);
+    }
+
+    /* Chatbot Styles */
+    .chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .chatbot-window {
+        position: absolute;
+        bottom: 70px;
+        right: 0;
+        width: 350px;
+        height: 500px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+
+    .chatbot-window.active {
+        display: flex;
+    }
+
+    .chatbot-header {
+        background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .chatbot-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .chatbot-header h3 i {
+        font-size: 1.2rem;
+    }
+
+    .chatbot-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 320px;
+    }
+
+    .message {
+        max-width: 80%;
+        padding: 10px 15px;
+        border-radius: 18px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .message.bot {
+        align-self: flex-start;
+        background: #f0f2f5;
+        color: #333;
+        border-bottom-left-radius: 5px;
+    }
+
+    .message.user {
+        align-self: flex-end;
+        background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    /* Updated Chatbot Input Section with Voice Controls */
+    .chatbot-input-container {
+        padding: 15px;
+        border-top: 1px solid #e0e0e0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        position: relative;
+    }
+
+    .chatbot-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #d0d0d0;
+        border-radius: 20px;
+        outline: none;
+        font-size: 0.9rem;
+        padding-right: 110px;
+    }
+
+    .chatbot-input:focus {
+        border-color: #3182ce;
+    }
+
+    /* Voice Controls Styles */
+    .voice-controls {
+        display: flex;
+        gap: 5px;
+        position: absolute;
+        right: 90px;
+    }
+
+    .chatbot-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .voice-record {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .voice-record:hover {
+        background: #45a049;
+        transform: scale(1.05);
+    }
+
+    .voice-record.recording {
+        background: #f44336;
+        animation: pulse 1.5s infinite;
+    }
+
+    .voice-stop {
+        background: #757575;
+        color: white;
+    }
+
+    .voice-stop:hover {
+        background: #616161;
+    }
+
+    .voice-play {
+        background: #2196F3;
+        color: white;
+    }
+
+    .voice-play:hover {
+        background: #1976D2;
+    }
+
+    .voice-play.playing {
+        background: #FF9800;
+    }
+    /* Add these styles to your existing CSS */
+.voice-pause {
+    background: #FF9800;
+    color: white;
+}
+
+.voice-pause:hover {
+    background: #F57C00;
+}
+
+.voice-pause.paused {
+    background: #4CAF50;
+}
+
+/* Voice control button states */
+.voice-record:disabled,
+.voice-stop:disabled,
+.voice-pause:disabled,
+.voice-play:disabled,
+.voice-stop-speaking:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.voice-record:disabled:hover,
+.voice-stop:disabled:hover,
+.voice-pause:disabled:hover,
+.voice-play:disabled:hover,
+.voice-stop-speaking:disabled:hover {
+    background: inherit;
+    transform: none;
+}
+
+/* Update existing voice controls styles */
+.voice-controls {
+    display: flex;
+    gap: 5px;
+    position: absolute;
+    right: 90px;
+    flex-wrap: nowrap;
+}
+
+/* Make sure all voice buttons are same size */
+.voice-record,
+.voice-stop,
+.voice-pause,
+.voice-play,
+.voice-stop-speaking {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+    /* Voice Status */
+    .voice-status {
+        padding: 8px 15px;
+        background: #f5f5f5;
+        border-radius: 20px;
+        margin: 5px 15px 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.8rem;
+        min-height: 40px;
+    }
+
+    .voice-visualizer {
+        flex: 1;
+        height: 4px;
+        background: #e0e0e0;
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .visualizer-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 0%;
+        background: #4CAF50;
+        transition: width 0.1s;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .chatbot-send {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 15px;
+    }
+
+    .suggested-questions {
+        padding: 10px 15px;
+        border-top: 1px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 100px;
+        overflow-y: auto;
+    }
+
+    .suggested-question {
+        background: #f5f7fa;
+        border: none;
+        border-radius: 15px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid #e2e8f0;
+    }
+
+    .suggested-question:hover {
+        background: #e2e8f0;
+    }
+
+    .typing-indicator {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #666;
+        font-style: italic;
+        margin-top: 5px;
+    }
+
+    .typing-dot {
+        width: 6px;
+        height: 6px;
+        background: #666;
+        border-radius: 50%;
+        animation: typing 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) {
+        animation-delay: -0.32s;
+    }
+
+    .typing-dot:nth-child(2) {
+        animation-delay: -0.16s;
+    }
+    /* Add to existing CSS */
+.voice-stop-speaking {
+    background: #f44336;
+    color: white;
+}
+
+.voice-stop-speaking:hover {
+    background: #d32f2f;
+}
+
+.voice-stop-speaking:active {
+    background: #b71c1c;
+}
+
+    @keyframes typing {
+        0%, 80%, 100% {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+        40% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Syllabus Chatbot Styles */
+    .syllabus-chatbot-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .syllabus-chatbot-toggle {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #38b2ac 0%, #0e7490 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .syllabus-chatbot-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .syllabus-chatbot-window {
+        position: absolute;
+        bottom: 70px;
+        right: 0;
+        width: 400px;
+        height: 550px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+
+    .syllabus-chatbot-window.active {
+        display: flex;
+    }
+
+    .syllabus-chatbot-header {
+        background: linear-gradient(135deg, #38b2ac 0%, #0e7490 100%);
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .syllabus-chatbot-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .syllabus-chatbot-header h3 i {
+        font-size: 1.2rem;
+    }
+
+    .syllabus-chatbot-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .subject-selector {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .subject-card-selector {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid #e2e8f0;
+        text-align: center;
+    }
+
+    .subject-card-selector:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-color: #38b2ac;
+    }
+
+    .subject-card-selector.selected {
+        border-color: #38b2ac;
+        background: #f0f9ff;
+    }
+
+    .subject-card-selector i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #38b2ac;
+    }
+
+    .subject-card-selector h4 {
+        margin: 0;
+        color: #1a365d;
+        font-size: 1rem;
+    }
+
+    .subject-card-selector p {
+        margin: 5px 0 0;
+        color: #64748b;
+        font-size: 0.8rem;
+    }
+
+    .syllabus-chatbot-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 320px;
+    }
+
+    .syllabus-chatbot-input-container {
+        padding: 15px;
+        border-top: 1px solid #e0e0e0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .syllabus-chatbot-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #d0d0d0;
+        border-radius: 20px;
+        outline: none;
+        font-size: 0.9rem;
+    }
+
+    .syllabus-chatbot-input:focus {
+        border-color: #38b2ac;
+    }
+
+    .syllabus-chatbot-send {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #38b2ac 0%, #0e7490 100%);
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .syllabus-suggested-questions {
+        padding: 10px 15px;
+        border-top: 1px solid #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 100px;
+        overflow-y: auto;
+    }
+
+    .syllabus-suggested-question {
+        background: #f0f9ff;
+        border: none;
+        border-radius: 15px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid #bae6fd;
+    }
+
+    .syllabus-suggested-question:hover {
+        background: #e0f2fe;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .profile-container-main {
+            flex-direction: column;
+        }
+       
+        .charts-section {
+            grid-template-columns: 1fr;
+        }
+        
+        .assignments-grid, .quizzes-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+    }
+
+    @media (max-width: 768px) {
+        header {
+            padding: 15px 20px;
+            flex-direction: column;
+            gap: 15px;
+        }
+       
+        nav ul {
+            gap: 15px;
+        }
+       
+        .subject-grid {
+            grid-template-columns: 1fr;
+        }
+       
+        .activity-week {
+            margin-left: 50px;
+        }
+       
+        .month-label {
+            width: 40px;
+        }
+        
+        .assignments-grid, .quizzes-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .modal-content {
+            width: 95%;
+        }
+        
+        .dashboard-stats {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .chatbot-window,
+        .syllabus-chatbot-window {
+            width: 300px;
+            height: 450px;
+            right: -50px;
+        }
+        
+        .chatbot-input-container {
+            flex-wrap: wrap;
+        }
+        
+        .voice-controls {
+            position: static;
+            order: 2;
+            width: 100%;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        
+        .chatbot-input {
+            padding-right: 15px;
+        }
+        
+        .chatbot-send {
+            position: static;
+            order: 3;
+        }
+        
+        .subject-selector {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+            </div>
+            <div class="logo-text">
+                <h1>STEM Learn Odisha</h1>
+                <p>Gamified Learning Platform</p>
+            </div>
+        </div>
+       
+        <nav>
+            <ul>
+                <li><a href="home.html" id="navHome" data-translate="nav-home">Home</a></li>
+                <li><a href="about.html" id="navAbout" data-translate="nav-about">About</a></li>
+                <li><a href="contact.html" id="navContact" data-translate="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+       
+        <div class="header-controls">
+            <button class="control-btn" id="languageToggle">
+                <i class="fas fa-globe"></i>
+            </button>
+           
+            <div class="profile-container">
+                <button class="profile-btn" id="profileToggle">
+                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <span id="headerUserName">Student</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+               
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" class="dropdown-item" id="dropdownProfile">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="dropdown-profile">Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownSettings">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="dropdown-settings">Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownLogout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="dropdown-logout">Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Language Options -->
+    <div class="language-options" id="languageOptions">
+        <div class="language-option" data-lang="en">English</div>
+        <div class="language-option" data-lang="or">ଓଡ଼ିଆ</div>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <div class="container" id="dashboardContent">
+        <!-- Dashboard Notifications -->
+        <div class="dashboard-notifications" id="dashboardNotifications">
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-text" id="notificationText"></div>
+                <div class="notification-time" id="notificationTime"></div>
+            </div>
+            <button class="notification-close" id="closeNotification">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="welcome-section">
+            <h2 data-translate="welcome-title">Welcome back, <span id="studentName">Student</span>!</h2>
+            <p data-translate="welcome-subtitle">Continue your learning journey in Grade <span id="studentGrade">5</span></p>
+            <div class="dashboard-stats" id="dashboardStats">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
+        </div>
+       
+        <!-- Assignments Section -->
+        <div class="assignments-section" id="assignmentsSection">
+            <div class="section-header">
+                <h3 data-translate="assignments-title">Your Assignments</h3>
+                <button class="btn-refresh" id="refreshAssignments" title="Refresh assignments">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="assignments-grid" id="assignmentsGrid">
+                <!-- Assignments will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Quizzes Section -->
+        <div class="quizzes-section" id="quizzesSection">
+            <div class="section-header">
+                <h3 data-translate="quizzes-title">Your Quizzes</h3>
+                <button class="btn-refresh" id="refreshQuizzes" title="Refresh quizzes">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="quizzes-grid" id="quizzesGrid">
+                <!-- Quizzes will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Grade Content Section -->
+        <div class="grade-section">
+            <h3 data-translate="grade-title">Your Grade <span id="gradeDisplay">5</span> Content</h3>
+            <div class="subject-grid" id="subjectGrid">
+                <!-- Subjects will be dynamically generated based on grade -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="container profile-page" id="profilePage">
+        <div class="welcome-section">
+            <h2 data-translate="profile-title">Student Profile</h2>
+            <p data-translate="profile-subtitle">View your progress and achievements</p>
+        </div>
+       
+        <div class="profile-container-main">
+            <div class="profile-sidebar">
+                <div class="profile-info">
+                    <img src="" alt="Profile Picture" class="profile-pic-large" id="profilePagePic">
+                    <h3 id="profilePageName">Student Name</h3>
+                    <p id="profilePageGrade">Grade 5</p>
+                    <p id="profilePageEmail">student@example.com</p>
+                </div>
+               
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <div class="detail-label" data-translate="member-since">Member Since</div>
+                        <div class="detail-value" id="memberSince">January 2023</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label" data-translate="last-active">Last Active</div>
+                        <div class="detail-value" id="lastActive">Today</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label" data-translate="total-games">Total Games Played</div>
+                        <div class="detail-value" id="totalGames">10</div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="profile-main">
+                <div class="summary-section">
+                    <h3 data-translate="overall-summary">Overall Summary</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="gamesSolved">7</div>
+                            <div class="stat-label" data-translate="games-solved">Games Solved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="gamesAttempted">10</div>
+                            <div class="stat-label" data-translate="games-attempted">Games Attempted</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="quizzesParticipated">15</div>
+                            <div class="stat-label" data-translate="quizzes-participated">Quizzes Participated</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="accuracy">75%</div>
+                            <div class="stat-label" data-translate="accuracy">Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="maxGames">2</div>
+                            <div class="stat-label" data-translate="max-problems">Max Games in a Day</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="longestStreak">2</div>
+                            <div class="stat-label" data-translate="longest-streak">Longest Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="currentStreak">1</div>
+                            <div class="stat-label" data-translate="current-streak">Current Streak</div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <h3 data-translate="maths-rating">Maths Rating Progress</h3>
+                        <div class="chart-placeholder">
+                            Maths Rating Graph (Would be implemented with a chart library)
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3 data-translate="science-rating">Science Rating Progress</h3>
+                        <div class="chart-placeholder">
+                            Science Rating Graph (Would be implemented with a chart library)
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="activity-section">
+                    <h3 data-translate="activity-year">Activity in the Year</h3>
+                    <div class="activity-calendar-container" id="activityCalendar">
+                        <!-- Activity squares will be generated dynamically -->
+                    </div>
+                    <div class="activity-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #e2e8f0;"></div>
+                            <span data-translate="less">Less</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #c6f6d5;"></div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #68d391;"></div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #38a169;"></div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #276749;"></div>
+                            <span data-translate="more">More</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div class="container settings-page" id="settingsPage">
+        <div class="welcome-section">
+            <h2 data-translate="settings-title">Account Settings</h2>
+            <p data-translate="settings-subtitle">Manage your account preferences</p>
+        </div>
+       
+        <div class="settings-container">
+            <div class="settings-section">
+                <h3 data-translate="profile-settings">Profile Settings</h3>
+                <div class="form-group">
+                    <label for="settingsName" data-translate="fullname-label">Full Name</label>
+                    <input type="text" id="settingsName" class="form-control" value="Student Name">
+                </div>
+                <div class="form-group">
+                    <label for="settingsGrade" data-translate="grade-label">Grade/Standard</label>
+                    <select id="settingsGrade" class="form-control">
+                        <option value="1">Grade 1</option>
+                        <option value="2">Grade 2</option>
+                        <option value="3">Grade 3</option>
+                        <option value="4">Grade 4</option>
+                        <option value="5" selected>Grade 5</option>
+                        <option value="6">Grade 6</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-translate="profile-picture-label">Profile Picture</label>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="" alt="Profile Picture" class="profile-pic-large" id="settingsProfilePic">
+                        <button class="btn" data-translate="change-photo">Change Photo</button>
+                    </div>
+                </div>
+                <button class="btn-save" data-translate="save-profile">Save Profile Changes</button>
+            </div>
+           
+            <div class="settings-section">
+                <h3 data-translate="password-settings">Password Settings</h3>
+                <div class="form-group">
+                    <label for="currentPassword" data-translate="current-password">Current Password</label>
+                    <input type="password" id="currentPassword" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" data-translate="new-password">New Password</label>
+                    <input type="password" id="newPassword" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword" data-translate="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" class="form-control">
+                </div>
+                <button class="btn-save" data-translate="change-password">Change Password</button>
+            </div>
+           
+            <div class="settings-section">
+                <h3 data-translate="notification-settings">Notification Settings</h3>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="emailNotifications" checked>
+                    <label for="emailNotifications" data-translate="email-notifications">Email Notifications</label>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="gameReminders" checked>
+                    <label for="gameReminders" data-translate="game-reminders">Game Reminders</label>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="progressReports" checked>
+                    <label for="progressReports" data-translate="progress-reports">Progress Reports</label>
+                </div>
+                <button class="btn-save" data-translate="save-settings">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assignment Submission Modal -->
+    <div class="assignment-modal" id="assignmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="assignmentModalTitle">Submit Assignment</h3>
+                <button class="close-modal" id="closeAssignmentModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="assignment-details" id="assignmentModalDetails">
+                    <!-- Assignment details will be loaded here -->
+                </div>
+                <form id="assignmentSubmissionForm">
+                    <div class="form-group">
+                        <label for="assignmentFile">Upload your work</label>
+                        <input type="file" id="assignmentFile" class="form-control file-input" required>
+                        <small>Accepted formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignmentNotes">Additional notes (optional)</label>
+                        <textarea id="assignmentNotes" class="form-control" rows="3" 
+                                  placeholder="Add any comments or notes for your teacher..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelAssignmentSubmission">Cancel</button>
+                <button class="btn-confirm" id="submitAssignmentBtn">Submit Assignment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="quiz-modal" id="quizModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="quizModalTitle">Quiz</h3>
+                <div class="quiz-timer" id="quizTimer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timerText">Time remaining: 30:00</span>
+                </div>
+                <button class="close-modal" id="closeQuizModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="quiz-instructions" id="quizInstructions">
+                    <!-- Quiz instructions will be loaded here -->
+                </div>
+                <div class="quiz-questions" id="quizQuestions">
+                    <!-- Quiz questions will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelQuiz">Cancel Quiz</button>
+                <button class="btn-confirm" id="submitQuizBtn">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Results Modal -->
+    <div class="quiz-results-modal" id="quizResultsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Quiz Results</h3>
+                <button class="close-modal" id="closeResultsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="quiz-results" id="quizResultsContent">
+                    <!-- Quiz results will be displayed here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-confirm" id="closeResultsBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Syllabus-Based Chatbot (NEW) -->
+    <div class="syllabus-chatbot-container">
+        <div class="syllabus-chatbot-toggle" id="syllabusChatbotToggle">
+            <i class="fas fa-book"></i>
+        </div>
+        <div class="syllabus-chatbot-window" id="syllabusChatbotWindow">
+            <div class="syllabus-chatbot-header">
+                <h3><i class="fas fa-book-open"></i> Syllabus Assistant</h3>
+                <button class="syllabus-chatbot-close" id="syllabusChatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="subject-selector" id="subjectSelector">
+                <!-- Subject cards will be loaded here -->
+            </div>
+            
+            <div class="syllabus-chatbot-messages" id="syllabusChatbotMessages" style="display: none;">
+                <!-- Chat messages will appear here -->
+            </div>
+            
+            <div class="syllabus-chatbot-input-container" id="syllabusChatbotInputContainer" style="display: none;">
+                <input type="text" class="syllabus-chatbot-input" id="syllabusChatbotInput" placeholder="Ask about your syllabus...">
+                <button class="syllabus-chatbot-send" id="syllabusChatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            
+            <div class="syllabus-suggested-questions" id="syllabusSuggestedQuestions" style="display: none;">
+                <!-- Suggested questions will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot (Existing) -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-graduation-cap"></i> STEM Learning Assistant</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    Hello! I'm your STEM learning assistant powered by AI. How can I help you with your studies today?
+                </div>
+                <div class="message bot">
+                    You can ask me questions about math, science, technology, or any STEM-related topic you're learning.
+                </div>
+            </div>
+            
+            <!-- Voice Status -->
+            <div class="voice-status" id="voiceStatus" style="display: none;">
+                <span id="statusText">Ready to record Odia</span>
+                <div class="voice-visualizer" id="visualizer"></div>
+            </div>
+            
+            <div class="suggested-questions" id="suggestedQuestions">
+                <button class="suggested-question" data-question="Explain photosynthesis">Explain photosynthesis</button>
+                <button class="suggested-question" data-question="What is the Pythagorean theorem?">What is the Pythagorean theorem?</button>
+                <button class="suggested-question" data-question="How do I solve quadratic equations?">How do I solve quadratic equations?</button>
+            </div>
+            
+            <!-- Updated Chatbot Input Section with Voice Controls -->
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type or speak in Odia...">
+                
+                <!-- Voice Control Buttons -->
+                <div class="voice-controls">
+                    <button class="chatbot-btn voice-record" id="startRecord" title="Start Recording">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button class="chatbot-btn voice-stop" id="stopRecord" title="Stop Recording" disabled>
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <button class="chatbot-btn voice-play" id="playOdia" title="Play in Odia">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <button class="chatbot-btn voice-pause" id="pauseSpeaking" title="Pause Speech" disabled style="display: none;">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="chatbot-btn voice-stop-speaking" id="stopSpeaking" title="Stop Speaking" disabled style="display: none;">
+                        <i class="fas fa-stop-circle"></i>
+                    </button>
+                </div>
+                
+                <button class="chatbot-send" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Main application state
+        let currentUser = null;
+        let currentQuizAttempt = null;
+        let quizTimerInterval = null;
+        let selectedSubject = null;
+        let syllabusKnowledgeBase = {};
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+           
+            if (!user) {
+                window.location.href = 'student-login.html';
+                return;
+            }
+           
+            currentUser = user;
+            loadUserData(user);
+            loadDashboardData(user.id);
+            loadAssignments(user.id);
+            loadQuizzes(user.id);
+            loadNotifications(user.id);
+            generateGradeContent(user.grade);
+            generateActivityCalendar();
+            setupEventListeners();
+            setupChatbotWithVoice();
+            setupSyllabusChatbot(); // Initialize syllabus chatbot
+            loadSyllabusKnowledgeBase(); // Load syllabus data
+        });
+
+        // Load user data
+        function loadUserData(user) {
+            document.getElementById('studentName').textContent = user.fullName;
+            document.getElementById('studentGrade').textContent = user.grade;
+            document.getElementById('gradeDisplay').textContent = user.grade;
+            document.getElementById('headerUserName').textContent = user.fullName;
+            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+           
+            // Profile page data
+            document.getElementById('profilePageName').textContent = user.fullName;
+            document.getElementById('profilePageGrade').textContent = `Grade ${user.grade}`;
+            document.getElementById('profilePageEmail').textContent = user.email;
+            document.getElementById('profilePagePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+           
+            // Settings page data
+            document.getElementById('settingsName').value = user.fullName;
+            document.getElementById('settingsGrade').value = user.grade;
+            document.getElementById('settingsProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+           
+            // Set member since date
+            const memberSince = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+            document.getElementById('memberSince').textContent = memberSince;
+        }
+
+        // Load dashboard data
+        async function loadDashboardData(userId) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/student/dashboard/${userId}`);
+                if (!response.ok) throw new Error('Failed to fetch dashboard data');
+                
+                const data = await response.json();
+                
+                // Update stats badges
+                const statsContainer = document.getElementById('dashboardStats');
+                statsContainer.innerHTML = '';
+                
+                if (data.pending_assignments > 0) {
+                    const badge = document.createElement('span');
+                    badge.className = 'stat-badge warning';
+                    badge.innerHTML = `<i class="fas fa-clipboard-list"></i> ${data.pending_assignments} assignment${data.pending_assignments !== 1 ? 's' : ''} pending`;
+                    statsContainer.appendChild(badge);
+                }
+                
+                if (data.pending_quizzes > 0) {
+                    const badge = document.createElement('span');
+                    badge.className = 'stat-badge danger';
+                    badge.innerHTML = `<i class="fas fa-question-circle"></i> ${data.pending_quizzes} quiz${data.pending_quizzes !== 1 ? 'zes' : ''} pending`;
+                    statsContainer.appendChild(badge);
+                }
+                
+                statsContainer.style.display = 'flex';
+                
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+
+        // Load assignments
+        async function loadAssignments(studentId) {
+            try {
+                console.log('Loading assignments for student:', studentId);
+                const response = await fetch(`http://localhost:5000/api/student/assignments/${studentId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch assignments: ${response.status}`);
+                }
+                
+                const assignments = await response.json();
+                console.log('Assignments loaded:', assignments);
+                displayAssignments(assignments);
+                
+            } catch (error) {
+                console.error('Error loading assignments:', error);
+                showNotification('Could not load assignments. Please try again.', 'error');
+                
+                // Show fallback data
+                const fallbackAssignments = [
+                    {
+                        id: 1,
+                        title: 'Science Homework - Chapter 1',
+                        subject: 'Science',
+                        teacher_name: 'John Smith',
+                        due_date_formatted: 'December 20, 2024',
+                        days_remaining: 5,
+                        description: 'Complete exercises 1-5 from Chapter 1 about living organisms and their characteristics.',
+                        is_submitted: false,
+                        is_overdue: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Math Practice - Fractions',
+                        subject: 'Mathematics',
+                        teacher_name: 'John Smith',
+                        due_date_formatted: 'December 18, 2024',
+                        days_remaining: 3,
+                        description: 'Solve the fraction problems in worksheet attached. Show all your work.',
+                        is_submitted: true,
+                        student_grade: 'A',
+                        is_overdue: false
+                    }
+                ];
+                displayAssignments(fallbackAssignments);
+            }
+        }
+
+        // Display assignments
+        function displayAssignments(assignments) {
+            const assignmentsGrid = document.getElementById('assignmentsGrid');
+            
+            if (!assignments || assignments.length === 0) {
+                assignmentsGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="empty-message">No assignments at the moment</div>
+                        <p>Check back later for new assignments from your teachers.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            assignmentsGrid.innerHTML = '';
+            
+            assignments.forEach(assignment => {
+                const assignmentCard = document.createElement('div');
+                assignmentCard.className = 'assignment-card';
+                assignmentCard.dataset.assignmentId = assignment.id;
+                
+                let statusClass = 'status-pending';
+                let statusText = 'Pending';
+                let buttonHtml = '';
+                
+                if (assignment.is_submitted) {
+                    statusClass = 'status-submitted';
+                    statusText = 'Submitted';
+                    if (assignment.student_grade) {
+                        statusText += ` (Grade: ${assignment.student_grade})`;
+                    }
+                    buttonHtml = `<button class="btn-view view-assignment" data-id="${assignment.id}">
+                        <i class="fas fa-eye"></i> View
+                    </button>`;
+                } else if (assignment.is_overdue) {
+                    statusClass = 'status-overdue';
+                    statusText = 'Overdue';
+                    buttonHtml = `<button class="btn-submit submit-assignment" data-id="${assignment.id}">
+                        <i class="fas fa-paper-plane"></i> Submit Late
+                    </button>`;
+                } else {
+                    statusText = `Due in ${assignment.days_remaining} day${assignment.days_remaining !== 1 ? 's' : ''}`;
+                    buttonHtml = `<button class="btn-submit submit-assignment" data-id="${assignment.id}">
+                        <i class="fas fa-paper-plane"></i> Submit
+                    </button>`;
+                }
+                
+                assignmentCard.innerHTML = `
+                    <div class="assignment-header">
+                        <h4 class="assignment-title">${assignment.title}</h4>
+                        <span class="assignment-subject">${assignment.subject}</span>
+                    </div>
+                    <div class="assignment-teacher">
+                        <small>By: ${assignment.teacher_name || 'Teacher'}</small>
+                    </div>
+                    <div class="assignment-due">
+                        <i class="far fa-calendar-alt"></i> Due: ${assignment.due_date_formatted}
+                    </div>
+                    <div class="assignment-description">
+                        ${assignment.description ? (assignment.description.substring(0, 100) + (assignment.description.length > 100 ? '...' : '')) : 'No description'}
+                    </div>
+                    <div class="assignment-status ${statusClass}">
+                        ${statusText}
+                    </div>
+                    <div class="assignment-actions">
+                        ${buttonHtml}
+                        <button class="btn-view view-assignment-details" data-id="${assignment.id}">
+                            <i class="fas fa-info-circle"></i> Details
+                        </button>
+                    </div>
+                `;
+                
+                assignmentsGrid.appendChild(assignmentCard);
+            });
+        }
+
+        // Load quizzes
+        async function loadQuizzes(studentId) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/student/quizzes/${studentId}`);
+                if (!response.ok) throw new Error('Failed to fetch quizzes');
+                
+                const quizzes = await response.json();
+                displayQuizzes(quizzes);
+                
+            } catch (error) {
+                console.error('Error loading quizzes:', error);
+                showNotification('Could not load quizzes. Please try again.', 'error');
+                
+                // Show fallback data
+                const fallbackQuizzes = [
+                    {
+                        id: 1,
+                        title: 'Science Quiz - Living Things',
+                        subject: 'Science',
+                        teacher_name: 'John Smith',
+                        duration: 30,
+                        total_questions: 10,
+                        description: 'Test your knowledge about living organisms',
+                        attempt_status: 'not-started'
+                    },
+                    {
+                        id: 2,
+                        title: 'Mathematics Quiz - Basic Operations',
+                        subject: 'Mathematics',
+                        teacher_name: 'John Smith',
+                        duration: 25,
+                        total_questions: 15,
+                        description: 'Test your basic math skills',
+                        attempt_status: 'completed',
+                        student_score: 85
+                    }
+                ];
+                displayQuizzes(fallbackQuizzes);
+            }
+        }
+
+        // Display quizzes
+        function displayQuizzes(quizzes) {
+            const quizzesGrid = document.getElementById('quizzesGrid');
+            
+            if (!quizzes || quizzes.length === 0) {
+                quizzesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="empty-message">No quizzes at the moment</div>
+                        <p>Check back later for new quizzes from your teachers.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            quizzesGrid.innerHTML = '';
+            
+            quizzes.forEach(quiz => {
+                const quizCard = document.createElement('div');
+                quizCard.className = 'quiz-card';
+                quizCard.dataset.quizId = quiz.id;
+                
+                let statusClass = 'status-pending';
+                let statusText = 'Not Started';
+                let buttonHtml = '';
+                
+                if (quiz.attempt_status === 'completed') {
+                    statusClass = 'status-completed';
+                    statusText = `Completed (Score: ${quiz.student_score || 0}%)`;
+                    buttonHtml = `<button class="btn-view view-quiz-results" data-id="${quiz.id}">
+                        <i class="fas fa-chart-bar"></i> View Results
+                    </button>`;
+                } else if (quiz.attempt_status === 'in-progress') {
+                    statusClass = 'status-in-progress';
+                    statusText = 'In Progress';
+                    buttonHtml = `<button class="btn-start continue-quiz" data-id="${quiz.id}">
+                        <i class="fas fa-play"></i> Continue
+                    </button>`;
+                } else {
+                    buttonHtml = `<button class="btn-start start-quiz" data-id="${quiz.id}">
+                        <i class="fas fa-play"></i> Start Quiz
+                    </button>`;
+                }
+                
+                quizCard.innerHTML = `
+                    <div class="quiz-header">
+                        <h4 class="quiz-title">${quiz.title}</h4>
+                        <span class="quiz-subject">${quiz.subject}</span>
+                    </div>
+                    <div class="quiz-teacher">
+                        <small>By: ${quiz.teacher_name || 'Teacher'}</small>
+                    </div>
+                    <div class="quiz-duration">
+                        <i class="far fa-clock"></i> Duration: ${quiz.duration} minutes
+                    </div>
+                    <div class="quiz-description">
+                        ${quiz.description.substring(0, 100)}${quiz.description.length > 100 ? '...' : ''}
+                    </div>
+                    <div class="quiz-questions-count">
+                        <small>${quiz.total_questions} questions</small>
+                    </div>
+                    <div class="quiz-status ${statusClass}">
+                        ${statusText}
+                    </div>
+                    <div class="quiz-actions">
+                        ${buttonHtml}
+                        <button class="btn-view view-quiz-details" data-id="${quiz.id}">
+                            <i class="fas fa-info-circle"></i> Details
+                        </button>
+                    </div>
+                `;
+                
+                quizzesGrid.appendChild(quizCard);
+            });
+        }
+
+        // Load notifications
+        async function loadNotifications(studentId) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/student/notifications/${studentId}`);
+                if (!response.ok) return;
+                
+                const notifications = await response.json();
+                
+                // Show latest unread notification
+                const unreadNotifications = notifications.filter(n => !n.is_read);
+                if (unreadNotifications.length > 0) {
+                    const latest = unreadNotifications[0];
+                    showDashboardNotification(latest.title, latest.message, latest.created_at);
+                    
+                    // Mark as read
+                    fetch(`http://localhost:5000/api/student/notifications/${latest.id}/read`, {
+                        method: 'PUT'
+                    });
+                }
+                
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+            }
+        }
+
+        // Show dashboard notification
+        function showDashboardNotification(title, message, time) {
+            document.getElementById('notificationText').textContent = `${title}: ${message}`;
+            
+            const notificationTime = new Date(time);
+            const now = new Date();
+            const diffMinutes = Math.floor((now - notificationTime) / (1000 * 60));
+            
+            let timeText;
+            if (diffMinutes < 1) {
+                timeText = 'Just now';
+            } else if (diffMinutes < 60) {
+                timeText = `${diffMinutes} minute${diffMinutes !== 1 ? 's' : ''} ago`;
+            } else if (diffMinutes < 1440) {
+                const hours = Math.floor(diffMinutes / 60);
+                timeText = `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+            } else {
+                timeText = notificationTime.toLocaleDateString();
+            }
+            
+            document.getElementById('notificationTime').textContent = timeText;
+            document.getElementById('dashboardNotifications').style.display = 'flex';
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Profile dropdown
+            document.getElementById('profileToggle').addEventListener('click', function() {
+                document.getElementById('profileDropdown').classList.toggle('show');
+            });
+
+            // Language toggle
+            document.getElementById('languageToggle').addEventListener('click', function() {
+                document.getElementById('languageOptions').classList.toggle('show');
+            });
+
+            // Language selection
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                    document.getElementById('languageOptions').classList.remove('show');
+                });
+            });
+
+            // Navigation
+            document.getElementById('dropdownProfile').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('profilePage');
+                document.getElementById('profileDropdown').classList.remove('show');
+            });
+
+            document.getElementById('dropdownSettings').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('settingsPage');
+                document.getElementById('profileDropdown').classList.remove('show');
+            });
+
+            document.getElementById('dropdownLogout').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.href = 'student-login.html';
+            });
+
+            // Refresh buttons
+            document.getElementById('refreshAssignments').addEventListener('click', () => {
+                loadAssignments(currentUser.id);
+                showNotification('Assignments refreshed', 'success');
+            });
+            
+            document.getElementById('refreshQuizzes').addEventListener('click', () => {
+                loadQuizzes(currentUser.id);
+                showNotification('Quizzes refreshed', 'success');
+            });
+
+            // Assignment actions
+            document.addEventListener('click', function(e) {
+                // Submit assignment
+                if (e.target.closest('.submit-assignment')) {
+                    const assignmentId = e.target.closest('.submit-assignment').dataset.id;
+                    openAssignmentModal(assignmentId);
+                }
+                
+                // View assignment details
+                if (e.target.closest('.view-assignment-details')) {
+                    const assignmentId = e.target.closest('.view-assignment-details').dataset.id;
+                    viewAssignmentDetails(assignmentId);
+                }
+                
+                // Quiz actions
+                if (e.target.closest('.start-quiz')) {
+                    const quizId = e.target.closest('.start-quiz').dataset.id;
+                    startQuiz(quizId);
+                }
+                
+                if (e.target.closest('.continue-quiz')) {
+                    const quizId = e.target.closest('.continue-quiz').dataset.id;
+                    startQuiz(quizId);
+                }
+                
+                if (e.target.closest('.view-quiz-results')) {
+                    const quizId = e.target.closest('.view-quiz-results').dataset.id;
+                    viewQuizResults(quizId);
+                }
+            });
+
+            // Assignment modal
+            document.getElementById('closeAssignmentModal').addEventListener('click', () => {
+                closeAssignmentModal();
+            });
+            
+            document.getElementById('cancelAssignmentSubmission').addEventListener('click', () => {
+                closeAssignmentModal();
+            });
+            
+            document.getElementById('submitAssignmentBtn').addEventListener('click', () => {
+                submitAssignment();
+            });
+
+            // Quiz modal
+            document.getElementById('closeQuizModal').addEventListener('click', () => {
+                if (confirm('Are you sure you want to cancel the quiz? Your progress will be lost.')) {
+                    closeQuizModal();
+                }
+            });
+            
+            document.getElementById('cancelQuiz').addEventListener('click', () => {
+                if (confirm('Are you sure you want to cancel the quiz? Your progress will be lost.')) {
+                    closeQuizModal();
+                }
+            });
+            
+            document.getElementById('submitQuizBtn').addEventListener('click', () => {
+                submitQuiz();
+            });
+
+            // Results modal
+            document.getElementById('closeResultsModal').addEventListener('click', () => {
+                document.getElementById('quizResultsModal').style.display = 'none';
+            });
+            
+            document.getElementById('closeResultsBtn').addEventListener('click', () => {
+                document.getElementById('quizResultsModal').style.display = 'none';
+                loadQuizzes(currentUser.id);
+            });
+
+            // Notification close
+            document.getElementById('closeNotification').addEventListener('click', () => {
+                document.getElementById('dashboardNotifications').style.display = 'none';
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
+                    document.getElementById('languageOptions').classList.remove('show');
+                }
+                
+                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                    document.getElementById('profileDropdown').classList.remove('show');
+                }
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target.classList.contains('assignment-modal')) {
+                    closeAssignmentModal();
+                }
+                if (e.target.classList.contains('quiz-modal')) {
+                    if (confirm('Are you sure you want to cancel the quiz? Your progress will be lost.')) {
+                        closeQuizModal();
+                    }
+                }
+                if (e.target.classList.contains('quiz-results-modal')) {
+                    document.getElementById('quizResultsModal').style.display = 'none';
+                }
+            });
+        }
+
+        // Open assignment modal
+        async function openAssignmentModal(assignmentId) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/student/assignments/${currentUser.id}`);
+                const assignments = await response.json();
+                const assignment = assignments.find(a => a.id == assignmentId);
+                
+                if (!assignment) {
+                    showNotification('Assignment not found', 'error');
+                    return;
+                }
+                
+                document.getElementById('assignmentModalTitle').textContent = `Submit: ${assignment.title}`;
+                
+                const detailsHtml = `
+                    <div class="assignment-modal-details">
+                        <p><strong>Subject:</strong> ${assignment.subject}</p>
+                        <p><strong>Topic:</strong> ${assignment.topic || 'General'}</p>
+                        <p><strong>Due Date:</strong> ${assignment.due_date_formatted}</p>
+                        <p><strong>Description:</strong> ${assignment.description}</p>
+                        ${assignment.attachment ? `<p><strong>Attachment:</strong> ${assignment.attachment}</p>` : ''}
+                    </div>
+                `;
+                
+                document.getElementById('assignmentModalDetails').innerHTML = detailsHtml;
+                document.getElementById('assignmentSubmissionForm').reset();
+                document.getElementById('assignmentSubmissionForm').dataset.assignmentId = assignmentId;
+                
+                document.getElementById('assignmentModal').style.display = 'flex';
+                
+            } catch (error) {
+                console.error('Error opening assignment modal:', error);
+                showNotification('Could not load assignment details', 'error');
+            }
+        }
+
+        // Close assignment modal
+        function closeAssignmentModal() {
+            document.getElementById('assignmentModal').style.display = 'none';
+            document.getElementById('assignmentSubmissionForm').reset();
+        }
+
+        // Submit assignment
+        async function submitAssignment() {
+            const form = document.getElementById('assignmentSubmissionForm');
+            const assignmentId = form.dataset.assignmentId;
+            const fileInput = document.getElementById('assignmentFile');
+            const notes = document.getElementById('assignmentNotes').value;
+            
+            if (!fileInput.files.length) {
+                showNotification('Please select a file to upload', 'error');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('student_id', currentUser.id);
+            formData.append('assignment_id', assignmentId);
+            formData.append('attachment', fileInput.files[0]);
+            if (notes) {
+                formData.append('notes', notes);
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/student/assignment/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) throw new Error('Failed to submit assignment');
+                
+                const result = await response.json();
+                
+                showNotification('Assignment submitted successfully!', 'success');
+                closeAssignmentModal();
+                loadAssignments(currentUser.id);
+                loadDashboardData(currentUser.id);
+                
+            } catch (error) {
+                console.error('Error submitting assignment:', error);
+                showNotification('Failed to submit assignment. Please try again.', 'error');
+            }
+        }
+
+        // View assignment details
+        function viewAssignmentDetails(assignmentId) {
+            alert('Assignment details would show here. Assignment ID: ' + assignmentId);
+        }
+
+        // Start quiz
+        async function startQuiz(quizId) {
+            try {
+                // Start quiz attempt
+                const startResponse = await fetch('http://localhost:5000/api/student/quiz/start', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        student_id: currentUser.id, 
+                        quiz_id: quizId 
+                    })
+                });
+                
+                if (!startResponse.ok) {
+                    const errorText = await startResponse.text();
+                    throw new Error('Failed to start quiz: ' + errorText);
+                }
+                
+                const result = await startResponse.json();
+                currentQuizAttempt = { id: result.attempt_id, quizId: quizId };
+                
+                // Get quiz questions
+                const quizResponse = await fetch(`http://localhost:5000/api/student/quiz/${quizId}`, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (!quizResponse.ok) {
+                    const errorText = await quizResponse.text();
+                    throw new Error('Failed to load quiz questions: ' + errorText);
+                }
+                
+                const quiz = await quizResponse.json();
+                
+                // Display quiz
+                displayQuiz(quiz, result.attempt_id);
+                
+            } catch (error) {
+                console.error('Error starting quiz:', error);
+                showNotification('Could not start quiz. Please try again.', 'error');
+            }
+        }
+
+        // Display quiz
+        function displayQuiz(quiz, attemptId) {
+            document.getElementById('quizModalTitle').textContent = quiz.title;
+            document.getElementById('quizModal').dataset.quizId = quiz.id;
+            document.getElementById('quizModal').dataset.attemptId = attemptId;
+            
+            const instructionsHtml = `
+                <div class="quiz-instructions-content">
+                    <p><strong>Subject:</strong> ${quiz.subject}</p>
+                    <p><strong>Duration:</strong> ${quiz.duration} minutes</p>
+                    <p><strong>Total Questions:</strong> ${quiz.total_questions}</p>
+                    <p><strong>Description:</strong> ${quiz.description}</p>
+                    <div class="quiz-instructions-list">
+                        <p><strong>Instructions:</strong></p>
+                        <ul>
+                            <li>Read each question carefully</li>
+                            <li>Select the correct answer</li>
+                            <li>You can review your answers before submitting</li>
+                            <li>Timer will start when you begin</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('quizInstructions').innerHTML = instructionsHtml;
+            
+            // Display questions
+            const questionsHtml = quiz.questions.map((question, index) => `
+                <div class="quiz-question" data-question-id="${question.id}">
+                    <div class="question-text">
+                        ${index + 1}. ${question.question_text}
+                    </div>
+                    <div class="options-container">
+                        <label class="option-label">
+                            <input type="radio" name="question_${question.id}" value="A" class="option-input">
+                            <span class="option-text">A. ${question.option_a}</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="question_${question.id}" value="B" class="option-input">
+                            <span class="option-text">B. ${question.option_b}</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="question_${question.id}" value="C" class="option-input">
+                            <span class="option-text">C. ${question.option_c}</span>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="question_${question.id}" value="D" class="option-input">
+                            <span class="option-text">D. ${question.option_d}</span>
+                        </label>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('quizQuestions').innerHTML = questionsHtml;
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option-label').forEach(label => {
+                label.addEventListener('click', function() {
+                    const radio = this.querySelector('.option-input');
+                    radio.checked = true;
+                    
+                    // Update visual selection
+                    document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Start timer
+            startQuizTimer(quiz.duration);
+            
+            document.getElementById('quizModal').style.display = 'flex';
+        }
+
+        // Start quiz timer
+        function startQuizTimer(minutes) {
+            let timeLeft = minutes * 60;
+            const timerElement = document.getElementById('timerText');
+            const timerContainer = document.getElementById('quizTimer');
+            
+            if (quizTimerInterval) {
+                clearInterval(quizTimerInterval);
+            }
+            
+            quizTimerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(quizTimerInterval);
+                    timerElement.textContent = 'Time\'s up!';
+                    timerContainer.classList.add('timer-warning');
+                    
+                    setTimeout(() => {
+                        submitQuiz();
+                    }, 2000);
+                    return;
+                }
+                
+                const minutesLeft = Math.floor(timeLeft / 60);
+                const secondsLeft = timeLeft % 60;
+                
+                timerElement.textContent = `Time remaining: ${minutesLeft}:${secondsLeft.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 300) {
+                    timerContainer.classList.add('timer-warning');
+                }
+                
+                timeLeft--;
+                
+            }, 1000);
+        }
+
+        // Close quiz modal
+        function closeQuizModal() {
+            if (quizTimerInterval) {
+                clearInterval(quizTimerInterval);
+                quizTimerInterval = null;
+            }
+            document.getElementById('quizModal').style.display = 'none';
+            currentQuizAttempt = null;
+        }
+
+        // Submit quiz
+        async function submitQuiz() {
+            if (!currentQuizAttempt) {
+                showNotification('No quiz attempt found', 'error');
+                return;
+            }
+            
+            const quizId = document.getElementById('quizModal').dataset.quizId;
+            const attemptId = document.getElementById('quizModal').dataset.attemptId;
+            
+            // Clear timer
+            if (quizTimerInterval) {
+                clearInterval(quizTimerInterval);
+                quizTimerInterval = null;
+            }
+            
+            // Collect answers
+            const answers = [];
+            document.querySelectorAll('.quiz-question').forEach(questionDiv => {
+                const questionId = questionDiv.dataset.questionId;
+                const selectedRadio = questionDiv.querySelector('input[type="radio"]:checked');
+                
+                if (selectedRadio) {
+                    answers.push({
+                        question_id: questionId,
+                        selected_answer: selectedRadio.value
+                    });
+                }
+            });
+            
+            if (answers.length === 0) {
+                showNotification('Please answer at least one question', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/student/quiz/submit', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        student_id: currentUser.id,
+                        quiz_id: quizId,
+                        attempt_id: attemptId,
+                        answers: answers
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Quiz submission error:', errorText);
+                    throw new Error('Failed to submit quiz: ' + errorText);
+                }
+                
+                const result = await response.json();
+                
+                // Show results
+                showQuizResults(result);
+                document.getElementById('quizModal').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error submitting quiz:', error);
+                showNotification('Failed to submit quiz. Please try again.', 'error');
+            }
+        }
+
+        // Show quiz results
+        function showQuizResults(result) {
+            const resultsHtml = `
+                <div class="quiz-results-content">
+                    <div class="result-score">
+                        <h4>Quiz Completed!</h4>
+                        <div class="score-circle">
+                            <span class="score-percentage">${result.percentage}%</span>
+                        </div>
+                        <p class="score-details">Score: ${result.score} points</p>
+                    </div>
+                    <div class="result-breakdown">
+                        <p><strong>Correct Answers:</strong> ${result.correct_answers} out of ${result.total_questions}</p>
+                        <p><strong>Percentage:</strong> ${result.percentage}%</p>
+                    </div>
+                    <div class="result-message">
+                        ${result.percentage >= 80 ? 
+                            '<p class="success-message">Excellent work! Keep it up!</p>' :
+                          result.percentage >= 60 ?
+                            '<p class="good-message">Good job! You passed!</p>' :
+                          '<p class="improve-message">Keep practicing! You can do better next time.</p>'
+                        }
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('quizResultsContent').innerHTML = resultsHtml;
+            document.getElementById('quizResultsModal').style.display = 'flex';
+        }
+
+        // View quiz results
+        async function viewQuizResults(quizId) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/student/quizzes/${currentUser.id}`);
+                const quizzes = await response.json();
+                const quiz = quizzes.find(q => q.id == quizId);
+                
+                if (quiz && quiz.student_score !== undefined) {
+                    const resultsHtml = `
+                        <div class="quiz-results-content">
+                            <h4>${quiz.title}</h4>
+                            <div class="result-score">
+                                <div class="score-circle">
+                                    <span class="score-percentage">${quiz.student_score}%</span>
+                                </div>
+                                <p class="score-details">Completed on: ${new Date(quiz.completed_date).toLocaleDateString()}</p>
+                            </div>
+                            <div class="result-message">
+                                <p>You completed this quiz with a score of ${quiz.student_score}%.</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('quizResultsContent').innerHTML = resultsHtml;
+                    document.getElementById('quizResultsModal').style.display = 'flex';
+                } else {
+                    showNotification('No results available for this quiz', 'info');
+                }
+                
+            } catch (error) {
+                console.error('Error viewing quiz results:', error);
+                showNotification('Could not load quiz results', 'error');
+            }
+        }
+
+        // Show notification toast
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification-toast notification-${type}`;
+            
+            const icon = type === 'success' ? 'check-circle' : 
+                         type === 'error' ? 'exclamation-circle' : 'info-circle';
+            
+            const backgroundColor = type === 'success' ? '#52c41a' : 
+                                  type === 'error' ? '#ff4d4f' : '#1890ff';
+            
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${backgroundColor};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            // Close button
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            });
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+            
+            // Add keyframes for animation
+            if (!document.querySelector('#notification-animations')) {
+                const style = document.createElement('style');
+                style.id = 'notification-animations';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+                    @keyframes slideOut {
+                        from {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                        to {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Generate grade content
+        function generateGradeContent(grade) {
+            const subjectGrid = document.getElementById('subjectGrid');
+            subjectGrid.innerHTML = '';
+           
+            const gradeContent = {
+                '1': [
+                    { title: 'Basic Counting', icon: 'fas fa-calculator', description: 'Learn to count from 1 to 100', link: 'class-1/maths/math.html', type: 'maths' },
+                    { title: 'Shapes and Colors', icon: 'fas fa-shapes', description: 'Identify different shapes and colors', link: 'class-1/science/science.html', type: 'science' },
+                    { title: 'Living Things', icon: 'fas fa-leaf', description: 'Learn about plants and animals', link: 'class-1/science/science.html', type: 'science' },
+                    { title: 'Basic English', icon: 'fas fa-language', description: 'Learn alphabets and simple words', link: 'class-1/english/english.html', type: 'english' }
+                ],
+                '5': [
+                    { title: 'Mathematics', icon: 'fas fa-calculator', description: 'Work with fractions and decimal numbers', link: 'class-6/maths/math.html', type: 'maths' },
+                    { title: 'Science', icon: 'fas fa-flask', description: 'Explore how our body works', link: 'class-6/science/science.html', type: 'science' },
+                    { title: 'Technology', icon: 'fas fa-laptop-code', description: 'Introduction to computers and coding', link: 'class-6/technology/technology.html', type: 'technology' },
+                    { title: 'English', icon: 'fas fa-language', description: 'Improve reading and writing skills', link: 'class-6/english/english.html', type: 'english' }
+                ],
+                '10': [
+                    { title: 'Algebra', icon: 'fas fa-square-root-alt', description: 'Solve equations and inequalities', link: 'class-10/maths/math.html', type: 'maths' },
+                    { title: 'Trigonometry', icon: 'fas fa-wave-square', description: 'Study triangles and trigonometric functions', link: 'class-10/maths/math.html', type: 'maths' },
+                    { title: 'Chemistry Basics', icon: 'fas fa-flask', description: 'Introduction to atoms and molecules', link: 'class-10/science/science.html', type: 'science' },
+                    { title: 'Physics Fundamentals', icon: 'fas fa-atom', description: 'Learn about motion, force, and energy', link: 'class-10/science/science.html', type: 'science' },
+                    { title: 'Computer Science', icon: 'fas fa-laptop-code', description: 'Programming and algorithms', link: 'class-10/technology/technology.html', type: 'technology' },
+                    { title: 'English Literature', icon: 'fas fa-language', description: 'Study of literary works', link: 'class-10/english/english.html', type: 'english' }
+                ]
+            };
+           
+            const defaultContent = [
+                { title: 'Mathematics', icon: 'fas fa-calculator', description: 'Practice math problems and concepts', link: `class-${grade}/maths/math.html`, type: 'maths' },
+                { title: 'Science', icon: 'fas fa-flask', description: 'Explore scientific concepts and experiments', link: `class-${grade}/science/science.html`, type: 'science' },
+                { title: 'Technology', icon: 'fas fa-laptop-code', description: 'Learn about computers and programming', link: `class-${grade}/technology/technology.html`, type: 'technology' },
+                { title: 'English', icon: 'fas fa-language', description: 'Improve language and communication skills', link: `class-${grade}/english/english.html`, type: 'english' }
+            ];
+           
+            const content = gradeContent[grade] || defaultContent;
+           
+            content.forEach(subject => {
+                const subjectCard = document.createElement('div');
+                subjectCard.className = `subject-card ${subject.type}-card`;
+                subjectCard.innerHTML = `
+                    <div class="subject-header">
+                        <i class="${subject.icon}"></i>
+                        <h3>${subject.title}</h3>
+                    </div>
+                    <div class="subject-content">
+                        <p>${subject.description}</p>
+                        <a href="${subject.link}" class="btn" data-translate="start-learning">Start Learning</a>
+                    </div>
+                `;
+                subjectGrid.appendChild(subjectCard);
+            });
+        }
+
+        // Generate activity calendar
+        function generateActivityCalendar() {
+            const calendar = document.getElementById('activityCalendar');
+            calendar.innerHTML = '';
+           
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+           
+            const today = new Date();
+            const currentMonth = today.getMonth();
+            const currentDay = today.getDate();
+           
+            for (let month = 0; month <= currentMonth; month++) {
+                const monthContainer = document.createElement('div');
+                monthContainer.className = 'activity-month';
+               
+                const monthLabel = document.createElement('div');
+                monthLabel.className = 'month-label';
+                monthLabel.textContent = months[month];
+                monthContainer.appendChild(monthLabel);
+               
+                const totalDays = month === currentMonth ? currentDay : daysInMonth[month];
+               
+                let dayCount = 0;
+                while (dayCount < totalDays) {
+                    const weekContainer = document.createElement('div');
+                    weekContainer.className = 'activity-week';
+                   
+                    for (let dayOfWeek = 0; dayOfWeek < 7 && dayCount < totalDays; dayOfWeek++) {
+                        const day = document.createElement('div');
+                        day.className = 'activity-day';
+                       
+                        if (month === 8) {
+                            if (dayCount < 2) {
+                                day.classList.add('medium');
+                            } else if (dayCount >= 2 && dayCount < 5) {
+                            } else if (dayCount === 5) {
+                                day.classList.add('low');
+                            }
+                        } else {
+                            if (Math.random() < 0.05 && month < currentMonth) {
+                                const activityLevel = Math.floor(Math.random() * 4) + 1;
+                                if (activityLevel === 1) day.classList.add('low');
+                                else if (activityLevel === 2) day.classList.add('medium');
+                                else if (activityLevel === 3) day.classList.add('high');
+                                else if (activityLevel === 4) day.classList.add('very-high');
+                            }
+                        }
+                       
+                        weekContainer.appendChild(day);
+                        dayCount++;
+                    }
+                   
+                    monthContainer.appendChild(weekContainer);
+                }
+               
+                calendar.appendChild(monthContainer);
+            }
+           
+            document.getElementById('longestStreak').textContent = '2';
+            document.getElementById('currentStreak').textContent = '1';
+        }
+
+        // Show page
+        function showPage(pageId) {
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('profilePage').style.display = 'none';
+            document.getElementById('settingsPage').style.display = 'none';
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        // Language translations
+        const translations = {
+            en: {
+                'nav-home': 'Home',
+                'nav-about': 'About',
+                'nav-contact': 'Contact',
+                'dropdown-profile': 'Profile',
+                'dropdown-settings': 'Settings',
+                'dropdown-logout': 'Logout',
+                'welcome-title': 'Welcome back,',
+                'welcome-subtitle': 'Continue your learning journey in Grade',
+                'assignments-title': 'Your Assignments',
+                'quizzes-title': 'Your Quizzes',
+                'grade-title': 'Your Grade',
+                'start-learning': 'Start Learning',
+                'profile-title': 'Student Profile',
+                'profile-subtitle': 'View your progress and achievements',
+                'member-since': 'Member Since',
+                'last-active': 'Last Active',
+                'total-games': 'Total Games Played',
+                'overall-summary': 'Overall Summary',
+                'games-solved': 'Games Solved',
+                'games-attempted': 'Games Attempted',
+                'quizzes-participated': 'Quizzes Participated',
+                'accuracy': 'Accuracy',
+                'max-problems': 'Max Problems in a Day',
+                'longest-streak': 'Longest Streak',
+                'current-streak': 'Current Streak',
+                'maths-rating': 'Maths Rating Progress',
+                'science-rating': 'Science Rating Progress',
+                'activity-year': 'Activity in the Year',
+                'less': 'Less',
+                'more': 'More',
+                'settings-title': 'Account Settings',
+                'settings-subtitle': 'Manage your account preferences',
+                'profile-settings': 'Profile Settings',
+                'fullname-label': 'Full Name',
+                'grade-label': 'Grade/Standard',
+                'profile-picture-label': 'Profile Picture',
+                'change-photo': 'Change Photo',
+                'save-profile': 'Save Profile Changes',
+                'password-settings': 'Password Settings',
+                'current-password': 'Current Password',
+                'new-password': 'New Password',
+                'confirm-password': 'Confirm New Password',
+                'change-password': 'Change Password',
+                'notification-settings': 'Notification Settings',
+                'email-notifications': 'Email Notifications',
+                'game-reminders': 'Game Reminders',
+                'progress-reports': 'Progress Reports',
+                'save-settings': 'Save Settings'
+            },
+            or: {
+                'nav-home': 'ମୁଖ୍ୟପୃଷ୍ଠା',
+                'nav-about': 'ବିଷୟରେ',
+                'nav-contact': 'ଯୋଗାଯୋଗ',
+                'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍',
+                'dropdown-settings': 'ସେଟିଂସ୍',
+                'dropdown-logout': 'ଲଗଆଉଟ୍',
+                'welcome-title': 'ପୁନର୍ବାର ସ୍ୱାଗତ,',
+                'welcome-subtitle': 'ଗ୍ରେଡ୍ ରେ ଆପଣଙ୍କର ଶିଖଣ ଯାତ୍ରା ଜାରି ରଖନ୍ତୁ',
+                'assignments-title': 'ଆପଣଙ୍କର ଅସାଇନମେଣ୍ଟଗୁଡିକ',
+                'quizzes-title': 'ଆପଣଙ୍କର କୁଇଜ୍‌ଗୁଡିକ',
+                'grade-title': 'ଆପଣଙ୍କର ଗ୍ରେଡ୍',
+                'start-learning': 'ଶିଖିବା ଆରମ୍ଭ କରନ୍ତୁ',
+                'profile-title': 'ଛାତ୍ର ପ୍ରୋଫାଇଲ୍',
+                'profile-subtitle': 'ଆପଣଙ୍କର ପ୍ରଗତି ଏବଂ ସଫଳତା ଦେଖନ୍ତୁ',
+                'member-since': 'ସଦସ୍ୟ ହୋଇଛନ୍ତି',
+                'last-active': 'ଶେଷ ସକ୍ରିୟ',
+                'total-games': 'ମୋଟ ଖେଳାଯାଇଥିବା ଖେଳ',
+                'overall-summary': 'ସାମଗ୍ରିକ ସାରାଂଶ',
+                'games-solved': 'ଖେଳ ସମାଧାନ ହେଲା',
+                'games-attempted': 'ଖେଳ ଚେଷ୍ଟା କରାଯାଇଥିଲା',
+                'quizzes-participated': 'କ୍ୱିଜ୍ ରେ ଭାଗ ନେଇଥିଲେ',
+                'accuracy': 'ସଠିକତା',
+                'max-problems': 'ଏକ ଦିନରେ ସର୍ବାଧିକ ସମସ୍ୟା',
+                'longest-streak': 'ସର୍ବାଧିକ ଷ୍ଟ୍ରିକ୍',
+                'current-streak': 'ବର୍ତ୍ତମାନ ଷ୍ଟ୍ରିକ୍',
+                'maths-rating': 'ଗଣିତ ରେଟିଂ ପ୍ରଗତି',
+                'science-rating': 'ବିଜ୍ଞାନ ରେଟିଂ ପ୍ରଗତି',
+                'activity-year': 'ବର୍ଷରେ ସକ୍ରିୟତା',
+                'less': 'କମ୍',
+                'more': 'ଅଧିକ',
+                'settings-title': 'ଆକାଉଣ୍ଟ୍ ସେଟିଂସ୍',
+                'settings-subtitle': 'ଆପଣଙ୍କର ଆକାଉଣ୍ଟ୍ ପସନ୍ଦ ପରିଚାଳନା କରନ୍ତୁ',
+                'profile-settings': 'ପ୍ରୋଫାଇଲ୍ ସେଟିଂସ୍',
+                'fullname-label': 'ପୂରା ନାମ',
+                'grade-label': 'ଶ୍ରେଣୀ/ଷ୍ଟାଣ୍ଡାର୍ଡ',
+                'profile-picture-label': 'ପ୍ରୋଫାଇଲ୍ ଚିତ୍ର',
+                'change-photo': 'ଫଟୋ ବଦଳାନ୍ତୁ',
+                'save-profile': 'ପ୍ରୋଫାଇଲ୍ ପରିବର୍ତ୍ତନ ସଞ୍ଚୟ କରନ୍ତୁ',
+                'password-settings': 'ପାସୱାର୍ଡ ସେଟିଂସ୍',
+                'current-password': 'ବର୍ତ୍ତମାନର ପାସୱାର୍ଡ',
+                'new-password': 'ନୂଆ ପାସୱାର୍ଡ',
+                'confirm-password': 'ନୂଆ ପାସୱାର୍ଡ ନିଶ୍ଚିତ କରନ୍ତୁ',
+                'change-password': 'ପାସୱାର୍ଡ ବଦଳାନ୍ତୁ',
+                'notification-settings': 'ବିଜ୍ଞପ୍ତି ସେଟିଂସ୍',
+                'email-notifications': 'ଇମେଲ୍ ବିଜ୍ଞପ୍ତି',
+                'game-reminders': 'ଖେଳ ରିମାଇଣ୍ଡର୍',
+                'progress-reports': 'ପ୍ରଗତି ରିପୋର୍ଟ',
+                'save-settings': 'ସେଟିଂସ୍ ସଞ୍ଚୟ କରନ୍ତୁ'
+            }
+        };
+
+        function switchLanguage(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+           
+            if (lang === 'or') {
+                document.body.classList.add('odia-text');
+            } else {
+                document.body.classList.remove('odia-text');
+            }
+        }
+
+        // Load syllabus knowledge base
+        function loadSyllabusKnowledgeBase() {
+            syllabusKnowledgeBase = {
+                'mathematics': {
+                    topics: [
+                        'Knowing Numbers',
+                        'Further Discussion of Numbers',
+                        'Basic Concepts in Geometry',
+                        'Natural Numbers',
+                        'Fractions',
+                        'Decimal Numbers',
+                        'Business Mathematics',
+                        'Integers',
+                        'Geometric Shapes on a Flat Surface',
+                        'Introduction to Algebra',
+                        'Weighing',
+                        'Data Management and Structure',
+                        'Geometric Drawing'
+                    ],
+                    qa: {
+                        'what are natural numbers': 'Natural numbers are counting numbers starting from 1, 2, 3, 4, and so on. They are used for counting objects.',
+                        'what are fractions': 'Fractions represent parts of a whole. They have a numerator (top number) and denominator (bottom number). Example: 1/2 means one part out of two equal parts.',
+                        'what are decimal numbers': 'Decimal numbers are numbers with a decimal point. They represent numbers between whole numbers. Example: 1.5 is between 1 and 2.',
+                        'what is geometry': 'Geometry is the study of shapes, sizes, positions, and properties of space. Basic concepts include points, lines, and angles.',
+                        'how to add fractions': 'To add fractions with same denominator, add the numerators and keep the denominator same. For different denominators, find common denominator first.',
+                        'what are integers': 'Integers include all whole numbers and their negatives: ..., -3, -2, -1, 0, 1, 2, 3, ...'
+                    }
+                },
+                'english': {
+                    topics: [
+                        'Part – I: Fun with English',
+                        'Kite',
+                        'A Greedy Fat Old Man – I',
+                        'A Greedy Fat Old Man – II',
+                        'A Greedy Fat Old Man – III',
+                        'Part – II',
+                        'Mice (Poem)',
+                        'I Like Bats',
+                        'The Foolish Son-in-law',
+                        'Bamboo Curry',
+                        'A Nail (Poem)',
+                        'My Story Is Said',
+                        'Test – 1',
+                        'The Deaf Friend',
+                        'The Three Questions',
+                        'The Cat and the Dog (Poems)',
+                        'The Crab and the Fox',
+                        'A Special School',
+                        'Mahagir – The Kind Elephant',
+                        'When I Grow Up (Poem)',
+                        'What Can I Be?',
+                        'Raghunath Murmu',
+                        'The Story of Language',
+                        'Test – 2',
+                        'Appendices'
+                    ],
+                    qa: {
+                        'what is a poem': 'A poem is a piece of writing that uses imaginative language, rhythm, and often rhyme to express emotions or ideas.',
+                        'what is a story': 'A story is a narrative about events and characters, usually with a beginning, middle, and end.',
+                        'how to write sentences': 'Start with a capital letter, end with proper punctuation, and make sure it expresses a complete thought.',
+                        'what is grammar': 'Grammar is the set of rules for using words and constructing sentences in a language.',
+                        'what are nouns': 'Nouns are words that name people, places, things, or ideas. Example: boy, school, book, happiness.',
+                        'what are verbs': 'Verbs are action words or state-of-being words. Example: run, think, is, have.'
+                    }
+                },
+                'computer': {
+                    topics: [
+                        'Basic Concepts of Computers',
+                        'What is a Computer?',
+                        'Computer Features',
+                        'History of Computers',
+                        'Arms of Computer Science',
+                        'Computer Literacy',
+                        'Uses of Computer in Departments',
+                        'Computer Applications',
+                        'Computer Hardware',
+                        'CPU (Central Processing Unit)',
+                        'Memory',
+                        'Input/Output Devices',
+                        'Other Features of Personal Computers',
+                        'Computer Software',
+                        'What is Software?',
+                        'Types of Software',
+                        'Method of Operation',
+                        'Basic Concepts of Windows',
+                        'What is Windows?',
+                        'Windows Components',
+                        'Basic Working of a Mouse',
+                        'Windows Accessories & Internet',
+                        'Opening Windows Accessories',
+                        'Notepad',
+                        'Paint',
+                        'Calculator',
+                        'Compact Disc',
+                        'Pen Drive',
+                        'Windows Media Player',
+                        'Internet Basics'
+                    ],
+                    qa: {
+                        'what is a computer': 'A computer is an electronic device that processes data according to instructions to produce information.',
+                        'what is cpu': 'CPU stands for Central Processing Unit. It is the brain of the computer that processes instructions.',
+                        'what is software': 'Software is a set of instructions that tells the computer what to do. Examples: Windows, Word, games.',
+                        'what is hardware': 'Hardware is the physical parts of a computer that you can touch. Examples: monitor, keyboard, mouse.',
+                        'what is internet': 'The Internet is a worldwide network of computers that allows sharing of information and communication.',
+                        'what is windows': 'Windows is an operating system developed by Microsoft that manages computer hardware and software.'
+                    }
+                },
+                'science': {
+                    topics: [
+                        'Food',
+                        'Source of Food',
+                        'Classification of Food',
+                        'Identification of Food Products',
+                        'Objects & Materials',
+                        'Items Used in Daily Life',
+                        'Object Type Discrimination',
+                        'Changes in Matter and Substance',
+                        'Living Things',
+                        'Living and Non-Living Things',
+                        'Location',
+                        'Structure and Function of Body Parts',
+                        'Moving Objects',
+                        'Measure of Length and Distance',
+                        'Speed',
+                        'How Objects Work',
+                        'Electricity',
+                        'Magnet',
+                        'Natural Phenomena',
+                        'Natural Phenomena',
+                        'Light',
+                        'Natural Resources',
+                        'Water',
+                        'Importance of Air',
+                        'Garbage'
+                    ],
+                    qa: {
+                        'what are living things': 'Living things grow, reproduce, respond to environment, need food, and breathe. Examples: plants, animals, humans.',
+                        'what is photosynthesis': 'Photosynthesis is the process by which plants make their own food using sunlight, water, and carbon dioxide.',
+                        'what is electricity': 'Electricity is the flow of electric charge. It powers our lights, fans, and electronic devices.',
+                        'what is a magnet': 'A magnet is an object that attracts certain metals like iron. It has north and south poles.',
+                        'what are natural resources': 'Natural resources are materials from nature that we use. Examples: water, air, minerals, forests.',
+                        'why is water important': 'Water is essential for all living things. It helps in digestion, transportation in body, and keeps us hydrated.'
+                    }
+                }
+            };
+        }
+
+        // Setup syllabus chatbot
+        function setupSyllabusChatbot() {
+            const syllabusChatbotToggle = document.getElementById('syllabusChatbotToggle');
+            const syllabusChatbotWindow = document.getElementById('syllabusChatbotWindow');
+            const syllabusChatbotClose = document.getElementById('syllabusChatbotClose');
+            const subjectSelector = document.getElementById('subjectSelector');
+            
+            // Load subject cards
+            const subjects = [
+                { id: 'mathematics', name: 'Mathematics', icon: 'fas fa-calculator', description: 'Numbers, Geometry, Algebra' },
+                { id: 'english', name: 'English', icon: 'fas fa-language', description: 'Reading, Writing, Grammar' },
+                { id: 'computer', name: 'Computer', icon: 'fas fa-laptop-code', description: 'Hardware, Software, Internet' },
+                { id: 'science', name: 'Science', icon: 'fas fa-flask', description: 'Nature, Living Things, Physics' }
+            ];
+            
+            subjects.forEach(subject => {
+                const card = document.createElement('div');
+                card.className = 'subject-card-selector';
+                card.dataset.subject = subject.id;
+                card.innerHTML = `
+                    <i class="${subject.icon}"></i>
+                    <h4>${subject.name}</h4>
+                    <p>${subject.description}</p>
+                `;
+                subjectSelector.appendChild(card);
+                
+                card.addEventListener('click', () => selectSubject(subject.id));
+            });
+            
+            // Event listeners
+            syllabusChatbotToggle.addEventListener('click', () => {
+                syllabusChatbotWindow.classList.toggle('active');
+            });
+            
+            syllabusChatbotClose.addEventListener('click', () => {
+                syllabusChatbotWindow.classList.remove('active');
+                resetSyllabusChatbot();
+            });
+            
+            document.getElementById('syllabusChatbotSend').addEventListener('click', sendSyllabusMessage);
+            
+            document.getElementById('syllabusChatbotInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendSyllabusMessage();
+                }
+            });
+            
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.syllabus-chatbot-container') && 
+                    !e.target.closest('.syllabus-chatbot-window')) {
+                    syllabusChatbotWindow.classList.remove('active');
+                    resetSyllabusChatbot();
+                }
+            });
+        }
+        
+        // Select subject for syllabus chatbot
+        function selectSubject(subjectId) {
+            selectedSubject = subjectId;
+            
+            // Update UI
+            document.querySelectorAll('.subject-card-selector').forEach(card => {
+                card.classList.remove('selected');
+                if (card.dataset.subject === subjectId) {
+                    card.classList.add('selected');
+                }
+            });
+            
+            // Show chat interface
+            document.getElementById('subjectSelector').style.display = 'none';
+            document.getElementById('syllabusChatbotMessages').style.display = 'flex';
+            document.getElementById('syllabusChatbotInputContainer').style.display = 'flex';
+            document.getElementById('syllabusSuggestedQuestions').style.display = 'flex';
+            
+            // Add welcome message
+            const messagesContainer = document.getElementById('syllabusChatbotMessages');
+            messagesContainer.innerHTML = '';
+            
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = 'message bot';
+            welcomeMessage.textContent = `Welcome to ${getSubjectName(subjectId)} help! I can answer questions about:`;
+            messagesContainer.appendChild(welcomeMessage);
+            
+            // List topics
+            const topics = syllabusKnowledgeBase[subjectId].topics;
+            const topicList = document.createElement('div');
+            topicList.className = 'message bot';
+            topicList.style.background = '#e6f7ff';
+            topicList.style.fontSize = '0.85rem';
+            
+            let topicText = '';
+            topics.forEach((topic, index) => {
+                topicText += `${index + 1}. ${topic}\n`;
+            });
+            topicList.textContent = topicText;
+            messagesContainer.appendChild(topicList);
+            
+            // Add help message
+            const helpMessage = document.createElement('div');
+            helpMessage.className = 'message bot';
+            helpMessage.textContent = 'Ask me anything about these topics. Try questions like: "What are fractions?" or "Explain photosynthesis"';
+            messagesContainer.appendChild(helpMessage);
+            
+            // Update suggested questions
+            updateSuggestedQuestions(subjectId);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Get subject name from ID
+        function getSubjectName(subjectId) {
+            const names = {
+                'mathematics': 'Mathematics',
+                'english': 'English',
+                'computer': 'Computer',
+                'science': 'Science'
+            };
+            return names[subjectId] || 'Subject';
+        }
+        
+        // Update suggested questions based on subject
+        function updateSuggestedQuestions(subjectId) {
+            const container = document.getElementById('syllabusSuggestedQuestions');
+            container.innerHTML = '';
+            
+            const questions = {
+                'mathematics': [
+                    'What are natural numbers?',
+                    'How to add fractions?',
+                    'What are decimal numbers?',
+                    'What is geometry?'
+                ],
+                'english': [
+                    'What is a poem?',
+                    'How to write sentences?',
+                    'What are nouns?',
+                    'What is grammar?'
+                ],
+                'computer': [
+                    'What is a computer?',
+                    'What is CPU?',
+                    'What is software?',
+                    'What is internet?'
+                ],
+                'science': [
+                    'What are living things?',
+                    'What is photosynthesis?',
+                    'What is electricity?',
+                    'Why is water important?'
+                ]
+            };
+            
+            questions[subjectId].forEach(question => {
+                const button = document.createElement('button');
+                button.className = 'syllabus-suggested-question';
+                button.textContent = question;
+                button.addEventListener('click', () => {
+                    document.getElementById('syllabusChatbotInput').value = question;
+                    sendSyllabusMessage();
+                });
+                container.appendChild(button);
+            });
+        }
+        
+        // Send message to syllabus chatbot
+        function sendSyllabusMessage() {
+            const input = document.getElementById('syllabusChatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            if (!selectedSubject) {
+                addSyllabusMessage('Please select a subject first.', 'bot');
+                return;
+            }
+            
+            // Add user message
+            addSyllabusMessage(message, 'user');
+            input.value = '';
+            
+            // Process and get response
+            const response = getSyllabusResponse(message.toLowerCase());
+            setTimeout(() => {
+                addSyllabusMessage(response, 'bot');
+            }, 500);
+        }
+        
+        // Get response from syllabus knowledge base
+        function getSyllabusResponse(question) {
+            if (!selectedSubject || !syllabusKnowledgeBase[selectedSubject]) {
+                return "Please select a subject first.";
+            }
+            
+            const qa = syllabusKnowledgeBase[selectedSubject].qa;
+            
+            // Check for exact match
+            for (const [key, answer] of Object.entries(qa)) {
+                if (question.includes(key)) {
+                    return answer;
+                }
+            }
+            
+            // Check for topic match
+            const topics = syllabusKnowledgeBase[selectedSubject].topics;
+            for (const topic of topics) {
+                if (question.includes(topic.toLowerCase())) {
+                    return `"${topic}" is part of your ${getSubjectName(selectedSubject)} syllabus. It's an important topic you should study from your textbook.`;
+                }
+            }
+            
+            // Generic responses based on subject
+            const genericResponses = {
+                'mathematics': "That's a good math question! Check your textbook for detailed explanations. Remember to practice regularly.",
+                'english': "For English language questions, try reading the related stories or poems in your textbook. Practice writing sentences.",
+                'computer': "For computer questions, you can find more details in your computer textbook. Try practical exercises on a computer.",
+                'science': "Science questions are best answered by experiments and observations. Check your science textbook for detailed explanations."
+            };
+            
+            return genericResponses[selectedSubject] || "I can help with questions about your syllabus. Try asking about specific topics mentioned in your textbook.";
+        }
+        
+        // Add message to syllabus chat
+        function addSyllabusMessage(text, sender) {
+            const messagesContainer = document.getElementById('syllabusChatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Reset syllabus chatbot
+        function resetSyllabusChatbot() {
+            selectedSubject = null;
+            document.getElementById('subjectSelector').style.display = 'grid';
+            document.getElementById('syllabusChatbotMessages').style.display = 'none';
+            document.getElementById('syllabusChatbotInputContainer').style.display = 'none';
+            document.getElementById('syllabusSuggestedQuestions').style.display = 'none';
+            document.getElementById('syllabusChatbotMessages').innerHTML = '';
+            document.getElementById('syllabusChatbotInput').value = '';
+            
+            document.querySelectorAll('.subject-card-selector').forEach(card => {
+                card.classList.remove('selected');
+            });
+        }
+
+        // Rest of your existing chatbot code (OdiaVoiceAssistant, etc.)
+        // ... (keep all your existing chatbot code from line 1369 onwards)
+        // The OdiaVoiceAssistant class and setupChatbotWithVoice function remain unchanged
+        // Just add them here without modification
+
+        // M// Updated OdiaVoiceAssistant class with better language detection
+        class OdiaVoiceAssistant {
+            constructor() {
+                this.recognition = null;
+                this.isRecording = false;
+                this.speechSynthesis = window.speechSynthesis;
+                this.speechUtterance = null;
+                this.isSpeaking = false;
+                this.isPaused = false;
+                this.pausedTime = 0;
+                this.pauseStartTime = 0;
+                this.init();
+            }
+            
+            init() {
+                // Check browser support
+                if ('webkitSpeechRecognition' in window) {
+                    this.initSpeechRecognition();
+                    return true;
+                } else if ('SpeechRecognition' in window) {
+                    this.recognition = new SpeechRecognition();
+                    this.initSpeechRecognition();
+                    return true;
+                }
+                return false;
+            }
+            
+            initSpeechRecognition() {
+                this.recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                this.recognition.continuous = false;
+                this.recognition.interimResults = true;
+                this.recognition.lang = 'or-IN'; // Odia language code
+                
+                this.recognition.onstart = () => {
+                    console.log('Odia speech recognition started');
+                    this.isRecording = true;
+                    this.onListeningStart();
+                };
+                
+                this.recognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    let finalTranscript = '';
+                    
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalTranscript += transcript;
+                        } else {
+                            interimTranscript += transcript;
+                        }
+                    }
+                    
+                    // Update UI with interim results
+                    if (interimTranscript) {
+                        this.onInterimTranscript(interimTranscript);
+                    }
+                    
+                    // Handle final result
+                    if (finalTranscript) {
+                        this.onFinalTranscript(finalTranscript);
+                    }
+                };
+                
+                this.recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    this.onError(event.error);
+                };
+                
+                this.recognition.onend = () => {
+                    console.log('Speech recognition ended');
+                    this.isRecording = false;
+                    this.onListeningEnd();
+                };
+            }
+            
+            startRecording() {
+                if (this.recognition && !this.isRecording) {
+                    try {
+                        this.recognition.start();
+                    } catch (error) {
+                        console.error('Error starting recording:', error);
+                        this.onError('start-failed');
+                    }
+                }
+            }
+            
+            stopRecording() {
+                if (this.recognition && this.isRecording) {
+                    this.recognition.stop();
+                }
+            }
+            
+            // Enhanced speakOdia function with pause support
+            speakOdia(text) {
+                if (this.speechSynthesis.speaking && !this.isPaused) {
+                    this.stopSpeaking();
+                }
+                
+                this.speechUtterance = new SpeechSynthesisUtterance(text);
+                
+                // Try to set Odia voice if available
+                const voices = this.speechSynthesis.getVoices();
+                const odiaVoice = voices.find(voice => 
+                    voice.lang.startsWith('or') || // Odia
+                    voice.lang.startsWith('hi') || // Hindi (closest)
+                    voice.lang.startsWith('bn')    // Bengali (similar)
+                );
+                
+                if (odiaVoice) {
+                    this.speechUtterance.voice = odiaVoice;
+                    this.speechUtterance.lang = odiaVoice.lang;
+                } else {
+                    // Fallback to default voice
+                    this.speechUtterance.lang = 'or-IN';
+                }
+                
+                this.speechUtterance.rate = 0.9; // Slightly slower for clarity
+                this.speechUtterance.pitch = 1;
+                this.speechUtterance.volume = 1;
+                
+                this.speechUtterance.onstart = () => {
+                    this.isSpeaking = true;
+                    this.isPaused = false;
+                    this.onSpeakingStart();
+                };
+                
+                this.speechUtterance.onend = () => {
+                    this.isSpeaking = false;
+                    this.isPaused = false;
+                    this.onSpeakingEnd();
+                };
+                
+                this.speechUtterance.onerror = (event) => {
+                    console.error('Speech synthesis error:', event);
+                    this.isSpeaking = false;
+                    this.isPaused = false;
+                    this.onSpeakingEnd();
+                };
+                
+                this.speechUtterance.onpause = () => {
+                    this.isPaused = true;
+                    this.pauseStartTime = Date.now();
+                    this.onSpeakingPaused();
+                };
+                
+                this.speechUtterance.onresume = () => {
+                    if (this.isPaused) {
+                        this.pausedTime += Date.now() - this.pauseStartTime;
+                        this.isPaused = false;
+                    }
+                    this.onSpeakingResumed();
+                };
+                
+                this.speechSynthesis.speak(this.speechUtterance);
+            }
+            
+            // Pause speech
+            pauseSpeaking() {
+                if (this.speechSynthesis.speaking && !this.isPaused) {
+                    this.speechSynthesis.pause();
+                    this.isPaused = true;
+                    this.pauseStartTime = Date.now();
+                    this.onSpeakingPaused();
+                }
+            }
+            
+            // Resume speech
+            resumeSpeaking() {
+                if (this.speechSynthesis.paused) {
+                    this.speechSynthesis.resume();
+                    this.isPaused = false;
+                    if (this.pauseStartTime) {
+                        this.pausedTime += Date.now() - this.pauseStartTime;
+                        this.pauseStartTime = 0;
+                    }
+                    this.onSpeakingResumed();
+                }
+            }
+            
+            // Toggle pause/resume
+            togglePauseSpeaking() {
+                if (this.isPaused) {
+                    this.resumeSpeaking();
+                } else {
+                    this.pauseSpeaking();
+                }
+            }
+            
+            // Stop speech completely
+            stopSpeaking() {
+                if (this.speechSynthesis.speaking || this.isPaused) {
+                    this.speechSynthesis.cancel();
+                    this.isSpeaking = false;
+                    this.isPaused = false;
+                    this.pausedTime = 0;
+                    this.pauseStartTime = 0;
+                    this.onSpeakingEnd();
+                }
+            }
+            
+            // Event handlers for voice recognition
+            onListeningStart() {
+                if (document.getElementById('startRecord')) {
+                    document.getElementById('startRecord').classList.add('recording');
+                }
+                if (document.getElementById('stopRecord')) {
+                    document.getElementById('stopRecord').disabled = false;
+                }
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = 'Listening... Speak in Odia';
+                }
+                if (document.getElementById('voiceStatus')) {
+                    document.getElementById('voiceStatus').style.display = 'flex';
+                }
+                this.updateVisualizer(true);
+            }
+            
+            onInterimTranscript(text) {
+                if (document.getElementById('chatbotInput')) {
+                    document.getElementById('chatbotInput').value = text;
+                }
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = 'Recognizing: ' + text.substring(0, 30) + '...';
+                }
+            }
+            
+            onFinalTranscript(text) {
+                console.log('Final Odia text:', text);
+                if (document.getElementById('chatbotInput')) {
+                    document.getElementById('chatbotInput').value = text;
+                }
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = 'Recognized: ' + text;
+                }
+                
+                // Auto-submit if text is long enough
+                if (text.trim().length > 3) {
+                    setTimeout(() => {
+                        if (document.getElementById('chatbotSend')) {
+                            document.getElementById('chatbotSend').click();
+                        }
+                    }, 1000);
+                }
+            }
+            
+            onError(error) {
+                let errorMsg = 'Voice recognition error: ';
+                switch(error) {
+                    case 'no-speech':
+                        errorMsg = 'No speech detected. Please speak louder.';
+                        break;
+                    case 'audio-capture':
+                        errorMsg = 'No microphone found. Please check your microphone.';
+                        break;
+                    case 'not-allowed':
+                        errorMsg = 'Microphone access denied. Please allow microphone access.';
+                        break;
+                    case 'start-failed':
+                        errorMsg = 'Unable to start recording. Please refresh the page.';
+                        break;
+                    default:
+                        errorMsg = 'Error: ' + error;
+                }
+                
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = errorMsg;
+                }
+                if (document.getElementById('startRecord')) {
+                    document.getElementById('startRecord').classList.remove('recording');
+                }
+                if (document.getElementById('stopRecord')) {
+                    document.getElementById('stopRecord').disabled = true;
+                }
+                
+                // Hide status after 3 seconds
+                setTimeout(() => {
+                    if (document.getElementById('voiceStatus') && !this.isRecording) {
+                        document.getElementById('voiceStatus').style.display = 'none';
+                    }
+                }, 3000);
+            }
+            
+            onListeningEnd() {
+                if (document.getElementById('startRecord')) {
+                    document.getElementById('startRecord').classList.remove('recording');
+                }
+                if (document.getElementById('stopRecord')) {
+                    document.getElementById('stopRecord').disabled = true;
+                }
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = 'Ready to record Odia';
+                }
+                this.updateVisualizer(false);
+                
+                // Hide status after 3 seconds
+                setTimeout(() => {
+                    if (document.getElementById('voiceStatus') && !this.isRecording) {
+                        document.getElementById('voiceStatus').style.display = 'none';
+                    }
+                }, 3000);
+            }
+            
+            // New event handlers for pause/resume
+            onSpeakingPaused() {
+                const pauseBtn = document.getElementById('pauseSpeaking');
+                if (pauseBtn) {
+                    pauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    pauseBtn.title = 'Resume Speech';
+                    pauseBtn.classList.add('paused');
+                }
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = 'Speech paused';
+                }
+            }
+            
+            onSpeakingResumed() {
+                const pauseBtn = document.getElementById('pauseSpeaking');
+                if (pauseBtn) {
+                    pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    pauseBtn.title = 'Pause Speech';
+                    pauseBtn.classList.remove('paused');
+                }
+                if (document.getElementById('statusText')) {
+                    document.getElementById('statusText').textContent = 'Speaking...';
+                }
+            }
+            
+            onSpeakingStart() {
+                const playBtn = document.getElementById('playOdia');
+                const pauseBtn = document.getElementById('pauseSpeaking');
+                const stopBtn = document.getElementById('stopSpeaking');
+                const statusText = document.getElementById('statusText');
+                const voiceStatus = document.getElementById('voiceStatus');
+                
+                if (playBtn) playBtn.style.display = 'none';
+                if (pauseBtn) {
+                    pauseBtn.style.display = 'block';
+                    pauseBtn.disabled = false;
+                    pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    pauseBtn.title = 'Pause Speech';
+                    pauseBtn.classList.remove('paused');
+                }
+                if (stopBtn) {
+                    stopBtn.style.display = 'block';
+                    stopBtn.disabled = false;
+                }
+                if (statusText) {
+                    statusText.textContent = 'Speaking...';
+                }
+                if (voiceStatus) {
+                    voiceStatus.style.display = 'flex';
+                }
+            }
+            
+            onSpeakingEnd() {
+                const playBtn = document.getElementById('playOdia');
+                const pauseBtn = document.getElementById('pauseSpeaking');
+                const stopBtn = document.getElementById('stopSpeaking');
+                const statusText = document.getElementById('statusText');
+                
+                if (playBtn) playBtn.style.display = 'block';
+                if (pauseBtn) {
+                    pauseBtn.style.display = 'none';
+                    pauseBtn.disabled = true;
+                    pauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    pauseBtn.classList.remove('paused');
+                    pauseBtn.title = 'Pause Speech';
+                }
+                if (stopBtn) {
+                    stopBtn.style.display = 'none';
+                    stopBtn.disabled = true;
+                }
+                if (statusText) {
+                    statusText.textContent = 'Voice playback finished';
+                }
+                
+                // Hide status after 2 seconds
+                setTimeout(() => {
+                    if (!this.isSpeaking && !this.isPaused && document.getElementById('voiceStatus')) {
+                        document.getElementById('voiceStatus').style.display = 'none';
+                    }
+                }, 2000);
+            }
+            
+            updateVisualizer(isActive) {
+                const visualizer = document.getElementById('visualizer');
+                if (!visualizer) return;
+                
+                visualizer.innerHTML = '';
+                
+                if (isActive) {
+                    const bar = document.createElement('div');
+                    bar.className = 'visualizer-bar';
+                    visualizer.appendChild(bar);
+                    this.animateVisualizer(bar);
+                }
+            }
+            
+            animateVisualizer(bar) {
+                const animate = () => {
+                    if (this.isRecording && bar && bar.parentNode) {
+                        const width = 20 + Math.random() * 80;
+                        bar.style.width = width + '%';
+                        requestAnimationFrame(() => this.animateVisualizer(bar));
+                    }
+                };
+                animate();
+            }
+        }
+
+        // Offline Odia-English Dictionary
+        const odiaSTEMDictionary = {
+            // Mathematics
+            'ଯୋଗ': 'addition',
+            'ବିୟୋଗ': 'subtraction',
+            'ଗୁଣନ': 'multiplication',
+            'ଭାଗ': 'division',
+            'ଭଗ୍ନାଂଶ': 'fraction',
+            'ଦଶମିକ': 'decimal',
+            'ବର୍ଗମୂଳ': 'square root',
+            'ସମୀକରଣ': 'equation',
+            'ତ୍ରିଭୁଜ': 'triangle',
+            'ବୃତ୍ତ': 'circle',
+            'ଦଶମିକ': 'decimal',
+            'କପାନ୍ନ': 'calculation',
+            'କାପନ୍ନ': 'calculation',
+            'କାପାନ୍ନ': 'calculation',
+            'ଗଣନା': 'calculation',
+            'ଆକଳନ': 'calculation',
+            
+            // Science
+            'ଜୀବନ': 'life',
+            'ଉଦ୍ଭିଦ': 'plant',
+            'ପ୍ରାଣୀ': 'animal',
+            'ଜଳ': 'water',
+            'ବାୟୁ': 'air',
+            'ଆଲୋକ': 'light',
+            'ତାପ': 'heat',
+            'ଶକ୍ତି': 'energy',
+            'ପରମାଣୁ': 'atom',
+            'ଅଣୁ': 'molecule',
+            'ଜୈବିକ': 'biological',
+            'ପ୍ରଣାଳୀ': 'system',
+            
+            // Common words
+            'ସହାୟତା': 'help',
+            'ବୁଝାଅ': 'explain',
+            'କଣ': 'what',
+            'କାହିଁକି': 'why',
+            'କେମିତି': 'how',
+            'କାହାକୁ': 'to whom',
+            'ପ୍ରଶ୍ନ': 'question',
+            'ଉତ୍ତର': 'answer',
+            'ବିଷୟ': 'subject',
+            'ପାଠ୍ୟ': 'lesson'
+        };
+
+        // Function to detect if text contains Odia characters
+        function containsOdia(text) {
+            const odiaRange = /[\u0B00-\u0B7F]/;
+            return odiaRange.test(text);
+        }
+
+        // Function to extract Odia words and translate them
+        function translateOdiaToEnglish(text) {
+            if (!containsOdia(text)) {
+                return text; // Return as-is if no Odia detected
+            }
+            
+            let translatedText = text;
+            
+            // First, translate known Odia words
+            Object.keys(odiaSTEMDictionary).forEach(odiaWord => {
+                const regex = new RegExp(odiaWord, 'g');
+                if (regex.test(text)) {
+                    translatedText = translatedText.replace(regex, odiaSTEMDictionary[odiaWord]);
+                }
+            });
+            
+            // If we detected Odia but didn't translate much, add context
+            if (containsOdia(translatedText) && translatedText === text) {
+                // Keep the Odia text but add English context
+                return "Odia question: " + text + " (Please explain in simple terms)";
+            }
+            
+            return translatedText;
+        }
+
+        // Integration with Chatbot
+        function setupChatbotWithVoice() {
+            // Initialize voice assistant
+            const voiceAssistant = new OdiaVoiceAssistant();
+            
+            // Check browser support
+            if (!voiceAssistant.recognition) {
+                console.log('Speech recognition not supported in this browser');
+                // Hide voice controls if not supported
+                document.querySelector('.voice-controls').style.display = 'none';
+            }
+            
+            // Button event listeners
+            document.getElementById('startRecord').addEventListener('click', () => {
+                voiceAssistant.startRecording();
+            });
+            
+            document.getElementById('stopRecord').addEventListener('click', () => {
+                voiceAssistant.stopRecording();
+            });
+            
+            document.getElementById('playOdia').addEventListener('click', () => {
+                const lastBotMessage = document.querySelector('.message.bot:last-child');
+                if (lastBotMessage) {
+                    voiceAssistant.speakOdia(lastBotMessage.textContent);
+                } else {
+                    // If no last message, use default
+                    voiceAssistant.speakOdia("Hello! I'm your STEM learning assistant.");
+                }
+            });
+            
+            // Pause button event listener
+            const pauseBtn = document.getElementById('pauseSpeaking');
+            if (pauseBtn) {
+                pauseBtn.addEventListener('click', () => {
+                    console.log('Pause button clicked');
+                    voiceAssistant.togglePauseSpeaking();
+                });
+            }
+            
+            // Stop speaking button event listener
+            const stopSpeakingBtn = document.getElementById('stopSpeaking');
+            if (stopSpeakingBtn) {
+                stopSpeakingBtn.addEventListener('click', () => {
+                    console.log('Stop speaking button clicked');
+                    voiceAssistant.stopSpeaking();
+                });
+            }
+            
+            // Groq API configuration
+            const GROQ_API_KEY = "";
+            const GROQ_API_URL = "";
+            
+            // Chatbot message history
+            let chatHistory = [
+                {
+                    role: "system",
+                    content: `You are a helpful STEM Learning Assistant for students in Grade ${currentUser.grade}. 
+                    Your role is to help students with their studies in Mathematics, Science, Technology, and English.
+                    
+                    IMPORTANT: Students may ask questions in Odia (Oria language). When you detect Odia words or questions:
+                    1. First, respond in English with the translation/interpretation
+                    2. Then provide the answer in simple English
+                    3. If helpful, provide the Odia translation of key terms in parentheses
+                    
+                    Example:
+                    User: "ଦଶମିକ କପାନ୍ନ କେମିତି କରିବି?"
+                    You: "You're asking: 'How to do decimal calculations?' 
+                    To calculate with decimals, line up the decimal points and add/subtract normally.
+                    (ଦଶମିକ ସଂଖ୍ୟା ପାଇଁ, ଦଶମିକ ବିନ୍ଦୁଗୁଡିକୁ ଏକ ସରଳରେଖାରେ ରଖି ଯୋଡନ୍ତୁ କିମ୍ବା ବିୟୋଗ କରନ୍ତୁ।)"
+                    
+                    Guidelines:
+                    1. Always be encouraging and supportive
+                    2. Break down complex concepts into simple steps
+                    3. Use examples that are relevant to school students
+                    4. If you don't know something, suggest asking a teacher
+                    5. Keep responses under 3-4 sentences for simple questions
+                    6. For complex topics, provide step-by-step explanations
+                    7. Acknowledge when students are speaking in Odia and respond appropriately`
+                },
+                {
+                    role: "assistant",
+                    content: "Hello! I'm your STEM learning assistant powered by AI. How can I help you with your studies today?"
+                },
+                {
+                    role: "assistant",
+                    content: "You can ask me questions about math, science, technology, or any STEM-related topic you're learning in Grade " + currentUser.grade + ". Feel free to ask in English or Odia!"
+                }
+            ];
+            
+            // Chatbot UI elements
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+            const suggestedQuestions = document.getElementById('suggestedQuestions');
+            
+            // Chatbot UI event listeners
+            chatbotToggle.addEventListener('click', function() {
+                chatbotWindow.classList.toggle('active');
+                // Scroll to bottom when opening
+                setTimeout(() => {
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 100);
+            });
+            
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.classList.remove('active');
+            });
+            
+            chatbotSend.addEventListener('click', sendMessage);
+            
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Suggested questions
+            document.querySelectorAll('.suggested-question').forEach(button => {
+                button.addEventListener('click', function() {
+                    const question = this.getAttribute('data-question');
+                    chatbotInput.value = question;
+                    sendMessage();
+                });
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Only trigger if chatbot is open
+                if (!document.getElementById('chatbotWindow').classList.contains('active')) return;
+                
+                // Ctrl + Space to toggle pause/resume
+                if (e.ctrlKey && e.code === 'Space') {
+                    e.preventDefault();
+                    const pauseBtn = document.getElementById('pauseSpeaking');
+                    if (pauseBtn && pauseBtn.style.display !== 'none') {
+                        pauseBtn.click();
+                    }
+                }
+                
+                // Ctrl + S to stop speaking
+                if (e.ctrlKey && e.code === 'KeyS') {
+                    e.preventDefault();
+                    const stopBtn = document.getElementById('stopSpeaking');
+                    if (stopBtn && stopBtn.style.display !== 'none') {
+                        stopBtn.click();
+                    }
+                }
+                
+                // Ctrl + M to start recording
+                if (e.ctrlKey && e.code === 'KeyM') {
+                    e.preventDefault();
+                    const recordBtn = document.getElementById('startRecord');
+                    if (recordBtn) {
+                        recordBtn.click();
+                    }
+                }
+                
+                // Alt + P to play last response
+                if (e.altKey && e.code === 'KeyP') {
+                    e.preventDefault();
+                    const playBtn = document.getElementById('playOdia');
+                    if (playBtn) {
+                        playBtn.click();
+                    }
+                }
+                
+                // Esc key to close chatbot
+                if (e.code === 'Escape') {
+                    chatbotWindow.classList.remove('active');
+                }
+            });
+            
+            // Send message function
+            async function sendMessage() {
+                const message = chatbotInput.value.trim();
+                if (message === '') return;
+                
+                console.log('Original message:', message);
+                
+                // Add user message to chat
+                addMessage(message, 'user');
+                
+                // Check if message contains Odia
+                const containsOdiaText = containsOdia(message);
+                let englishMessage = message;
+                
+                if (containsOdiaText) {
+                    console.log('Detected Odia text');
+                    // Translate Odia to English for the API
+                    englishMessage = translateOdiaToEnglish(message);
+                    console.log('Translated to:', englishMessage);
+                    
+                    // Add note about translation
+                    addMessage(`(Detected Odia question, translating...)`, 'bot', true);
+                }
+                
+                // Add to chat history
+                chatHistory.push({ role: "user", content: englishMessage });
+                chatbotInput.value = '';
+                
+                // Show typing indicator
+                showTypingIndicator();
+                
+                try {
+                    // Call Groq API
+                    console.log('Calling Groq API with message:', englishMessage);
+                    
+                    const requestPayload = {
+                        model: "llama-3.3-70b-versatile",
+                        messages: chatHistory,
+                        max_tokens: 600,
+                        temperature: 0.7,
+                        stream: false
+                    };
+                    
+                    const response = await fetch(GROQ_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${GROQ_API_KEY}`
+                        },
+                        body: JSON.stringify(requestPayload)
+                    });
+                    
+                    console.log('API Response status:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('API Error response:', errorText);
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // Check if we have a valid response
+                    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                        console.error('Invalid API response structure:', data);
+                        throw new Error('Invalid response structure from API');
+                    }
+                    
+                    const aiResponse = data.choices[0].message.content;
+                    console.log('AI Response received successfully');
+                    
+                    // Remove typing indicator
+                    removeTypingIndicator();
+                    
+                    // Add AI response to chat
+                    addMessage(aiResponse, 'bot');
+                    chatHistory.push({ role: "assistant", content: aiResponse });
+                    
+                    // Auto-play Odia TTS for responses
+                    setTimeout(() => {
+                        voiceAssistant.speakOdia(aiResponse);
+                    }, 500);
+                    
+                    // Scroll to bottom
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    
+                } catch (error) {
+                    console.error('Error calling Groq API:', error);
+                    removeTypingIndicator();
+                    
+                    // Fallback response
+                    let fallbackResponse = "";
+                    if (containsOdiaText) {
+                        fallbackResponse = "ମାଫ କରିବେ, ମୁଁ ଏହି ପ୍ରଶ୍ନର ଉତ୍ତର ଦେଇପାରିଲି ନାହିଁ। ଦୟାକରି ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ।";
+                    } else {
+                        fallbackResponse = "I'm sorry, I couldn't get an answer for that question. Please try again.";
+                    }
+                    
+                    addMessage(fallbackResponse, 'bot');
+                    chatHistory.push({ role: "assistant", content: fallbackResponse });
+                    
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+            }
+            
+            function addMessage(text, sender, isNote = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                if (isNote) {
+                    messageDiv.style.fontStyle = 'italic';
+                    messageDiv.style.fontSize = '0.8em';
+                    messageDiv.style.opacity = '0.7';
+                }
+                messageDiv.textContent = text;
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+            
+            function showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'typing-indicator';
+                typingDiv.id = 'typingIndicator';
+                typingDiv.innerHTML = `
+                    STEM Assistant is typing
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatbotMessages.appendChild(typingDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+            
+            function removeTypingIndicator() {
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
