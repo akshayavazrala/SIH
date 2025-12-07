@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Computer Engineer - STEM Learn Odisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f0f7ff; color:#1e293b; line-height:1.6; overflow-x:hidden; }
+        .container { width:100%; max-width:1200px; margin:0 auto; padding:0 20px; }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #2a69ac;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text h1 span {
+            color: #38b2ac;
+            font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 180px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f7fa;
+        }
+
+        .dropdown-item i {
+            color: #3182ce;
+            width: 20px;
+        }
+
+        /* Language Options */
+        .language-options {
+            position: absolute;
+            top: 60px;
+            right: 120px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 120px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .language-options.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .language-option:last-child {
+            border-bottom: none;
+        }
+
+        .language-option:hover {
+            background: #f5f7fa;
+        }
+
+        /* Instructions Modal */
+        .instructions-modal { display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; align-items: center; justify-content: center; }
+        .instructions-content { background: white; border-radius: 20px; width: 90%; max-width: 700px; padding: 30px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); position: relative; text-align: center; }
+        .instructions-title { font-size: 2rem; margin-bottom: 20px; color: #1a365d; font-weight: 700; }
+        .instructions-text { color: #64748b; margin-bottom: 25px; line-height: 1.6; text-align: left; font-size: 1.1rem; }
+        .instructions-list { margin-left: 20px; margin-bottom: 25px; }
+        .instructions-list li { margin-bottom: 10px; }
+        .start-game-btn { padding: 15px 40px; background: linear-gradient(135deg, #38b2ac 0%, #2c9a94 100%); color: white; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; }
+        .start-game-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3); }
+
+        /* game header */
+        .game-header { background: linear-gradient(rgba(14,42,71,0.85),rgba(26,54,93,0.9)), url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size:cover; background-position:center; color:white; padding:50px 0; text-align:center; }
+        .game-header h1 { font-size:2.8rem; margin-bottom:12px; font-weight:700; text-shadow:0 2px 4px rgba(0,0,0,0.2); }
+        .game-header p { font-size:1.1rem; max-width:800px; margin:0 auto; font-weight:300; opacity:0.95; }
+
+        /* game stats */
+        .game-stats { display:flex; justify-content:space-between; align-items:center; background:white; padding:15px 25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); margin:20px auto; max-width:1000px; gap:12px; flex-wrap:wrap; }
+        .timer, .score, .level { display:flex; align-items:center; gap:10px; font-size:1.1rem; font-weight:600; color:#1a365d; }
+        .timer i { color:#e53e3e; }
+        .score i { color:#38a169; }
+        .level i { color:#d69e2e; }
+        .progress-container { width:200px; height:12px; background:#e2e8f0; border-radius:10px; overflow:hidden; }
+        .progress-bar { height:100%; background:#3182ce; border-radius:10px; transition: width 0.5s ease; }
+
+        /* Game Area - Computer Assembly */
+        .game-area { padding:40px 0 60px; }
+        .assembly-container { display:grid; grid-template-columns:1fr 1fr; gap:30px; max-width:1100px; margin:0 auto 40px auto; }
+        
+        /* Computer Case */
+        .computer-case { background: linear-gradient(145deg, #2d3748, #4a5568); border-radius: 25px; padding: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); min-height: 500px; position: relative; border: 3px solid #1a202c; }
+        .case-title { color: white; text-align: center; margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; }
+        .case-inner { background: rgba(0, 0, 0, 0.3); border-radius: 15px; height: 100%; padding: 15px; position: relative; }
+        
+        /* Component Slots */
+        .component-slot { position: absolute; background: rgba(255, 255, 255, 0.1); border: 2px dashed rgba(255, 255, 255, 0.3); border-radius: 10px; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .component-slot.locked { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
+        .component-slot.highlight { background: rgba(66, 153, 225, 0.2); border-color: #4299e1; transform: scale(1.05); }
+        .component-slot.filled { background: rgba(72, 187, 120, 0.2); border-color: #48bb78; }
+        .slot-label { color: white; font-size: 0.8rem; position: absolute; bottom: -25px; text-align: center; width: 100%; }
+        .slot-number { position: absolute; top: 5px; left: 5px; background: rgba(0,0,0,0.5); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; }
+        
+        /* Quiz Panel */
+        .quiz-panel { background: white; border-radius: 25px; padding: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; }
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .quiz-title { font-size: 1.4rem; font-weight: 700; color: #1a365d; }
+        .quiz-step { font-size: 0.9rem; color: #4a5568; background: #edf2f7; padding: 4px 12px; border-radius: 20px; }
+        .quiz-question { background: #f7fafc; padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid #4299e1; }
+        .quiz-question h3 { color: #2d3748; margin-bottom: 10px; font-size: 1.1rem; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        .quiz-option { background: white; border: 2px solid #e2e8f0; border-radius: 10px; padding: 12px 15px; cursor: pointer; transition: all 0.3s ease; }
+        .quiz-option:hover { border-color: #cbd5e0; background: #f7fafc; }
+        .quiz-option.selected { border-color: #4299e1; background: #ebf8ff; }
+        .quiz-option.correct { border-color: #48bb78; background: #f0fff4; }
+        .quiz-option.incorrect { border-color: #f56565; background: #fff5f5; }
+        .quiz-actions { display: flex; justify-content: space-between; margin-top: auto; }
+        .quiz-btn { padding: 10px 20px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .quiz-submit { background: linear-gradient(45deg, #4299e1, #3182ce); color: white; }
+        .quiz-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3); }
+        .quiz-next { background: linear-gradient(45deg, #38b2ac, #2c9a94); color: white; }
+        .quiz-next:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3); }
+        
+        /* Component Items */
+        .component-item { width: 120px; height: 120px; background: linear-gradient(145deg,#ffffff,#f0f4f8); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: grab; box-shadow:0 8px 20px rgba(0,0,0,0.06); transition:all 0.25s ease; user-select:none; border: 2px solid #e2e8f0; position: relative; }
+        .component-item:hover { transform:translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+        .component-item.dragging { opacity:0.85; transform:scale(1.08) rotate(8deg); z-index:1200; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .component-item.locked { opacity: 0.5; cursor: not-allowed; filter: grayscale(0.7); }
+        .component-item.unlocked { border-color: #48bb78; }
+        .component-icon { font-size:2.8rem; margin-bottom:8px; }
+        .component-name { font-size:0.95rem; font-weight:700; color:#2d3748; text-align:center; }
+        .component-status { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+        .component-status.locked { background: #a0aec0; color: white; }
+        .component-status.unlocked { background: #48bb78; color: white; }
+        .component-status.placed { background: #38b2ac; color: white; }
+
+        /* Assembly Guide */
+        .assembly-guide { background: white; border-radius: 15px; padding: 20px; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .guide-title { color: #1a365d; margin-bottom: 10px; font-size: 1.2rem; }
+        .guide-steps { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
+        .guide-step { min-width: 80px; text-align: center; padding: 10px; border-radius: 10px; background: #f7fafc; border: 2px solid #e2e8f0; transition: all 0.3s ease; }
+        .guide-step.active { border-color: #4299e1; background: #ebf8ff; }
+        .guide-step.completed { border-color: #48bb78; background: #f0fff4; }
+        .step-number { width: 30px; height: 30px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px; font-weight: bold; }
+        .step-name { font-size: 0.8rem; }
+        
+        /* modal */
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75); z-index:2000; align-items:center; justify-content:center; }
+        .modal-content { background:linear-gradient(145deg,#ffffff,#f0f8ff); border-radius:24px; width:90%; max-width:700px; padding:36px; text-align:center; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .modal-close { position:absolute; top:16px; right:16px; background:rgba(0,0,0,0.06); border:none; font-size:1.4rem; width:44px; height:44px; border-radius:50%; cursor:pointer; transition: all 0.3s ease; }
+        .modal-close:hover { background:rgba(0,0,0,0.12); transform: rotate(90deg); }
+        .modal-icon { font-size:3.6rem; margin-bottom:12px; }
+        .modal-title { font-size:2rem; font-weight:800; color:#1a365d; margin-bottom:8px; }
+        .modal-text { color:#4a5568; margin-bottom:18px; font-size:1rem; line-height:1.6; }
+        .modal-action { padding:12px 22px; background:linear-gradient(45deg,#4facfe,#00f2fe); color:white; border:none; border-radius:14px; font-weight:800; cursor:pointer; transition: all 0.3s ease; }
+        .modal-action:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(79, 172, 254, 0.4); }
+
+        .level-complete { display:none; text-align:center; padding:28px; background:linear-gradient(145deg,#ffffff,#f7fafc); border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.08); max-width:700px; margin:24px auto; }
+        .next-level-btn { padding:10px 18px; background:linear-gradient(45deg,#38b2ac,#2c9a94); color:white; border:none; border-radius:12px; font-weight:800; cursor:pointer; transition: all 0.3s ease; }
+        .next-level-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(56, 178, 172, 0.4); }
+
+        .particles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1; }
+        .particle { position:absolute; width:4px; height:4px; background:rgba(255,255,255,0.5); border-radius:50%; animation: float-particle 18s infinite linear; }
+
+        @keyframes float-particle { 0% { transform: translateY(100vh) translateX(0px); opacity:0; } 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-100px) translateX(100px); opacity:0;} }
+
+        /* Success Animation */
+        @keyframes pulse-success {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-pulse {
+            animation: pulse-success 0.5s ease-in-out 3;
+        }
+
+        /* Language-specific text styles */
+        .odia-text { font-family: 'Kalinga', 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600; }
+        .hindi-text { font-family: 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600; }
+
+        @media (max-width:968px) {
+            .assembly-container { grid-template-columns:1fr; gap:20px; }
+            .component-item { width:100px; height:100px; }
+            .game-stats { flex-direction:column; gap:10px; align-items:flex-start; }
+            .quiz-actions { flex-direction: column; gap: 10px; }
+            .quiz-btn { width: 100%; }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+           
+            nav ul {
+                gap: 15px;
+            }
+            
+            .computer-case { min-height: 400px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <div class="logo-text">
+                <h1>STEM Learn Odisha</h1>
+                <p>Gamified Learning Platform</p>
+            </div>
+        </div>
+       
+        <nav>
+            <ul>
+                <li><a href="student-dashboard.html" id="navHome" data-translate="nav-dashboard">Dashboard</a></li>
+                <li><a href="computer-science.html" id="navCS" data-translate="nav-cs">Computer Science</a></li>
+                <li><a href="about.html" id="navAbout" data-translate="nav-about">About</a></li>
+                <li><a href="contact.html" id="navContact" data-translate="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+       
+        <div class="header-controls">
+            <button class="control-btn" id="languageToggle">
+                <i class="fas fa-globe"></i>
+            </button>
+           
+            <div class="profile-container">
+                <button class="profile-btn" id="profileToggle">
+                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <span id="headerUserName">Student</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+               
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" class="dropdown-item" id="dropdownProfile">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="dropdown-profile">Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownSettings">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="dropdown-settings">Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownLogout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="dropdown-logout">Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Language Options -->
+    <div class="language-options" id="languageOptions">
+        <div class="language-option" data-lang="en">English</div>
+        <div class="language-option" data-lang="or">ଓଡ଼ିଆ</div>
+        <div class="language-option" data-lang="hi">हिन्दी</div>
+    </div>
+
+    <!-- Instructions modal -->
+    <div class="instructions-modal" id="instructions-modal">
+        <div class="instructions-content">
+            <div class="language-switcher" style="position: relative; top: 0; right: 0; margin: 0 auto 20px auto; width: fit-content; background: rgba(26, 54, 93, 0.1);">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
+                <button class="lang-btn" data-lang="hi">हिन्दी</button>
+            </div>
+           
+            <h2 class="instructions-title" id="instructions-title">Become a Computer Engineer</h2>
+            <div class="instructions-text" id="instructions-text">
+                <p id="instructions-intro">Welcome to Computer Engineer! Test your knowledge and build a computer step by step:</p>
+                <ul class="instructions-list" id="instructions-list">
+                    <li id="instruction-1">Answer quiz questions about each computer component to unlock it.</li>
+                    <li id="instruction-2">Only after answering correctly can you drag the component to assemble it.</li>
+                    <li id="instruction-3">Complete questions for all 10 components to build a complete computer.</li>
+                    <li id="instruction-4">Learn detailed information about each hardware component.</li>
+                    <li id="instruction-5">Earn points for correct answers and proper assembly.</li>
+                    <li id="instruction-6">Follow the assembly guide to complete your computer in the right order!</li>
+                </ul>
+                <p id="instructions-outro">Good luck! Test your knowledge and build your dream computer!</p>
+            </div>
+            <button class="start-game-btn" id="start-game-btn">Start Engineering</button>
+        </div>
+    </div>
+
+    <!-- Game header -->
+    <section class="game-header" style="display:none;" id="game-header">
+        <div class="container">
+            <h1 data-translate="game-title">Computer Engineer</h1>
+            <p data-translate="game-desc">Test your hardware knowledge and assemble a computer! Answer quiz questions to unlock components, then drag them to build your system!</p>
+        </div>
+    </section>
+
+    <!-- Game stats -->
+    <div class="container" style="display:none;" id="game-stats-container">
+        <div class="game-stats">
+            <div class="timer">
+                <i class="fas fa-clock"></i>
+                <span id="time">10:00</span>
+            </div>
+
+            <div class="score">
+                <i class="fas fa-star"></i>
+                <span id="score">Score: 0</span>
+            </div>
+
+            <div class="level">
+                <i class="fas fa-layer-group"></i>
+                <span id="current-step">Step: 1/10</span>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress" style="width:0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game area -->
+    <section class="game-area" style="display:none;" id="game-area">
+        <div class="container">
+            <!-- Assembly Guide -->
+            <div class="assembly-guide">
+                <h3 class="guide-title" data-translate="assembly-guide">Assembly Guide</h3>
+                <div class="guide-steps" id="guide-steps">
+                    <!-- Steps will be dynamically generated -->
+                </div>
+            </div>
+
+            <div class="assembly-container">
+                <!-- Computer Case -->
+                <div class="computer-case">
+                    <h2 class="case-title" data-translate="case-title">Computer Assembly</h2>
+                    <div class="case-inner" id="case-inner">
+                        <!-- Component slots will be created dynamically -->
+                    </div>
+                </div>
+
+                <!-- Quiz Panel -->
+                <div class="quiz-panel" id="quiz-panel">
+                    <div class="quiz-header">
+                        <h2 class="quiz-title" data-translate="quiz-title">Component Quiz</h2>
+                        <span class="quiz-step" id="quiz-step">Question 1/3</span>
+                    </div>
+                    
+                    <div class="quiz-question" id="quiz-question">
+                        <h3 id="question-text">What is the function of the CPU in a computer?</h3>
+                    </div>
+                    
+                    <div class="quiz-options" id="quiz-options">
+                        <!-- Options will be dynamically generated -->
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button class="quiz-btn quiz-submit" id="quiz-submit" disabled data-translate="submit-btn">Submit Answer</button>
+                        <button class="quiz-btn quiz-next" id="quiz-next" disabled data-translate="next-btn">Next Component</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Component Inventory -->
+            <div class="component-inventory" style="margin-top: 30px;">
+                <h2 class="inventory-title" data-translate="inventory-title">Component Inventory</h2>
+                <div class="inventory-items" id="inventory-items">
+                    <!-- Component items will be created dynamically -->
+                </div>
+            </div>
+
+            <div class="level-complete" id="level-complete">
+                <div class="badge"><i class="fas fa-medal"></i></div>
+                <h2 class="level-title" data-translate="level-title">Computer Complete!</h2>
+                <p class="level-text" id="completion-text">Congratulations! You've successfully answered all questions and assembled a complete computer system. You're now a certified Computer Engineer!</p>
+                <button class="next-level-btn" id="play-again-btn" data-translate="play-again">Build Another</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback modal -->
+    <div class="modal" id="feedback-modal">
+        <div class="modal-content" id="modal-content">
+            <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+
+            <div class="modal-icon" id="modal-icon"><i class="fas fa-check-circle"></i></div>
+            <h2 class="modal-title" id="modal-title" data-translate="correct-title">Excellent!</h2>
+            <p class="modal-text" id="modal-text">Correct! The CPU is the brain of the computer. You've unlocked the CPU component and can now assemble it!</p>
+
+            <button class="modal-action" id="modal-action" data-translate="continue-btn">Continue Building</button>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+           
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'student-login.html';
+                return;
+            }
+           
+            // Load user data
+            loadUserData(user);
+            
+            // Initialize the game
+            init();
+        });
+
+        // Load user data into the page
+        function loadUserData(user) {
+            document.getElementById('headerUserName').textContent = user.fullName;
+            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+        }
+
+        /* ---- COMPUTER COMPONENTS DATA WITH QUESTIONS ---- */
+        const computerComponents = [
+            { 
+                id: 1, 
+                name: { en: "CPU", or: "CPU", hi: "सीपीयू" }, 
+                icon: "⚙️", 
+                type: "processing",
+                slot: "cpu-slot",
+                position: { top: "30%", left: "40%", width: "80px", height: "80px" },
+                info: { 
+                    en: "The Central Processing Unit (CPU) is the brain of the computer that executes instructions and performs calculations.", 
+                    or: "CPU (କେନ୍ଦ୍ରୀୟ ପ୍ରୋସେସିଂ ୟୁନିଟ୍) କମ୍ପ୍ୟୁଟରର ମସ୍ତିଷ୍କ ଯାହା ନିର୍ଦ୍ଦେଶାବଳୀ କାର୍ଯ୍ୟକାରୀ କରେ ଏବଂ ଗଣନା କରେ।", 
+                    hi: "सीपीयू (सेंट्रल प्रोसेसिंग यूनिट) कंप्यूटर का मस्तिष्क है जो निर्देशों को निष्पादित करता है और गणना करता है।" 
+                },
+                questions: [
+                    {
+                        en: "What is the main function of the CPU?",
+                        or: "CPUର ମୁଖ୍ୟ କାର୍ଯ୍ୟ କ'ଣ?",
+                        hi: "सीपीयू का मुख्य कार्य क्या है?",
+                        options: {
+                            en: ["Process graphics and display images", "Store data permanently", "Execute instructions and perform calculations", "Supply power to components"],
+                            or: ["ଗ୍ରାଫିକ୍ ପ୍ରକ୍ରିୟା ଏବଂ ଇମେଜ୍ ପ୍ରଦର୍ଶନ", "ଡାଟା ସ୍ଥାୟୀ ଭାବରେ ସଂରକ୍ଷଣ", "ନିର୍ଦ୍ଦେଶାବଳୀ କାର୍ଯ୍ୟକାରୀ କରେ ଏବଂ ଗଣନା କରେ", "ଉପାଦାନଗୁଡିକୁ ଶକ୍ତି ଯୋଗାଏ"],
+                            hi: ["ग्राफिक्स प्रोसेस करना और छवियां प्रदर्शित करना", "डेटा को स्थायी रूप से संग्रहीत करना", "निर्देश निष्पादित करना और गणना करना", "घटकों को बिजली की आपूर्ति करना"]
+                        },
+                        correct: 2
+                    },
+                    {
+                        en: "Why is the CPU called the 'brain' of the computer?",
+                        or: "CPUକୁ କାହିଁକି କମ୍ପ୍ୟୁଟରର 'ମସ୍ତିଷ୍କ' କୁହାଯାଏ?",
+                        hi: "सीपीयू को कंप्यूटर का 'मस्तिष्क' क्यों कहा जाता है?",
+                        options: {
+                            en: ["Because it's the largest component", "Because it controls all other components", "Because it stores all data", "Because it displays images"],
+                            or: ["କାରଣ ଏହା ସବୁଠାରୁ ବଡ଼ ଉପାଦାନ", "କାରଣ ଏହା ଅନ୍ୟ ସମସ୍ତ ଉପାଦାନଙ୍କୁ ନିୟନ୍ତ୍ରଣ କରେ", "କାରଣ ଏହା ସମସ୍ତ ଡାଟା ସଂରକ୍ଷଣ କରେ", "କାରଣ ଏହା ଇମେଜ୍ ପ୍ରଦର୍ଶନ କରେ"],
+                            hi: ["क्योंकि यह सबसे बड़ा घटक है", "क्योंकि यह अन्य सभी घटकों को नियंत्रित करता है", "क्योंकि यह सभी डेटा संग्रहीत करता है", "क्योंकि यह छवियां प्रदर्शित करता है"]
+                        },
+                        correct: 1
+                    }
+                ]
+            },
+            { 
+                id: 2, 
+                name: { en: "RAM", or: "RAM", hi: "रैम" }, 
+                icon: "💾", 
+                type: "memory",
+                slot: "ram-slot",
+                position: { top: "50%", left: "60%", width: "120px", height: "40px" },
+                info: { 
+                    en: "Random Access Memory (RAM) provides temporary storage for data and programs currently in use.", 
+                    or: "RAM (ର୍ୟାଣ୍ଡମ୍ ଆକ୍ସେସ୍ ମେମୋରୀ) ବର୍ତ୍ତମାନ ବ୍ୟବହୃତ ଡାଟା ଏବଂ ପ୍ରୋଗ୍ରାମ୍ ପାଇଁ ଅସ୍ଥାୟୀ ସଂଚୟ ପ୍ରଦାନ କରେ।", 
+                    hi: "रैम (रैंडम एक्सेस मेमोरी) वर्तमान में उपयोग किए जा रहे डेटा और प्रोग्रामों के लिए अस्थायी भंडारण प्रदान करता है।" 
+                },
+                questions: [
+                    {
+                        en: "What does RAM stand for?",
+                        or: "RAM କଣ ବୁଝାଏ?",
+                        hi: "रैम का पूरा नाम क्या है?",
+                        options: {
+                            en: ["Random Access Memory", "Read All Memory", "Rapid Access Module", "Running Active Memory"],
+                            or: ["ର୍ୟାଣ୍ଡମ୍ ଆକ୍ସେସ୍ ମେମୋରୀ", "ରିଡ୍ ଓଲ୍ ମେମୋରୀ", "ର୍ୟାପିଡ୍ ଆକ୍ସେସ୍ ମୋଡ୍ୟୁଲ୍", "ରନିଂ ଆକ୍ଟିଭ୍ ମେମୋରୀ"],
+                            hi: ["रैंडम एक्सेस मेमोरी", "रीड ऑल मेमोरी", "रैपिड एक्सेस मॉड्यूल", "रनिंग एक्टिव मेमोरी"]
+                        },
+                        correct: 0
+                    },
+                    {
+                        en: "What happens to data in RAM when the computer is turned off?",
+                        or: "କମ୍ପ୍ୟୁଟର ବନ୍ଦ ହେଲେ RAMରେ ଥିବା ଡାଟାର କଣ ହୁଏ?",
+                        hi: "कंप्यूटर बंद होने पर रैम में डेटा का क्या होता है?",
+                        options: {
+                            en: ["It is saved permanently", "It is transferred to the hard drive", "It is lost/erased", "It becomes read-only"],
+                            or: ["ଏହା ସ୍ଥାୟୀ ଭାବରେ ସଞ୍ଚିତ ହୁଏ", "ଏହା ହାର୍ଡ ଡ୍ରାଇଭ୍କୁ ସ୍ଥାନାନ୍ତରିତ ହୁଏ", "ଏହା ହରାଯାଏ/ମିଟିଯାଏ", "ଏହା କେବଳ ପଢିବା ପାଇଁ ହୁଏ"],
+                            hi: ["यह स्थायी रूप से सहेजा जाता है", "यह हार्ड ड्राइव में स्थानांतरित हो जाता है", "यह खो जाता है/मिट जाता है", "यह रीड-ओनली हो जाता है"]
+                        },
+                        correct: 2
+                    }
+                ]
+            },
+            { 
+                id: 3, 
+                name: { en: "Hard Drive", or: "ହାର୍ଡ ଡ୍ରାଇଭ୍", hi: "हार्ड ड्राइव" }, 
+                icon: "💿", 
+                type: "storage",
+                slot: "hdd-slot",
+                position: { top: "70%", left: "20%", width: "100px", height: "60px" },
+                info: { 
+                    en: "The Hard Drive stores all your data, programs, and the operating system permanently.", 
+                    or: "ହାର୍ଡ ଡ୍ରାଇଭ୍ ଆପଣଙ୍କର ସମସ୍ତ ଡାଟା, ପ୍ରୋଗ୍ରାମ୍ ଏବଂ ଅପରେଟିଂ ସିଷ୍ଟମ୍ ସ୍ଥାୟୀ ଭାବରେ ସଂରକ୍ଷଣ କରେ।", 
+                    hi: "हार्ड ड्राइव आपके सभी डेटा, प्रोग्राम और ऑपरेटिंग सिस्टम को स्थायी रूप से संग्रहीत करता है।" 
+                },
+                questions: [
+                    {
+                        en: "How is data stored on a hard drive?",
+                        or: "ହାର୍ଡ ଡ୍ରାଇଭ୍ରେ ଡାଟା କିପରି ସଂରକ୍ଷିତ ହୁଏ?",
+                        hi: "हार्ड ड्राइव पर डेटा कैसे संग्रहीत किया जाता है?",
+                        options: {
+                            en: ["Using magnetic storage on spinning disks", "Using electrical charges in transistors", "Using laser beams on discs", "Using chemical reactions"],
+                            or: ["ଘୁରୁଥିବା ଡିସ୍କରେ ଚୁମ୍ବକୀୟ ସଂରକ୍ଷଣ ବ୍ୟବହାର କରି", "ଟ୍ରାନ୍ଜିଷ୍ଟରରେ ବ electric ଦ୍ୟୁତିକ ଚାର୍ଜ ବ୍ୟବହାର କରି", "ଡିସ୍କରେ ଲେଜର ବିମ ବ୍ୟବହାର କରି", "ରାସାୟନିକ ପ୍ରତିକ୍ରିୟା ବ୍ୟବହାର କରି"],
+                            hi: ["घूमने वाली डिस्क पर चुंबकीय भंडारण का उपयोग करके", "ट्रांजिस्टर में विद्युत आवेश का उपयोग करके", "डिस्क पर लेजर बीम का उपयोग करके", "रासायनिक प्रतिक्रियाओं का उपयोग करके"]
+                        },
+                        correct: 0
+                    },
+                    {
+                        en: "What type of storage is a hard drive?",
+                        or: "ହାର୍ଡ ଡ୍ରାଇଭ୍ କେଉଁ ପ୍ରକାରର ସଂରକ୍ଷଣ?",
+                        hi: "हार्ड ड्राइव किस प्रकार का भंडारण है?",
+                        options: {
+                            en: ["Temporary storage", "Permanent storage", "Cache storage", "Network storage"],
+                            or: ["ଅସ୍ଥାୟୀ ସଂରକ୍ଷଣ", "ସ୍ଥାୟୀ ସଂରକ୍ଷଣ", "କ୍ୟାଶେ ସଂରକ୍ଷଣ", "ନେଟୱର୍କ ସଂରକ୍ଷଣ"],
+                            hi: ["अस्थायी भंडारण", "स्थायी भंडारण", "कैश भंडारण", "नेटवर्क भंडारण"]
+                        },
+                        correct: 1
+                    }
+                ]
+            },
+            { 
+                id: 4, 
+                name: { en: "Motherboard", or: "ମଦରବୋର୍ଡ", hi: "मदरबोर्ड" }, 
+                icon: "🔌", 
+                type: "mainboard",
+                slot: "mb-slot",
+                position: { top: "40%", left: "20%", width: "150px", height: "120px" },
+                info: { 
+                    en: "The motherboard is the main circuit board that connects all components and allows them to communicate.", 
+                    or: "ମଦରବୋର୍ଡ ହେଉଛି ମୁଖ୍ୟ ସର୍କିଟ୍ ବୋର୍ଡ ଯାହା ସମସ୍ତ ଉପାଦାନଗୁଡିକୁ ସଂଯୋଗ କରେ ଏବଂ ସେମାନଙ୍କୁ ସଂଚାର କରିବା ପାଇଁ ଅନୁମତି ଦିଏ।", 
+                    hi: "मदरबोर्ड मुख्य सर्किट बोर्ड है जो सभी घटकों को जोड़ता है और उन्हें संचार करने की अनुमति देता है।" 
+                },
+                questions: [
+                    {
+                        en: "What is the main purpose of the motherboard?",
+                        or: "ମଦରବୋର୍ଡର ମୁଖ୍ୟ ଉଦ୍ଦେଶ୍ୟ କ'ଣ?",
+                        hi: "मदरबोर्ड का मुख्य उद्देश्य क्या है?",
+                        options: {
+                            en: ["To store data", "To display images", "To connect all components", "To power the computer"],
+                            or: ["ଡାଟା ସଂରକ୍ଷଣ କରିବା", "ଇମେଜ୍ ପ୍ରଦର୍ଶନ କରିବା", "ସମସ୍ତ ଉପାଦାନଙ୍କୁ ସଂଯୋଗ କରିବା", "କମ୍ପ୍ୟୁଟରକୁ ଶକ୍ତି ଯୋଗାଇବା"],
+                            hi: ["डेटा संग्रहीत करना", "छवियां प्रदर्शित करना", "सभी घटकों को जोड़ना", "कंप्यूटर को बिजली देना"]
+                        },
+                        correct: 2
+                    },
+                    {
+                        en: "Which components connect directly to the motherboard?",
+                        or: "କେଉଁ ଉପାଦାନଗୁଡିକ ସିଧାସଳଖ ମଦରବୋର୍ଡ ସହିତ ସଂଯୁକ୍ତ ହୁଏ?",
+                        hi: "कौन से घटक सीधे मदरबोर्ड से जुड़ते हैं?",
+                        options: {
+                            en: ["Only the CPU", "Only RAM and CPU", "CPU, RAM, and expansion cards", "Only the power supply"],
+                            or: ["କେବଳ CPU", "କେବଳ RAM ଏବଂ CPU", "CPU, RAM, ଏବଂ ଏକ୍ସପାନସନ୍ କାର୍ଡଗୁଡିକ", "କେବଳ ପାୱର ସପ୍ଲାଇ"],
+                            hi: ["केवल सीपीयू", "केवल रैम और सीपीयू", "सीपीयू, रैम और विस्तार कार्ड", "केवल पावर सप्लाई"]
+                        },
+                        correct: 2
+                    }
+                ]
+            },
+            { 
+                id: 5, 
+                name: { en: "GPU", or: "GPU", hi: "जीपीयू" }, 
+                icon: "🎮", 
+                type: "graphics",
+                slot: "gpu-slot",
+                position: { top: "60%", left: "10%", width: "100px", height: "60px" },
+                info: { 
+                    en: "The Graphics Processing Unit (GPU) handles visual computations and displays images on your monitor.", 
+                    or: "GPU (ଗ୍ରାଫିକ୍ସ ପ୍ରୋସେସିଂ ୟୁନିଟ୍) ଭିଜୁଆଲ୍ ଗଣନାକୁ ହ୍ୟାଣ୍ଡେଲ୍ କରେ ଏବଂ ଆପଣଙ୍କ ମନିଟରରେ ଇମେଜ୍ ପ୍ରଦର୍ଶନ କରେ।", 
+                    hi: "जीपीयू (ग्राफिक्स प्रोसेसिंग यूनिट) दृश्य गणनाओं को संभालता है और आपके मॉनिटर पर छवियां प्रदर्शित करता है।" 
+                },
+                questions: [
+                    {
+                        en: "What does GPU stand for?",
+                        or: "GPU କଣ ବୁଝାଏ?",
+                        hi: "जीपीयू का पूरा नाम क्या है?",
+                        options: {
+                            en: ["Graphics Processing Unit", "General Processing Unit", "Graphics Power Unit", "General Power Unit"],
+                            or: ["ଗ୍ରାଫିକ୍ସ ପ୍ରୋସେସିଂ ୟୁନିଟ୍", "ଜେନେରାଲ୍ ପ୍ରୋସେସିଂ ୟୁନିଟ୍", "ଗ୍ରାଫିକ୍ସ ପାୱର ୟୁନିଟ୍", "ଜେନେରାଲ୍ ପାୱର ୟୁନିଟ୍"],
+                            hi: ["ग्राफिक्स प्रोसेसिंग यूनिट", "जनरल प्रोसेसिंग यूनिट", "ग्राफिक्स पावर यूनिट", "जनरल पावर यूनिट"]
+                        },
+                        correct: 0
+                    },
+                    {
+                        en: "Which tasks is a GPU particularly good at?",
+                        or: "GPU କେଉଁ କାର୍ଯ୍ୟଗୁଡିକରେ ବିଶେଷ ଭାବରେ ଭଲ?",
+                        hi: "जीपीयू विशेष रूप से किन कार्यों में अच्छा है?",
+                        options: {
+                            en: ["Word processing", "Spreadsheet calculations", "Parallel processing of graphics", "Internet browsing"],
+                            or: ["ୱାର୍ଡ ପ୍ରୋସେସିଂ", "ସ୍ପ୍ରେଡସିଟ୍ ଗଣନା", "ଗ୍ରାଫିକ୍ସର ସମାନ୍ତରାଳ ପ୍ରକ୍ରିୟା", "ଇଣ୍ଟରନେଟ୍ ବ୍ରାଉଜିଂ"],
+                            hi: ["वर्ड प्रोसेसिंग", "स्प्रेडशीट गणना", "ग्राफिक्स का समानांतर प्रसंस्करण", "इंटरनेट ब्राउजिंग"]
+                        },
+                        correct: 2
+                    }
+                ]
+            }
+        ];
+
+        // Additional components with questions would continue here...
+
+        /* ---- STATE ---- */
+        let currentLanguage = 'en';
+        let score = 0;
+        let currentStep = 0; // Current component step (0-9)
+        let currentQuestion = 0; // Current question for the component (0-1)
+        let timeLeft = 600; // 10 minutes
+        let timerInterval = null;
+        let draggedItem = null;
+        let placedComponents = [];
+        let unlockedComponents = [];
+        let selectedOption = null;
+        let answeredCorrectly = false;
+
+        /* ---- ELEMENTS ---- */
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const inventoryItems = document.getElementById('inventory-items');
+        const caseInner = document.getElementById('case-inner');
+        const scoreElement = document.getElementById('score');
+        const timeElement = document.getElementById('time');
+        const currentStepElement = document.getElementById('current-step');
+        const progressElement = document.getElementById('progress');
+        const feedbackModal = document.getElementById('feedback-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalTitle = document.getElementById('modal-title');
+        const modalText = document.getElementById('modal-text');
+        const modalAction = document.getElementById('modal-action');
+        const modalClose = document.getElementById('modal-close');
+        const levelComplete = document.getElementById('level-complete');
+        const playAgainBtn = document.getElementById('play-again-btn');
+        const instructionsModal = document.getElementById('instructions-modal');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const gameHeader = document.getElementById('game-header');
+        const gameStatsContainer = document.getElementById('game-stats-container');
+        const gameArea = document.getElementById('game-area');
+        const guideSteps = document.getElementById('guide-steps');
+        const quizStep = document.getElementById('quiz-step');
+        const questionText = document.getElementById('question-text');
+        const quizOptions = document.getElementById('quiz-options');
+        const quizSubmit = document.getElementById('quiz-submit');
+        const quizNext = document.getElementById('quiz-next');
+        const completionText = document.getElementById('completion-text');
+
+        // Dashboard integration elements
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const languageToggle = document.getElementById('languageToggle');
+        const languageOptions = document.getElementById('languageOptions');
+        const dropdownProfile = document.getElementById('dropdownProfile');
+        const dropdownSettings = document.getElementById('dropdownSettings');
+        const dropdownLogout = document.getElementById('dropdownLogout');
+        const navHome = document.getElementById('navHome');
+        const navCS = document.getElementById('navCS');
+        const navAbout = document.getElementById('navAbout');
+        const navContact = document.getElementById('navContact');
+
+        const translations = {
+            en: {
+                'nav-dashboard': 'Dashboard','nav-cs': 'Computer Science','nav-about':'About','nav-contact':'Contact',
+                'dropdown-profile': 'Profile','dropdown-settings': 'Settings','dropdown-logout': 'Logout',
+                'game-title':'Computer Engineer','game-desc':'Test your hardware knowledge and assemble a computer! Answer quiz questions to unlock components, then drag them to build your system!',
+                'case-title':'Computer Assembly','inventory-title':'Component Inventory',
+                'correct-title':'Excellent!','incorrect-title':'Try Again!',
+                'continue-btn':'Continue Building','level-title':'Computer Complete!',
+                'play-again':'Build Another','instructions-title':'Become a Computer Engineer','instructions-intro':"Welcome to Computer Engineer! Test your knowledge and build a computer step by step:",
+                'instruction-1':'Answer quiz questions about each computer component to unlock it.',
+                'instruction-2':'Only after answering correctly can you drag the component to assemble it.',
+                'instruction-3':'Complete questions for all 10 components to build a complete computer.','instruction-4':'Learn detailed information about each hardware component.',
+                'instruction-5':'Earn points for correct answers and proper assembly.',
+                'instruction-6':'Follow the assembly guide to complete your computer in the right order!','instructions-outro':'Good luck! Test your knowledge and build your dream computer!','start-game-btn':'Start Engineering',
+                'assembly-guide': 'Assembly Guide','quiz-title':'Component Quiz','submit-btn':'Submit Answer','next-btn':'Next Component'
+            },
+            or: {
+                'nav-dashboard':'ଡ୍ୟାସବୋର୍ଡ','nav-cs': 'କମ୍ପ୍ୟୁଟର ବିଜ୍ଞାନ','nav-about':'ବିଷୟରେ','nav-contact':'ଯୋଗାଯୋଗ',
+                'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍','dropdown-settings': 'ସେଟିଂସ୍','dropdown-logout': 'ଲଗଆଉଟ୍',
+                'game-title':'କମ୍ପ୍ୟୁଟର ଇଞ୍ଜିନିୟର୍','game-desc':'ତୁମର ହାର୍ଡୱେର୍ ଜ୍ଞାନ ପରୀକ୍ଷା କର ଏବଂ ଏକ କମ୍ପ୍ୟୁଟର ତିଆରି କର! ଉପାଦାନ ଅନଲକ୍ କରିବା ପାଇଁ ପ୍ରଶ୍ନୋତ୍ତର ଦିଅ, ତା’ପରେ ତୁମର ସିଷ୍ଟମ୍ ତିଆରି କରିବା ପାଇଁ ସେଗୁଡିକୁ ଟାଣ!',
+                'case-title':'କମ୍ପ୍ୟୁଟର ଏସେମ୍ବ୍ଲି','inventory-title':'ଉପାଦାନ ଇନଭେଣ୍ଟରୀ',
+                'correct-title':'ଚମତ୍କାର!','incorrect-title':'ପୁଣି ଚେଷ୍ଟା କର!',
+                'continue-btn':'ବିଲ୍ଡିଂ ଜାରି ରଖନ୍ତୁ','level-title':'କମ୍ପ୍ୟୁଟର ସମ୍ପୂର୍ଣ୍ଣ!',
+                'play-again':'ଆଉ ଏକ ତିଆରି କରନ୍ତୁ','instructions-title':'କମ୍ପ୍ୟୁଟର ଇଞ୍ଜିନିୟର୍ ହୁଅନ୍ତୁ','instructions-intro':'କମ୍ପ୍ୟୁଟର ଇଞ୍ଜିନିୟରକୁ ସ୍ୱାଗତ!',
+                'instruction-1':'ପ୍ରତ୍ୟେକ କମ୍ପ୍ୟୁଟର ଉପାଦାନ ବିଷୟରେ ପ୍ରଶ୍ନୋତ୍ତର ଦିଅ ଏବଂ ଏହାକୁ ଅନଲକ୍ କର।',
+                'instruction-2':'ସଠିକ ଭାବରେ ଉତ୍ତର ଦେବା ପରେ ହିଁ ତୁମେ ଉପାଦାନକୁ ଟାଣି ଏକାଠି କରିପାରିବ।','instruction-3':'ଏକ ସମ୍ପୂର୍ଣ୍ଣ କମ୍ପ୍ୟୁଟର ତିଆରି କରିବା ପାଇଁ ସମସ୍ତ 10 ଉପାଦାନ ପାଇଁ ପ୍ରଶ୍ନ ସମାପ୍ତ କର।','instruction-4':'ପ୍ରତ୍ୟେକ ହାର୍ଡୱେର୍ ଉପାଦାନ ବିଷୟରେ ବିସ୍ତୃତ ସୂଚନା ଶିଖନ୍ତୁ।',
+                'instruction-5':'ସଠିକ୍ ଉତ୍ତର ଏବଂ ଉପଯୁକ୍ତ ଏସେମ୍ବ୍ଲି ପାଇଁ ପଏଣ୍ଟ ଅର୍ଜନ କରନ୍ତୁ।','instruction-6':'ସଠିକ କ୍ରମରେ ଆପଣଙ୍କର କମ୍ପ୍ୟୁଟର ସମ୍ପୂର୍ଣ୍ଣ କରିବା ପାଇଁ ଏସେମ୍ବ୍ଲି ଗାଇଡ୍ ଅନୁସରଣ କରନ୍ତୁ!','instructions-outro':'ଶୁଭକାମନା!','start-game-btn':'ଇଞ୍ଜିନିୟରିଂ ଆରମ୍ଭ କରନ୍ତୁ',
+                'assembly-guide': 'ଏସେମ୍ବ୍ଲି ଗାଇଡ୍','quiz-title':'ଉପାଦାନ କୁଇଜ୍','submit-btn':'ଉତ୍ତର ଦିଅନ୍ତୁ','next-btn':'ପରବର୍ତ୍ତୀ ଉପାଦାନ'
+            },
+            hi: {
+                'nav-dashboard':'डैशबोर्ड','nav-cs': 'कंप्यूटर विज्ञान','nav-about':'हमारे बारे में','nav-contact':'संपर्क करें',
+                'dropdown-profile': 'प्रोफाइल','dropdown-settings': 'सेटिंग्स','dropdown-logout': 'लॉगआउट',
+                'game-title':'कंप्यूटर इंजीनियर','game-desc':'अपना हार्डवेयर ज्ञान परखें और कंप्यूटर असेंबल करें! घटकों को अनलॉक करने के लिए क्विज प्रश्नों के उत्तर दें, फिर उन्हें अपना सिस्टम बनाने के लिए खींचें!',
+                'case-title':'कंप्यूटर असेंबली','inventory-title':'घटक इन्वेंटरी',
+                'correct-title':'बहुत बढ़िया!','incorrect-title':'फिर से कोशिश करें!',
+                'continue-btn':'बिल्डिंग जारी रखें','level-title':'कंप्यूटर पूरा!',
+                'play-again':'एक और बनाएं','instructions-title':'कंप्यूटर इंजीनियर बनें','instructions-intro':'कंप्यूटर इंजीनियर में आपका स्वागत है!',
+                'instruction-1':'प्रत्येक कंप्यूटर घटक के बारे में क्विज प्रश्नों के उत्तर दें ताकि उसे अनलॉक किया जा सके।',
+                'instruction-2':'सही उत्तर देने के बाद ही आप घटक को खींचकर असेंबल कर सकते हैं।','instruction-3':'एक पूर्ण कंप्यूटर बनाने के लिए सभी 10 घटकों के प्रश्न पूरे करें।','instruction-4':'प्रत्येक हार्डवेयर घटक के बारे में विस्तृत जानकारी सीखें।',
+                'instruction-5':'सही उत्तर और उचित असेंबली के लिए अंक अर्जित करें।',
+                'instruction-6':'अपने कंप्यूटर को सही क्रम में पूरा करने के लिए असेंबली गाइड का पालन करें!','instructions-outro':'शुभकामनाएं!','start-game-btn':'इंजीनियरिंग शुरू करें',
+                'assembly-guide': 'असेंबली गाइड','quiz-title':'घटक क्विज','submit-btn':'उत्तर सबमिट करें','next-btn':'अगला घटक'
+            }
+        };
+
+        /* ---- INIT ---- */
+        function init() {
+            createParticles();
+
+            // Add event listeners to all language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+
+            startGameBtn.addEventListener('click', startGame);
+            modalAction.addEventListener('click', closeModal);
+            modalClose.addEventListener('click', closeModal);
+            playAgainBtn.addEventListener('click', startGame);
+
+            // Quiz event listeners
+            quizSubmit.addEventListener('click', submitAnswer);
+            quizNext.addEventListener('click', nextComponent);
+
+            // Dashboard integration event listeners
+            profileToggle.addEventListener('click', function() {
+                profileDropdown.classList.toggle('show');
+            });
+
+            languageToggle.addEventListener('click', function() {
+                languageOptions.classList.toggle('show');
+            });
+
+            // Language selection
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                    languageOptions.classList.remove('show');
+                });
+            });
+
+            // Navigation between pages
+            dropdownProfile.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#profile';
+            });
+
+            dropdownSettings.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#settings';
+            });
+
+            dropdownLogout.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.href = 'student-login.html';
+            });
+
+            // Navigation menu items
+            navHome.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html';
+            });
+
+            navCS.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'computer-science.html';
+            });
+
+            navAbout.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('About page would open here');
+            });
+
+            navContact.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Contact page would open here');
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
+                    languageOptions.classList.remove('show');
+                }
+               
+                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+
+            switchLanguage('en');
+        }
+
+        function createParticles() {
+            const container = document.getElementById('particles');
+            container.innerHTML = '';
+            for (let i=0;i<18;i++){
+                const p = document.createElement('div'); p.className='particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.animationDelay = `${Math.random()*10}s`;
+                container.appendChild(p);
+            }
+        }
+
+        /* ---- CREATE ASSEMBLY GUIDE ---- */
+        function createAssemblyGuide() {
+            guideSteps.innerHTML = '';
+            computerComponents.forEach((component, index) => {
+                const step = document.createElement('div');
+                step.className = 'guide-step';
+                step.dataset.index = index;
+                
+                if (index === currentStep) {
+                    step.classList.add('active');
+                } else if (index < currentStep) {
+                    step.classList.add('completed');
+                }
+                
+                step.innerHTML = `
+                    <div class="step-number">${index + 1}</div>
+                    <div class="step-name">${component.name[currentLanguage]}</div>
+                `;
+                
+                guideSteps.appendChild(step);
+            });
+        }
+
+        /* ---- CREATE COMPONENT SLOTS AND INVENTORY ---- */
+        function createComponentSlots() {
+            caseInner.innerHTML = '';
+            computerComponents.forEach((component, index) => {
+                const slot = document.createElement('div');
+                slot.className = 'component-slot';
+                slot.id = component.slot;
+                slot.dataset.componentId = component.id;
+                
+                if (index > currentStep) {
+                    slot.classList.add('locked');
+                }
+                
+                // Apply position styles
+                Object.keys(component.position).forEach(key => {
+                    slot.style[key] = component.position[key];
+                });
+                
+                const number = document.createElement('div');
+                number.className = 'slot-number';
+                number.textContent = index + 1;
+                slot.appendChild(number);
+                
+                const label = document.createElement('div');
+                label.className = 'slot-label';
+                label.textContent = component.name[currentLanguage];
+                slot.appendChild(label);
+                
+                caseInner.appendChild(slot);
+            });
+        }
+
+        function createInventoryItems() {
+            inventoryItems.innerHTML = '';
+            computerComponents.forEach((component, index) => {
+                const el = document.createElement('div');
+                el.className = 'component-item';
+                el.dataset.id = component.id;
+                el.dataset.slot = component.slot;
+                el.dataset.type = component.type;
+                el.style.transitionDelay = `${index * 30}ms`;
+                
+                // Set locked/unlocked state
+                if (index < currentStep) {
+                    el.classList.add('unlocked');
+                    el.draggable = true;
+                } else if (index === currentStep && answeredCorrectly) {
+                    el.classList.add('unlocked');
+                    el.draggable = true;
+                } else {
+                    el.classList.add('locked');
+                    el.draggable = false;
+                }
+                
+                const status = document.createElement('div');
+                status.className = 'component-status';
+                
+                if (index < currentStep || (index === currentStep && answeredCorrectly)) {
+                    status.classList.add('unlocked');
+                    status.innerHTML = '<i class="fas fa-lock-open"></i>';
+                } else {
+                    status.classList.add('locked');
+                    status.innerHTML = '<i class="fas fa-lock"></i>';
+                }
+                
+                el.innerHTML = `
+                    <div class="component-icon">${component.icon}</div>
+                    <div class="component-name">${component.name[currentLanguage]}</div>
+                `;
+                el.appendChild(status);
+                
+                inventoryItems.appendChild(el);
+            });
+            
+            // Setup drag and drop for unlocked items
+            setupDragAndDrop();
+        }
+
+        function setupDragAndDrop() {
+            const unlockedItems = document.querySelectorAll('.component-item.unlocked');
+            const slots = document.querySelectorAll('.component-slot:not(.locked)');
+
+            unlockedItems.forEach(it => {
+                it.addEventListener('dragstart', dragStart);
+                it.addEventListener('dragend', dragEnd);
+            });
+
+            slots.forEach(slot => {
+                slot.addEventListener('dragover', dragOver);
+                slot.addEventListener('dragenter', dragEnter);
+                slot.addEventListener('dragleave', dragLeave);
+                slot.addEventListener('drop', drop);
+            });
+        }
+
+        function dragStart(e) {
+            if (this.classList.contains('locked')) {
+                e.preventDefault();
+                return;
+            }
+            
+            draggedItem = this;
+            e.dataTransfer.setData('text/plain', this.dataset.id);
+            this.classList.add('dragging');
+            setTimeout(()=> this.style.opacity = '0.5', 10);
+        }
+        
+        function dragEnd() { 
+            if (this.classList.contains('dragging')) {
+                this.classList.remove('dragging'); 
+                this.style.opacity='1'; 
+            }
+        }
+
+        function dragOver(e) { e.preventDefault(); }
+        function dragEnter(e) { 
+            e.preventDefault(); 
+            if (!this.classList.contains('filled')) {
+                this.classList.add('highlight'); 
+            }
+        }
+        function dragLeave() { this.classList.remove('highlight'); }
+
+        function drop(e) {
+            e.preventDefault();
+            this.classList.remove('highlight');
+            const id = e.dataTransfer.getData('text/plain');
+            const component = computerComponents.find(f => f.id == id);
+            const targetSlotId = this.id;
+            
+            if (!component || !draggedItem) return;
+            
+            if (component.slot === targetSlotId) {
+                handleCorrectPlacement(component, this, draggedItem);
+            } else {
+                handleIncorrectPlacement(component, this, draggedItem);
+            }
+        }
+
+        /* ---- QUIZ FUNCTIONS ---- */
+        function loadQuiz() {
+            const component = computerComponents[currentStep];
+            const question = component.questions[currentQuestion];
+            
+            // Update quiz UI
+            quizStep.textContent = `${currentLanguage === 'en' ? 'Question' : currentLanguage === 'or' ? 'ପ୍ରଶ୍ନ' : 'प्रश्न'} ${currentQuestion + 1}/${component.questions.length}`;
+            questionText.textContent = question[currentLanguage];
+            
+            // Clear previous options
+            quizOptions.innerHTML = '';
+            
+            // Create new options
+            question.options[currentLanguage].forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'quiz-option';
+                optionEl.dataset.index = index;
+                optionEl.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                
+                optionEl.addEventListener('click', function() {
+                    // Remove selection from all options
+                    document.querySelectorAll('.quiz-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Select this option
+                    this.classList.add('selected');
+                    selectedOption = index;
+                    quizSubmit.disabled = false;
+                });
+                
+                quizOptions.appendChild(optionEl);
+            });
+            
+            // Reset buttons
+            quizSubmit.disabled = true;
+            quizNext.disabled = true;
+            selectedOption = null;
+            answeredCorrectly = false;
+        }
+
+        function submitAnswer() {
+            if (selectedOption === null) return;
+            
+            const component = computerComponents[currentStep];
+            const question = component.questions[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            // Disable all options
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            options.forEach((opt, index) => {
+                if (index === question.correct) {
+                    opt.classList.add('correct');
+                }
+                if (index === selectedOption && index !== question.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Check if answer is correct
+            if (selectedOption === question.correct) {
+                // Correct answer
+                score += 10;
+                updateScore();
+                answeredCorrectly = true;
+                
+                // If this is the last question for this component
+                if (currentQuestion === component.questions.length - 1) {
+                    quizNext.disabled = false;
+                    
+                    // Show success modal
+                    showFeedback(true, component);
+                    
+                    // Unlock the component for dragging
+                    setTimeout(() => {
+                        createInventoryItems();
+                    }, 1000);
+                } else {
+                    // Move to next question for same component
+                    setTimeout(() => {
+                        currentQuestion++;
+                        loadQuiz();
+                    }, 1500);
+                }
+            } else {
+                // Incorrect answer
+                showFeedback(false, component);
+                quizSubmit.disabled = true;
+            }
+        }
+
+        function nextComponent() {
+            // Add component to unlocked list
+            unlockedComponents.push(computerComponents[currentStep].id);
+            
+            // Move to next component
+            currentStep++;
+            currentQuestion = 0;
+            
+            // Check if all components are completed
+            if (currentStep >= computerComponents.length) {
+                completeAssembly();
+                return;
+            }
+            
+            // Update UI
+            updateStep();
+            loadQuiz();
+            createAssemblyGuide();
+            createComponentSlots();
+            createInventoryItems();
+        }
+
+        /* ---- GAME LOGIC ---- */
+        function handleCorrectPlacement(component, slot, draggedElement) {
+            if (placedComponents.includes(component.id)) return; // already placed
+            
+            placedComponents.push(component.id);
+            
+            // Add points for assembly
+            score += 15;
+            updateScore();
+            
+            // Mark slot as filled
+            slot.classList.add('filled');
+            slot.classList.remove('highlight');
+            
+            // Mark component as placed
+            draggedElement.style.opacity = '0.3';
+            draggedElement.draggable = false;
+            
+            // Update status icon
+            const statusIcon = draggedElement.querySelector('.component-status');
+            statusIcon.className = 'component-status placed';
+            statusIcon.innerHTML = '<i class="fas fa-check"></i>';
+            
+            // Add visual feedback to slot
+            const slotContent = document.createElement('div');
+            slotContent.style.cssText = `
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 2rem;
+            `;
+            slotContent.textContent = component.icon;
+            slot.innerHTML = '';
+            slot.appendChild(slotContent);
+            
+            // Add the label and number back
+            const label = document.createElement('div');
+            label.className = 'slot-label';
+            label.textContent = component.name[currentLanguage];
+            slot.appendChild(label);
+            
+            const number = document.createElement('div');
+            number.className = 'slot-number';
+            number.textContent = computerComponents.findIndex(c => c.id === component.id) + 1;
+            slot.appendChild(number);
+            
+            // Pulse animation for success
+            slot.classList.add('success-pulse');
+            setTimeout(() => slot.classList.remove('success-pulse'), 1500);
+            
+            createConfetti();
+        }
+
+        function handleIncorrectPlacement(component, slot, draggedElement) {
+            slot.classList.remove('highlight');
+            slot.classList.add('incorrect');
+            
+            // Shake animation for wrong placement
+            draggedElement.style.animation = 'shake 0.6s';
+            setTimeout(()=> draggedElement.style.animation = '', 600);
+            
+            setTimeout(()=> slot.classList.remove('incorrect'), 900);
+        }
+
+        /* ---- MODAL & FEEDBACK ---- */
+        function showFeedback(isCorrect, component) {
+            const modal = feedbackModal;
+            const icon = modalIcon;
+            
+            if (isCorrect) {
+                modalContent.classList.remove('incorrect-modal');
+                modalContent.classList.add('correct-modal');
+                icon.innerHTML = '<i class="fas fa-check-circle" style="color:#48bb78;"></i>';
+                modalTitle.textContent = translations[currentLanguage]['correct-title'] || 'Excellent!';
+                modalText.textContent = (currentLanguage === 'en') ? 
+                    `Correct! ${component.info.en} You've unlocked the ${component.name.en} component and can now assemble it!` :
+                    (currentLanguage === 'or') ? 
+                    `ସଠିକ! ${component.info.or} ଆପଣ ${component.name.or} ଉପାଦାନ ଅନଲକ୍ କରିଛନ୍ତି ଏବଂ ବର୍ତ୍ତମାନ ଏହାକୁ ଏକାଠି କରିପାରିବେ!` :
+                    `सही! ${component.info.hi} आपने ${component.name.hi} घटक अनलॉक कर दिया है और अब इसे असेंबल कर सकते हैं!`;
+            } else {
+                modalContent.classList.remove('correct-modal');
+                modalContent.classList.add('incorrect-modal');
+                icon.innerHTML = '<i class="fas fa-times-circle" style="color:#f56565;"></i>';
+                modalTitle.textContent = translations[currentLanguage]['incorrect-title'] || 'Try Again!';
+                modalText.textContent = (currentLanguage === 'en') ?
+                    `Incorrect answer. ${component.info.en} Try again to unlock the ${component.name.en} component.` :
+                    (currentLanguage === 'or') ? 
+                    `ଭୁଲ୍ ଉତ୍ତର। ${component.info.or} ${component.name.or} ଉପାଦାନ ଅନଲକ୍ କରିବା ପାଇଁ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।` :
+                    `गलत उत्तर। ${component.info.hi} ${component.name.hi} घटक को अनलॉक करने के लिए फिर से प्रयास करें।`;
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            feedbackModal.style.display = 'none';
+        }
+
+        /* ---- UI Updates ---- */
+        function updateScore() {
+            scoreElement.textContent = `Score: ${score}`;
+            const pct = Math.min(100, Math.round((currentStep / computerComponents.length) * 100));
+            progressElement.style.width = `${pct}%`;
+        }
+
+        function updateStep() {
+            currentStepElement.textContent = `Step: ${currentStep + 1}/${computerComponents.length}`;
+            updateScore();
+        }
+
+        /* ---- TIMER ---- */
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(()=> {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    showTimeUpModal();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timeLeft/60);
+            const s = timeLeft % 60;
+            timeElement.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+
+        function showTimeUpModal() {
+            modalIcon.innerHTML = '<i class="fas fa-clock" style="color:#f56565;"></i>';
+            modalTitle.textContent = currentLanguage === 'en' ? "Time's Up!" : (currentLanguage === 'or' ? 'ସମୟ ସରିଗଲା!' : 'समय समाप्त!');
+            modalText.textContent = (currentLanguage === 'en') ? `Time finished. You completed ${currentStep} components and scored ${score} points.` :
+                (currentLanguage === 'or') ? `ସମୟ ସମାପ୍ତ! ଆପଣ ${currentStep} ଉପାଦାନ ସମାପ୍ତ କରିଛନ୍ତି ଏବଂ ${score} ପଏଣ୍ଟ ପାଇଛନ୍ତି।` : 
+                `समय समाप्त! आपने ${currentStep} घटक पूरे किए और ${score} अंक प्राप्त किए।`;
+            modalAction.textContent = currentLanguage === 'en' ? 'Try Again' : (currentLanguage === 'or' ? 'ପୁଣି ଚେଷ୍ଟା' : 'फिर से कोशिश करें');
+            feedbackModal.style.display = 'flex';
+        }
+
+        /* ---- COMPLETE ASSEMBLY ---- */
+        function completeAssembly() {
+            clearInterval(timerInterval);
+            const timeBonus = Math.max(0, Math.floor(timeLeft/10) * 20);
+            score += timeBonus;
+            updateScore();
+            levelComplete.style.display = 'block';
+            createConfetti();
+            
+            completionText.textContent = (currentLanguage === 'en') ?
+                `Congratulations! You've successfully answered all questions and assembled a complete computer system. Final Score: ${score}. You're now a certified Computer Engineer!` :
+                (currentLanguage === 'or') ?
+                `ଅଭିନନ୍ଦନ! ଆପଣ ସଫଳତାର ସହିତ ସମସ୍ତ ପ୍ରଶ୍ନର ଉତ୍ତର ଦେଇଛନ୍ତି ଏବଂ ଏକ ସମ୍ପୂର୍ଣ୍ଣ କମ୍ପ୍ୟୁଟର ସିଷ୍ଟମ୍ ଏକାଠି କରିଛନ୍ତି। ଅନ୍ତିମ ସ୍କୋର: ${score}। ଆପଣ ବର୍ତ୍ତମାନ ଏକ ସାର୍ଟିଫାଇଡ୍ କମ୍ପ୍ୟୁଟର ଇଞ୍ଜିନିୟର୍!` :
+                `बधाई हो! आपने सभी प्रश्नों के उत्तर सफलतापूर्वक दिए हैं और एक पूर्ण कंप्यूटर सिस्टम असेंबल किया है। अंतिम स्कोर: ${score}। अब आप एक प्रमाणित कंप्यूटर इंजीनियर हैं!`;
+            
+            // Add celebration animation to all slots
+            document.querySelectorAll('.component-slot').forEach(slot => {
+                slot.classList.add('success-pulse');
+            });
+        }
+
+        /* ---- START GAME / LANGUAGE SWITCH ---- */
+        function startGame() {
+            instructionsModal.style.display = 'none';
+            gameHeader.style.display = 'block';
+            gameStatsContainer.style.display = 'block';
+            gameArea.style.display = 'block';
+            levelComplete.style.display = 'none';
+           
+            // reset stats
+            score = 0; 
+            currentStep = 0; 
+            currentQuestion = 0;
+            timeLeft = 600; 
+            placedComponents = [];
+            unlockedComponents = [];
+            selectedOption = null;
+            answeredCorrectly = false;
+           
+            // Create UI
+            createAssemblyGuide();
+            createComponentSlots();
+            createInventoryItems();
+            loadQuiz();
+            startTimer();
+            updateStep();
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+           
+            // Update all language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang')===lang);
+            });
+           
+            // translate elements
+            const map = translations[lang] || translations.en;
+            Object.keys(map).forEach(key => {
+                document.querySelectorAll(`[data-translate="${key}"]`).forEach(el => {
+                    el.textContent = map[key];
+                });
+            });
+           
+            // update instructions text
+            document.getElementById('instructions-title').textContent = map['instructions-title'];
+            document.getElementById('instructions-intro').textContent = map['instructions-intro'];
+            document.getElementById('instruction-1').textContent = map['instruction-1'];
+            document.getElementById('instruction-2').textContent = map['instruction-2'];
+            document.getElementById('instruction-3').textContent = map['instruction-3'];
+            document.getElementById('instruction-4').textContent = map['instruction-4'];
+            document.getElementById('instruction-5').textContent = map['instruction-5'];
+            document.getElementById('instruction-6').textContent = map['instruction-6'];
+            document.getElementById('instructions-outro').textContent = map['instructions-outro'];
+            document.getElementById('start-game-btn').textContent = map['start-game-btn'];
+           
+            // Reload quiz with new language
+            if (gameArea.style.display !== 'none') {
+                loadQuiz();
+                createAssemblyGuide();
+                createComponentSlots();
+                createInventoryItems();
+            }
+           
+            // apply language-specific font classes
+            if (lang === 'or') {
+                document.body.classList.add('odia-text');
+                document.body.classList.remove('hindi-text');
+            } else if (lang === 'hi') {
+                document.body.classList.add('hindi-text');
+                document.body.classList.remove('odia-text');
+            } else {
+                document.body.classList.remove('odia-text');
+                document.body.classList.remove('hindi-text');
+            }
+        }
+
+        /* ---- FUN STUFF ---- */
+        function createConfetti() {
+            for (let i=0;i<20;i++){
+                const c = document.createElement('div');
+                c.style.position='fixed';
+                c.style.left = Math.random()*100 + 'vw';
+                c.style.top = '-10px';
+                c.style.width='12px'; c.style.height='12px';
+                const colors = ['#ff6b6b','#4ecdc4','#45b7d1','#96ceb4','#ffeaa7', '#ff9a76', '#a29bfe'];
+                c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+                c.style.zIndex = 1500;
+                c.style.borderRadius = '2px';
+                c.style.animation = `confetti-fall ${2 + Math.random()}s ease-out forwards`;
+                document.body.appendChild(c);
+                setTimeout(()=> { if (document.body.contains(c)) document.body.removeChild(c); }, 3000);
+            }
+        }
+
+        /* ---- EVENTS & BOOT ---- */
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+            if ((e.key === 'r' || e.key === 'R') && e.ctrlKey) { e.preventDefault(); startGame(); }
+            if (e.key === '1') switchLanguage('en'); if (e.key==='2') switchLanguage('or'); if (e.key==='3') switchLanguage('hi');
+        });
+
+        // hide modal when clicking outside content
+        feedbackModal.addEventListener('click', (ev)=> { if (ev.target === feedbackModal) closeModal(); });
+
+        // Add CSS animation for shake
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+            
+            @keyframes confetti-fall {
+                0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            }
+            
+            .incorrect-modal { border: 3px solid #fc8181; }
+            .correct-modal { border: 3px solid #68d391; }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>
