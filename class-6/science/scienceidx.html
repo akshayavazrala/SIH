@@ -18,6 +18,7 @@
             background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             color: #1e293b;
             line-height: 1.6;
+            transition: all 0.3s ease;
         }
         
         .container {
@@ -381,21 +382,26 @@
             border-radius: 10px 10px 0 0;
         }
         
-        /* Odia language styling */
+        /* Language styling */
+        .english-text {
+            display: block;
+        }
+        
         .odia-text {
             font-family: 'Kalinga', 'Nirmala UI', sans-serif;
             display: none;
         }
         
-        .odia-text.active {
-            display: block;
+        /* Show Odia when body has class 'odia-mode' */
+        body.odia-mode .english-text {
+            display: none !important;
         }
         
-        .english-text {
-            display: block;
+        body.odia-mode .odia-text {
+            display: block !important;
         }
         
-        .odia-text .chapter-item {
+        body.odia-mode .chapter-item {
             font-size: 1.1rem;
         }
         
@@ -434,7 +440,7 @@
                 <i class="fas fa-atom"></i>
             </div>
             <div class="logo-text">
-                <h1>STEM Learn Odisha</h1>
+                <h1>STEM <span>Learn</span> Odisha</h1>
                 <p>Gamified Learning Platform</p>
             </div>
         </div>
@@ -456,7 +462,7 @@
            
             <div class="profile-container">
                 <button class="profile-btn" id="profileToggle">
-                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <img src="default-profile.png" alt="Profile" class="profile-pic" id="headerProfilePic">
                     <span id="headerUserName">Student</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
@@ -490,7 +496,9 @@
         
         <div class="language-toggle">
             <button class="toggle-btn" id="contentLanguageToggle">
-                <i class="fas fa-language"></i> <span class="english-text">Switch to Odia</span><span class="odia-text">ଇଂରାଜୀକୁ ବଦଳାନ୍ତୁ</span>
+                <i class="fas fa-language"></i> 
+                <span class="english-text">Switch to Odia</span>
+                <span class="odia-text">Switch to English</span>
             </button>
         </div>
         
@@ -514,7 +522,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="food/food.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="food/food.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
 
@@ -537,7 +549,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="Objects&Materials/objects.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="Objects&Materials/objects.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
 
@@ -560,7 +576,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="Living-Things/living.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="Living-Things/living.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
 
@@ -581,7 +601,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="moving-objects/index.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="moving-objects/moving.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
 
@@ -602,7 +626,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="How-Objects-works/objects.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="How-Objects-works/objects.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
 
@@ -623,7 +651,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="Natural-phenomenon/phenomenon.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="Natural-phenomenon/phenomenon.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
 
@@ -646,7 +678,11 @@
                     </ul>
                 </div>
                 <div class="card-actions">
-                    <a href="Natural-Resources/resources.html" class="btn btn-view"><i class="fas fa-eye"></i> <span class="english-text">View Topic</span><span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span></a>
+                    <a href="Natural-Resources/resources.html" class="btn btn-view">
+                        <i class="fas fa-eye"></i> 
+                        <span class="english-text">View Topic</span>
+                        <span class="odia-text">ଟପିକ୍ ଦେଖନ୍ତୁ</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -675,46 +711,30 @@
             
             // Initialize the page
             initPage();
+            
+            // Load saved language preference
+            const savedLang = localStorage.getItem('contentLanguage');
+            if (savedLang === 'odia') {
+                toggleContentLanguage();
+            }
         });
 
         // Load user data into the page
         function loadUserData(user) {
-            document.getElementById('headerUserName').textContent = user.fullName;
-            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+            if (user) {
+                document.getElementById('headerUserName').textContent = user.fullName || 'Student';
+                if (user.profilePicture) {
+                    document.getElementById('headerProfilePic').src = `uploads/${user.profilePicture}`;
+                }
+            }
         }
 
         function initPage() {
-            // Initialize content language toggle
+            // Content language toggle
             const contentToggleButton = document.getElementById('contentLanguageToggle');
-            const englishElements = document.querySelectorAll('.english-text');
-            const odiaElements = document.querySelectorAll('.odia-text');
-            const toggleEnglish = contentToggleButton.querySelector('.english-text');
-            const toggleOdia = contentToggleButton.querySelector('.odia-text');
-            
-            let isOdia = false;
-            
-            // Initially hide Odia elements
-            englishElements.forEach(el => el.style.display = 'block');
-            odiaElements.forEach(el => el.style.display = 'none');
-            toggleEnglish.style.display = 'inline';
-            toggleOdia.style.display = 'none';
             
             contentToggleButton.addEventListener('click', function() {
-                isOdia = !isOdia;
-                
-                if (isOdia) {
-                    englishElements.forEach(el => el.style.display = 'none');
-                    odiaElements.forEach(el => el.style.display = 'block');
-                    toggleEnglish.style.display = 'none';
-                    toggleOdia.style.display = 'inline';
-                    document.body.classList.add('odia-text');
-                } else {
-                    englishElements.forEach(el => el.style.display = 'block');
-                    odiaElements.forEach(el => el.style.display = 'none');
-                    toggleEnglish.style.display = 'inline';
-                    toggleOdia.style.display = 'none';
-                    document.body.classList.remove('odia-text');
-                }
+                toggleContentLanguage();
             });
 
             // Dashboard integration event listeners
@@ -740,11 +760,11 @@
                 languageOptions.classList.toggle('show');
             });
 
-            // Language selection
+            // Language selection for interface language
             document.querySelectorAll('.language-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const lang = this.getAttribute('data-lang');
-                    switchLanguage(lang);
+                    switchInterfaceLanguage(lang);
                     languageOptions.classList.remove('show');
                 });
             });
@@ -799,8 +819,22 @@
             });
         }
 
-        // Language translations
-        function switchLanguage(lang) {
+        // Toggle content language (English/Odia)
+        function toggleContentLanguage() {
+            const body = document.body;
+            const isOdiaMode = body.classList.contains('odia-mode');
+            
+            if (isOdiaMode) {
+                body.classList.remove('odia-mode');
+                localStorage.setItem('contentLanguage', 'english');
+            } else {
+                body.classList.add('odia-mode');
+                localStorage.setItem('contentLanguage', 'odia');
+            }
+        }
+
+        // Switch interface language
+        function switchInterfaceLanguage(lang) {
             const translations = {
                 en: {
                     'navHome': 'Dashboard',
@@ -810,7 +844,8 @@
                     'dropdownProfile': 'Profile',
                     'dropdownSettings': 'Settings',
                     'dropdownLogout': 'Logout',
-                    'page-title': 'Class 6 Science Curriculum'
+                    'page-title': 'Class 6 Science Curriculum',
+                    'contentToggleText': 'Switch to Odia'
                 },
                 or: {
                     'navHome': 'ଡ୍ୟାସବୋର୍ଡ',
@@ -820,21 +855,31 @@
                     'dropdownProfile': 'ପ୍ରୋଫାଇଲ୍',
                     'dropdownSettings': 'ସେଟିଂସ୍',
                     'dropdownLogout': 'ଲଗଆଉଟ୍',
-                    'page-title': 'କ୍ଲାସ ୬ ବିଜ୍ଞାନ ପାଠ୍ୟକ୍ରମ'
+                    'page-title': 'କ୍ଲାସ ୬ ବିଜ୍ଞାନ ପାଠ୍ୟକ୍ରମ',
+                    'contentToggleText': 'ଇଂରାଜୀକୁ ବଦଳାନ୍ତୁ'
                 }
             };
 
             const map = translations[lang] || translations.en;
             
             // Update navigation and dropdown text
-            if (map['navHome']) document.getElementById('navHome').textContent = map['navHome'];
-            if (map['navScience']) document.getElementById('navScience').textContent = map['navScience'];
-            if (map['navAbout']) document.getElementById('navAbout').textContent = map['navAbout'];
-            if (map['navContact']) document.getElementById('navContact').textContent = map['navContact'];
-            if (map['dropdownProfile']) document.getElementById('dropdownProfile').querySelector('span').textContent = map['dropdownProfile'];
-            if (map['dropdownSettings']) document.getElementById('dropdownSettings').querySelector('span').textContent = map['dropdownSettings'];
-            if (map['dropdownLogout']) document.getElementById('dropdownLogout').querySelector('span').textContent = map['dropdownLogout'];
-            if (map['page-title']) document.getElementById('page-title').textContent = map['page-title'];
+            document.getElementById('navHome').textContent = map['navHome'];
+            document.getElementById('navScience').textContent = map['navScience'];
+            document.getElementById('navAbout').textContent = map['navAbout'];
+            document.getElementById('navContact').textContent = map['navContact'];
+            document.getElementById('dropdownProfile').querySelector('span').textContent = map['dropdownProfile'];
+            document.getElementById('dropdownSettings').querySelector('span').textContent = map['dropdownSettings'];
+            document.getElementById('dropdownLogout').querySelector('span').textContent = map['dropdownLogout'];
+            document.getElementById('page-title').textContent = map['page-title'];
+            
+            // Update content toggle button text
+            const toggleBtn = document.getElementById('contentLanguageToggle');
+            const toggleText = document.body.classList.contains('odia-mode') ? 
+                (lang === 'en' ? 'Switch to English' : 'ଇଂରାଜୀକୁ ବଦଳାନ୍ତୁ') : 
+                (lang === 'en' ? 'Switch to Odia' : 'ଓଡ଼ିଆକୁ ବଦଳାନ୍ତୁ');
+            
+            toggleBtn.querySelector('.english-text').textContent = lang === 'en' ? 'Switch to Odia' : 'ଓଡ଼ିଆକୁ ବଦଳାନ୍ତୁ';
+            toggleBtn.querySelector('.odia-text').textContent = lang === 'en' ? 'Switch to English' : 'ଇଂରାଜୀକୁ ବଦଳାନ୍ତୁ';
         }
     </script>
 </body>

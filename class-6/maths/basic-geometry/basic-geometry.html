@@ -914,52 +914,6 @@
                 </div>
             </div>
 
-            <!-- Progress Tracking -->
-            <div class="progress-section">
-                <h2 class="progress-title">
-                    <i class="fas fa-chart-line"></i>
-                    <span data-translate="progress-title">Your Progress</span>
-                </h2>
-                <div class="progress-bars">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-points">Points and Lines</span>
-                            <span id="points-progress-value">55%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="points-progress" style="width: 55%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-angles">Angles</span>
-                            <span id="angles-progress-value">25%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="angles-progress" style="width: 25%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-shapes">Basic Shapes</span>
-                            <span id="shapes-progress-value">10%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="shapes-progress" style="width: 10%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-overall">Overall Mastery</span>
-                            <span id="overall-progress-value">30%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="overall-progress" style="width: 30%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Games Section -->
             <div class="games-section">
                 <h2 class="section-title">
@@ -1633,42 +1587,6 @@
             document.getElementById('content-modal').style.display = 'none';
         }
 
-        // Progress tracking
-        function updateProgress(category, points) {
-            const progressBars = {
-                'points': document.getElementById('points-progress'),
-                'angles': document.getElementById('angles-progress'),
-                'shapes': document.getElementById('shapes-progress'),
-                'overall': document.getElementById('overall-progress')
-            };
-            
-            const progressValues = {
-                'points': document.getElementById('points-progress-value'),
-                'angles': document.getElementById('angles-progress-value'),
-                'shapes': document.getElementById('shapes-progress-value'),
-                'overall': document.getElementById('overall-progress-value')
-            };
-            
-            // Update specific category
-            let currentWidth = parseInt(progressBars[category].style.width);
-            if (currentWidth + points <= 100) {
-                progressBars[category].style.width = (currentWidth + points) + '%';
-                progressValues[category].textContent = (currentWidth + points) + '%';
-            } else {
-                progressBars[category].style.width = '100%';
-                progressValues[category].textContent = '100%';
-            }
-            
-            // Update overall progress
-            let overallWidth = (
-                parseInt(progressBars['points'].style.width) +
-                parseInt(progressBars['angles'].style.width) +
-                parseInt(progressBars['shapes'].style.width)
-            ) / 3;
-            
-            progressBars['overall'].style.width = overallWidth + '%';
-            progressValues['overall'].textContent = Math.round(overallWidth) + '%';
-        }
     </script>
 </body>
 </html>

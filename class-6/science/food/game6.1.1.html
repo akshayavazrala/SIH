@@ -87,6 +87,39 @@
             gap: 15px;
         }
 
+        /* Horizontal Language Selector */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 15px;
+        }
+
+        .language-option-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .language-option-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .language-option-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
         .control-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
@@ -177,37 +210,9 @@
             width: 20px;
         }
 
-        /* Language Options */
+        /* Remove old language options */
         .language-options {
-            position: absolute;
-            top: 60px;
-            right: 120px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            width: 120px;
-            display: none;
-            z-index: 1001;
-            overflow: hidden;
-        }
-
-        .language-options.show {
-            display: block;
-        }
-
-        .language-option {
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .language-option:last-child {
-            border-bottom: none;
-        }
-
-        .language-option:hover {
-            background: #f5f7fa;
+            display: none !important;
         }
 
         /* Instructions Modal */
@@ -272,7 +277,7 @@
         .level-complete .badge i { font-size: 3.5rem; }
         .level-title { font-size:2.2rem; font-weight:800; color:#1a365d; margin-bottom:15px; }
         .level-text { color:#4a5568; margin-bottom:20px; font-size:1.1rem; line-height:1.6; }
-        
+       
         /* Score and Rank Display */
         .score-rank-container { display: flex; justify-content: center; gap: 30px; margin: 25px 0; flex-wrap: wrap; }
         .score-box, .rank-box { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); min-width: 180px; }
@@ -282,7 +287,7 @@
         .score-value { font-size: 2.5rem; font-weight: 800; color: #1a365d; }
         .rank-value { font-size: 2.5rem; font-weight: 800; color: #d97706; }
         .rank-suffix { font-size: 1rem; color: #6b7280; }
-        
+       
         /* Leaderboard Preview */
         .leaderboard-preview { margin: 25px 0; padding: 20px; background: #f8fafc; border-radius: 15px; }
         .leaderboard-title { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 15px; text-align: center; }
@@ -292,7 +297,7 @@
         .leaderboard-rank { font-weight: 700; color: #475569; width: 30px; text-align: center; }
         .leaderboard-name { flex-grow: 1; margin: 0 15px; font-weight: 600; }
         .leaderboard-score { font-weight: 700; color: #059669; min-width: 60px; text-align: right; }
-        
+       
         .next-level-btn { padding:12px 24px; background:linear-gradient(45deg,#38b2ac,#2c9a94); color:white; border:none; border-radius:12px; font-size:1.1rem; font-weight:800; cursor:pointer; transition: all 0.3s ease; margin-top:15px; }
         .next-level-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(56, 178, 172, 0.4); }
 
@@ -319,8 +324,16 @@
             .streak-counter { display: none !important; }
             .score-rank-container { gap: 15px; }
             .score-box, .rank-box { min-width: 150px; padding: 15px; }
+            .language-selector {
+                margin-right: 5px;
+            }
+            .language-option-btn {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+                min-width: 50px;
+            }
         }
-        
+       
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
@@ -331,21 +344,43 @@
             nav ul {
                 gap: 15px;
             }
-            
+           
             .score-value, .rank-value { font-size: 2rem; }
+            .header-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .language-selector {
+                margin-right: 0;
+                order: 1;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
         }
-        
+       
+        @media (max-width: 480px) {
+            .language-selector {
+                gap: 5px;
+            }
+            .language-option-btn {
+                padding: 3px 6px;
+                font-size: 0.65rem;
+                min-width: 45px;
+            }
+        }
+       
         /* New animations */
         @keyframes confetti-fall {
             0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
-        
+       
         @keyframes pop-in {
             0% { transform: scale(0.5); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        
+       
         .pop-in { animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     </style>
 </head>
@@ -375,9 +410,12 @@
         </nav>
        
         <div class="header-controls">
-            <button class="control-btn" id="languageToggle">
-                <i class="fas fa-globe"></i>
-            </button>
+            <!-- Horizontal Language Selector -->
+            <div class="language-selector">
+                <button class="language-option-btn active" data-lang="en">English</button>
+                <button class="language-option-btn" data-lang="or">ଓଡ଼ିଆ</button>
+                <button class="language-option-btn" data-lang="hi">हिन्दी</button>
+            </div>
            
             <div class="profile-container">
                 <button class="profile-btn" id="profileToggle">
@@ -403,13 +441,6 @@
             </div>
         </div>
     </header>
-
-    <!-- Language Options -->
-    <div class="language-options" id="languageOptions">
-        <div class="language-option" data-lang="en">English</div>
-        <div class="language-option" data-lang="or">ଓଡ଼ିଆ</div>
-        <div class="language-option" data-lang="hi">हिन्दी</div>
-    </div>
 
     <!-- Instructions modal -->
     <div class="instructions-modal" id="instructions-modal">
@@ -497,7 +528,7 @@
                 <div class="badge"><i class="fas fa-medal"></i></div>
                 <h2 class="level-title" data-translate="level-title">Level Complete!</h2>
                 <p class="level-text" data-translate="level-text">Congratulations! You've identified the food sources correctly. You're becoming a real food detective!</p>
-                
+               
                 <!-- Score and Rank Display -->
                 <div class="score-rank-container">
                     <div class="score-box pop-in">
@@ -510,7 +541,7 @@
                         <div class="rank-suffix" id="rank-suffix">th</div>
                     </div>
                 </div>
-                
+               
                 <!-- Leaderboard Preview -->
                 <div class="leaderboard-preview" id="leaderboard-preview">
                     <div class="leaderboard-title">Top Players</div>
@@ -518,7 +549,7 @@
                         <!-- Leaderboard items will be inserted here -->
                     </div>
                 </div>
-                
+               
                 <button class="next-level-btn" id="play-again-btn" data-translate="play-again">Play Again</button>
             </div>
         </div>
@@ -551,7 +582,7 @@
            
             // Load user data
             loadUserData(user);
-            
+           
             // Initialize the game
             init();
         });
@@ -638,8 +669,6 @@
         // Dashboard integration elements
         const profileToggle = document.getElementById('profileToggle');
         const profileDropdown = document.getElementById('profileDropdown');
-        const languageToggle = document.getElementById('languageToggle');
-        const languageOptions = document.getElementById('languageOptions');
         const dropdownProfile = document.getElementById('dropdownProfile');
         const dropdownSettings = document.getElementById('dropdownSettings');
         const dropdownLogout = document.getElementById('dropdownLogout');
@@ -648,12 +677,18 @@
         const navAbout = document.getElementById('navAbout');
         const navContact = document.getElementById('navContact');
 
+        // Language selector elements
+        const languageOptionBtns = document.querySelectorAll('.language-option-btn');
+
         const translations = {
             en: {
                 'nav-dashboard': 'Dashboard','nav-science': 'Science','nav-about':'About','nav-contact':'Contact',
                 'dropdown-profile': 'Profile','dropdown-settings': 'Settings','dropdown-logout': 'Logout',
                 'game-title':'Food Detective','game-desc':'Discover where your food comes from! Drag each food item to its correct source and become a food expert!',
                 'correct-title':'Awesome!','incorrect-title':'Try Again!',
+                'timer-label': 'Time',
+        'score-label': 'Score',
+        'streak-label': 'Streak',
                 'continue-btn':'Continue Adventure','level-title':'Level Complete!','level-text':"Congratulations! You've identified the food sources correctly. You're becoming a real food detective!",
                 'play-again':'Play Again','instructions-title':'How to Play Food Detective','instructions-intro':"Welcome to Food Detective! Here's how to play:",
                 'instruction-1':'Drag food items to their correct source - either Plant or Animal.',
@@ -668,6 +703,9 @@
                 'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍','dropdown-settings': 'ସେଟିଂସ୍','dropdown-logout': 'ଲଗଆଉଟ୍',
                 'game-title':'ଖାଦ୍ୟ ଗବେଷକ','game-desc':'ଆପଣଙ୍କର ଖାଦ୍ୟ କେଉଁଠାରୁ ଆସେ ଆବିଷ୍କାର କରନ୍ତୁ! ପ୍ରତ୍ୟେକ ଖାଦ୍ୟ ବସ୍ତୁକୁ ସଠିକ ଉତ୍ସକୁ ଟାଣନ୍ତୁ!',
                 'correct-title':'ଚମତ୍କାର!','incorrect-title':'ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ!',
+                 'timer-label': 'ସମୟ',
+        'score-label': 'ସ୍କୋର',
+        'streak-label': 'ଧାରା',
                 'continue-btn':'ଆଗକୁ ବଢ଼ନ୍ତୁ','level-title':'ସ୍ତର ସମ୍ପୂର୍ଣ୍ଣ!','level-text':'ଅଭିନନ୍ଦନ! ଆପଣ ଖାଦ୍ୟ ଉତ୍ସଗୁଡ଼ିକୁ ସଠିକ ଭାବରେ ଚିହ୍ନିଛନ୍ତି!',
                 'play-again':'ପୁଣି ଖେଳନ୍ତୁ','instructions-title':'ଫୁଡ ଡିଟେକ୍ଟିଭ କିପରି ଖେଳିବେ','instructions-intro':'ଫୁଡ ଡିଟେକ୍ଟିଭକୁ ସ୍ୱାଗତ!',
                 'instruction-1':'ଖାଦ୍ୟ ବସ୍ତୁଗୁଡିକୁ ସେମାନଙ୍କ ସଠିକ ଉତ୍ସକୁ ଟାଣନ୍ତୁ - ଉଦ୍ଭିଦ କିମ୍ବା ପ୍ରାଣୀ।',
@@ -680,10 +718,13 @@
                 'dropdown-profile': 'प्रोफाइल','dropdown-settings': 'सेटिंग्स','dropdown-logout': 'लॉगआउट',
                 'game-title':'फूड डिटेक्टिव','game-desc':'खोजें कि आपका भोजन कहाँ से आता है! प्रत्येक खाद्य पदार्थ को उसके सही स्रोत पर खींचें और भोजन विशेषज्ञ बनें!',
                 'correct-title':'बहुत बढ़िया!','incorrect-title':'फिर से कोशिश करें!',
+                'timer-label': 'समय',
+        'score-label': 'स्कोर',
+        'streak-label': 'लगातार',
                 'continue-btn':'जारी रखें','level-title':'स्तर पूरा!','level-text':'बधाई हो! आपने खाद्य स्रोतों को सही ढंग से पहचान लिया है।',
                 'play-again':'फिर से खेलें','instructions-title':'फूड डिटेक्टिव कैसे खेलें','instructions-intro':'स्वागत है',
-                'instruction-1':'खाद्य पदार्थों को उनके सही स्रोत पर खींचें - पौधा या जानवर।','instruction-2':'प्रत्येक सही उत्तर अंक अर्जित करता है।',
-                'instruction-3':'अपनी लगातार सफलता बनाए रखें','instruction-4':'सभी आइटम पूरे करें','instruction-5':'विभिन्न खाद्य पदार्थों और उनके स्रोतों के बारे में जानें!',
+                'instruction-1':'खाद्य पार्थों को उनके सही स्रोत पर खींचें - पौधा या जानवर।','instruction-2':'प्रत्येक सही उत्तर अंक अर्जित करता है।',
+                'instruction-3':'अपनी लगातार सफलता बनाए रखें','instruction-4':'सभी आइटम पूरे करें','instruction-5':'विभिन्न खाद्य पार्थों और उनके स्रोतों के बारे में जानें!',
                 'instruction-6':'मज़ा करें','instructions-outro':'शुभकामनाएं','start-game-btn':'खेल शुरू करें','plant-source':'पौधों के स्रोत','animal-source':'जानवरों के स्रोत'
             }
         };
@@ -700,6 +741,17 @@
                 });
             });
 
+            // Add event listeners to horizontal language selector
+            languageOptionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    // Update active button
+                    languageOptionBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    switchLanguage(lang);
+                });
+            });
+
             startGameBtn.addEventListener('click', startGame);
             modalAction.addEventListener('click', closeModal);
             modalClose.addEventListener('click', closeModal);
@@ -708,19 +760,6 @@
             // Dashboard integration event listeners
             profileToggle.addEventListener('click', function() {
                 profileDropdown.classList.toggle('show');
-            });
-
-            languageToggle.addEventListener('click', function() {
-                languageOptions.classList.toggle('show');
-            });
-
-            // Language selection
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    switchLanguage(lang);
-                    languageOptions.classList.remove('show');
-                });
             });
 
             // Navigation between pages
@@ -763,10 +802,6 @@
 
             // Close dropdowns when clicking outside
             document.addEventListener('click', function(e) {
-                if (!e.target.closest('#languageToggle') && !e.target.closest('#languageOptions')) {
-                    languageOptions.classList.remove('show');
-                }
-               
                 if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
                     profileDropdown.classList.remove('show');
                 }
@@ -926,14 +961,21 @@
 
         /* ---- UI Updates ---- */
         function updateScore() {
-            scoreElement.textContent = `Score: ${score}`;
-            const maxPossible = currentGameItems.length * 30; // approximate (base 10 + streak)
+            // Get the translated label
+            const scoreLabel = translations[currentLanguage]?.['score-label'] || 'Score';
+            // Update with both label and value
+            scoreElement.textContent = `${scoreLabel}: ${score}`;
+           
+            const maxPossible = currentGameItems.length * 30;
             const pct = Math.min(100, Math.round((score / (maxPossible || 1)) * 100));
             progressElement.style.width = `${pct}%`;
         }
 
         function updateStreak() {
-            streakElement.textContent = `Streak: ${streak}`;
+            // Get the translated label
+            const streakLabel = translations[currentLanguage]?.['streak-label'] || 'Streak';
+            // Update with both label and value
+            streakElement.textContent = `${streakLabel}: ${streak}`;
             streakCountDisplay.textContent = streak;
            
             // Show streak counter when streak is 3 or more
@@ -961,7 +1003,10 @@
         function updateTimerDisplay() {
             const m = Math.floor(timeLeft/60);
             const s = timeLeft % 60;
-            timeElement.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            // Get the translated label
+            const timerLabel = translations[currentLanguage]?.['timer-label'] || 'Time';
+            // Update with both label and value
+            timeElement.textContent = `${timerLabel}: ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
         }
 
         function showTimeUpModal() {
@@ -980,17 +1025,17 @@
             score += timeBonus;
             finalScore = score;
             updateScore();
-            
+           
             // Save score to server and get rank
             try {
                 const user = JSON.parse(localStorage.getItem('user'));
                 if (user && user.id) {
                     const result = await saveGameResult(user.id, finalScore);
-                    
+                   
                     if (result && result.rank) {
                         // Get leaderboard data
                         const leaderboardData = await getGameLeaderboard(gameName);
-                        
+                       
                         // Display final results
                         displayFinalResults(finalScore, result.rank, leaderboardData);
                     } else {
@@ -1004,7 +1049,7 @@
                 console.error('Error saving game result:', error);
                 displayFinalResults(finalScore, 1, []);
             }
-            
+           
             createConfetti();
             levelComplete.style.display = 'block';
         }
@@ -1013,7 +1058,7 @@
         async function saveGameResult(userId, gameScore) {
             try {
                 const timeTaken = 180 - timeLeft; // in seconds
-                
+               
                 const response = await fetch('/api/game/save-result-with-rank', {
                     method: 'POST',
                     headers: {
@@ -1027,11 +1072,11 @@
                         completed: true
                     })
                 });
-                
+               
                 if (!response.ok) {
                     throw new Error('Failed to save game result');
                 }
-                
+               
                 return await response.json();
             } catch (error) {
                 console.error('Error saving game result:', error);
@@ -1042,11 +1087,11 @@
         async function getGameLeaderboard(gameName) {
             try {
                 const response = await fetch(`/api/game/leaderboard/${encodeURIComponent(gameName)}`);
-                
+               
                 if (!response.ok) {
                     throw new Error('Failed to fetch leaderboard');
                 }
-                
+               
                 return await response.json();
             } catch (error) {
                 console.error('Error fetching leaderboard:', error);
@@ -1059,11 +1104,11 @@
             // Update score and rank display
             finalScoreElement.textContent = finalScore;
             finalRankElement.textContent = rank;
-            
+           
             // Add proper suffix to rank
             const suffix = getRankSuffix(rank);
             rankSuffixElement.textContent = suffix;
-            
+           
             // Display leaderboard
             if (leaderboardData && leaderboardData.length > 0) {
                 displayLeaderboard(leaderboardData);
@@ -1071,7 +1116,7 @@
             } else {
                 leaderboardPreview.style.display = 'none';
             }
-            
+           
             // Add celebration effects based on rank
             if (rank <= 3) {
                 celebrateTopRank(rank);
@@ -1092,35 +1137,35 @@
 
         function displayLeaderboard(leaderboardData) {
             leaderboardList.innerHTML = '';
-            
+           
             const user = JSON.parse(localStorage.getItem('user'));
             const currentUserId = user ? user.id : null;
-            
+           
             // Sort by score descending
             leaderboardData.sort((a, b) => b.score - a.score);
-            
+           
             // Display top 5 or less
             const displayCount = Math.min(5, leaderboardData.length);
             for (let i = 0; i < displayCount; i++) {
                 const player = leaderboardData[i];
                 const item = document.createElement('div');
                 item.className = 'leaderboard-item';
-                
+               
                 // Highlight current user
                 if (player.user_id == currentUserId) {
                     item.classList.add('current-user');
                 }
-                
+               
                 // Format rank (starting from 1)
                 const rank = i + 1;
                 const rankSuffix = getRankSuffix(rank);
-                
+               
                 item.innerHTML = `
                     <div class="leaderboard-rank">${rank}${rankSuffix}</div>
                     <div class="leaderboard-name">${player.fullName}</div>
                     <div class="leaderboard-score">${player.score}</div>
                 `;
-                
+               
                 leaderboardList.appendChild(item);
             }
         }
@@ -1128,15 +1173,15 @@
         function celebrateTopRank(rank) {
             // Add special effects for top 3 ranks
             const medalColors = ['#FFD700', '#C0C0C0', '#CD7F32']; // Gold, Silver, Bronze
-            
+           
             if (rank <= 3) {
                 // Update medal icon color
                 const medalIcon = document.querySelector('.level-complete .badge i');
                 medalIcon.style.color = medalColors[rank - 1];
-                
+               
                 // Add special confetti for top ranks
                 createSpecialConfetti(rank);
-                
+               
                 // Play victory sound if available
                 if (rank === 1) {
                     // First place special celebration
@@ -1150,10 +1195,10 @@
         }
 
         function createSpecialConfetti(rank) {
-            const colors = rank === 1 ? ['#FFD700', '#FFED4E', '#FFF9C4'] : 
-                          rank === 2 ? ['#C0C0C0', '#E5E4E2', '#D3D3D3'] : 
+            const colors = rank === 1 ? ['#FFD700', '#FFED4E', '#FFF9C4'] :
+                          rank === 2 ? ['#C0C0C0', '#E5E4E2', '#D3D3D3'] :
                           ['#CD7F32', '#B87333', '#8B4513'];
-            
+           
             for (let i = 0; i < 15; i++) {
                 const c = document.createElement('div');
                 c.style.position = 'fixed';
@@ -1198,11 +1243,19 @@
                 btn.classList.toggle('active', btn.getAttribute('data-lang')===lang);
             });
            
+            // Update horizontal language selector
+            languageOptionBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang')===lang);
+            });
+           
             // translate elements
             const map = translations[lang] || translations.en;
             Object.keys(map).forEach(key => {
                 document.querySelectorAll(`[data-translate="${key}"]`).forEach(el => {
                     el.textContent = map[key];
+                    updateTimerDisplay();
+                    updateScore();
+                    updateStreak();
                 });
             });
            
@@ -1260,7 +1313,8 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeModal();
             if ((e.key === 'r' || e.key === 'R') && e.ctrlKey) { e.preventDefault(); startGame(); }
-            if (e.key === '1') switchLanguage('en'); if (e.key==='2') switchLanguage('or'); if (e.key==='3') switchLanguage('hi');
+    
+        if (e.key === '1') switchLanguage('en'); if (e.key==='2') switchLanguage('or'); if (e.key==='3') switchLanguage('hi');
         });
 
         // hide modal when clicking outside content

@@ -1,4 +1,4 @@
-// server.js - Complete Backend for STEM Learn Odisha
+// server.js - Complete Backend for STEM Learn Odisha with Doubt System
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
@@ -21,6 +21,7 @@ app.use('/uploads', express.static('uploads'));
 if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
 if (!fs.existsSync('assignments')) fs.mkdirSync('assignments');
 if (!fs.existsSync('quizzes')) fs.mkdirSync('quizzes');
+if (!fs.existsSync('doubts')) fs.mkdirSync('doubts');
 
 // Initialize SQLite database
 let db;
@@ -222,6 +223,38 @@ async function initializeDatabase() {
       is_correct BOOLEAN DEFAULT 0,
       FOREIGN KEY (student_quiz_id) REFERENCES student_quizzes(id) ON DELETE CASCADE,
       FOREIGN KEY (question_id) REFERENCES quiz_questions(id)
+    )`);
+
+    // Doubts table (NEW)
+    await createTable('doubts', `CREATE TABLE IF NOT EXISTS doubts (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      student_id INTEGER NOT NULL,
+      subject TEXT NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      attachment TEXT,
+      status TEXT DEFAULT 'pending', -- pending, in-progress, resolved
+      priority TEXT DEFAULT 'normal', -- low, normal, high, urgent
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      resolved_at DATETIME,
+      resolved_by INTEGER,
+      resolution_text TEXT,
+      FOREIGN KEY (student_id) REFERENCES users(id),
+      FOREIGN KEY (resolved_by) REFERENCES teachers(id)
+    )`);
+
+    // Doubt comments table (NEW)
+    await createTable('doubt_comments', `CREATE TABLE IF NOT EXISTS doubt_comments (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      doubt_id INTEGER NOT NULL,
+      user_id INTEGER NOT NULL,
+      user_type TEXT NOT NULL, -- student or teacher
+      comment TEXT NOT NULL,
+      attachment TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (doubt_id) REFERENCES doubts(id) ON DELETE CASCADE,
+      FOREIGN KEY (user_id) REFERENCES users(id)
     )`);
 
     // Notifications table
@@ -431,6 +464,23 @@ async function insertSampleData() {
           );
         });
 
+        // Create sample doubt
+        await new Promise((resolveDoubt, rejectDoubt) => {
+          db.run(
+            `INSERT INTO doubts (student_id, subject, title, description, status, priority) VALUES (?, ?, ?, ?, ?, ?)`,
+            [1, 'Mathematics', 'Confusion about Fractions', 'I am having difficulty understanding how to add fractions with different denominators. Can someone explain step by step?', 'pending', 'normal'],
+            function(err) {
+              if (err) {
+                console.error('Error inserting sample doubt:', err);
+                rejectDoubt(err);
+              } else {
+                console.log('Sample doubt created with ID:', this.lastID);
+                resolveDoubt();
+              }
+            }
+          );
+        });
+
         console.log('All sample data inserted successfully');
         resolve();
       } else {
@@ -547,6 +597,7 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     let folder = 'uploads/';
     if (file.fieldname === 'assignmentFile') folder = 'assignments/';
+    if (file.fieldname === 'doubtAttachment') folder = 'doubts/';
     cb(null, folder);
   },
   filename: function (req, file, cb) {
@@ -1007,6 +1058,300 @@ app.get('/api/teachers/quizzes/:teacherId', (req, res) => {
   });
 });
 
+// ==================== DOUBT SYSTEM ROUTES (NEW) ====================
+
+// Post a new doubt
+app.post('/api/doubts/create', upload.single('attachment'), (req, res) => {
+  try {
+    const { student_id, subject, title, description, priority } = req.body;
+    
+    if (!student_id || !subject || !title || !description) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const attachment = req.file ? req.file.filename : null;
+    
+    db.run(
+      `INSERT INTO doubts (student_id, subject, title, description, attachment, priority) VALUES (?, ?, ?, ?, ?, ?)`,
+      [student_id, subject, title, description, attachment, priority || 'normal'],
+      function(err) {
+        if (err) {
+          console.error('Error creating doubt:', err);
+          return res.status(500).json({ message: 'Error creating doubt' });
+        }
+        
+        const doubtId = this.lastID;
+        
+        // Notify all teachers about new doubt
+        db.all('SELECT id FROM teachers', (err, teachers) => {
+          if (teachers && teachers.length > 0) {
+            teachers.forEach(teacher => {
+              db.run(
+                `INSERT INTO notifications (user_id, title, message, type, related_id) VALUES (?, ?, ?, ?, ?)`,
+                [teacher.id, 'New Doubt Posted', `Student posted a new doubt in ${subject}: "${title}"`, 'doubt', doubtId]
+              );
+            });
+          }
+        });
+        
+        res.status(201).json({ 
+          message: 'Doubt posted successfully',
+          doubtId: doubtId
+        });
+      }
+    );
+  } catch (error) {
+    console.error('Error creating doubt:', error);
+    res.status(500).json({ message: 'Server error creating doubt' });
+  }
+});
+
+// Get doubts for student
+app.get('/api/student/doubts/:studentId', (req, res) => {
+  const studentId = req.params.studentId;
+  
+  db.all(`
+    SELECT d.*, u.fullName as student_name, u.profilePicture as student_picture,
+           t.fullName as resolved_by_name
+    FROM doubts d
+    JOIN users u ON d.student_id = u.id
+    LEFT JOIN teachers t ON d.resolved_by = t.id
+    WHERE d.student_id = ?
+    ORDER BY d.created_at DESC
+  `, [studentId], (err, doubts) => {
+    if (err) {
+      console.error('Error fetching student doubts:', err);
+      return res.status(500).json({ message: 'Error fetching doubts' });
+    }
+    
+    res.status(200).json(doubts || []);
+  });
+});
+
+// Get all doubts for teacher dashboard
+app.get('/api/teachers/doubts', (req, res) => {
+  db.all(`
+    SELECT d.*, u.fullName as student_name, u.grade, u.profilePicture as student_picture,
+           t.fullName as resolved_by_name
+    FROM doubts d
+    JOIN users u ON d.student_id = u.id
+    LEFT JOIN teachers t ON d.resolved_by = t.id
+    ORDER BY 
+      CASE 
+        WHEN d.status = 'pending' THEN 1
+        WHEN d.status = 'in-progress' THEN 2
+        ELSE 3
+      END,
+      CASE d.priority
+        WHEN 'urgent' THEN 1
+        WHEN 'high' THEN 2
+        WHEN 'normal' THEN 3
+        ELSE 4
+      END,
+      d.created_at DESC
+  `, (err, doubts) => {
+    if (err) {
+      console.error('Error fetching doubts:', err);
+      return res.status(500).json({ message: 'Error fetching doubts' });
+    }
+    
+    res.status(200).json(doubts || []);
+  });
+});
+
+// Get doubt details with comments
+app.get('/api/doubts/:doubtId', (req, res) => {
+  const doubtId = req.params.doubtId;
+  
+  db.get(`
+    SELECT d.*, u.fullName as student_name, u.grade, u.profilePicture as student_picture,
+           t.fullName as resolved_by_name
+    FROM doubts d
+    JOIN users u ON d.student_id = u.id
+    LEFT JOIN teachers t ON d.resolved_by = t.id
+    WHERE d.id = ?
+  `, [doubtId], (err, doubt) => {
+    if (err || !doubt) {
+      return res.status(404).json({ message: 'Doubt not found' });
+    }
+    
+    db.all(`
+      SELECT dc.*, 
+             CASE 
+               WHEN dc.user_type = 'student' THEN u.fullName
+               ELSE t.fullName
+             END as user_name,
+             CASE 
+               WHEN dc.user_type = 'student' THEN u.profilePicture
+               ELSE t.profilePicture
+             END as user_picture
+      FROM doubt_comments dc
+      LEFT JOIN users u ON dc.user_type = 'student' AND dc.user_id = u.id
+      LEFT JOIN teachers t ON dc.user_type = 'teacher' AND dc.user_id = t.id
+      WHERE dc.doubt_id = ?
+      ORDER BY dc.created_at ASC
+    `, [doubtId], (err, comments) => {
+      if (err) comments = [];
+      
+      res.status(200).json({
+        ...doubt,
+        comments: comments
+      });
+    });
+  });
+});
+
+// Add comment to doubt
+app.post('/api/doubts/:doubtId/comments', upload.single('attachment'), (req, res) => {
+  try {
+    const doubtId = req.params.doubtId;
+    const { user_id, user_type, comment } = req.body;
+    
+    if (!user_id || !user_type || !comment) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+    
+    const attachment = req.file ? req.file.filename : null;
+    
+    db.run(
+      `INSERT INTO doubt_comments (doubt_id, user_id, user_type, comment, attachment) VALUES (?, ?, ?, ?, ?)`,
+      [doubtId, user_id, user_type, comment, attachment],
+      function(err) {
+        if (err) {
+          console.error('Error adding comment:', err);
+          return res.status(500).json({ message: 'Error adding comment' });
+        }
+        
+        // Update doubt status if teacher is commenting
+        if (user_type === 'teacher') {
+          db.get('SELECT status FROM doubts WHERE id = ?', [doubtId], (err, doubt) => {
+            if (!err && doubt && doubt.status === 'pending') {
+              db.run(
+                `UPDATE doubts SET status = 'in-progress', updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+                [doubtId]
+              );
+            }
+          });
+          
+          // Notify student about teacher's comment
+          db.get('SELECT student_id FROM doubts WHERE id = ?', [doubtId], (err, doubt) => {
+            if (!err && doubt) {
+              db.run(
+                `INSERT INTO notifications (user_id, title, message, type, related_id) VALUES (?, ?, ?, ?, ?)`,
+                [doubt.student_id, 'Doubt Response', 'A teacher has responded to your doubt', 'doubt_comment', doubtId]
+              );
+            }
+          });
+        }
+        
+        res.status(201).json({ 
+          message: 'Comment added successfully',
+          commentId: this.lastID
+        });
+      }
+    );
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    res.status(500).json({ message: 'Server error adding comment' });
+  }
+});
+
+// Update doubt status
+app.put('/api/doubts/:doubtId/status', (req, res) => {
+  try {
+    const doubtId = req.params.doubtId;
+    const { status, resolved_by, resolution_text } = req.body;
+    
+    if (!status) {
+      return res.status(400).json({ message: 'Status is required' });
+    }
+    
+    const updates = [];
+    const params = [];
+    
+    updates.push('status = ?');
+    params.push(status);
+    
+    updates.push('updated_at = CURRENT_TIMESTAMP');
+    
+    if (status === 'resolved') {
+      updates.push('resolved_at = CURRENT_TIMESTAMP');
+      if (resolved_by) {
+        updates.push('resolved_by = ?');
+        params.push(resolved_by);
+      }
+      if (resolution_text) {
+        updates.push('resolution_text = ?');
+        params.push(resolution_text);
+      }
+    }
+    
+    params.push(doubtId);
+    
+    const query = `UPDATE doubts SET ${updates.join(', ')} WHERE id = ?`;
+    
+    db.run(query, params, function(err) {
+      if (err) {
+        console.error('Error updating doubt status:', err);
+        return res.status(500).json({ message: 'Error updating doubt status' });
+      }
+      
+      // Notify student if doubt is resolved
+      if (status === 'resolved') {
+        db.get('SELECT student_id FROM doubts WHERE id = ?', [doubtId], (err, doubt) => {
+          if (!err && doubt) {
+            db.run(
+              `INSERT INTO notifications (user_id, title, message, type, related_id) VALUES (?, ?, ?, ?, ?)`,
+              [doubt.student_id, 'Doubt Resolved', 'Your doubt has been resolved by a teacher', 'doubt_resolved', doubtId]
+            );
+          }
+        });
+      }
+      
+      res.status(200).json({ 
+        message: 'Doubt status updated successfully'
+      });
+    });
+  } catch (error) {
+    console.error('Error updating doubt status:', error);
+    res.status(500).json({ message: 'Server error updating doubt status' });
+  }
+});
+
+// Get doubt statistics for teacher dashboard
+app.get('/api/teachers/doubt-stats', (req, res) => {
+  db.all(`
+    SELECT 
+      COUNT(*) as total_doubts,
+      COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending_doubts,
+      COUNT(CASE WHEN status = 'in-progress' THEN 1 END) as in_progress_doubts,
+      COUNT(CASE WHEN status = 'resolved' THEN 1 END) as resolved_doubts,
+      COUNT(CASE WHEN priority = 'urgent' THEN 1 END) as urgent_doubts,
+      COUNT(CASE WHEN priority = 'high' THEN 1 END) as high_doubts
+    FROM doubts
+  `, (err, stats) => {
+    if (err) {
+      console.error('Error fetching doubt stats:', err);
+      return res.status(500).json({ message: 'Error fetching doubt statistics' });
+    }
+    
+    db.all(`
+      SELECT subject, COUNT(*) as count
+      FROM doubts
+      WHERE status != 'resolved'
+      GROUP BY subject
+      ORDER BY count DESC
+    `, (err, subjectStats) => {
+      if (err) subjectStats = [];
+      
+      res.status(200).json({
+        ...stats[0],
+        subject_stats: subjectStats
+      });
+    });
+  });
+});
+
 // ==================== STUDENT DASHBOARD ROUTES ====================
 
 // Get student dashboard data
@@ -1070,9 +1415,11 @@ app.get('/api/student/dashboard/:userId', (req, res) => {
                      WHERE a.class_grade = ? AND a.status = 'active' AND (sa.submitted IS NULL OR sa.submitted = 0)) as pending_assignments,
                     (SELECT COUNT(*) FROM quizzes q 
                      LEFT JOIN student_quizzes sq ON q.id = sq.quiz_id AND sq.student_id = ?
-                     WHERE q.class_grade = ? AND q.status = 'active' AND sq.completed_at IS NULL) as pending_quizzes
-                `, [userId, user.grade, userId, user.grade], (err, counts) => {
-                  const pending = counts || { pending_assignments: 0, pending_quizzes: 0 };
+                     WHERE q.class_grade = ? AND q.status = 'active' AND sq.completed_at IS NULL) as pending_quizzes,
+                    (SELECT COUNT(*) FROM doubts d 
+                     WHERE d.student_id = ? AND d.status != 'resolved') as pending_doubts
+                `, [userId, user.grade, userId, user.grade, userId], (err, counts) => {
+                  const pending = counts || { pending_assignments: 0, pending_quizzes: 0, pending_doubts: 0 };
                   
                   const dashboardData = {
                     user: {
@@ -1104,7 +1451,8 @@ app.get('/api/student/dashboard/:userId', (req, res) => {
                     recentGames: recentGames || [],
                     availableGames: availableGames,
                     pending_assignments: pending.pending_assignments,
-                    pending_quizzes: pending.pending_quizzes
+                    pending_quizzes: pending.pending_quizzes,
+                    pending_doubts: pending.pending_doubts
                   };
                   
                   res.status(200).json(dashboardData);
@@ -1340,7 +1688,7 @@ app.post('/api/student/quiz/submit', (req, res) => {
         
         // Get time taken
         const attempt = await new Promise((resolve, reject) => {
-          db.get('SELECT started_at FROM student_quizzes WHERE id = ?', [attempt_id], (err, row) => {
+          db.get('SELECT started_at FROM student_quizzes WHERE id = ?', [attemptId], (err, row) => {
             if (err) reject(err);
             else resolve(row);
           });
@@ -1626,151 +1974,44 @@ app.get('/api/games/subject/:subject', (req, res) => {
   });
 });
 
-// ==================== HTML ROUTES WITH CLEAN URLS ====================
+// ==================== BASIC HTML ROUTES ====================
 
-// REDIRECTS FROM OLD .html URLs TO CLEAN URLs
-app.get('/home.html', (req, res) => res.redirect('/home'));
-app.get('/about.html', (req, res) => res.redirect('/about'));
-app.get('/contact.html', (req, res) => res.redirect('/contact'));
-app.get('/student-login.html', (req, res) => res.redirect('/student-login'));
-app.get('/teacher-login.html', (req, res) => res.redirect('/teacher-login'));
-app.get('/student-register.html', (req, res) => res.redirect('/register'));
-app.get('/teacher-register.html', (req, res) => res.redirect('/teacher-register'));
-app.get('/student-dashboard.html', (req, res) => res.redirect('/student-dashboard'));
-app.get('/teacher-dashboard.html', (req, res) => res.redirect('/teacher-dashboard'));
-app.get('/assignments.html', (req, res) => res.redirect('/assignments'));
-app.get('/quizzes.html', (req, res) => res.redirect('/quizzes'));
-app.get('/leaderboard.html', (req, res) => res.redirect('/leaderboard'));
-app.get('/profile.html', (req, res) => res.redirect('/profile'));
-
-// MAIN CLEAN URL ROUTES
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
-app.get('/home', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
-app.get('/about', (req, res) => res.sendFile(path.join(__dirname, 'about.html')));
-app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, 'contact.html')));
-app.get('/student-login', (req, res) => res.sendFile(path.join(__dirname, 'student-login.html')));
-app.get('/teacher-login', (req, res) => res.sendFile(path.join(__dirname, 'teacher-login.html')));
-app.get('/register', (req, res) => res.sendFile(path.join(__dirname, 'student-register.html')));
-app.get('/teacher-register', (req, res) => res.sendFile(path.join(__dirname, 'teacher-register.html')));
-app.get('/student-dashboard', (req, res) => res.sendFile(path.join(__dirname, 'student-dashboard.html')));
-app.get('/teacher-dashboard', (req, res) => res.sendFile(path.join(__dirname, 'teacher-dashboard.html')));
-app.get('/assignments', (req, res) => res.sendFile(path.join(__dirname, 'assignments.html')));
-app.get('/quizzes', (req, res) => res.sendFile(path.join(__dirname, 'quizzes.html')));
-app.get('/leaderboard', (req, res) => res.sendFile(path.join(__dirname, 'leaderboard.html')));
-app.get('/profile', (req, res) => res.sendFile(path.join(__dirname, 'profile.html')));
-
-// SUBJECT PAGES
-app.get('/english', (req, res) => res.sendFile(path.join(__dirname, 'class-6/english/english.html')));
-app.get('/maths', (req, res) => res.sendFile(path.join(__dirname, 'class-6/maths/math.html')));
-app.get('/science', (req, res) => res.sendFile(path.join(__dirname, 'class-6/science/science.html')));
-app.get('/technology', (req, res) => res.sendFile(path.join(__dirname, 'class-6/technology/technology.html')));
-
-// GAME PAGES
-app.get('/english-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/english/enggames.html')));
-app.get('/math-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/maths/mathidx.html')));
-app.get('/science-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/science/scienceidx.html')));
-app.get('/tech-games', (req, res) => res.sendFile(path.join(__dirname, 'class-6/technology/techgames.html')));
-
-// INDIVIDUAL GAMES
-app.get('/game-living', (req, res) => res.sendFile(path.join(__dirname, 'game-living.html')));
-app.get('/game-habitat', (req, res) => res.sendFile(path.join(__dirname, 'game-habitat.html')));
-app.get('/game-bodyparts', (req, res) => res.sendFile(path.join(__dirname, 'game-bodyparts.html')));
-app.get('/game-math-basic', (req, res) => res.sendFile(path.join(__dirname, 'game-math-basic.html')));
-app.get('/game-fractions', (req, res) => res.sendFile(path.join(__dirname, 'game-fractions.html')));
-app.get('/game6.1.1', (req, res) => res.sendFile(path.join(__dirname, 'game6.1.1.html')));
-app.get('/game6.3.2', (req, res) => res.sendFile(path.join(__dirname, 'game6.3.2.html')));
-
-// FALLBACK FOR ANY .html FILE ACCESS
-app.get('*.html', (req, res) => {
-  const requestedFile = req.path;
-  // Redirect to clean URL (remove .html)
-  const cleanUrl = requestedFile.replace('.html', '');
-  res.redirect(cleanUrl);
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'student-login.html'));
 });
 
-// CATCH-ALL FOR CLASS-6 FOLDER
-app.get('/class-6/:folder/:file', (req, res) => {
-  const folder = req.params.folder;
-  const file = req.params.file;
-  const filePath = path.join(__dirname, `class-6/${folder}/${file}.html`);
-  
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      res.status(404).send('<h1>Page not found</h1><p>Go to <a href="/home">Home</a></p>');
-    } else {
-      res.sendFile(filePath);
-    }
-  });
+app.get('/student-dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'student-dashboard.html'));
 });
 
-// FINAL CATCH-ALL - Try to serve any HTML file without extension
-app.get('/:page', (req, res) => {
-  const page = req.params.page;
-  
-  // Skip API routes
-  if (page.startsWith('api')) {
-    return res.status(404).json({ message: 'API endpoint not found' });
-  }
-  
-  const filePath = path.join(__dirname, `${page}.html`);
-  
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      // Check if it's in class-6 folder
-      const class6Path = path.join(__dirname, `class-6/${page}/${page}.html`);
-      fs.access(class6Path, fs.constants.F_OK, (err2) => {
-        if (err2) {
-          // Send 404 page
-          res.status(404).send(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <title>404 - Page Not Found</title>
-              <style>
-                body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                h1 { color: #ff4444; }
-                a { color: #0066cc; text-decoration: none; }
-                a:hover { text-decoration: underline; }
-              </style>
-            </head>
-            <body>
-              <h1>404 - Page Not Found</h1>
-              <p>The page "${page}" does not exist.</p>
-              <p><a href="/home">Go to Home Page</a></p>
-              <p><a href="/student-login">Student Login</a> | <a href="/teacher-login">Teacher Login</a></p>
-            </body>
-            </html>
-          `);
-        } else {
-          res.sendFile(class6Path);
-        }
-      });
-    } else {
-      res.sendFile(filePath);
-    }
-  });
+app.get('/student-login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'student-login.html'));
+});
+
+app.get('/teacher-login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'teacher-login.html'));
+});
+
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'student-register.html'));
 });
 
 // ==================== START SERVER ====================
 
 app.listen(PORT, () => {
-  console.log('='.repeat(70));
-  console.log('🚀 STEM Learn Odisha - NATIONAL LEVEL HACKATHON SUBMISSION 🚀');
-  console.log('='.repeat(70));
-  console.log(`✅ Server running on: http://localhost:${PORT}`);
-  console.log('📌 CLEAN URLS:');
-  console.log(`   🏠 Home: http://localhost:${PORT}/home`);
-  console.log(`   👨‍🎓 Student Login: http://localhost:${PORT}/student-login`);
-  console.log(`   👨‍🏫 Teacher Login: http://localhost:${PORT}/teacher-login`);
-  console.log(`   📊 Dashboard: http://localhost:${PORT}/student-dashboard`);
-  console.log(`   📋 Teacher Dashboard: http://localhost:${PORT}/teacher-dashboard`);
-  console.log(`   🔬 Science: http://localhost:${PORT}/science`);
-  console.log(`   ➕ Maths: http://localhost:${PORT}/maths`);
-  console.log(`   📚 English: http://localhost:${PORT}/english`);
-  console.log(`   💻 Technology: http://localhost:${PORT}/technology`);
-  console.log('='.repeat(70));
-  console.log('📢 FOR DEMO: Open browser and type: http://localhost:5000/home');
-  console.log('='.repeat(70));
+  console.log('='.repeat(60));
+  console.log('🚀 STEM Learn Odisha Server Started Successfully!');
+  console.log('='.repeat(60));
+  console.log(`📍 Server running on: http://localhost:${PORT}`);
+  console.log(`👨‍🎓 Student Portal: http://localhost:${PORT}/student-login`);
+  console.log(`👨‍🏫 Teacher Portal: http://localhost:${PORT}/teacher-login`);
+  console.log(`📊 Student Dashboard: http://localhost:${PORT}/student-dashboard`);
+  console.log(`📊 Teacher Dashboard: http://localhost:${PORT}/teacher-dashboard`);
+  console.log('='.repeat(60));
+  console.log('✅ Doubt System: Enabled');
+  console.log('✅ Students can post doubts in STEM subjects');
+  console.log('✅ Teachers can view and resolve doubts');
+  console.log('='.repeat(60));
 });
 
 // Error handling middleware
@@ -1788,4 +2029,4 @@ process.on('SIGINT', () => {
     console.log('👋 Server stopped. Goodbye!\n');
     process.exit(0);
   });
-});
+}); 

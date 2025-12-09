@@ -436,57 +436,6 @@
             margin-bottom: 8px;
         }
 
-        /* Progress Tracking */
-        .progress-section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-        }
-
-        .progress-title {
-            font-size: 1.5rem;
-            color: #1a365d;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .progress-bars {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .progress-item {
-            margin-bottom: 15px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: #4a5568;
-        }
-
-        .progress-bar-container {
-            height: 10px;
-            background: #e2e8f0;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: #3182ce;
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
-
         /* Games Section */
         .games-section {
             margin-bottom: 30px;
@@ -910,52 +859,6 @@
                         </div>
                         <div class="card-title" data-translate="card4-title">Review and Practice</div>
                         <div class="card-desc" data-translate="card4-desc">Test your skills in using different mathematical tools through practical exercises</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Progress Tracking -->
-            <div class="progress-section">
-                <h2 class="progress-title">
-                    <i class="fas fa-chart-line"></i>
-                    <span data-translate="progress-title">Your Progress</span>
-                </h2>
-                <div class="progress-bars">
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-mathematical">Mathematical Tools</span>
-                            <span id="mathematical-progress-value">45%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="mathematical-progress" style="width: 45%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-measuring">Measuring Instruments</span>
-                            <span id="measuring-progress-value">35%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="measuring-progress" style="width: 35%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-drawing">Drawing Tools</span>
-                            <span id="drawing-progress-value">25%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="drawing-progress" style="width: 25%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <div class="progress-label">
-                            <span data-translate="progress-overall">Overall Mastery</span>
-                            <span id="overall-progress-value">35%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="overall-progress" style="width: 35%"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1605,42 +1508,6 @@
             document.getElementById('content-modal').style.display = 'none';
         }
 
-        // Progress tracking
-        function updateProgress(category, points) {
-            const progressBars = {
-                'mathematical': document.getElementById('mathematical-progress'),
-                'measuring': document.getElementById('measuring-progress'),
-                'drawing': document.getElementById('drawing-progress'),
-                'overall': document.getElementById('overall-progress')
-            };
-            
-            const progressValues = {
-                'mathematical': document.getElementById('mathematical-progress-value'),
-                'measuring': document.getElementById('measuring-progress-value'),
-                'drawing': document.getElementById('drawing-progress-value'),
-                'overall': document.getElementById('overall-progress-value')
-            };
-            
-            // Update specific category
-            let currentWidth = parseInt(progressBars[category].style.width);
-            if (currentWidth + points <= 100) {
-                progressBars[category].style.width = (currentWidth + points) + '%';
-                progressValues[category].textContent = (currentWidth + points) + '%';
-            } else {
-                progressBars[category].style.width = '100%';
-                progressValues[category].textContent = '100%';
-            }
-            
-            // Update overall progress
-            let overallWidth = (
-                parseInt(progressBars['mathematical'].style.width) +
-                parseInt(progressBars['measuring'].style.width) +
-                parseInt(progressBars['drawing'].style.width)
-            ) / 3;
-            
-            progressBars['overall'].style.width = overallWidth + '%';
-            progressValues['overall'].textContent = Math.round(overallWidth) + '%';
-        }
     </script>
 </body>
 </html>

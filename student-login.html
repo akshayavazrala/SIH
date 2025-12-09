@@ -32,7 +32,7 @@
             padding: 0 20px;
         }
 
-        /* Language and Audio Controls */
+        /* Language and Home Controls */
         .controls {
             position: absolute;
             top: 20px;
@@ -56,6 +56,7 @@
             backdrop-filter: blur(10px);
             color: white;
             font-size: 1.2rem;
+            text-decoration: none;
         }
 
         .control-btn:hover {
@@ -389,11 +390,11 @@
     </style>
 </head>
 <body>
-    <!-- Language and Audio Controls -->
+    <!-- Language and Home Controls -->
     <div class="controls">
-        <button class="control-btn" id="audioToggle">
-            <i class="fas fa-volume-up"></i>
-        </button>
+        <a href="home.html" class="control-btn" id="homeBtn" title="Go to Home">
+            <i class="fas fa-home"></i>
+        </a>
         <button class="control-btn" id="languageToggle">
             <i class="fas fa-globe"></i>
         </button>
@@ -675,76 +676,76 @@
                 matchValidation.querySelector('.invalid').style.display = 'inline';
             }
         }
-// Replace the form submission handlers with these:
 
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-  
-  try {
-    const response = await fetch('http://localhost:5000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
-    
-    const data = await response.json();
-    
-    if (response.ok) {
-      // Store user data
-      localStorage.setItem('user', JSON.stringify(data.user));
-      alert('Login successful!');
-      // Redirect to dashboard or home page
-      window.location.href = 'student-dashboard.html';
-    } else {
-      alert(data.message);
-    }
-  } catch (error) {
-    console.error('Login error:', error);
-    alert('An error occurred during login');
-  }
-});
+        // Form submission handlers
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store user data
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Login successful!');
+                    // Redirect to dashboard or home page
+                    window.location.href = 'student-dashboard.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred during login');
+            }
+        });
 
-document.getElementById('registerForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData();
-  formData.append('fullName', document.getElementById('fullName').value);
-  formData.append('email', document.getElementById('registerEmail').value);
-  formData.append('password', document.getElementById('registerPassword').value);
-  formData.append('grade', document.getElementById('grade').value);
-  
-  const profilePicture = document.getElementById('profilePicture').files[0];
-  if (profilePicture) {
-    formData.append('profilePicture', profilePicture);
-  }
-  
-  try {
-    const response = await fetch('http://localhost:5000/api/register', {
-      method: 'POST',
-      body: formData
-    });
-    
-    const data = await response.json();
-    
-    if (response.ok) {
-      // Store user data
-      localStorage.setItem('user', JSON.stringify(data.user));
-      alert('Registration successful!');
-      // Redirect to dashboard or home page
-      // window.location.href = 'dashboard.html';
-    } else {
-      alert(data.message);
-    }
-  } catch (error) {
-    console.error('Registration error:', error);
-    alert('An error occurred during registration');
-  }
-});
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('fullName', document.getElementById('fullName').value);
+            formData.append('email', document.getElementById('registerEmail').value);
+            formData.append('password', document.getElementById('registerPassword').value);
+            formData.append('grade', document.getElementById('grade').value);
+            
+            const profilePicture = document.getElementById('profilePicture').files[0];
+            if (profilePicture) {
+                formData.append('profilePicture', profilePicture);
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/register', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store user data
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Registration successful!');
+                    // Redirect to dashboard or home page
+                    // window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('An error occurred during registration');
+            }
+        });
 
         // Language toggle
         document.getElementById('languageToggle').addEventListener('click', function() {
@@ -758,14 +759,6 @@ document.getElementById('registerForm').addEventListener('submit', async functio
                 switchLanguage(lang);
                 document.getElementById('languageOptions').classList.remove('show');
             });
-        });
-
-        // Audio toggle
-        let audioEnabled = true;
-        document.getElementById('audioToggle').addEventListener('click', function() {
-            audioEnabled = !audioEnabled;
-            this.innerHTML = audioEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
-            alert('Audio ' + (audioEnabled ? 'enabled' : 'disabled'));
         });
 
         // Language translations

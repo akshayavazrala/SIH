@@ -1654,42 +1654,6 @@
             document.getElementById('content-modal').style.display = 'none';
         }
 
-        // Progress tracking
-        function updateProgress(category, points) {
-            const progressBars = {
-                'concepts': document.getElementById('concepts-progress'),
-                'units': document.getElementById('units-progress'),
-                'scales': document.getElementById('scales-progress'),
-                'overall': document.getElementById('overall-progress')
-            };
-            
-            const progressValues = {
-                'concepts': document.getElementById('concepts-progress-value'),
-                'units': document.getElementById('units-progress-value'),
-                'scales': document.getElementById('scales-progress-value'),
-                'overall': document.getElementById('overall-progress-value')
-            };
-            
-            // Update specific category
-            let currentWidth = parseInt(progressBars[category].style.width);
-            if (currentWidth + points <= 100) {
-                progressBars[category].style.width = (currentWidth + points) + '%';
-                progressValues[category].textContent = (currentWidth + points) + '%';
-            } else {
-                progressBars[category].style.width = '100%';
-                progressValues[category].textContent = '100%';
-            }
-            
-            // Update overall progress
-            let overallWidth = (
-                parseInt(progressBars['concepts'].style.width) +
-                parseInt(progressBars['units'].style.width) +
-                parseInt(progressBars['scales'].style.width)
-            ) / 3;
-            
-            progressBars['overall'].style.width = overallWidth + '%';
-            progressValues['overall'].textContent = Math.round(overallWidth) + '%';
-        }
     </script>
 </body>
 </html>

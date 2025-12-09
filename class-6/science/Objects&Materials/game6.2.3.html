@@ -10,17 +10,185 @@
   *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
   body{background:#f0f7ff;color:#0f1724;overflow-x:hidden}
   .container{max-width:1100px;margin:0 auto;padding:0 18px}
-  header{background:linear-gradient(135deg,#0e2a47 0%,#1a365d 100%);color:white;padding:14px 0;position:sticky;top:0;z-index:100}
-  .header-content{display:flex;justify-content:space-between;align-items:center;gap:12px}
-  .logo{display:flex;gap:12px;align-items:center}
-  .logo-icon{background:white;color:#155e75;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
-  .logo-text{font-weight:800;font-size:1.2rem}
-  .logo-text span{color:#38b2ac}
-  nav ul{display:flex;gap:16px;list-style:none}
-  nav a{color:white;text-decoration:none;font-weight:600}
-  .language-switcher{position:absolute;top:16px;right:18px;display:flex;gap:6px;background:rgba(255,255,255,0.12);padding:6px;border-radius:22px;backdrop-filter:blur(6px);z-index:1200}
-  .lang-btn{background:transparent;border:none;color:white;padding:8px 10px;border-radius:14px;font-weight:700;cursor:pointer}
-  .lang-btn.active{background:rgba(255,255,255,0.22)}
+  
+  /* Header Styles with Profile Integration */
+  header {
+    background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo i {
+    font-size: 1.8rem;
+    color: #2a69ac;
+  }
+
+  .logo-text h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .logo-text h1 span {
+    color: #38b2ac;
+    font-weight: 800;
+  }
+
+  .logo-text p {
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+
+  nav a:hover, nav a.active {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /* Horizontal Language Selector */
+  .language-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 15px;
+  }
+
+  .language-option-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .language-option-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .language-option-btn.active {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
+
+  .profile-container {
+    position: relative;
+  }
+
+  .profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 30px;
+    padding: 8px 15px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .profile-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    width: 180px;
+    display: none;
+    z-index: 1001;
+    overflow: hidden;
+  }
+
+  .profile-dropdown.show {
+    display: block;
+  }
+
+  .dropdown-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-item:hover {
+    background: #f5f7fa;
+  }
+
+  .dropdown-item i {
+    color: #3182ce;
+    width: 20px;
+  }
   
   /* header hero */
   .game-header{background:linear-gradient(rgba(14,42,71,0.85),rgba(26,54,93,0.9)),url('https://images.unsplash.com/photo-1541976076758-0d0b0a2b9a5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80');background-size:cover;padding:34px 0;color:white;text-align:center;margin-bottom:14px}
@@ -75,7 +243,52 @@
   .instructions-list {margin-left: 20px; margin-bottom: 25px;}
   .instructions-list li {margin-bottom: 10px;}
   
-  /* Fun Fact Modal - LIKE IN SAMPLE */
+  /* Level Complete with Ranking */
+  .level-complete {display:none; text-align:center; padding:28px; background:linear-gradient(145deg,#ffffff,#f7fafc); border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.08); max-width:700px; margin:24px auto;}
+  .level-complete .badge {font-size: 4rem; margin-bottom: 20px;}
+  .level-title {font-size:2.2rem; font-weight:800; color:#1a365d; margin-bottom:15px;}
+  .level-text {color:#4a5568; margin-bottom:20px; font-size:1.1rem; line-height:1.6;}
+ 
+  /* Score and Rank Display */
+  .score-rank-container {display: flex; justify-content: center; gap: 30px; margin: 25px 0; flex-wrap: wrap;}
+  .score-box, .rank-box {background: white; padding: 20px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); min-width: 180px;}
+  .score-box {border-left: 5px solid #38b2ac;}
+  .rank-box {border-left: 5px solid #f59e0b;}
+  .score-label, .rank-label {font-size: 0.9rem; color: #64748b; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
+  .score-value {font-size: 2.5rem; font-weight: 800; color: #1a365d;}
+  .rank-value {font-size: 2.5rem; font-weight: 800; color: #d97706;}
+  .rank-suffix {font-size: 1rem; color: #6b7280;}
+ 
+  /* Leaderboard Preview */
+  .leaderboard-preview {margin: 25px 0; padding: 20px; background: #f8fafc; border-radius: 15px;}
+  .leaderboard-title {font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 15px; text-align: center;}
+  .leaderboard-list {max-height: 200px; overflow-y: auto;}
+  .leaderboard-item {display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; margin-bottom: 8px; background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+  .leaderboard-item.current-user {background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border: 2px solid #0ea5e9;}
+  .leaderboard-rank {font-weight: 700; color: #475569; width: 30px; text-align: center;}
+  .leaderboard-name {flex-grow: 1; margin: 0 15px; font-weight: 600;}
+  .leaderboard-score {font-weight: 700; color: #059669; min-width: 60px; text-align: right;}
+ 
+  .next-level-btn {padding:12px 24px; background:linear-gradient(45deg,#38b2ac,#2c9a94); color:white; border:none; border-radius:12px; font-size:1.1rem; font-weight:800; cursor:pointer; transition: all 0.3s ease; margin-top:15px;}
+  .next-level-btn:hover {transform: translateY(-3px); box-shadow: 0 6px 15px rgba(56, 178, 172, 0.4);}
+
+  .particles {position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;}
+  .particle {position:absolute; width:4px; height:4px; background:rgba(255,255,255,0.5); border-radius:50%; animation: float-particle 18s infinite linear;}
+
+  @keyframes float-particle {0% {transform: translateY(100vh) translateX(0px); opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-100px) translateX(100px); opacity:0;}}
+
+  /* Streak Counter */
+  .streak-counter {position: fixed; top: 50%; right: 20px; transform: translateY(-50%); background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; padding: 18px 24px; border-radius: 50px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5); z-index: 500; animation: streak-bounce 2s infinite; display: none;}
+  @keyframes streak-bounce {
+    0%, 100% {transform: translateY(-50%) scale(1);}
+    50% {transform: translateY(-55%) scale(1.1);}
+  }
+
+  /* Language-specific text styles */
+  .odia-text {font-family: 'Kalinga', 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600;}
+  .hindi-text {font-family: 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600;}
+
+  /* Fun Fact Modal */
   .funfact-modal {
     display: none;
     position: fixed;
@@ -138,52 +351,133 @@
   .kingdom-unlock-title {font-size: 2.2rem; margin-bottom: 15px; color: #1a365d;}
   .kingdom-unlock-text {color: #64748b; margin-bottom: 30px; line-height: 1.6;}
   
-  /* Level Complete */
-  .level-complete {text-align:center; padding:28px; background:linear-gradient(145deg,#ffffff,#f7fafc); border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.08); max-width:700px; margin:24px auto; display: none;}
-  .level-complete .badge {font-size: 4rem; margin-bottom: 20px;}
-  
   /* Final Boss */
   .final-boss-page {text-align: center; padding: 40px 20px;}
   .boss-container {background: white; border-radius: 20px; padding: 40px; max-width: 700px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
   
   /* small screens */
-  @media(max-width:980px){.cards-grid{grid-template-columns:repeat(2,1fr)}.game-header h1{font-size:1.6rem}}
-  @media(max-width:520px){.cards-grid{grid-template-columns:repeat(1,1fr)}.language-switcher{right:10px;top:10px}.streak-counter{display:none}}
+  @media(max-width:980px){.cards-grid{grid-template-columns:repeat(2,1fr)}.game-header h1{font-size:1.6rem}
+    .game-stats {flex-direction:column; gap:10px; align-items:flex-start;}
+    .streak-counter {display: none !important;}
+    .score-rank-container {gap: 15px;}
+    .score-box, .rank-box {min-width: 150px; padding: 15px;}
+    .language-selector {
+      margin-right: 5px;
+    }
+    .language-option-btn {
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      min-width: 50px;
+    }
+  }
+  
+  @media(max-width:768px){
+    header {
+      padding: 15px 20px;
+      flex-direction: column;
+      gap: 15px;
+    }
+   
+    nav ul {
+      gap: 15px;
+    }
+   
+    .score-value, .rank-value {font-size: 2rem;}
+    .header-controls {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .language-selector {
+      margin-right: 0;
+      order: 1;
+      width: 100%;
+      justify-content: center;
+      margin-top: 10px;
+    }
+  }
+  
+  @media(max-width:480px){
+    .language-selector {
+      gap: 5px;
+    }
+    .language-option-btn {
+      padding: 3px 6px;
+      font-size: 0.65rem;
+      min-width: 45px;
+    }
+  }
   
   /* Animations */
   .pulse {animation: pulse 1.5s infinite;}
   @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
   }
   .shake {animation: shake 0.5s;}
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+    0%, 100% {transform: translateX(0);}
+    10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+    20%, 40%, 60%, 80% {transform: translateX(5px);}
   }
   .confetti {position: absolute; pointer-events: none; z-index: 10;}
 </style>
 </head>
 <body>
-  <div class="language-switcher" id="global-lang">
-    <button class="lang-btn active" data-lang="en">English</button>
-    <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
-    <button class="lang-btn" data-lang="hi">हिन्दी</button>
-  </div>
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+  <div class="streak-counter" id="streak-counter">🔥 <span id="streak-count">0</span> Streak!</div>
 
+  <!-- Header with Profile Integration -->
   <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo"><div class="logo-icon"><i class="fas fa-vial"></i></div><div class="logo-text">STEM <span>Learn</span> Odisha</div></div>
-        <nav>
-          <ul>
-            <li><a href="#" data-translate="nav-dashboard">Dashboard</a></li>
-            <li><a href="#" data-translate="nav-about">About</a></li>
-            <li><a href="#" data-translate="nav-contact">Contact</a></li>
-          </ul>
-        </nav>
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fas fa-vial"></i>
+      </div>
+      <div class="logo-text">
+        <h1>STEM Learn Odisha</h1>
+        <p>Gamified Learning Platform</p>
+      </div>
+    </div>
+   
+    <nav>
+      <ul>
+        <li><a href="student-dashboard.html" id="navHome" data-translate="nav-dashboard">Dashboard</a></li>
+        <li><a href="science.html" id="navScience" data-translate="nav-science">Science</a></li>
+        <li><a href="about.html" id="navAbout" data-translate="nav-about">About</a></li>
+        <li><a href="contact.html" id="navContact" data-translate="nav-contact">Contact</a></li>
+      </ul>
+    </nav>
+   
+    <div class="header-controls">
+      <!-- Horizontal Language Selector -->
+      <div class="language-selector">
+        <button class="language-option-btn active" data-lang="en">English</button>
+        <button class="language-option-btn" data-lang="or">ଓଡ଼ିଆ</button>
+        <button class="language-option-btn" data-lang="hi">हिन्दी</button>
+      </div>
+     
+      <div class="profile-container">
+        <button class="profile-btn" id="profileToggle">
+          <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+          <span id="headerUserName">Student</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+       
+        <div class="profile-dropdown" id="profileDropdown">
+          <a href="#" class="dropdown-item" id="dropdownProfile">
+            <i class="fas fa-user"></i>
+            <span data-translate="dropdown-profile">Profile</span>
+          </a>
+          <a href="#" class="dropdown-item" id="dropdownSettings">
+            <i class="fas fa-cog"></i>
+            <span data-translate="dropdown-settings">Settings</span>
+          </a>
+          <a href="#" class="dropdown-item" id="dropdownLogout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span data-translate="dropdown-logout">Logout</span>
+          </a>
+        </div>
       </div>
     </div>
   </header>
@@ -269,6 +563,28 @@
         <div class="badge">🏅</div>
         <h3 id="level-complete-title-solidia">Solidia Kingdom Complete!</h3>
         <p id="level-complete-text-solidia">You restored balance to Solidia! Ready for the next kingdom?</p>
+       
+        <!-- Score and Rank Display -->
+        <div class="score-rank-container">
+          <div class="score-box pop-in">
+            <div class="score-label">Your Score</div>
+            <div class="score-value" id="final-score-solidia">0</div>
+          </div>
+          <div class="rank-box pop-in">
+            <div class="rank-label">Your Rank</div>
+            <div class="rank-value" id="final-rank-solidia">0</div>
+            <div class="rank-suffix" id="rank-suffix-solidia">th</div>
+          </div>
+        </div>
+       
+        <!-- Leaderboard Preview -->
+        <div class="leaderboard-preview" id="leaderboard-preview-solidia">
+          <div class="leaderboard-title">Top Players</div>
+          <div class="leaderboard-list" id="leaderboard-list-solidia">
+            <!-- Leaderboard items will be inserted here -->
+          </div>
+        </div>
+       
         <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
           <button class="next-level-btn" id="next-kingdom-solidia">Next Kingdom</button>
         </div>
@@ -320,6 +636,28 @@
         <div class="badge">🏅</div>
         <h3 id="level-complete-title-liquida">Liquida Kingdom Complete!</h3>
         <p id="level-complete-text-liquida">You restored balance to Liquida! Ready for the next kingdom?</p>
+       
+        <!-- Score and Rank Display -->
+        <div class="score-rank-container">
+          <div class="score-box pop-in">
+            <div class="score-label">Your Score</div>
+            <div class="score-value" id="final-score-liquida">0</div>
+          </div>
+          <div class="rank-box pop-in">
+            <div class="rank-label">Your Rank</div>
+            <div class="rank-value" id="final-rank-liquida">0</div>
+            <div class="rank-suffix" id="rank-suffix-liquida">th</div>
+          </div>
+        </div>
+       
+        <!-- Leaderboard Preview -->
+        <div class="leaderboard-preview" id="leaderboard-preview-liquida">
+          <div class="leaderboard-title">Top Players</div>
+          <div class="leaderboard-list" id="leaderboard-list-liquida">
+            <!-- Leaderboard items will be inserted here -->
+          </div>
+        </div>
+       
         <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
           <button class="next-level-btn" id="next-kingdom-liquida">Next Kingdom</button>
         </div>
@@ -371,6 +709,28 @@
         <div class="badge">🏅</div>
         <h3 id="level-complete-title-gasia">Gasia Kingdom Complete!</h3>
         <p id="level-complete-text-gasia">You restored balance to Gasia! Congratulations on saving all three kingdoms!</p>
+       
+        <!-- Score and Rank Display -->
+        <div class="score-rank-container">
+          <div class="score-box pop-in">
+            <div class="score-label">Your Score</div>
+            <div class="score-value" id="final-score-gasia">0</div>
+          </div>
+          <div class="rank-box pop-in">
+            <div class="rank-label">Your Rank</div>
+            <div class="rank-value" id="final-rank-gasia">0</div>
+            <div class="rank-suffix" id="rank-suffix-gasia">th</div>
+          </div>
+        </div>
+       
+        <!-- Leaderboard Preview -->
+        <div class="leaderboard-preview" id="leaderboard-preview-gasia">
+          <div class="leaderboard-title">Top Players</div>
+          <div class="leaderboard-list" id="leaderboard-list-gasia">
+            <!-- Leaderboard items will be inserted here -->
+          </div>
+        </div>
+       
         <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
           <button class="next-level-btn" id="final-boss-btn">Final Boss Battle</button>
           <button class="next-level-btn" id="play-again-final">Play Again</button>
@@ -439,9 +799,30 @@
     </div>
   </div>
 
-  <div class="streak-counter" id="streak-counter">🔥 <span id="streak-count">0</span> Streak!</div>
-
 <script>
+// Authentication Check
+document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(localStorage.getItem('user'));
+   
+    if (!user) {
+        // Redirect to login if not authenticated
+        window.location.href = 'student-login.html';
+        return;
+    }
+   
+    // Load user data
+    loadUserData(user);
+   
+    // Initialize the game
+    init();
+});
+
+// Load user data into the page
+function loadUserData(user) {
+    document.getElementById('headerUserName').textContent = user.fullName;
+    document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+}
+
 /* ========= GAME CONFIG ========= */
 const CONFIG = {
   perWorldPick: 6,
@@ -586,11 +967,20 @@ let timeLeft = CONFIG.sessionTime;
 let timerInterval = null;
 let currentCard = null;
 let currentKingdom = 'solidia';
+let finalScore = 0;
+let userRank = 0;
+let gameName = 'Matter Mission';
 
 /* ========= TRANSLATIONS ========= */
 const UI_STRINGS = {
   en: {
-    'nav-dashboard':'Dashboard','nav-about':'About','nav-contact':'Contact',
+    'nav-dashboard':'Dashboard',
+    'nav-science':'Science',
+    'nav-about':'About',
+    'nav-contact':'Contact',
+    'dropdown-profile':'Profile',
+    'dropdown-settings':'Settings',
+    'dropdown-logout':'Logout',
     'game-title':'Matter Mission — Save the Three Kingdoms',
     'game-desc':'Help restore balance to the kingdoms of matter by identifying physical and chemical changes!',
     'instructions-title':'How to Play Matter Mission',
@@ -610,7 +1000,6 @@ const UI_STRINGS = {
     'gasia-unlock-title':'Gasia Kingdom Unlocked!',
     'gasia-unlock-text':'You\'ve mastered liquids! Now face the challenges of gases in the Gasia kingdom.',
     'continue':'Continue',
-    // Game text translations
     'score':'Score',
     'streak':'Streak',
     'solidia-kingdom':'Solidia Kingdom - Solids',
@@ -638,7 +1027,13 @@ const UI_STRINGS = {
     'level-text-gasia':'You restored balance to Gasia! Congratulations on saving all three kingdoms!'
   },
   or: {
-    'nav-dashboard':'ଡ୍ୟାସବୋର୍ଡ','nav-about':'ବିଷୟରେ','nav-contact':'ଯୋଗାଯୋଗ',
+    'nav-dashboard':'ଡ୍ୟାସବୋର୍ଡ',
+    'nav-science':'ବିଜ୍ଞାନ',
+    'nav-about':'ବିଷୟରେ',
+    'nav-contact':'ଯୋଗାଯୋଗ',
+    'dropdown-profile':'ପ୍ରୋଫାଇଲ୍',
+    'dropdown-settings':'ସେଟିଂସ୍',
+    'dropdown-logout':'ଲଗଆଉଟ୍',
     'game-title':'ମ୍ୟାଟର ମିଶନ — ତିନୋଟି ରାଜ୍ୟକୁ ରକ୍ଷା କରନ୍ତୁ',
     'game-desc':'ଭୌତିକ ଏବଂ ରାସୟନିକ ପରିବର୍ତ୍ତନ ଚିହ୍ନଟ କରି ପଦାର୍ଥର ରାଜ୍ୟଗୁଡ଼ିକର ସନ୍ତୁଳନ ପୁନରୁଦ୍ଧାର କରିବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ |',
     'instructions-title':'ମ୍ୟାଟର ମିଶନ କିପରି ଖେଳିବେ',
@@ -658,7 +1053,6 @@ const UI_STRINGS = {
     'gasia-unlock-title':'ଗେସିଆ ରାଜ୍ୟ ଅନଲକ୍!',
     'gasia-unlock-text':'ଆପଣ ତରଳ ପଦାର୍ଥରେ ଦକ୍ଷତା ହାସଲ କରିଛନ୍ତି! ଏବେ ଗେସିଆ ରାଜ୍ୟରେ ଗ୍ୟାସ୍ର ଚ୍ୟାଲେଞ୍ଜଗୁଡ଼ିକର ସମ୍ମୁଖୀନ ହୁଅନ୍ତୁ |',
     'continue':'ଆଗକୁ',
-    // Game text translations
     'score':'ସ୍କୋର',
     'streak':'ଷ୍ଟ୍ରିକ୍',
     'solidia-kingdom':'ସୋଲିଡିଆ ରାଜ୍ୟ - ଠୋସ',
@@ -686,7 +1080,13 @@ const UI_STRINGS = {
     'level-text-gasia':'ଆପଣ ଗେସିଆର ସନ୍ତୁଳନ ପୁନରୁଦ୍ଧାର କରିଛନ୍ତି! ତିନୋଟି ରାଜ୍ୟ ବଞ୍ଚାଇବା ପାଇଁ ଅଭିନନ୍ଦନ!'
   },
   hi: {
-    'nav-dashboard':'डैशबोर्ड','nav-about':'हमारे बारे में','nav-contact':'संपर्क करें',
+    'nav-dashboard':'डैशबोर्ड',
+    'nav-science':'विज्ञान',
+    'nav-about':'हमारे बारे में',
+    'nav-contact':'संपर्क करें',
+    'dropdown-profile':'प्रोफाइल',
+    'dropdown-settings':'सेटिंग्स',
+    'dropdown-logout':'लॉगआउट',
     'game-title':'मैटर मिशन — तीन राज्य बचाओ',
     'game-desc':'भौतिक और रासायनिक परिवर्तनों की पहचान करके पदार्थ के राज्यों में संतुलन बहाल करने में मदद करें।',
     'instructions-title':'मैटर मिशन कैसे खेलें',
@@ -706,7 +1106,6 @@ const UI_STRINGS = {
     'gasia-unlock-title':'गेसिया राज्य अनलॉक!',
     'gasia-unlock-text':'आपने तरल पदार्थों में महारत हासिल कर ली है! अब गेसिया राज्य में गैसों की चुनौतियों का सामना करें।',
     'continue':'जारी रखें',
-    // Game text translations
     'score':'स्कोर',
     'streak':'स्ट्रीक',
     'solidia-kingdom':'सोलिडिया राज्य - ठोस',
@@ -737,7 +1136,21 @@ const UI_STRINGS = {
 
 /* ========= DOM ELEMENTS ========= */
 const dom = {
-  langBtns: document.querySelectorAll('#global-lang .lang-btn'),
+  // Header elements
+  profileToggle: document.getElementById('profileToggle'),
+  profileDropdown: document.getElementById('profileDropdown'),
+  dropdownProfile: document.getElementById('dropdownProfile'),
+  dropdownSettings: document.getElementById('dropdownSettings'),
+  dropdownLogout: document.getElementById('dropdownLogout'),
+  navHome: document.getElementById('navHome'),
+  navScience: document.getElementById('navScience'),
+  navAbout: document.getElementById('navAbout'),
+  navContact: document.getElementById('navContact'),
+  
+  // Language selector elements
+  languageOptionBtns: document.querySelectorAll('.language-option-btn'),
+  
+  // Game elements
   instructionsModal: document.getElementById('instructions-modal'),
   instructionsLangBtns: document.querySelectorAll('#instructions-modal .lang-btn'),
   pages: document.querySelectorAll('.page'),
@@ -796,15 +1209,17 @@ const dom = {
   funfactIcon: document.getElementById('funfact-icon'),
   funfactTitle: document.getElementById('funfact-title'),
   funfactText: document.getElementById('funfact-text'),
-  continueBtn: document.getElementById('continue-btn')
+  continueBtn: document.getElementById('continue-btn'),
+  
+  // Streak Counter
+  streakCounter: document.getElementById('streak-counter'),
+  streakCountDisplay: document.getElementById('streak-count')
 };
 
 /* ========= UTILITIES ========= */
 function randShuffle(arr){ return arr.map(a=>({v:a,r:Math.random()})).sort((a,b)=>a.r-b.r).map(x=>x.v); }
 
-// NEW: Function to ensure fresh questions every time
 function pickRandomUnique(pool, count){
-  // Always shuffle and pick fresh questions
   const shuffled = randShuffle(pool);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }
@@ -839,13 +1254,76 @@ function updateKingdomStats(kingdom){
     const progress = Math.round((completed / total) * 100);
     progressEl.style.width = `${progress}%`;
   }
+  
+  // Update streak counter
+  dom.streakCountDisplay.textContent = streak[kingdom];
+  if(streak[kingdom] >= 3) {
+    dom.streakCounter.style.display = 'block';
+  } else {
+    dom.streakCounter.style.display = 'none';
+  }
 }
 
 /* ========= INITIALIZATION ========= */
-document.addEventListener('DOMContentLoaded', ()=> {
-  // Global language buttons - THIS CHANGES ENTIRE GAME
-  dom.langBtns.forEach(btn=>{
-    btn.addEventListener('click', ()=> switchLanguage(btn.dataset.lang));
+function init() {
+  createParticles();
+  
+  // Dashboard integration event listeners
+  dom.profileToggle.addEventListener('click', function() {
+    dom.profileDropdown.classList.toggle('show');
+  });
+
+  // Navigation between pages
+  dom.dropdownProfile.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'student-dashboard.html#profile';
+  });
+
+  dom.dropdownSettings.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'student-dashboard.html#settings';
+  });
+
+  dom.dropdownLogout.addEventListener('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('user');
+    window.location.href = 'student-login.html';
+  });
+
+  // Navigation menu items
+  dom.navHome.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'student-dashboard.html';
+  });
+
+  dom.navScience.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'science.html';
+  });
+
+  dom.navAbout.addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('About page would open here');
+  });
+
+  dom.navContact.addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Contact page would open here');
+  });
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+      dom.profileDropdown.classList.remove('show');
+    }
+  });
+
+  // Language selector buttons
+  dom.languageOptionBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const lang = this.getAttribute('data-lang');
+      switchLanguage(lang);
+    });
   });
   
   // Instructions language buttons - ONLY changes instructions text
@@ -891,15 +1369,31 @@ document.addEventListener('DOMContentLoaded', ()=> {
   // Set initial language
   switchLanguage('en');
   switchInstructionsLanguage('en');
-});
+  
+  // Create particles
+  createParticles();
+}
+
+function createParticles() {
+  const container = document.getElementById('particles');
+  container.innerHTML = '';
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = `${Math.random() * 10}s`;
+    container.appendChild(p);
+  }
+}
 
 /* ========= LANGUAGE SWITCHING ========= */
 function switchLanguage(lang){
   LANG = lang; // This changes the ENTIRE GAME language
   
-  // Update global language switcher
-  document.querySelectorAll('#global-lang .lang-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.lang===lang);
+  // Update language selector buttons
+  dom.languageOptionBtns.forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang')===lang);
   });
   
   // Update all translatable elements
@@ -930,7 +1424,7 @@ function switchLanguage(lang){
   document.getElementById('start-boss-btn').textContent = t('start-boss');
   document.getElementById('back-to-game-btn').textContent = t('back-game');
   
-  // UPDATE ALL START BUTTONS TOO - THIS IS THE FIX
+  // UPDATE ALL START BUTTONS
   document.getElementById('start-game-btn').textContent = t('start-game-btn');
   document.getElementById('start-solidia-btn').textContent = t('start-game-btn');
   document.getElementById('start-liquida-btn').textContent = t('start-game-btn');
@@ -965,13 +1459,13 @@ function switchLanguage(lang){
   dom.bossScore.textContent = `${t('score')}: 0`;
   dom.bossStreak.textContent = `${t('streak')}: 0`;
   
-  // UPDATE CARD TITLES ON THE BOARD - THIS IS THE NEW FIX
+  // UPDATE CARD TITLES ON THE BOARD
   updateCardTitles();
 }
 
 function switchInstructionsLanguage(lang){
   // Only update instruction modal, NOT the game language
-  document.querySelectorAll('#instructions-modal .lang-btn').forEach(b => {
+  dom.instructionsLangBtns.forEach(b => {
     b.classList.toggle('active', b.dataset.lang === lang);
   });
   
@@ -995,7 +1489,7 @@ function switchInstructionsLanguage(lang){
   LANG = tempLang;
 }
 
-/* ========= NEW FUNCTION: UPDATE CARD TITLES ========= */
+/* ========= UPDATE CARD TITLES ========= */
 function updateCardTitles() {
   // Update cards for each kingdom if they exist on the page
   const kingdoms = ['solidia', 'liquida', 'gasia'];
@@ -1170,7 +1664,7 @@ function evaluateAnswer(answer){
   }
 }
 
-function handleCorrectAnswer(kingdom, card){
+async function handleCorrectAnswer(kingdom, card){
   const basePoints = CONFIG.basePoints;
   const streakBonus = Math.min(streak[kingdom] * CONFIG.streakBonus, 20);
   const pointsEarned = basePoints + streakBonus;
@@ -1227,7 +1721,7 @@ function showTimeUp(kingdom){
 }
 
 /* ========= LEVEL COMPLETE ========= */
-function showLevelComplete(kingdom){
+async function showLevelComplete(kingdom){
   const levelCompleteBox = document.getElementById(`level-complete-${kingdom}`);
   if(levelCompleteBox){
     levelCompleteBox.style.display = 'block';
@@ -1242,6 +1736,30 @@ function showLevelComplete(kingdom){
   }
   
   clearInterval(timerInterval);
+  
+  // Save score and get rank
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.id) {
+      const result = await saveGameResult(user.id, score[kingdom], kingdom);
+     
+      if (result && result.rank) {
+        // Get leaderboard data
+        const leaderboardData = await getGameLeaderboard(gameName, kingdom);
+       
+        // Display final results
+        displayFinalResults(score[kingdom], result.rank, leaderboardData, kingdom);
+      } else {
+        displayFinalResults(score[kingdom], result?.rank || 1, [], kingdom);
+      }
+    } else {
+      // Fallback if no user logged in
+      displayFinalResults(score[kingdom], 1, [], kingdom);
+    }
+  } catch (error) {
+    console.error('Error saving game result:', error);
+    displayFinalResults(score[kingdom], 1, [], kingdom);
+  }
 }
 
 /* ========= FINAL BOSS ========= */
@@ -1325,7 +1843,19 @@ function startBossBattle(){
   showNextQuestion();
 }
 
-function showBossComplete(){
+async function showBossComplete(){
+  const finalBossScore = totalScore;
+  
+  // Save final boss score
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.id) {
+      await saveGameResult(user.id, finalBossScore, 'final-boss');
+    }
+  } catch (error) {
+    console.error('Error saving boss score:', error);
+  }
+  
   dom.bossQuestionsContainer.innerHTML = `
     <div class="instruction-card">
       <div class="instruction-icon">🏆</div>
@@ -1339,6 +1869,170 @@ function showBossComplete(){
   `;
   
   document.getElementById('play-again-boss').addEventListener('click', startNewGame);
+}
+
+/* ========= SERVER COMMUNICATION ========= */
+async function saveGameResult(userId, gameScore, kingdom) {
+  try {
+    const timeTaken = CONFIG.sessionTime - timeLeft;
+   
+    const response = await fetch('/api/game/save-result-with-rank', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: userId,
+        gameName: `${gameName} - ${kingdom}`,
+        score: gameScore,
+        timeTaken: timeTaken,
+        completed: true
+      })
+    });
+   
+    if (!response.ok) {
+      throw new Error('Failed to save game result');
+    }
+   
+    return await response.json();
+  } catch (error) {
+    console.error('Error saving game result:', error);
+    throw error;
+  }
+}
+
+async function getGameLeaderboard(gameName, kingdom) {
+  try {
+    const response = await fetch(`/api/game/leaderboard/${encodeURIComponent(gameName + ' - ' + kingdom)}`);
+   
+    if (!response.ok) {
+      throw new Error('Failed to fetch leaderboard');
+    }
+   
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching leaderboard:', error);
+    return [];
+  }
+}
+
+/* ========= DISPLAY FINAL RESULTS ========= */
+function displayFinalResults(finalScore, rank, leaderboardData, kingdom) {
+  // Update score and rank display
+  const finalScoreElement = document.getElementById(`final-score-${kingdom}`);
+  const finalRankElement = document.getElementById(`final-rank-${kingdom}`);
+  const rankSuffixElement = document.getElementById(`rank-suffix-${kingdom}`);
+  
+  if (finalScoreElement) finalScoreElement.textContent = finalScore;
+  if (finalRankElement) finalRankElement.textContent = rank;
+ 
+  // Add proper suffix to rank
+  const suffix = getRankSuffix(rank);
+  if (rankSuffixElement) rankSuffixElement.textContent = suffix;
+ 
+  // Display leaderboard
+  const leaderboardPreview = document.getElementById(`leaderboard-preview-${kingdom}`);
+  const leaderboardList = document.getElementById(`leaderboard-list-${kingdom}`);
+  
+  if (leaderboardData && leaderboardData.length > 0 && leaderboardPreview && leaderboardList) {
+    displayLeaderboard(leaderboardData, leaderboardList);
+    leaderboardPreview.style.display = 'block';
+  } else if (leaderboardPreview) {
+    leaderboardPreview.style.display = 'none';
+  }
+ 
+  // Add celebration effects based on rank
+  if (rank <= 3) {
+    celebrateTopRank(rank);
+  }
+}
+
+function getRankSuffix(rank) {
+  if (rank % 100 >= 11 && rank % 100 <= 13) {
+    return 'th';
+  }
+  switch (rank % 10) {
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
+  }
+}
+
+function displayLeaderboard(leaderboardData, leaderboardListElement) {
+  leaderboardListElement.innerHTML = '';
+ 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const currentUserId = user ? user.id : null;
+ 
+  // Sort by score descending
+  leaderboardData.sort((a, b) => b.score - a.score);
+ 
+  // Display top 5 or less
+  const displayCount = Math.min(5, leaderboardData.length);
+  for (let i = 0; i < displayCount; i++) {
+    const player = leaderboardData[i];
+    const item = document.createElement('div');
+    item.className = 'leaderboard-item';
+   
+    // Highlight current user
+    if (player.user_id == currentUserId) {
+      item.classList.add('current-user');
+    }
+   
+    // Format rank (starting from 1)
+    const rank = i + 1;
+    const rankSuffix = getRankSuffix(rank);
+   
+    item.innerHTML = `
+      <div class="leaderboard-rank">${rank}${rankSuffix}</div>
+      <div class="leaderboard-name">${player.fullName}</div>
+      <div class="leaderboard-score">${player.score}</div>
+    `;
+   
+    leaderboardListElement.appendChild(item);
+  }
+}
+
+function celebrateTopRank(rank) {
+  // Add special effects for top 3 ranks
+  const medalColors = ['#FFD700', '#C0C0C0', '#CD7F32']; // Gold, Silver, Bronze
+ 
+  if (rank <= 3) {
+    // Add special confetti for top ranks
+    createSpecialConfetti(rank);
+   
+    // Play victory sound if available
+    if (rank === 1) {
+      // First place special celebration
+      setTimeout(() => {
+        createConfetti();
+        setTimeout(() => createConfetti(), 300);
+        setTimeout(() => createConfetti(), 600);
+      }, 500);
+    }
+  }
+}
+
+function createSpecialConfetti(rank) {
+  const colors = rank === 1 ? ['#FFD700', '#FFED4E', '#FFF9C4'] :
+                rank === 2 ? ['#C0C0C0', '#E5E4E2', '#D3D3D3'] :
+                ['#CD7F32', '#B87333', '#8B4513'];
+ 
+  for (let i = 0; i < 15; i++) {
+    const c = document.createElement('div');
+    c.style.position = 'fixed';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.top = '-10px';
+    c.style.width = '12px';
+    c.style.height = '12px';
+    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    c.style.zIndex = 1500;
+    c.style.borderRadius = '50%';
+    c.style.animation = `confetti-fall ${2 + Math.random()}s ease-out forwards`;
+    document.body.appendChild(c);
+    setTimeout(() => { if (document.body.contains(c)) document.body.removeChild(c); }, 3000);
+  }
 }
 
 /* ========= UI HELPERS ========= */
@@ -1399,8 +2093,8 @@ function createConfetti(){
 const style = document.createElement('style');
 style.textContent = `
 @keyframes confetti-fall {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  0% {transform: translateY(0) rotate(0deg); opacity: 1;}
+  100% {transform: translateY(100vh) rotate(360deg); opacity: 0;}
 }
 `;
 document.head.appendChild(style);

@@ -28,92 +28,60 @@
             padding: 0 20px;
         }
 
-        /* Language Switcher */
-        .language-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            padding: 8px;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            gap: 5px;
-        }
-
-        .lang-btn {
-            padding: 8px 16px;
-            border: none;
-            background: transparent;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: white;
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-        }
-
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
         /* Header Styles */
         header {
             background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
             color: white;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            font-size: 2.2rem;
+            width: 50px;
+            height: 50px;
             background: white;
-            color: #2a69ac;
-            width: 55px;
-            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logo-text {
+        .logo i {
             font-size: 1.8rem;
+            color: #2a69ac;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
-        .logo-text span {
+        .logo-text h1 span {
             color: #38b2ac;
             font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 28px;
+            gap: 30px;
         }
 
         nav a {
@@ -122,8 +90,7 @@
             font-weight: 500;
             transition: all 0.3s ease;
             padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 1.05rem;
+            border-radius: 6px;
         }
 
         nav a:hover, nav a.active {
@@ -131,14 +98,149 @@
             transform: translateY(-2px);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.6rem;
-            background: none;
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Horizontal Language Selector */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 15px;
+        }
+
+        .language-option-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .language-option-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .language-option-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
             border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 15px;
             color: white;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
+
+        .profile-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 180px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #f5f7fa;
+        }
+
+        .dropdown-item i {
+            color: #3182ce;
+            width: 20px;
+        }
+
+        /* Remove old language options */
+        .language-options {
+            display: none !important;
+        }
+
+        /* Instructions Modal */
+        .instructions-modal { display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; align-items: center; justify-content: center; }
+        .instructions-content { background: white; border-radius: 20px; width: 90%; max-width: 700px; padding: 30px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); position: relative; text-align: center; }
+        .instructions-title { font-size: 2rem; margin-bottom: 20px; color: #1a365d; font-weight: 700; }
+        .instructions-text { color: #64748b; margin-bottom: 25px; line-height: 1.6; text-align: left; font-size: 1.1rem; }
+        .instructions-list { margin-left: 20px; margin-bottom: 25px; }
+        .instructions-list li { margin-bottom: 10px; }
+        .start-game-btn { padding: 15px 40px; background: linear-gradient(135deg, #38b2ac 0%, #2c9a94 100%); color: white; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; }
+        .start-game-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3); }
 
         /* Game Header */
         .game-header {
@@ -454,106 +556,51 @@
             transform: rotate(-18deg) scale(1.05);
         }
 
-        /* Level complete card */
-        .level-complete {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            border-radius: 14px;
-            background: linear-gradient(145deg, #fff, #f7fafc);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-            max-width: 720px;
-            margin: 18px auto;
+        /* Level Complete with Ranking */
+        .level-complete { display:none; text-align:center; padding:28px; background:linear-gradient(145deg,#ffffff,#f7fafc); border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.08); max-width:700px; margin:24px auto; }
+        .level-complete .badge { font-size: 3rem; margin-bottom: 20px; color: #fbbf24; }
+        .level-complete .badge i { font-size: 3.5rem; }
+        .level-title { font-size:2.2rem; font-weight:800; color:#1a365d; margin-bottom:15px; }
+        .level-text { color:#4a5568; margin-bottom:20px; font-size:1.1rem; line-height:1.6; }
+       
+        /* Score and Rank Display */
+        .score-rank-container { display: flex; justify-content: center; gap: 30px; margin: 25px 0; flex-wrap: wrap; }
+        .score-box, .rank-box { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); min-width: 180px; }
+        .score-box { border-left: 5px solid #38b2ac; }
+        .rank-box { border-left: 5px solid #f59e0b; }
+        .score-label, .rank-label { font-size: 0.9rem; color: #64748b; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .score-value { font-size: 2.5rem; font-weight: 800; color: #1a365d; }
+        .rank-value { font-size: 2.5rem; font-weight: 800; color: #d97706; }
+        .rank-suffix { font-size: 1rem; color: #6b7280; }
+       
+        /* Leaderboard Preview */
+        .leaderboard-preview { margin: 25px 0; padding: 20px; background: #f8fafc; border-radius: 15px; }
+        .leaderboard-title { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 15px; text-align: center; }
+        .leaderboard-list { max-height: 200px; overflow-y: auto; }
+        .leaderboard-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; margin-bottom: 8px; background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .leaderboard-item.current-user { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); border: 2px solid #0ea5e9; }
+        .leaderboard-rank { font-weight: 700; color: #475569; width: 30px; text-align: center; }
+        .leaderboard-name { flex-grow: 1; margin: 0 15px; font-weight: 600; }
+        .leaderboard-score { font-weight: 700; color: #059669; min-width: 60px; text-align: right; }
+       
+        .next-level-btn { padding:12px 24px; background:linear-gradient(45deg,#38b2ac,#2c9a94); color:white; border:none; border-radius:12px; font-size:1.1rem; font-weight:800; cursor:pointer; transition: all 0.3s ease; margin-top:15px; }
+        .next-level-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(56, 178, 172, 0.4); }
+
+        .particles { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1; }
+        .particle { position:absolute; width:4px; height:4px; background:rgba(255,255,255,0.5); border-radius:50%; animation: float-particle 18s infinite linear; }
+
+        @keyframes float-particle { 0% { transform: translateY(100vh) translateX(0px); opacity:0; } 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-100px) translateX(100px); opacity:0;} }
+
+        /* Streak Counter */
+        .streak-counter { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; padding: 18px 24px; border-radius: 50px; font-weight: 800; font-size: 1.2rem; box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5); z-index: 500; animation: streak-bounce 2s infinite; display: none; }
+        @keyframes streak-bounce {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-55%) scale(1.1); }
         }
 
-        .next-level-btn {
-            padding: 10px 18px;
-            border-radius: 12px;
-            border: none;
-            background: linear-gradient(45deg, #38b2ac, #2c9a94);
-            color: white;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .next-level-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3);
-        }
-
-        /* Small helpers */
-        .small-muted {
-            font-size: .9rem;
-            color: #64748b;
-        }
-
-        /* Instructions Modal */
-        .instructions-modal {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .instructions-content {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 700px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            text-align: center;
-        }
-
-        .instructions-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1a365d;
-            font-weight: 700;
-        }
-
-        .instructions-text {
-            color: #64748b;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            text-align: left;
-            font-size: 1.1rem;
-        }
-
-        .instructions-list {
-            margin-left: 20px;
-            margin-bottom: 25px;
-        }
-
-        .instructions-list li {
-            margin-bottom: 10px;
-        }
-
-        .start-game-btn {
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #38b2ac 0%, #2c9a94 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .start-game-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(56, 178, 172, 0.3);
-        }
+        /* Language-specific text styles */
+        .odia-text { font-family: 'Kalinga', 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600; }
+        .hindi-text { font-family: 'Nirmala UI', 'Segoe UI', sans-serif; font-weight:600; }
 
         /* Success Modal */
         .success-modal {
@@ -633,116 +680,6 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, #0e2a47 0%, #1a365d 100%);
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-about {
-            padding-right: 20px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .footer-logo-icon {
-            font-size: 1.8rem;
-            background: #38b2ac;
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .footer-logo-text {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        .footer-about p {
-            color: #cbd5e1;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .footer-links h3 {
-            margin-bottom: 20px;
-            color: #38b2ac;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #2d3748;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .social-links a:hover {
-            background: #38b2ac;
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #2d3748;
-            color: #a0aec0;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
         @media (max-width: 980px) {
             .game-container {
                 grid-template-columns: 1fr;
@@ -762,63 +699,113 @@
             .passport-card-large {
                 width: 92%;
             }
+           
+            .game-stats { flex-direction:column; gap:10px; align-items:flex-start; }
+            .streak-counter { display: none !important; }
+            .score-rank-container { gap: 15px; }
+            .score-box, .rank-box { min-width: 150px; padding: 15px; }
+            .language-selector {
+                margin-right: 5px;
+            }
+            .language-option-btn {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+                min-width: 50px;
+            }
         }
-
+       
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-           
-            .game-header h1 {
-                font-size: 2.2rem;
-            }
-           
-            .game-stats {
+            header {
+                padding: 15px 20px;
                 flex-direction: column;
                 gap: 15px;
+            }
+           
+            nav ul {
+                gap: 15px;
+            }
+           
+            .score-value, .rank-value { font-size: 2rem; }
+            .header-controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .language-selector {
+                margin-right: 0;
+                order: 1;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+       
+        @media (max-width: 480px) {
+            .language-selector {
+                gap: 5px;
+            }
+            .language-option-btn {
+                padding: 3px 6px;
+                font-size: 0.65rem;
+                min-width: 45px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Particles -->
-    <div class="particles" id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:0"></div>
+    <div class="particles" id="particles"></div>
+    <div class="streak-counter" id="streak-counter">🔥 <span id="streak-count">0</span> Streak!</div>
 
-    <!-- Streak counter -->
-    <div class="streak-counter" id="streak-counter" style="position:fixed;right:18px;top:50%;transform:translateY(-50%);display:none;background:linear-gradient(45deg,#ff6b6b,#ee5a24);color:white;padding:14px 18px;border-radius:40px;font-weight:800;z-index:1500">🔥 <span id="streak-count">0</span> Streak!</div>
-
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="en">English</button>
-        <button class="lang-btn" data-lang="or">ଓଡ଼ିଆ</button>
-        <button class="lang-btn" data-lang="hi">हिन्दी</button>
-    </div>
-
+    <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-passport"></i>
-                    </div>
-                    <div class="logo-text">STEM <span>Learn</span> Odisha</div>
-                </div>
-
-                <nav>
-                    <ul>
-                        <li><a href="student-dashboard.html" data-translate="nav-dashboard">Dashboard</a></li>
-                        <li><a href="about.html" data-translate="nav-about">About</a></li>
-                        <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
-                    </ul>
-                </nav>
-
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-passport"></i>
+            </div>
+            <div class="logo-text">
+                <h1>STEM Learn Odisha</h1>
+                <p>Gamified Learning Platform</p>
+            </div>
+        </div>
+       
+        <nav>
+            <ul>
+                <li><a href="student-dashboard.html" id="navHome" data-translate="nav-dashboard">Dashboard</a></li>
+                <li><a href="science.html" id="navScience" data-translate="nav-science">Science</a></li>
+                <li><a href="about.html" id="navAbout" data-translate="nav-about">About</a></li>
+                <li><a href="contact.html" id="navContact" data-translate="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+       
+        <div class="header-controls">
+            <!-- Horizontal Language Selector -->
+            <div class="language-selector">
+                <button class="language-option-btn active" data-lang="en">English</button>
+                <button class="language-option-btn" data-lang="or">ଓଡ଼ିଆ</button>
+                <button class="language-option-btn" data-lang="hi">हिन्दी</button>
+            </div>
+           
+            <div class="profile-container">
+                <button class="profile-btn" id="profileToggle">
+                    <img src="" alt="Profile" class="profile-pic" id="headerProfilePic">
+                    <span id="headerUserName">Student</span>
+                    <i class="fas fa-chevron-down"></i>
                 </button>
+               
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" class="dropdown-item" id="dropdownProfile">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="dropdown-profile">Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownSettings">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="dropdown-settings">Settings</span>
+                    </a>
+                    <a href="#" class="dropdown-item" id="dropdownLogout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="dropdown-logout">Logout</span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
@@ -987,13 +974,34 @@
                 </div>
             </div>
 
-            <!-- Level complete -->
-            <div class="level-complete" id="level-complete">
-                <div style="font-size:1.2rem;font-weight:800;margin-bottom:8px" data-translate="level-complete">Level Complete!</div>
-                <p class="small-muted" data-translate="level-desc">Fantastic! You approved all passports.</p>
-                <div style="margin-top:12px">
-                    <button class="next-level-btn" id="play-again-btn" data-translate="play-again-btn">Play Again</button>
+            <!-- Level Complete with Ranking -->
+            <div class="level-complete" id="level-complete" style="display:none;">
+                <div class="badge"><i class="fas fa-medal"></i></div>
+                <h2 class="level-title" data-translate="level-title">Level Complete!</h2>
+                <p class="level-text" data-translate="level-text">Congratulations! You've identified all object properties correctly. You're becoming a real object expert!</p>
+               
+                <!-- Score and Rank Display -->
+                <div class="score-rank-container">
+                    <div class="score-box pop-in">
+                        <div class="score-label">Your Score</div>
+                        <div class="score-value" id="final-score">0</div>
+                    </div>
+                    <div class="rank-box pop-in">
+                        <div class="rank-label">Your Rank</div>
+                        <div class="rank-value" id="final-rank">0</div>
+                        <div class="rank-suffix" id="rank-suffix">th</div>
+                    </div>
                 </div>
+               
+                <!-- Leaderboard Preview -->
+                <div class="leaderboard-preview" id="leaderboard-preview">
+                    <div class="leaderboard-title">Top Players</div>
+                    <div class="leaderboard-list" id="leaderboard-list">
+                        <!-- Leaderboard items will be inserted here -->
+                    </div>
+                </div>
+               
+                <button class="next-level-btn" id="play-again-btn" data-translate="play-again-btn">Play Again</button>
             </div>
         </div>
     </section>
@@ -1031,54 +1039,45 @@
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <div class="footer-logo-icon">
-                            <i class="fas fa-passport"></i>
-                        </div>
-                        <div class="footer-logo-text">STEM <span>Learn</span> Odisha</div>
-                    </div>
-                    <p>Making learning fun and interactive for children through engaging educational games.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-               
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#"><i class="fas fa-gamepad"></i> Games</a></li>
-                        <li><a href="#"><i class="fas fa-book"></i> Resources</a></li>
-                        <li><a href="#"><i class="fas fa-award"></i> Achievements</a></li>
-                    </ul>
-                </div>
-               
-                <div class="footer-links">
-                    <h3>Support</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-           
-            <div class="copyright">
-                &copy; 2023 STEM Learn Odisha. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Game elements
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+           
+            if (!user) {
+                // Redirect to login if not authenticated
+                window.location.href = 'student-login.html';
+                return;
+            }
+           
+            // Load user data
+            loadUserData(user);
+           
+            // Initialize the game
+            init();
+        });
+
+        // Load user data into the page
+        function loadUserData(user) {
+            document.getElementById('headerUserName').textContent = user.fullName;
+            document.getElementById('headerProfilePic').src = user.profilePicture ? `uploads/${user.profilePicture}` : 'default-profile.png';
+        }
+
+        /* ---- STATE ---- */
+        let currentLang = 'en';
+        let currentIndex = 0;
+        let score = 0, streak = 0, correctCount = 0;
+        let timeLeft = 300; // 5 minutes
+        let timerInterval = null;
+        let usedIds = [];
+        let lastRejected = false;
+        let isInInstructions = true;
+        let currentObjects = [];
+        let finalScore = 0;
+        let userRank = 0;
+        let gameName = 'Object Passport';
+
+        /* ---- ELEMENTS ---- */
         const instructionsModal = document.getElementById('instructions-modal');
         const startGameBtn = document.getElementById('start-game-btn');
         const gameHeader = document.getElementById('game-header');
@@ -1118,20 +1117,29 @@
         const successModal = document.getElementById('success-modal');
         const successNextBtn = document.getElementById('success-next-btn');
 
+        // Leaderboard elements
+        const finalScoreElement = document.getElementById('final-score');
+        const finalRankElement = document.getElementById('final-rank');
+        const rankSuffixElement = document.getElementById('rank-suffix');
+        const leaderboardPreview = document.getElementById('leaderboard-preview');
+        const leaderboardList = document.getElementById('leaderboard-list');
+
+        // Language selector elements
+        const languageOptionBtns = document.querySelectorAll('.language-option-btn');
         const langBtns = document.querySelectorAll('.lang-btn');
 
-        // Game state
-        let currentLang = 'en';
-        let currentIndex = 0;
-        let score = 0, streak = 0, correctCount = 0;
-        let timeLeft = 300; // 5 minutes
-        let timerInterval = null;
-        let usedIds = [];
-        let lastRejected = false;
-        let isInInstructions = true;
-        let currentObjects = [];
+        // Dashboard integration elements
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const dropdownProfile = document.getElementById('dropdownProfile');
+        const dropdownSettings = document.getElementById('dropdownSettings');
+        const dropdownLogout = document.getElementById('dropdownLogout');
+        const navHome = document.getElementById('navHome');
+        const navScience = document.getElementById('navScience');
+        const navAbout = document.getElementById('navAbout');
+        const navContact = document.getElementById('navContact');
 
-        // Enhanced object database with clear visual properties
+        /* ---- OBJECT DATABASE ---- */
         const objects = [
             { 
                 id: 1, 
@@ -1255,12 +1263,16 @@
             }
         ];
 
-        // Translations
+        /* ---- TRANSLATIONS ---- */
         const translations = {
             en: {
                 'nav-dashboard': 'Dashboard',
+                'nav-science': 'Science',
                 'nav-about': 'About',
                 'nav-contact': 'Contact',
+                'dropdown-profile': 'Profile',
+                'dropdown-settings': 'Settings',
+                'dropdown-logout': 'Logout',
                 'game-title': 'Object Passport Builder',
                 'game-desc': 'Identify object properties and approve passports to send objects on their journey!',
                 'instructions-title': 'How to Play Object Passport',
@@ -1280,7 +1292,8 @@
                 'did-you-know': 'Did you know?',
                 'play-again-btn': 'Play Again',
                 'level-complete': 'Level Complete!',
-                'level-desc': 'Fantastic! You approved all passports.',
+                'level-text': 'Congratulations! You\'ve identified all object properties correctly. You\'re becoming a real object expert!',
+                'level-title': 'Level Complete!',
                 'score': 'Score: ',
                 'streak': 'Streak: ',
                 'shape-label': 'Shape',
@@ -1288,12 +1301,18 @@
                 'colour-label': 'Colour',
                 'material-label': 'Material',
                 'texture-label': 'Texture',
-                'use-label': 'Use'
+                'use-label': 'Use',
+                'timer-label': 'Time',
+                'play-again': 'Play Again'
             },
             or: {
                 'nav-dashboard': 'ଡ୍ୟାସବୋର୍ଡ',
+                'nav-science': 'ବିଜ୍ଞାନ',
                 'nav-about': 'ବିଷୟରେ',
                 'nav-contact': 'ଯୋଗାଯୋଗ',
+                'dropdown-profile': 'ପ୍ରୋଫାଇଲ୍',
+                'dropdown-settings': 'ସେଟିଂସ୍',
+                'dropdown-logout': 'ଲଗଆଉଟ୍',
                 'game-title': 'ବସ୍ତୁ ପାସପୋର୍ଟ ବିଲ୍ଡର୍',
                 'game-desc': 'ବସ୍ତୁ ଗୁଣଗୁଡିକ ଚିହ୍ନଟ କରନ୍ତୁ ଏବଂ ବସ୍ତୁମାନଙ୍କୁ ସେମାନଙ୍କ ଯାତ୍ରାରେ ପଠାଇବା ପାଇଁ ପାସପୋର୍ଟ ଅନୁମୋଦନ କରନ୍ତୁ!',
                 'instructions-title': 'ବସ୍ତୁ ପାସପୋର୍ଟ କିପରି ଖେଳିବେ',
@@ -1313,7 +1332,8 @@
                 'did-you-know': 'ଆପଣ ଜାଣିଛନ୍ତି କି?',
                 'play-again-btn': 'ପୁନର୍ବାର ଖେଳନ୍ତୁ',
                 'level-complete': 'ସ୍ତର ସମ୍ପୂର୍ଣ୍ଣ!',
-                'level-desc': 'ଅଦ୍ଭୁତ! ଆପଣ ସମସ୍ତ ପାସପୋର୍ଟ ଅନୁମୋଦନ କରିଛନ୍ତି।',
+                'level-text': 'ଅଭିନନ୍ଦନ! ଆପଣ ବସ୍ତୁ ଗୁଣଗୁଡିକୁ ସଠିକ ଭାବରେ ଚିହ୍ନିଛନ୍ତି!',
+                'level-title': 'ସ୍ତର ସମ୍ପୂର୍ଣ୍ଣ!',
                 'score': 'ସ୍କୋର: ',
                 'streak': 'ଷ୍ଟ୍ରିକ୍: ',
                 'shape-label': 'ଆକୃତି',
@@ -1321,12 +1341,18 @@
                 'colour-label': 'ରଙ୍ଗ',
                 'material-label': 'ପଦାର୍ଥ',
                 'texture-label': 'ଗଠନ',
-                'use-label': 'ବ୍ୟବହାର'
+                'use-label': 'ବ୍ୟବହାର',
+                'timer-label': 'ସମୟ',
+                'play-again': 'ପୁଣି ଖେଳନ୍ତୁ'
             },
             hi: {
                 'nav-dashboard': 'डैशबोर्ड',
+                'nav-science': 'विज्ञान',
                 'nav-about': 'हमारे बारे में',
                 'nav-contact': 'संपर्क करें',
+                'dropdown-profile': 'प्रोफाइल',
+                'dropdown-settings': 'सेटिंग्स',
+                'dropdown-logout': 'लॉगआउट',
                 'game-title': 'वस्तु पासपोर्ट बिल्डर',
                 'game-desc': 'वस्तु गुणों की पहचान करें और वस्तुओं को उनकी यात्रा पर भेजने के लिए पासपोर्ट स्वीकृत करें!',
                 'instructions-title': 'वस्तु पासपोर्ट कैसे खेलें',
@@ -1346,7 +1372,8 @@
                 'did-you-know': 'क्या आप जानते हैं?',
                 'play-again-btn': 'फिर से खेलें',
                 'level-complete': 'स्तर पूरा!',
-                'level-desc': 'बहुत बढ़िया! आपने सभी पासपोर्ट स्वीकृत कर दिए।',
+                'level-text': 'बधाई हो! आपने सभी वस्तु गुणों को सही ढंग से पहचान लिया है।',
+                'level-title': 'स्तर पूरा!',
                 'score': 'स्कोर: ',
                 'streak': 'स्ट्रीक: ',
                 'shape-label': 'आकार',
@@ -1354,23 +1381,36 @@
                 'colour-label': 'रंग',
                 'material-label': 'सामग्री',
                 'texture-label': 'बनावट',
-                'use-label': 'उपयोग'
+                'use-label': 'उपयोग',
+                'timer-label': 'समय',
+                'play-again': 'फिर से खेलें'
             }
         };
 
-        // Initialize the game
+        /* ---- INITIALIZATION ---- */
         function init() {
             createParticles();
-            totalCount.textContent = objects.length;
 
-            // Language buttons
+            // Add event listeners to all language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const lang = btn.dataset.lang;
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
                     switchLanguage(lang);
                 });
             });
 
+            // Add event listeners to horizontal language selector
+            languageOptionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    // Update active button
+                    languageOptionBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    switchLanguage(lang);
+                });
+            });
+
+            // Game buttons
             startGameBtn.addEventListener('click', startGame);
             verifyBtn.addEventListener('click', verifyPassport);
             retryBtn.addEventListener('click', retryPassport);
@@ -1384,66 +1424,106 @@
                 startGame();
             });
 
+            // Dashboard integration event listeners
+            profileToggle.addEventListener('click', function() {
+                profileDropdown.classList.toggle('show');
+            });
+
+            // Navigation between pages
+            dropdownProfile.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#profile';
+            });
+
+            dropdownSettings.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html#settings';
+            });
+
+            dropdownLogout.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.href = 'student-login.html';
+            });
+
+            // Navigation menu items
+            navHome.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'student-dashboard.html';
+            });
+
+            navScience.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'science.html';
+            });
+
+            navAbout.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('About page would open here');
+            });
+
+            navContact.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Contact page would open here');
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#profileToggle') && !e.target.closest('#profileDropdown')) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+
             // Keyboard shortcuts
             document.addEventListener('keydown', e => {
                 if (e.key === 'Escape') {
                     overlayHide();
                 }
+                if (e.key === '1') switchLanguage('en'); 
+                if (e.key === '2') switchLanguage('or'); 
+                if (e.key === '3') switchLanguage('hi');
             });
 
             switchLanguage('en');
         }
 
-        // Create particles
+        /* ---- GAME FUNCTIONS ---- */
         function createParticles() {
             const container = document.getElementById('particles');
             container.innerHTML = '';
             for (let i = 0; i < 18; i++) {
                 const p = document.createElement('div');
-                p.style.position = 'absolute';
+                p.className = 'particle';
                 p.style.left = Math.random() * 100 + '%';
                 p.style.top = Math.random() * 100 + '%';
-                p.style.width = (3 + Math.random() * 6) + 'px';
-                p.style.height = p.style.width;
-                p.style.background = 'rgba(255,255,255,0.35)';
-                p.style.borderRadius = '50%';
-                p.style.filter = 'blur(0.2px)';
-                p.style.opacity = 0.7;
+                p.style.animationDelay = `${Math.random() * 10}s`;
                 container.appendChild(p);
             }
         }
 
-        // Switch language
         function switchLanguage(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-            
-            if (isInInstructions) {
-                // Only update instructions when in instructions modal
-                updateInstructionTranslations();
-            } else {
-                // Update all translations when in game
-                updateTranslations();
-                // Also update the current object name
-                if (currentObjects.length > 0 && currentIndex < currentObjects.length) {
-                    const obj = currentObjects[currentIndex];
-                    objectName.textContent = obj.name[currentLang] || obj.name.en;
-                }
-            }
-        }
-
-        // Update translations
-        function updateTranslations() {
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.dataset.translate;
-                if (translations[currentLang] && translations[currentLang][key]) {
+           
+            // Update all language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang')===lang);
+            });
+           
+            // Update horizontal language selector
+            languageOptionBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang')===lang);
+            });
+           
+            // translate elements
+            const map = translations[lang] || translations.en;
+            Object.keys(map).forEach(key => {
+                document.querySelectorAll(`[data-translate="${key}"]`).forEach(el => {
                     if (key === 'success-text') {
-                        const translatedText = translations[currentLang][key];
-                        el.innerHTML = translatedText;
+                        el.innerHTML = map[key];
                     } else {
-                        el.textContent = translations[currentLang][key];
+                        el.textContent = map[key];
                     }
-                }
+                });
             });
 
             // Update score and streak with current values
@@ -1452,9 +1532,26 @@
 
             // Update instruction elements
             updateInstructionTranslations();
+
+            // Update current object name if in game
+            if (!isInInstructions && currentObjects.length > 0 && currentIndex < currentObjects.length) {
+                const obj = currentObjects[currentIndex];
+                objectName.textContent = obj.name[currentLang] || obj.name.en;
+            }
+
+            // apply language-specific font classes
+            if (lang === 'or') {
+                document.body.classList.add('odia-text');
+                document.body.classList.remove('hindi-text');
+            } else if (lang === 'hi') {
+                document.body.classList.add('hindi-text');
+                document.body.classList.remove('odia-text');
+            } else {
+                document.body.classList.remove('odia-text');
+                document.body.classList.remove('hindi-text');
+            }
         }
 
-        // Update instruction elements
         function updateInstructionTranslations() {
             const instructionsTitle = document.getElementById('instructions-title');
             const instructionsIntro = document.getElementById('instructions-intro');
@@ -1481,7 +1578,6 @@
             }
         }
 
-        // Start the game
         function startGame() {
             isInInstructions = false;
             instructionsModal.style.display = 'none';
@@ -1494,7 +1590,7 @@
             verifyBtn.style.display = 'block';
 
             // Update all translations when starting the game
-            updateTranslations();
+            switchLanguage(currentLang);
 
             // Reset game state
             score = 0;
@@ -1516,7 +1612,6 @@
             startTimer();
         }
 
-        // Load current object
         function loadCurrent() {
             const obj = currentObjects[currentIndex];
             if (!obj) return;
@@ -1527,7 +1622,6 @@
             [shapeEl, sizeEl, colourEl, materialEl, textureEl, useEl].forEach(s => s.value = '');
         }
 
-        // Verify passport
         function verifyPassport() {
             const obj = currentObjects[currentIndex];
             // Compare values
@@ -1562,15 +1656,13 @@
             }
         }
 
-        // Retry passport
         function retryPassport() {
             retryBtn.style.display = 'none';
             verifyBtn.style.display = 'block';
             overlayHide();
         }
 
-        // Next object
-        function nextObject() {
+        async function nextObject() {
             currentIndex++;
             updateScore();
             updateStreak();
@@ -1579,7 +1671,7 @@
             progressBar.style.width = pct + '%';
 
             if (currentIndex >= currentObjects.length) {
-                finishLevel();
+                await finishLevel();
                 return;
             }
             // Show next
@@ -1589,14 +1681,42 @@
             }, 700);
         }
 
-        // Finish level
-        function finishLevel() {
+        async function finishLevel() {
             clearInterval(timerInterval);
+            const timeBonus = Math.max(0, Math.floor(timeLeft/10) * 5);
+            score += timeBonus;
+            finalScore = score;
+            updateScore();
+           
+            // Save score to server and get rank
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.id) {
+                    const result = await saveGameResult(user.id, finalScore);
+                   
+                    if (result && result.rank) {
+                        // Get leaderboard data
+                        const leaderboardData = await getGameLeaderboard(gameName);
+                       
+                        // Display final results
+                        displayFinalResults(finalScore, result.rank, leaderboardData);
+                    } else {
+                        displayFinalResults(finalScore, result?.rank || 1, []);
+                    }
+                } else {
+                    // Fallback if no user logged in
+                    displayFinalResults(finalScore, 1, []);
+                }
+            } catch (error) {
+                console.error('Error saving game result:', error);
+                displayFinalResults(finalScore, 1, []);
+            }
+           
+            // Show level complete with ranking
             levelComplete.style.display = 'block';
             successModal.style.display = 'flex';
         }
 
-        // Reset game
         function resetGame() {
             currentIndex = 0;
             score = 0;
@@ -1610,9 +1730,9 @@
             overlayHide();
             retryBtn.style.display = 'none';
             verifyBtn.style.display = 'block';
+            levelComplete.style.display = 'none';
         }
 
-        // Show overlay
         function showOverlay(isApproved, obj) {
             overlay.style.display = 'flex';
             setTimeout(() => overlayLarge.classList.add('show'), 10);
@@ -1640,20 +1760,17 @@
             }
         }
 
-        // Hide overlay
         function overlayHide() {
             overlayLarge.classList.remove('show');
             overlayStamp.classList.remove('show', 'approved', 'rejected');
             setTimeout(() => overlay.style.display = 'none', 350);
         }
 
-        // Update score
         function updateScore() {
             const scoreText = translations[currentLang] ? translations[currentLang]['score'] : 'Score: ';
             scoreEl.textContent = `${scoreText}${score}`;
         }
 
-        // Update streak
         function updateStreak() {
             const streakText = translations[currentLang] ? translations[currentLang]['streak'] : 'Streak: ';
             streakEl.textContent = `${streakText}${streak}`;
@@ -1662,7 +1779,6 @@
             else streakCounter.style.display = 'none';
         }
 
-        // Timer
         function startTimer() {
             clearInterval(timerInterval);
             timeLeft = 300;
@@ -1680,11 +1796,193 @@
         function updateTimer() {
             const m = Math.floor(timeLeft / 60);
             const s = timeLeft % 60;
-            timeEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            const timerLabel = translations[currentLang]?.['timer-label'] || 'Time';
+            timeEl.textContent = `${timerLabel}: ${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        /* ---- SERVER COMMUNICATION ---- */
+        async function saveGameResult(userId, gameScore) {
+            try {
+                const timeTaken = 300 - timeLeft; // in seconds
+               
+                const response = await fetch('/api/game/save-result-with-rank', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        gameName: gameName,
+                        score: gameScore,
+                        timeTaken: timeTaken,
+                        completed: true
+                    })
+                });
+               
+                if (!response.ok) {
+                    throw new Error('Failed to save game result');
+                }
+               
+                return await response.json();
+            } catch (error) {
+                console.error('Error saving game result:', error);
+                throw error;
+            }
+        }
+
+        async function getGameLeaderboard(gameName) {
+            try {
+                const response = await fetch(`/api/game/leaderboard/${encodeURIComponent(gameName)}`);
+               
+                if (!response.ok) {
+                    throw new Error('Failed to fetch leaderboard');
+                }
+               
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+                return [];
+            }
+        }
+
+        /* ---- DISPLAY FINAL RESULTS ---- */
+        function displayFinalResults(finalScore, rank, leaderboardData) {
+            // Update score and rank display
+            finalScoreElement.textContent = finalScore;
+            finalRankElement.textContent = rank;
+           
+            // Add proper suffix to rank
+            const suffix = getRankSuffix(rank);
+            rankSuffixElement.textContent = suffix;
+           
+            // Display leaderboard
+            if (leaderboardData && leaderboardData.length > 0) {
+                displayLeaderboard(leaderboardData);
+                leaderboardPreview.style.display = 'block';
+            } else {
+                leaderboardPreview.style.display = 'none';
+            }
+           
+            // Add celebration effects based on rank
+            if (rank <= 3) {
+                celebrateTopRank(rank);
+            }
+        }
+
+        function getRankSuffix(rank) {
+            if (rank % 100 >= 11 && rank % 100 <= 13) {
+                return 'th';
+            }
+            switch (rank % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        }
+
+        function displayLeaderboard(leaderboardData) {
+            leaderboardList.innerHTML = '';
+           
+            const user = JSON.parse(localStorage.getItem('user'));
+            const currentUserId = user ? user.id : null;
+           
+            // Sort by score descending
+            leaderboardData.sort((a, b) => b.score - a.score);
+           
+            // Display top 5 or less
+            const displayCount = Math.min(5, leaderboardData.length);
+            for (let i = 0; i < displayCount; i++) {
+                const player = leaderboardData[i];
+                const item = document.createElement('div');
+                item.className = 'leaderboard-item';
+               
+                // Highlight current user
+                if (player.user_id == currentUserId) {
+                    item.classList.add('current-user');
+                }
+               
+                // Format rank (starting from 1)
+                const rank = i + 1;
+                const rankSuffix = getRankSuffix(rank);
+               
+                item.innerHTML = `
+                    <div class="leaderboard-rank">${rank}${rankSuffix}</div>
+                    <div class="leaderboard-name">${player.fullName}</div>
+                    <div class="leaderboard-score">${player.score}</div>
+                `;
+               
+                leaderboardList.appendChild(item);
+            }
+        }
+
+        function celebrateTopRank(rank) {
+            // Add special effects for top 3 ranks
+            const medalColors = ['#FFD700', '#C0C0C0', '#CD7F32']; // Gold, Silver, Bronze
+           
+            if (rank <= 3) {
+                // Update medal icon color
+                const medalIcon = document.querySelector('.level-complete .badge i');
+                medalIcon.style.color = medalColors[rank - 1];
+               
+                // Add special confetti for top ranks
+                createSpecialConfetti(rank);
+               
+                // Play victory sound if available
+                if (rank === 1) {
+                    // First place special celebration
+                    setTimeout(() => {
+                        createConfetti();
+                        setTimeout(() => createConfetti(), 300);
+                        setTimeout(() => createConfetti(), 600);
+                    }, 500);
+                }
+            }
+        }
+
+        function createSpecialConfetti(rank) {
+            const colors = rank === 1 ? ['#FFD700', '#FFED4E', '#FFF9C4'] :
+                          rank === 2 ? ['#C0C0C0', '#E5E4E2', '#D3D3D3'] :
+                          ['#CD7F32', '#B87333', '#8B4513'];
+           
+            for (let i = 0; i < 15; i++) {
+                const c = document.createElement('div');
+                c.style.position = 'fixed';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.top = '-10px';
+                c.style.width = '12px';
+                c.style.height = '12px';
+                c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                c.style.zIndex = 1500;
+                c.style.borderRadius = '50%';
+                c.style.animation = `confetti-fall ${2 + Math.random()}s ease-out forwards`;
+                document.body.appendChild(c);
+                setTimeout(() => { if (document.body.contains(c)) document.body.removeChild(c); }, 3000);
+            }
+        }
+
+        function createConfetti() {
+            for (let i=0;i<12;i++){
+                const c = document.createElement('div');
+                c.style.position='fixed';
+                c.style.left = Math.random()*100 + 'vw';
+                c.style.top = '-10px';
+                c.style.width='10px'; c.style.height='10px';
+                const colors = ['#ff6b6b','#4ecdc4','#45b7d1','#96ceb4','#ffeaa7'];
+                c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+                c.style.zIndex = 1500;
+                c.style.borderRadius = '2px';
+                c.style.animation = `confetti-fall 2.8s ease-out forwards`;
+                document.body.appendChild(c);
+                setTimeout(()=> { if (document.body.contains(c)) document.body.removeChild(c); }, 3000);
+            }
         }
 
         // Initialize the game when the page loads
-        window.addEventListener('DOMContentLoaded', init);
+        window.addEventListener('DOMContentLoaded', function() {
+            // The authentication check happens at the beginning of the script
+            // The init() function is called after authentication check
+        });
     </script>
 </body>
 </html>
