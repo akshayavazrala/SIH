@@ -2,6 +2,11 @@
 
 An interactive STEM (Science, Technology, Engineering, and Mathematics) learning platform designed to make education engaging through educational games, quizzes, assignments, and doubt-solving features.
 
+## 🎥 Demo Video
+🔗 https://youtu.be/oJTqxn68VPk?si=nAFVHcWq9AzKOqCb
+
+## 📚 Project Overview
+
 ## 📚 Project Overview
 
 STEM Learn Odisha is a web-based educational platform that helps students learn Science and Mathematics through interactive activities and gamified learning experiences.
